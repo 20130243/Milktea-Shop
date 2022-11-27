@@ -1,0 +1,211 @@
+.breadcumb {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.breadcumb h1 {
+  font-size: 36px;
+  color: #1fa198;
+}
+
+.cart-product {
+  border: #1fa198 solid 1px;
+  min-width: 180px;
+  box-shadow: 0 0 8px #d7e0e0;
+  background-color: white;
+}
+
+.cart-product-heading {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+  border-bottom: #1fa198 solid 1px;
+  padding: 20px 20px 10px 20px;
+  background-color: #1fa198;
+}
+
+.cart-product-item {
+  padding: 8px 15px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: #695858 dashed 1px;
+}
+
+.cart-product-item:first-child {
+  padding: 15px 15px 8px 15px;
+}
+
+.cart-product-item:last-child {
+  padding: 8px 15px 15px 15px;
+}
+
+.cart-product-name {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  align-items: center;
+}
+
+.cart-product-name h5 {
+  color: #111111;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.cart-product-detail {
+  display: flex;
+  flex-direction: row;
+  min-height: 20px;
+  align-items: center;
+}
+
+.cart-product-detail .detail {
+  min-width: 50px;
+  font-size: 0.9rem;
+  color: #695858;
+}
+
+.cart-product-quantity {
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cart-product-quantity .quantity {
+  margin: 0;
+  margin: 0 10px;
+  size: 1rem;
+}
+
+.cart-product-quantity i {
+  cursor: pointer;
+  border: #1fa198 solid 1px;
+  border-radius: 2px;
+}
+
+.cart-product-quantity i:hover {
+  background-color: #1fa198;
+  color: white;
+}
+
+.icon-cup {
+  width: 16px;
+  height: 16px;
+  background: url("/templatecus/img/icon/drink.png");
+}
+
+.cart-product-price {
+  color: #111111;
+  font-size: 0.8rem;
+}
+
+.cart-product-total {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.total {
+  font-size: 0.9rem;
+}
+
+.total .price {
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.btn-pay {
+  min-width: 160px;
+  background-color: #1fa198;
+  border-radius: 5px;
+  color: white;
+  padding: 0 10px;
+  text-align: center;
+  border: none;
+  margin-top: 10px;
+}
+
+.product__item__pic {
+  cursor: pointer;
+  background-size: 150px;
+}
+.search_bar {
+  margin-bottom: 30px;
+  padding: 20px 0;
+  box-shadow: 0 0 8px #d7e0e0;
+}
+.search_bar_text {
+  padding: 5px 0;
+  font-weight: 700;
+}
+.menu-drop {
+  width: 100%;
+  font-size: 15px;
+  color: #b7b7b7;
+  height: 42px;
+  float: left;
+  line-height: 42px;
+  list-style-type: none;
+}
+
+.menu-drop .menu-item {
+  width: 100%;
+  text-decoration: none;
+  color: #111111;
+  display: none;
+  font-size: 15px;
+  color: #b7b7b7;
+  height: 42px;
+  float: left;
+  line-height: 42px;
+  width: 100%;
+  background-color: white;
+}
+
+.menu-drop .menu-item a {
+  text-decoration: none;
+  color: #111111;
+  width: 100%;
+  font-size: 15px;
+  height: 42px;
+  float: left;
+  line-height: 42px;
+  padding-left: 20px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #1fa198;
+}
+
+.menu-drop .menu-item.active {
+  display: block !important;
+}
+
+.menu-drop .menu-item.active a::after {
+  content: "";
+  display: block;
+  background: url("/templatecus/img/icon/heart.png") no-repeat;
+  background-position: center;
+  width: 20px;
+  height: 42px;
+  float: right;
+  margin: 0 6px 0 0;
+}
+
+.menu-drop .menu-item a:hover {
+  text-decoration: none;
+  color: #111111;
+}
+
+.menu-drop:hover .menu-item {
+  display: block;
+}
+
+.spad {
+  padding-top: 10px !important;
+  padding-bottom: 30px !important;
+}

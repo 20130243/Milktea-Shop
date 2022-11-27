@@ -1,0 +1,9 @@
+.header__menu ul li .dropdown a:hover {
+  color: #000;
+}
+
+.header__nav__option .user {
+  font-size: 16px;
+  font-weight: 500;
+  padding-top: 5px;
+}

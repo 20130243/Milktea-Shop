@@ -1,0 +1,32 @@
+.product__details__last__option h5:before {
+  width: 280px;
+}
+
+.product__details__cart__option .quantity {
+  margin-right: 0;
+  margin-bottom: 15px;
+}
+
+.product__details__last__option h5 span {
+  font-size: 16px;
+}
+
+.blog__hero__text h2 {
+  font-size: 36px;
+}
+
+.categories__text h2 {
+  font-size: 30px;
+  line-height: 55px;
+}
+
+.categories__text:before {
+  height: 250px;
+}
+
+.hero__items {
+  padding-top: 260px;
+}
+.contact__text {
+  text-align: center;
+}

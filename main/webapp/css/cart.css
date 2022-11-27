@@ -1,0 +1,9 @@
+ .cart__close{
+    cursor: pointer;
+ }
+ .w-150{
+    min-width: 120px;
+ }
+ .product__cart__item{
+    /* min-width: 400px; */
+ }

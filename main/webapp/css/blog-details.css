@@ -1,0 +1,12 @@
+.blog__details__pic {
+  max-width: 770px;
+  margin: 0 auto;
+}
+
+.blog-link {
+  color: #1fa198;
+}
+
+.blog-link:hover {
+  color: #000;
+}

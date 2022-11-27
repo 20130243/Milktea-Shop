@@ -1,0 +1,86 @@
+.f-bot .f-language {
+  text-align: right;
+  margin-top: 3px;
+}
+
+.col-md-2 a {
+  color: black;
+}
+
+.col-md-2 ul {
+  list-style-type: none;
+}
+
+.f-bot .f-social {
+  text-align: right;
+}
+
+.f-bot .f-social li {
+  display: inline-block;
+  font-size: 20px;
+  margin: auto 10px;
+  color: gray;
+}
+
+.f-bot .f-social li:hover {
+  color: black;
+}
+
+.btn-icon {
+  color: gray !important;
+}
+
+#footer + .copyright {
+  font-size: 0.7em;
+  line-height: 1.6;
+  padding: 2px 15px 3px;
+  color: #8d8d8d;
+}
+
+.black {
+  background-color: #010101;
+}
+
+.about__picc {
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+.f-bot {
+  padding-bottom: 20px;
+}
+
+.containerr {
+  text-align: center;
+  padding: 30px 0px;
+  max-width: 1170px;
+  margin: auto;
+}
+.banner__item__text {
+  max-width: 300px;
+  /*position: absolute;*/
+  left: 0;
+  top: 140px;
+}
+
+.abc {
+  translate: inherit;
+  text-align: center;
+  color: gray;
+}
+
+.abc:hover {
+  color: red;
+}
+.hero__items {
+  height: auto;
+  padding-top: 130px;
+  padding-bottom: 134px;
+}
+.about__pic img {
+  min-width: initial;
+}
+
+.spad {
+  padding-top: 0;
+}
