@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Phân loại</title>
+    <title>Doanh thu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -56,8 +56,8 @@
                 <!--- Sidemenu -->
                 <ul class="metismenu side-nav">
                     <li class="side-nav-item">
-                        <a href="admin-revenue.html" class="side-nav-link">
-                            <i class="uil-home-alt"></i>
+                        <a href="revenue.jsp" class="side-nav-link">
+                            <i class="uil-calender"></i>
                             <!-- <span class="badge badge-success float-right">4</span> -->
                             <span> Thống kê doanh thu</span>
                         </a>
@@ -93,18 +93,20 @@
                         </a>
                     </li>
                     <li class="side-nav-item">
-                        <a href="admin-category.html" class="side-nav-link">
+                        <a href="category.jsp" class="side-nav-link">
                             <i class="uil-calender"></i>
                             <span> Quản lí loại </span>
                         </a>
                     </li>
-                    <li class="side-nav-item">
+                 <li class="side-nav-item">
                         <a href="admin-topping.html" class="side-nav-link">
                             <i class="uil-calender"></i>
                             <span> Quản lí topping </span>
                         </a>
                     </li>
                 </ul>
+
+
                 <!-- End Sidebar -->
 
                 <div class="clearfix"></div>
@@ -184,7 +186,7 @@
                                         </p>
                                     </a>
                                     <!-- item-->
-                                    <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                       <a href="admin-order-detail.html" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-primary">
                                             <i class="mdi mdi-comment-account-outline"></i>
                                         </div>
@@ -197,7 +199,7 @@
                                 </div>
 
                                 <!-- All-->
-                                <a href="admin-order.html"
+                               <a href="admin-order.html"
                                     class="dropdown-item text-center text-primary notify-item notify-all">
                                     Xem tất cả
                                 </a>
@@ -304,177 +306,356 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item active">Phân loại</li>
-                                    </ol>
-                                </div>
-                                <h4 class="page-title">Phân loại</h4>
+                                <!-- <div class="page-title-right">
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control form-control-light"
+                                                    id="dash-daterange">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text bg-primary border-primary text-white">
+                                                        <i class="mdi mdi-calendar-range font-13"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="javascript: void(0);" class="btn btn-primary ml-2">
+                                            <i class="mdi mdi-autorenew"></i>
+                                        </a>
+                                        <a href="javascript: void(0);" class="btn btn-primary ml-1">
+                                            <i class="mdi mdi-filter-variant"></i>
+                                        </a>
+                                    </form>
+                                </div> -->
+                                <h4 class="page-title">Thống kê doanh thu</h4>
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
 
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-xl-5 col-lg-6">
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card widget-flat">
+                                        <div class="card-body">
+                                            <div class="float-right">
+                                                <i class="mdi mdi-account-multiple widget-icon"></i>
+                                            </div>
+                                            <h5 class="text-muted font-weight-normal mt-0" title="Number of Customers">
+                                                Số lượng khách hàng</h5>
+                                            <h3 class="mt-3 mb-3">36,254</h3>
+                                            <p class="mb-0 text-muted">
+                                                <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i>
+                                                    5.27%</span>
+                                                <span class="text-nowrap">So với tháng trước</span>
+                                            </p>
+                                        </div> <!-- end card-body-->
+                                    </div> <!-- end card-->
+                                </div> <!-- end col-->
+
+                                <div class="col-lg-6">
+                                    <div class="card widget-flat">
+                                        <div class="card-body">
+                                            <div class="float-right">
+                                                <i class="mdi mdi-cart-plus widget-icon"></i>
+                                            </div>
+                                            <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">Đơn
+                                                hàng</h5>
+                                            <h3 class="mt-3 mb-3">5,543</h3>
+                                            <p class="mb-0 text-muted">
+                                                <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i>
+                                                    1.08%</span>
+                                                <span class="text-nowrap">So với tháng trước</span>
+                                            </p>
+                                        </div> <!-- end card-body-->
+                                    </div> <!-- end card-->
+                                </div> <!-- end col-->
+                            </div> <!-- end row -->
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card widget-flat">
+                                        <div class="card-body">
+                                            <div class="float-right">
+                                                <i class="mdi mdi-currency-usd widget-icon"></i>
+                                            </div>
+                                            <h5 class="text-muted font-weight-normal mt-0" title="Average Revenue">Doanh
+                                                thu</h5>
+                                            <h3 class="mt-3 mb-3">32,000,000đ</h3>
+                                            <p class="mb-0 text-muted">
+                                                <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i>
+                                                    7.00%</span>
+                                                <span class="text-nowrap">So với tháng trước</span>
+                                            </p>
+                                        </div> <!-- end card-body-->
+                                    </div> <!-- end card-->
+                                </div> <!-- end col-->
+
+
+                            </div> <!-- end row -->
+
+                        </div> <!-- end col -->
+
+                        <div class="col-xl-7  col-lg-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row mb-2">
-                                        <div class="col-sm-4">
-                                            <a href="admin-add-category.html" class="btn btn-danger mb-2"><i
-                                                    class="mdi mdi-plus-circle mr-2"></i>Thêm loại</a>
+                                    <!-- <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a href="javascript:void(0);" class="dropdown-item">Bản báo cáo</a>
+                                            <a href="javascript:void(0);" class="dropdown-item">Lợi nhuận</a>
                                         </div>
-                                        <div class="col-sm-8">
-                                            <!-- <div class="text-sm-right">
-                                                <button type="button" class="btn btn-success mb-2 mr-1"><i
-                                                        class="mdi mdi-settings"></i></button>
-                                                <button type="button" class="btn btn-light mb-2 mr-1">Nhập file</button>
-                                                <button type="button" class="btn btn-light mb-2">Xuất file</button>
-                                            </div> -->
-                                        </div><!-- end col-->
+                                    </div> -->
+                                    <h4 class="header-title mb-3">Doanh thu</h4>
+
+                                    <div class="chart-content-bg">
+                                        <div class="row text-center">
+                                            <div class="col-md-6">
+                                                <p class="text-muted mb-0 mt-3">Tuần hiện tại</p>
+                                                <h2 class="font-weight-normal mb-3">
+                                                    <small
+                                                        class="mdi mdi-checkbox-blank-circle text-primary align-middle mr-1"></small>
+                                                    <span>8,000,000đ</span>
+                                                </h2>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="text-muted mb-0 mt-3">Tuần trước</p>
+                                                <h2 class="font-weight-normal mb-3">
+                                                    <small
+                                                        class="mdi mdi-checkbox-blank-circle text-success align-middle mr-1"></small>
+                                                    <span>12,000,000đ</span>
+                                                </h2>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div class="table-responsive">
-                                        <table class="table table-centered w-100 dt-responsive nowrap"
-                                            id="products-datatable">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th class="all">Tên loại</th>
-                                                    <th class="text-center">Tình trạng</th>
-                                                    <th class="text-center">Hành động</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">Trà sữa</a>
-                                                            <br />
-                                                        </p>
-                                                    </td> 
-                                                    <td class="text-center">
-                                                        <span class="badge badge-success">Đang bán</span>
-                                                    </td>
-                                                     <td class="table-action text-center" >
-                                                        <a href="admin-add-category.html" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">Trà </a>
-                                                            <br />
-                                                        </p>
-                                                    </td> 
+                                    <div class="dash-item-overlay d-none d-md-block" style="left: 10%;">
+                                        <h5>Doanh thu hôm nay: 3,000,000đ</h5>
 
-                                                    <td class="text-center">
-                                                        <span class="badge badge-success">Đang bán</span>
-                                                    </td>
+                                        <!-- <a href="javascript: void(0);" class="btn btn-outline-primary">Xem thống kê
+                                            <i class="mdi mdi-arrow-right ml-2"></i>
+                                        </a> -->
+                                    </div>
 
-                                                     <td class="table-action text-center" >
-                                                        <a href="admin-add-category.html" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">Cà phê</a>
-                                                            <br />
-                                                        </p>
-                                                    </td> 
-                                                    <td class="text-center">
-                                                        <span class="badge badge-success">Đang bán</span>
-                                                    </td>
+                                    <div id="revenue-chart" class="apex-charts mt-3" data-colors="#727cf5,#0acf97">
 
-                                                     <td class="table-action text-center" >
-                                                        <a href="admin-add-category.html" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">Đá xay</a>
-                                                            <br />
-                                                        </p>
-                                                    </td> 
-
-                                                    <td class="text-center">
-                                                        <span class="badge badge-success">Đang bán</span>
-                                                    </td>
-
-                                                     <td class="table-action text-center" >
-                                                        <a href="admin-add-category.html" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">Nước ép</a>
-                                                            <br />
-                                                        </p>
-                                                    </td> 
-                                                    <td class="text-center">
-                                                        <span class="badge badge-secondary">Ngưng bán</span>
-                                                    </td>
-
-                                                     <td class="table-action text-center" >
-                                                        <a href="admin-add-category.html" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div> <!-- end card-body-->
                             </div> <!-- end card-->
+
                         </div> <!-- end col -->
                     </div>
                     <!-- end row -->
 
-                </div> <!-- container -->
 
-            </div> <!-- content -->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-12 order-lg-2 order-xl-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- <a href="" class="btn btn-sm btn-link float-right mb-3">Xuất file
+                                        <i class="mdi mdi-download ml-1"></i>
+                                    </a> -->
+                                    <h4 class="header-title mt-2">Top sản phẩm bán chạy</h4>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-centered table-nowrap table-hover mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 font-weight-normal">Trà Sữa Ô long</h5>
+                                                        <span class="text-muted font-13">Trà sữa</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 font-weight-normal">82</h5>
+                                                        <span class="text-muted font-13">Số lượng</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 font-weight-normal">Bạc xỉu</h5>
+                                                        <span class="text-muted font-13">Cà phê</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 font-weight-normal">37</h5>
+                                                        <span class="text-muted font-13">Số lượng</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 font-weight-normal">Dứa ép
+                                                        </h5>
+                                                        <span class="text-muted font-13">Nước ép</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 font-weight-normal">64</h5>
+                                                        <span class="text-muted font-13">Số lượng</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 font-weight-normal">Hồng trà sữa
+                                                        </h5>
+                                                        <span class="text-muted font-13">Trà</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 font-weight-normal">184</h5>
+                                                        <span class="text-muted font-13">Số lượng</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 font-weight-normal">Sữa chua phúc bồn tử
+                                                        </h5>
+                                                        <span class="text-muted font-13">Sữa chua</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 font-weight-normal">69</h5>
+                                                        <span class="text-muted font-13">Số lượng</span>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- end table-responsive-->
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+
+                        <div class="col-xl-3 col-lg-6 order-lg-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title">Thống kê doanh thu trong tháng</h4>
+                                    <div id="average-sales" class="apex-charts mb-4 mt-4"
+                                        data-colors="#727cf5,#0acf97,#fa5c7c,#ffbc00"></div>
 
 
-        </div>
-        <!-- content -->
+                                    <div class="chart-widget-list">
+                                        <p>
+                                            <i class="mdi mdi-square text-primary"></i> Trà sữa
+                                            <span class="float-right">5,000,000đ</span>
+                                        </p>
+                                        <p>
+                                            <i class="mdi mdi-square text-danger"></i> Cà phê
+                                            <span class="float-right">2,500,000đ</span>
+                                        </p>
+                                        <p>
+                                            <i class="mdi mdi-square text-success"></i> Sữa chua
+                                            <span class="float-right">800,000đ</span>
+                                        </p>
+                                        <p class="mb-0">
+                                            <i class="mdi mdi-square text-warning"></i> Đá xay
+                                            <span class="float-right">2,500,000đ</span>
+                                        </p>
+                                    </div>
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
 
-        <!-- Footer Start -->
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        2022 HAHATI
+                        <div class="col-xl-3 col-lg-6 order-lg-1">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title mb-2">Đơn hàng gần đây</h4>
+
+                                    <div data-simplebar style="max-height: 424px;">
+                                        <div class="timeline-alt pb-0">
+                                            <div class="timeline-item">
+                                                <i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
+                                                <div class="timeline-item-info">
+                                                    <a href="#" class="text-info font-weight-bold mb-1 d-block">Đơn hàng
+                                                        #1254</a>
+                                                    <small>125,000đ</small>
+                                                    <p class="mb-0 pb-2">
+                                                        <small class="text-muted">17:30 03/11/2022</small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
+                                                <div class="timeline-item-info">
+                                                    <a href="#" class="text-info font-weight-bold mb-1 d-block">Đơn hàng
+                                                        #1254</a>
+                                                    <small>125,000đ</small>
+                                                    <p class="mb-0 pb-2">
+                                                        <small class="text-muted">17:30 03/11/2022</small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
+                                                <div class="timeline-item-info">
+                                                    <a href="#" class="text-info font-weight-bold mb-1 d-block">Đơn hàng
+                                                        #1254</a>
+                                                    <small>125,000đ</small>
+                                                    <p class="mb-0 pb-2">
+                                                        <small class="text-muted">17:30 03/11/2022</small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
+                                                <div class="timeline-item-info">
+                                                    <a href="#" class="text-info font-weight-bold mb-1 d-block">Đơn hàng
+                                                        #1254</a>
+                                                    <small>125,000đ</small>
+                                                    <p class="mb-0 pb-2">
+                                                        <small class="text-muted">17:30 03/11/2022</small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
+                                                <div class="timeline-item-info">
+                                                    <a href="#" class="text-info font-weight-bold mb-1 d-block">Đơn hàng
+                                                        #1254</a>
+                                                    <small>125,000đ</small>
+                                                    <p class="mb-0 pb-2">
+                                                        <small class="text-muted">17:30 03/11/2022</small>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end timeline -->
+                                    </div> <!-- end slimscroll -->
+                                </div>
+                                <!-- end card-body -->
+                            </div>
+                            <!-- end card-->
+                        </div>
+                        <!-- end col -->
+
+                    </div>
+                    <!-- end row -->
+
+                </div>
+                <!-- container -->
+
+            </div>
+            <!-- content -->
+
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            2022 HAHATI
+                        </div>
                     </div>
                 </div>
-            </div>
-        </footer>
-        <!-- end Footer -->
+            </footer>
+            <!-- end Footer -->
 
-    </div>
+        </div>
 
-    <!-- ============================================================== -->
-    <!-- End Page content -->
-    <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
 
 
     </div>
