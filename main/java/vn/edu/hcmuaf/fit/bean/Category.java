@@ -11,6 +11,10 @@ public class Category {
         this.status = status;
     }
 
+    public Category() {
+
+    }
+
     public int getId() {
         return id;
     }
