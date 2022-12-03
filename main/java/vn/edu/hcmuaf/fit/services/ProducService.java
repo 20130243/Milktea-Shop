@@ -17,12 +17,27 @@ public class ProducService {
             Product product = new Product();
             product.setId((Integer) map.get("id"));
             product.setName((String) map.get("name"));
-            product.setIdCategory((Integer) map.get("idCategory"));
-            product.setImg((String) map.get("img"));
+            product.setIdCategory((Integer) map.get("category_id"));
+            product.setImg((String) map.get("image"));
             product.setStatus((Integer) map.get("status"));
             rs.add(product);
         }
         return rs;
+    }
+
+    public List<Product> getPagingProduct(int index) {
+        List<Product> list = new ArrayList<Product>();
+        List<Map<String, Object>> productList = dao.pagingProduct(index);
+        for (Map<String, Object> map : productList) {
+            Product product = new Product();
+            product.setId((Integer) map.get("id"));
+            product.setName((String) map.get("name"));
+            product.setIdCategory((Integer) map.get("category_id"));
+            product.setImg((String) map.get("image"));
+            product.setStatus((Integer) map.get("status"));
+            list.add(product);
+        }
+        return list;
     }
 
     public Product getById(int id) {
@@ -30,7 +45,15 @@ public class ProducService {
         return  new Product((Integer)product.get("id"), (String) product.get("name"),(Integer) product.get("idCategory"), (String) product.get("img"), (Integer) product.get("status"));
     }
 
+    public int getTotalProduct() {
+        return dao.getTotalProduct();
+    }
     public static void main(String[] args) {
-        System.out.println(new ProducService().getAll());
+       ProducService dao = new ProducService();
+       List<Product> list = dao.getPagingProduct(2);
+        for (Product p : list
+             ) {
+            System.out.println(p);
+        }
     }
 }
