@@ -58,6 +58,22 @@ public class ProductDAO extends RD {
                         .execute()
         );
     }
-
+    public int getTotalProduct() {
+        int count = JDBIConnector.get().withHandle(h ->
+                h.createQuery("select count(*) from product").mapTo(Integer.class).first()
+                );
+        return count;
+    }
+    /*
+    * Tạo bởi: Lê Trọng Tình 20130440
+    * Cập nhật: Lê Trọng Tình 20130440
+    * */
+    public List<Map<String, Object>> pagingProduct(int index) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from product\n" +
+                        "order by id\n" +
+                        "LIMIT ? , 12;").bind(0, (index-1)*12).mapToMap().list()
+        );
+    }
 
 }
