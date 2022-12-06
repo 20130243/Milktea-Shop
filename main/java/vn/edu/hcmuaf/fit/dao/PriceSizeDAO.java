@@ -65,4 +65,8 @@ public class PriceSizeDAO extends RD {
                         .execute()
         );
     }
+
+    public static void main(String[] args) {
+        System.out.println(new PriceSizeDAO().getByProductId(5));
+    }
 }

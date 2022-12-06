@@ -63,7 +63,7 @@ public class ProducService {
         for (Map<String, Object> map : priceSize) {
             PriceSize priceSizeObj = new PriceSize();
             priceSizeObj.setPrice((Float) map.get("price"));
-            priceSizeObj.setSize((String) map.get("size"));
+            priceSizeObj.setSize((String) map.get("name"));
             priceSizeList.add(priceSizeObj);
         }
         return priceSizeList;
