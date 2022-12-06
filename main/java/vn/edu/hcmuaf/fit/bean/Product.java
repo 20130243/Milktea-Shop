@@ -1,21 +1,44 @@
 package vn.edu.hcmuaf.fit.bean;
 
+import java.util.List;
+
 public class Product {
     int id;
     String name;
     int idCategory;
+    List<PriceSize> priceSize;
     String img;
     int status;
 
-    public Product() {
+    List<Topping> topping;
+
+
+    public List<Topping> getTopping() {
+        return topping;
     }
 
-    public Product(int id, String name, int idCategory, String img, int status) {
+    public void setTopping(List<Topping> topping) {
+        this.topping = topping;
+    }
+
+    public Product(int id, String name, int idCategory, List<PriceSize> priceSize, String img, int status, List<Topping> topping) {
         this.id = id;
         this.name = name;
         this.idCategory = idCategory;
+        this.priceSize = priceSize;
         this.img = img;
         this.status = status;
+        this.topping = topping;
+    }
+    public Product() {
+    }
+
+    public List<PriceSize> getPriceSize() {
+        return priceSize;
+    }
+
+    public void setPriceSize(List<PriceSize> priceSize) {
+        this.priceSize = priceSize;
     }
 
     public int getId() {
@@ -64,8 +87,10 @@ public class Product {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", idCategory=" + idCategory +
+                ", priceSize=" + priceSize +
                 ", img='" + img + '\'' +
-                ", status='" + status + '\'' +
+                ", status=" + status +
+                ", topping=" + topping +
                 '}';
     }
 }

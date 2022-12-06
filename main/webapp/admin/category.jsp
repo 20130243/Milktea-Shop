@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,15 +22,15 @@
 
 </head>
 
-<body class="loading" <!--
-    data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false }'
-    -->
+<body class="loading"
+      data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false }'
+
 >
 <!-- data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}' -->
 <!-- Begin page -->
 <div class="wrapper">
     <!-- ========== Left Sidebar Start ========== -->
-
+    <%@include file="left-menu.jsp" %>
     <!-- Left Sidebar End -->
 
     <!-- ============================================================== -->
@@ -379,7 +380,7 @@
     <!-- content -->
 
     <!-- Footer Start -->
-    <%@include file="footer.jsp"%>
+    <%@include file="footer.jsp" %>
     <!-- end Footer -->
 
 </div>
