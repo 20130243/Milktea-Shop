@@ -5,12 +5,18 @@ public class Topping {
     private String name;
     private float price;
     private int status;
+    private int category_id;
 
-    public Topping(int id, String name, float price, int status) {
+    public Topping(int id, String name, float price, int category_id, int status) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.status = status;
+        this.category_id = category_id;
+    }
+
+    public Topping() {
+
     }
 
     @Override
@@ -20,7 +26,16 @@ public class Topping {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", status=" + status +
+                ", category_id=" + category_id +
                 '}';
+    }
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
     public int getId() {

@@ -1,6 +1,5 @@
 package vn.edu.hcmuaf.fit.bean;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,20 +75,20 @@ public class Cart {
     }
 
     public static void main(String[] args) {
-        Map<Product, List<Topping>> a1 = new HashMap<>(0);
-        List<PriceSize> priceSizeList = new ArrayList<PriceSize>();
-        priceSizeList.add(new PriceSize("L", 3000));
-        Product a2 = new Product(2, "String name", 1, priceSizeList, "String img", 0);
-        Product a3 = new Product(2, "Stasacasc", 1, priceSizeList, "String img", 0);
-        Topping t1 = new Topping(1, "String name", 5000, 0);
-        List<Topping> toppinglist = new ArrayList<>();
-        toppinglist.add(t1);
-        a1.put(a2, toppinglist);
-        a1.put(a3, null);
-//        System.out.println(a1);
-//        System.out.println(a1.keySet().toArray()[0]);
-        Product a = (Product) a1.keySet().toArray()[0];
-        System.out.println(a.getName());
+//        Map<Product, List<Topping>> a1 = new HashMap<>(0);
+//        List<PriceSize> priceSizeList = new ArrayList<PriceSize>();
+//        priceSizeList.add(new PriceSize("L", 3000));
+//        Product a2 = new Product(2, "String name", 1, priceSizeList, "String img", 0);
+//        Product a3 = new Product(2, "Stasacasc", 1, priceSizeList, "String img", 0);
+//        Topping t1 = new Topping(1, "String name", 5000, 0);
+//        List<Topping> toppinglist = new ArrayList<>();
+//        toppinglist.add(t1);
+//        a1.put(a2, toppinglist);
+//        a1.put(a3, null);
+////        System.out.println(a1);
+////        System.out.println(a1.keySet().toArray()[0]);
+//        Product a = (Product) a1.keySet().toArray()[0];
+//        System.out.println(a.getName());
 
 
     }

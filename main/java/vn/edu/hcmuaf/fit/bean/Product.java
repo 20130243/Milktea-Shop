@@ -10,15 +10,25 @@ public class Product {
     String img;
     int status;
 
+    List<Topping> topping;
 
 
-    public Product(int id, String name, int idCategory, List<PriceSize> priceSize, String img, int status) {
+    public List<Topping> getTopping() {
+        return topping;
+    }
+
+    public void setTopping(List<Topping> topping) {
+        this.topping = topping;
+    }
+
+    public Product(int id, String name, int idCategory, List<PriceSize> priceSize, String img, int status, List<Topping> topping) {
         this.id = id;
         this.name = name;
         this.idCategory = idCategory;
         this.priceSize = priceSize;
         this.img = img;
         this.status = status;
+        this.topping = topping;
     }
     public Product() {
     }
@@ -80,6 +90,7 @@ public class Product {
                 ", priceSize=" + priceSize +
                 ", img='" + img + '\'' +
                 ", status=" + status +
+                ", topping=" + topping +
                 '}';
     }
 }
