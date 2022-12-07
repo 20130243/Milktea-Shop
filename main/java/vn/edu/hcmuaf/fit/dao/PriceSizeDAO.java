@@ -2,14 +2,16 @@ package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ProductDAO extends RD {
+public class PriceSizeDAO extends RD {
+
     @Override
     public List<Map<String, Object>> getAll() {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM product  ")
+                h.createQuery("SELECT * FROM product_size  ")
                         .mapToMap()
                         .list()
         );
@@ -17,63 +19,56 @@ public class ProductDAO extends RD {
 
     @Override
     public Map<String, Object> getById(int id) {
-        List<Map<String, Object>> productList = getAll();
-        for (Map<String, Object> product : productList) {
-            if ((int) product.get("id") == id) {
-                return product;
+        List<Map<String, Object>> priceSizeList = getAll();
+        for (Map<String, Object> product_size : priceSizeList) {
+            if ((int) product_size.get("id") == id) {
+                return product_size;
             }
         }
         return null;
     }
+    public List<Map<String, Object>> getByProductId(int id) {
+        List<Map<String, Object>> priceSizeList = getAll();
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (Map<String, Object> product_size : priceSizeList) {
+            if ((int) product_size.get("product_id") == id) {
+                result.add(product_size);
+            }
+        }
+        return result;
+    }
 
-    public static void insert(String name, int categoryID, String img, int status) throws Exception {
+    public void insert(int product_id, String name, float price) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("INSERT INTO product(name,category_id,img,status) VALUES(:name,:category_id,:img,:status)")
+                h.createUpdate("INSERT INTO product_size(product_id,name,price) VALUES(:product_id,:name,:price)")
                         .bind("name", name)
-                        .bind("category_id", categoryID)
-                        .bind("img", img)
-                        .bind("status", status)
+                        .bind("price", price)
+                        .bind("product_id", product_id)
                         .execute()
         );
     }
 
-    public static void update(int id, String name, int categoryID, String img, int status) {
+    public void update(int product_id, String name, float price) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE product SET name=:name,category_id=:category_id,img=:img,status=:status WHERE id=:id")
+                h.createUpdate("UPDATE product_size SET name=:name,price=:price WHERE id=:product_id")
                         .bind("name", name)
-                        .bind("category_id", categoryID)
-                        .bind("img", img)
-                        .bind("status", status)
-                        .bind("id", id)
-                        .execute()
-        );
+                        .bind("price", price)
+                        .bind("id", product_id)
+                        .execute());
     }
-
 
     @Override
     public void delete(int id) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("DELETE FROM product WHERE id=:id")
+                h.createUpdate("DELETE FROM product_size WHERE id=:id")
                         .bind("id", id)
                         .execute()
         );
     }
-    public int getTotalProduct() {
-        int count = JDBIConnector.get().withHandle(h ->
-                h.createQuery("select count(*) from product").mapTo(Integer.class).first()
-                );
-        return count;
-    }
-    /*
-    * Tạo bởi: Lê Trọng Tình 20130440
-    * Cập nhật: Lê Trọng Tình 20130440
-    * */
-    public List<Map<String, Object>> pagingProduct(int index) {
-        return JDBIConnector.get().withHandle(h ->
-                h.createQuery("select * from product\n" +
-                        "order by id\n" +
-                        "LIMIT ? , 12;").bind(0, (index-1)*12).mapToMap().list()
-        );
-    }
 
+    public static void main(String[] args) {
+        PriceSizeDAO dao = new PriceSizeDAO();
+        List<Map<String, Object>> priceSizeList = dao.getAll();
+        System.out.println(priceSizeList);
+    }
 }

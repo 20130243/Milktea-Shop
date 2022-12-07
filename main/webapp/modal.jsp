@@ -27,7 +27,10 @@
    int id_product = Integer.parseInt(id);
    Product p = new ProducService().getById(id_product);
     CurrencyFormat  currency = new CurrencyFormat();
-    String priceP = currency.format((int) p.getPriceSize().get(0).getPrice());
+    String priceP = "0";
+    if(p.getPriceSize().size() > 0) {
+        priceP  = currency.format((int) p.getPriceSize().get(0).getPrice());
+    }
     String totalPrice = priceP;
     int count = p.getId();
 %>
@@ -52,6 +55,7 @@
                         <h6 class="title">Kích cỡ:</h6>
                         <div class="product-modal-size">
                         <%
+                            if(p.getPriceSize().size() > 0) {
                             List<PriceSize> sizes = p.getPriceSize();
 
                                 if(sizes.size() == 1) {
@@ -70,7 +74,7 @@
                             <label class="size-radio" for="l_size<%=p.getId()%>"><%=sizes.get(1).getSize()%></label>
 
                             <%
-                                }
+                                } }
                             %>
                         </div>
 
@@ -134,6 +138,7 @@
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script>
+    <%if(p.getPriceSize().size() > 0) {%>
     price<%=p.getId()%> = '<%=new ProducService().getPriceSizeM(p.getId())%>';
     var totalPrice<%=p.getId()%> = document.getElementById('totalprice' + '<%=p.getId()%>');
     subTotal<%=p.getId()%> =Number(price<%=p.getId()%>);
@@ -255,7 +260,7 @@
 
             })
     })
-
+<%}%>
 </script>
 
 </body>
