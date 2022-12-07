@@ -26,6 +26,10 @@ public class User implements Serializable {
         this.token = token;
     }
 
+    public User() {
+
+    }
+
     public int getId() {
         return id;
     }

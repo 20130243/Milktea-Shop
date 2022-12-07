@@ -1,7 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="left-side-menu">
 
   <!-- LOGO -->
-  <a href="../index.jsp" class="logo text-center logo-light">
+  <a href="../admin" class="logo text-center logo-light">
                 <span class="logo-lg">
                     <img src="../assets/images/logo.png" alt="" height="16">
                 </span>
@@ -11,7 +12,7 @@
   </a>
 
   <!-- LOGO -->
-  <a href="../index.jsp" class="logo text-center logo-dark">
+  <a href="../admin" class="logo text-center logo-dark">
                 <span class="logo-lg">
                     <img src="../assets/images/logo-dark.png" alt="" height="16">
                 </span>
@@ -25,7 +26,7 @@
     <!--- Sidemenu -->
     <ul class="metismenu side-nav">
       <li class="side-nav-item">
-        <a href="revenue.jsp" class="side-nav-link">
+        <a href="index.jsp" class="side-nav-link">
           <i class="uil-home-alt"></i>
           <!-- <span class="badge badge-success float-right">4</span> -->
           <span> Thống kê doanh thu</span>
