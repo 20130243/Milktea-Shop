@@ -33,8 +33,25 @@ public class CategoryService {
     public void update(Category category) throws Exception {
         dao.update(category.getId(), category.getName(),category.getStatus());
     }
+    public List<Category> getPaging(int index) {
+        List<Category> list = new ArrayList<>();
+        List<Map<String, Object>> categoryList = dao.paging(index);
+        for (Map<String, Object> map : categoryList) {
+            Category category = new Category();
+            category.setId((Integer) map.get("id"));
+            category.setName((String) map.get("name"));
+            category.setStatus((Integer) map.get("status"));
+
+
+            list.add(category);
+        }
+        return list;
+    }
+    public int getTotal() {
+        return dao.getTotal();
+    }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(new CategoryService().getAll());
+        System.out.println(new CategoryService().getPaging(2));
     }
 }
