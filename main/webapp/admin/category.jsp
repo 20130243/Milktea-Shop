@@ -1,3 +1,6 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,11 +24,10 @@
     <link href="../assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style"/>
 
 </head>
-
+ 
 <body class="loading"
-      data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false }'
+      data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false }'>
 
->
 <!-- data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}' -->
 <!-- Begin page -->
 <div class="wrapper">
@@ -364,18 +366,52 @@
                                         </tr>
                                         </tbody>
                                     </table>
+
+                                    <nav>
+                                        <ul class="pagination pagination-rounded mb-0">
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+
+
+                                            <%
+                                                int count = (int) request.getAttribute("endPage");
+                                                int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+                                                for (int i = 1; i <= count; i++) {
+                                            %>
+                                            <c:set var="count" value='${requestScope["endPage"]}'/>
+                                            <c:set var="currentPage" value="${count eq null ? 1 : count}"/>
+
+                                            <li class="page-item  <c:if test="${currentPage eq i }"> active </c:if>">
+                                                <a class="page-link"
+                                                   href="/admin/category?index=<%=i%>"><%= i %>
+                                                    <c:set var="guess" value="${param.page}"/>
+                                                    <c:out value="${guess}"/>
+                                                    <c:out value="${i}"/>
+                                                    <c:out value="${currentPage}"/>
+                                                </a>
+                                            </li>
+
+                                            <%}%>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div> <!-- end card-body-->
                         </div> <!-- end card-->
                     </div> <!-- end col -->
                 </div>
                 <!-- end row -->
-
             </div> <!-- container -->
-
         </div> <!-- content -->
-
-
     </div>
     <!-- content -->
 
@@ -402,13 +438,13 @@
 <script src="../assets/js/app.min.js"></script>
 
 <!-- third party js -->
-<script src="../assets/js/vendor/apexcharts.min.js"></script>
+<%--<script src="../assets/js/vendor/apexcharts.min.js"></script>--%>
 <script src="../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
 <!-- third party js ends -->
 
 <!-- demo app -->
-<script src="../assets/js/pages/demo.dashboard.js"></script>
+<%--<script src="../assets/js/pages/demo.dashboard.js"></script>--%>
 <!-- end demo js-->
 </body>
 

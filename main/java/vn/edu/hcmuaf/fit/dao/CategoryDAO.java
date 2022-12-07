@@ -52,5 +52,17 @@ public class CategoryDAO extends RD {
         );
     }
 
-
+    public int getTotal() {
+        int count = JDBIConnector.get().withHandle(h ->
+                h.createQuery("select count(*) from category").mapTo(Integer.class).first()
+        );
+        return count;
+    }
+    public List<Map<String, Object>> paging(int index) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from category\n" +
+                        "order by id\n" +
+                        "LIMIT ? , 2;").bind(0, (index-1)*2).mapToMap().list()
+        );
+    }
 }
