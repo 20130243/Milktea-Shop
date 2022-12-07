@@ -1,5 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.Product" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.Size" %>
+<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/3/2022
@@ -35,7 +37,7 @@
     <link rel="stylesheet" href="css/header-footer.css" type="text/css">
 </head>
 
-<body>
+<body >
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -164,8 +166,10 @@
                     List<Product> list = (List<Product>) request.getAttribute("listProduct");
                         for (Product p : list) {
                     %>
-                    <div class="col-lg-3 col-md-4 col-sm-4">
-                        <div class="product__item sale">
+                    <div class="col-lg-3 col-md-4 col-sm-4" >
+
+                        <div class="product__item sale" data-toggle="modal"
+                             data-target="#myModal<%=p.getId()%>" data-id="<%=p.getId()%>">
                             <div class="product__item__pic set-bg" data-setbg="<%=p.getImg()%>">
                                 <%
                                 if(p.getStatus() == 1) {
@@ -175,12 +179,21 @@
                             </div>
                             <div class="product__item__text">
                                 <h5><%=p.getName()%></h5>
-                                <h6>31.000đ</h6>
+                                <%
+                                    CurrencyFormat currency = new CurrencyFormat();
+                                    int price = (int) (p.getPriceSize().get(0).getPrice());
+                                %>
+                                <h6><%=currency.format(price)%></h6>
                             </div>
                         </div>
+                        <jsp:include page='/modal.jsp'>
+                            <jsp:param name="id" value="<%=p.getId()%>"/>
+                        </jsp:include>
                     </div>
-
-                    <% }%>
+                    <button type="button" class="btn btn-primary btn-lg d-none" id="btn-modal<%=p.getId()%>" data-toggle="modal"
+                            data-target="#myModal">
+                    </button>
+                    <%  }%>
                 </div>
             </div>
             <div class="col-lg-3">
@@ -330,86 +343,13 @@
 </footer>
 <!-- Footer Section End -->
 
-<button type="button" class="btn btn-primary btn-lg d-none" id="btn-modal" data-toggle="modal"
-        data-target="#myModal">
-</button>
 
-<div id="myModal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog product-modal" role="document">
-        <div class="modal-content flex-row">
-            <div class="w-50">
-                <div class="product-modal-img">
-                    <img src="img/product/Dứa-Ép-min.png">
-                </div>
-            </div>
-            <div class="w-50 product-modal-detail">
-                <div class="product-modal-header">
-                    <h3>Trà sữa lài</h3>
-                </div>
-                <div class="product-modal-middle">
-                    <div class="product-modal-option ">
-                        <h6 class="title">Kích cỡ:</h6>
-                        <div class="product-modal-size">
+<%--<a href="shop?proId=<%=p.getId()%>" type="button" class="btn btn-primary btn-lg d-none" id="btn-modal" data-toggle="modal"--%>
+<%--   data-target="#myModal" ></a>--%>
 
-                            <input class="" type="radio" name="size" id="m_size" value="M" checked="checked">
-                            <label class="size-radio" for="m_size">M</label>
-
-                            <input class="" type="radio" name="size" id="l_size" value="L">
-                            <label class="size-radio" for="l_size">L</label>
-
-                        </div>
-
-                    </div>
-                    <div class="product-modal-option">
-                        <h6 class="title">Số lượng:</h6>
-                        <div class="quantity-control ">
-                            <button class=" " id="modal-sub-btn"><i class="fa-solid fa-minus item"></i> </button>
-                            <input type="text" disabled class="quantity-num" value="1" id="modal-quantity">
-                            <button class=" " id="modal-sum-btn"> <i class="fa-solid fa-plus item"></i> </button>
-                        </div>
-                    </div>
-                    <div class="product-modal-option align-items-start">
-                        <h6 class="title">Topping:</h6>
-                        <div class="product-modal-topping ">
-                            <input type="checkbox" name="tranchau" id="tranchau">
-                            <label class="topping-detail" for="tranchau">
-                                Trân châu</label>
-
-                            <input type="checkbox" name="suongsao" id="suongsao">
-                            <label class="topping-detail" for="suongsao">
-                                Sương sáo</label>
-
-                            <input type="checkbox" name="cheese" id="cheese">
-                            <label class="topping-detail" for="cheese">
-                                Kem Cheese</label>
-
-                            <input type="checkbox" name="thach" id="thach">
-                            <label class="topping-detail" for="thach">
-                                Thạch dừa</label>
-
-                        </div>
-                    </div>
-
-                    <div class="product-modal-option align-items-start">
-                        <h6 class="title">Ghi chú:</h6>
-                        <div>
-                            <textarea name="" id="" cols="25" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="product-modal-option">
-                        <h6 class="title">Giá:</h6>
-                        <h6>36.000đ</h6>
-                    </div>
-                </div>
-
-                <div class="product-modal-footer">
-                    <button class="btn modal-btn"  data-dismiss="modal">Thêm vào giỏ hàng</button>
-                </div>
-            </div>
-        </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
@@ -421,25 +361,27 @@
 <script src="js/jquery.slicknav.js"></script>
 <script src="js/mixitup.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
 <script src="js/modal.js"></script>
+<script src="js/main.js"></script>
 <script src="js/cart.js"></script>
+<%--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"--%>
+<%--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">--%>
+<%--</script>--%>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 </script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-</script>
+
+
 <script>
     $(document).ready(function () {
         $(".product__item").click(function (e) {
-            e.preventDefault();
-            $("#btn-modal").click();
+            var val = this.getAttribute('data-id');
+            var s = '#btn-modal' + val;
+            $(s).click();
         });
     });
+
+
 </script>
 </body>
 
