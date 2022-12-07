@@ -174,9 +174,9 @@
                         checkChecked++;
                     }
                 }
-                console.log(checkBoxs.length == checkChecked);
+                var getQuantity = $(rs).val();
 
-                if(subTotal<%=p.getId()%> > priceMinus || subTotal<%=p.getId()%> < priceMinus && checkBoxs.length == checkChecked) {
+                if((subTotal<%=p.getId()%> > priceMinus || subTotal<%=p.getId()%> < priceMinus) && checkBoxs.length == checkChecked && getQuantity == 1) {
                     totalPrice<%=p.getId()%>.innerText =priceMinus.toLocaleString('vi-VN', {
                         style: 'currency',
                         currency: 'VND'
@@ -200,8 +200,6 @@
             var checkBox = document.getElementById('<%=p.getId()%><%=topping.getId()%><%=count%>');
             var sum = parseInt($(rs).val());
             if($(checked).is(':checked') ){
-                <%--const checkValue = document.querySelector('<%=p.getId()%><%=topping.getId()%><%=count%>').checked;--%>
-                <%--console.log(checkValue);--%>
                 var value = Number(checkBox.value);
                 value = sum * value;
                 subTotal<%=p.getId()%> = subTotal<%=p.getId()%> + value;
