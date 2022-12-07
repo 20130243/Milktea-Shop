@@ -5,11 +5,11 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "category", value = "admin/category")
-public class category extends HttpServlet {
+@WebServlet(name = "Category", value = "/admin/category")
+public class Category extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect("category.jsp");
     }
 
     @Override
