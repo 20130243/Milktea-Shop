@@ -180,8 +180,15 @@
                             <div class="product__item__text">
                                 <h5><%=p.getName()%></h5>
                                 <%
+                                    int price = 0;
                                     CurrencyFormat currency = new CurrencyFormat();
-                                    int price = (int) (p.getPriceSize().get(0).getPrice());
+                                    if(p.getPriceSize().size()
+                                    > 0) {
+
+                                    price = (int) (p.getPriceSize().get(0).getPrice());
+                                    } else {
+                                        price = 0;
+                                    }
                                 %>
                                 <h6><%=currency.format(price)%></h6>
                             </div>
