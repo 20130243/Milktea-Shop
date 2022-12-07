@@ -19,12 +19,8 @@
 
 .product-modal-price > h6 {
   font-weight: bold;
-  font-size: 24px;
+  font-size: 26px;
   color: #1fa198;
-}
-
-.product-modal-price > .title {
-  width: 10%
 }
 
 .product-modal-img img {

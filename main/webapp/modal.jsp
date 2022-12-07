@@ -28,6 +28,8 @@
    Product p = new ProducService().getById(id_product);
     CurrencyFormat  currency = new CurrencyFormat();
     String priceP = currency.format((int) p.getPriceSize().get(0).getPrice());
+    String totalPrice = priceP;
+    int count = p.getId();
 %>
 <div id="myModal<%=p.getId()%>" class="modal fade in" tabindex="-1" role="dialog">
     <div class="modal-dialog product-modal" role="document">
@@ -37,7 +39,6 @@
                     <img src="<%=p.getImg()%>">
                 </div>
                 <div class="product-modal-price">
-                    <h6 class="title">Giá: </h6>
                     <h6 id="price<%=p.getId()%>"> <%=priceP%></h6>
                 </div>
 
@@ -62,10 +63,10 @@
 
 
                         %>
-                            <input class="" type="radio" name="size<%=p.getId()%>" id="m_size<%=p.getId()%>" value="M" checked="checked" data-id="<%=p.getId()%>">
+                            <input class="" type="radio" name="size<%=p.getId()%>" id="m_size<%=p.getId()%>" value="M" checked="checked">
                             <label class="size-radio" for="m_size<%=p.getId()%>"><%=sizes.get(0).getSize()%></label>
 
-                            <input class="" type="radio" name="size<%=p.getId()%>" id="l_size<%=p.getId()%>" value="L"  data-id="<%=p.getId()%>">
+                            <input class="" type="radio" name="size<%=p.getId()%>" id="l_size<%=p.getId()%>" value="L" >
                             <label class="size-radio" for="l_size<%=p.getId()%>"><%=sizes.get(1).getSize()%></label>
 
                             <%
@@ -87,14 +88,14 @@
                         <h6 class="title">Topping:</h6>
                         <div class="product-modal-topping ">
                             <%
-                                if(p.getTopping().size() > 1) {
+                                if(p.getTopping().size() > 0) {
                                     List<Topping> toppingList = p.getTopping();
                                     for(Topping topping : toppingList) {
 
 
                             %>
-                            <input type="checkbox" name="<%=topping.getId()%>" id="<%=topping.getId()%><%=p.getId()%>" data-id="<%=p.getId()%>">
-                            <label class="topping-detail" for="<%=topping.getId()%><%=p.getId()%>">
+                            <input type="checkbox" name="<%=p.getId()%>" id="<%=p.getId()%><%=topping.getId()%><%=count%>" value="<%=topping.getPrice()%>" data-id="<%=p.getId()%>">
+                            <label class="topping-detail" for="<%=p.getId()%><%=topping.getId()%><%=count%>">
                                 <%=topping.getName()%> + <%=currency.format((int) topping.getPrice())%> </label>
                             <%
                                     } } else {
@@ -116,7 +117,7 @@
                     </div>
                     <div class="product-modal-option">
                         <h6 class="title">Giá: </h6>
-                        <h6 id="totalprice<%=p.getId()%>"><%=priceP%></h6>
+                        <h6 id="totalprice<%=p.getId()%>"><%=totalPrice%></h6>
                     </div>
                 </div>
 
@@ -133,43 +134,130 @@
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script>
+    price<%=p.getId()%> = '<%=new ProducService().getPriceSizeM(p.getId())%>';
+    var totalPrice<%=p.getId()%> = document.getElementById('totalprice' + '<%=p.getId()%>');
+    subTotal<%=p.getId()%> =Number(price<%=p.getId()%>);
     $(document).ready(function () {
         var sum_btn = '#modal-sum-btn' + '<%=p.getId()%>';
         var sub_btn = '#modal-sub-btn' + '<%=p.getId()%>';
         var rs = '#modal-quantity' + '<%=p.getId()%>';
+        var sum = parseInt($(rs).val());
         $(sum_btn).click(function (e) {
             $(rs).val(parseInt($(rs).val()) + 1);
+            var pricePlus =Number(price<%=p.getId()%>);
+            var pricePlusTow = Number(subTotal<%=p.getId()%>);
+            var checkPrice = totalPrice<%=p.getId()%>.innerText.split("đ",1);
+            subTotal<%=p.getId()%> = pricePlus + pricePlusTow;
+            totalPrice<%=p.getId()%>.innerText =subTotal<%=p.getId()%>.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            });
+
         });
         $(sub_btn).click(function (e) {
             if (parseInt($(rs).val()) > 1) {
                 $(rs).val(parseInt($(rs).val()) - 1);
-            }
+                var priceMinus =Number(price<%=p.getId()%>);
 
+                var priceMinusTow = Number(subTotal<%=p.getId()%>);
+                subTotal<%=p.getId()%> = priceMinusTow - priceMinus;
+
+                var checkBoxs = document.getElementsByName('<%=p.getId()%>');
+                var checkChecked = 0;
+                for (var i = 0; i < checkBoxs.length; i++) {
+                    if(checkBoxs[i].checked == false) {
+                        checkChecked++;
+                    }
+                }
+                console.log(checkBoxs.length == checkChecked);
+
+                if(subTotal<%=p.getId()%> > priceMinus || subTotal<%=p.getId()%> < priceMinus && checkBoxs.length == checkChecked) {
+                    totalPrice<%=p.getId()%>.innerText =priceMinus.toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    });
+                } else {
+                    totalPrice<%=p.getId()%>.innerText =subTotal<%=p.getId()%>.toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    });
+                }
+            }
         });
+    <%
+    if(p.getTopping().size() > 0) {
+        int i = 1;
+        List<Topping> toppingList = p.getTopping();
+        for(Topping topping : toppingList) {
+    %>
+        const alertStatus<%=p.getId()%><%=topping.getId()%> = (e) => {
+            var checked = '#<%=p.getId()%><%=topping.getId()%><%=count%>' ;
+            var checkBox = document.getElementById('<%=p.getId()%><%=topping.getId()%><%=count%>');
+            var sum = parseInt($(rs).val());
+            if($(checked).is(':checked') ){
+                <%--const checkValue = document.querySelector('<%=p.getId()%><%=topping.getId()%><%=count%>').checked;--%>
+                <%--console.log(checkValue);--%>
+                var value = Number(checkBox.value);
+                value = sum * value;
+                subTotal<%=p.getId()%> = subTotal<%=p.getId()%> + value;
+                totalPrice<%=p.getId()%>.innerText =subTotal<%=p.getId()%>.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                });
+            }
+            else{
+                var value = Number(checkBox.value);
+                value = sum * value;
+                subTotal<%=p.getId()%> = subTotal<%=p.getId()%> - value;
+                totalPrice<%=p.getId()%>.innerText =subTotal<%=p.getId()%>.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                });
+            }
+        };
+        $(document).on("click", '#<%=p.getId()%><%=topping.getId()%><%=count%>', alertStatus<%=p.getId()%><%=topping.getId()%>);
+
+        <%
+        } }%>
     });
 
+
     $(document).ready(function () {
-        var radio = document.getElementsByName('size'+ '<%=p.getId()%>');
         var rs = document.getElementById('price' + '<%=p.getId()%>');
-        var totalPrice = document.getElementById('totalprice' + '<%=p.getId()%>');
+        <%--var totalPrice = document.getElementById('totalprice' + '<%=p.getId()%>');--%>
         rs.innerText = '<%=priceP%>';
-        totalPrice.innerText = '<%=priceP%>';
-        if(radio.length == 2) {
+        <%--totalPrice.innerText = '<%=priceP%>';--%>
+
             var sizeM = document.getElementById('m_size' + '<%=p.getId()%>');
             var sizeL = document.getElementById('l_size' + '<%=p.getId()%>');
             $(sizeM).click(function (e) {
+                price<%=p.getId()%> = '<%=new ProducService().getPriceSizeM(p.getId())%>';
+                subTotal<%=p.getId()%> =Number(price<%=p.getId()%>) ;
+                document.getElementById('modal-quantity<%=p.getId()%>').value = 1;
                 rs.innerText = '<%=priceP = currency.format((int)new ProducService().getPriceSizeM(p.getId()))%>';
-                totalPrice.innerText = '<%=priceP = currency.format((int)new ProducService().getPriceSizeM(p.getId()))%>';
+                var checkBoxs = document.getElementsByName('<%=p.getId()%>');
+                for (i = 0; i < checkBoxs.length; i++) {
+                    checkBoxs[i].checked = false;
+                }
+                totalPrice<%=p.getId()%>.innerText = subTotal<%=p.getId()%>.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+
             })
             $(sizeL).click(function (e) {
+                price<%=p.getId()%> = '<%=new ProducService().getPriceSizeL(p.getId())%>';
+                subTotal<%=p.getId()%> =Number(price<%=p.getId()%>) ;
+                document.getElementById('modal-quantity<%=p.getId()%>').value = 1;
                 rs.innerText = '<%=priceP = currency.format((int)new ProducService().getPriceSizeL(p.getId()))%>';
-                totalPrice.innerText = '<%=priceP = currency.format((int)new ProducService().getPriceSizeL(p.getId()))%>';
+                var checkBoxs = document.getElementsByName('<%=p.getId()%>');
+                for (i = 0; i < checkBoxs.length; i++) {
+                    checkBoxs[i].checked = false;
+                }
+                totalPrice<%=p.getId()%>.innerText = subTotal<%=p.getId()%>.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+
             })
-        }
-
-
     })
+
 </script>
+
 </body>
 
 </html>
