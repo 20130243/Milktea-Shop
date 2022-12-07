@@ -63,7 +63,7 @@ public class ProducService {
         for (Map<String, Object> map : priceSize) {
             PriceSize priceSizeObj = new PriceSize();
             priceSizeObj.setPrice((Float) map.get("price"));
-            priceSizeObj.setSize((String) map.get("size"));
+            priceSizeObj.setSize((String) map.get("name"));
             priceSizeList.add(priceSizeObj);
         }
         return priceSizeList;
@@ -83,12 +83,21 @@ public class ProducService {
         return dao.getTotalProduct();
     }
 
+    public int getPriceSizeM(int id) {
+        return(int) getById(id).getPriceSize().get(0).getPrice();
+    }
+
+    public int getPriceSizeL(int id) {
+        try {
+            return(int) getById(id).getPriceSize().get(1).getPrice();
+
+        } catch (Exception e) {
+            return getPriceSizeM(id);
+        }
+    }
+
     public static void main(String[] args) {
         ProducService dao = new ProducService();
-        List<Product> list = dao.getPagingProduct(2);
-        for (Product p : list
-        ) {
-            System.out.println(p);
-        }
+        System.out.println(dao.getPriceSizeL(1));
     }
 }

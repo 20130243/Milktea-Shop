@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.dao;
 
+import vn.edu.hcmuaf.fit.bean.PriceSize;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.util.ArrayList;
@@ -64,5 +65,11 @@ public class PriceSizeDAO extends RD {
                         .bind("id", id)
                         .execute()
         );
+    }
+
+    public static void main(String[] args) {
+        PriceSizeDAO dao = new PriceSizeDAO();
+        List<Map<String, Object>> priceSizeList = dao.getAll();
+        System.out.println(priceSizeList);
     }
 }
