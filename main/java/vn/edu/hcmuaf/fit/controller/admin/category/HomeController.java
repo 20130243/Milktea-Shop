@@ -1,4 +1,4 @@
-package vn.edu.hcmuaf.fit.controller.admin;
+package vn.edu.hcmuaf.fit.controller.admin.category;
 
 import vn.edu.hcmuaf.fit.bean.Category;
 import vn.edu.hcmuaf.fit.services.CategoryService;
@@ -12,30 +12,29 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "Category", value = "/admin/category")
-public class CategoryController extends HttpServlet {
+public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String indexPage = request.getParameter("page");
+        String page = request.getParameter("page");
         int index;
-        if(indexPage == null) {
+        if(page == null) {
             index = 1;
         } else {
-            index = Integer.parseInt(indexPage);
+            index = Integer.parseInt(page);
         }
         CategoryService categoryService = new CategoryService();
         int count = categoryService.getTotal();
-        int endPage = count/2;
-        if(count % 12 != 0) {
+        int endPage = count/10;
+        if(count % 10 != 0) {
             endPage++;
         }
 
-        List<Category> listCategory = categoryService.getPaging(index);
+        List<Category> categoryList = categoryService.getPaging(index);
 
-        request.setAttribute("listProduct", listCategory);
+        request.setAttribute("categoryList", categoryList);
         request.setAttribute("endPage", endPage);
-        request.getRequestDispatcher("category.jsp").forward(request, response);
-//        response.sendRedirect("category.jsp");
+        request.getRequestDispatcher("category/index.jsp").forward(request, response);
     }
 
     @Override

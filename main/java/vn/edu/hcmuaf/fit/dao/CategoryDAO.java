@@ -62,7 +62,7 @@ public class CategoryDAO extends RD {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from category\n" +
                         "order by id\n" +
-                        "LIMIT ? , 2;").bind(0, (index-1)*2).mapToMap().list()
+                        "LIMIT ? , 10;").bind(0, (index-1)*10).mapToMap().list()
         );
     }
 }
