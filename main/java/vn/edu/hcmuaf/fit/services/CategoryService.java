@@ -25,14 +25,17 @@ public class CategoryService {
 
     public Category getById(int id) throws Exception {
         Map<String, Object> category = dao.getById(id);
-        return new Category((Integer) category.get("id"),(String) category.get("name"),(Integer) category.get("status"));
+        return new Category((Integer) category.get("id"), (String) category.get("name"), (Integer) category.get("status"));
     }
+
     public void insert(Category category) throws Exception {
-        dao.insert(category.getName(),category.getStatus());
+        dao.insert(category.getName(), category.getStatus());
     }
+
     public void update(Category category) throws Exception {
-        dao.update(category.getId(), category.getName(),category.getStatus());
+        dao.update(category.getId(), category.getName(), category.getStatus());
     }
+
     public List<Category> getPaging(int index) {
         List<Category> list = new ArrayList<>();
         List<Map<String, Object>> categoryList = dao.paging(index);
@@ -47,8 +50,13 @@ public class CategoryService {
         }
         return list;
     }
+
     public int getTotal() {
         return dao.getTotal();
+    }
+
+    public void delete(int id) throws Exception {
+        dao.delete(id);
     }
 
     public static void main(String[] args) throws Exception {

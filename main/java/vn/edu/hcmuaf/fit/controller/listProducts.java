@@ -15,12 +15,12 @@ import java.util.List;
 public class listProducts extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String indexPage = request.getParameter("index");
+        String page = request.getParameter("index");
         int index;
-        if(indexPage == null) {
+        if(page == null) {
             index = 1;
         } else {
-            index = Integer.parseInt(indexPage);
+            index = Integer.parseInt(page);
         }
         ProducService producService = new ProducService();
         SizeService sizeService = new SizeService();
