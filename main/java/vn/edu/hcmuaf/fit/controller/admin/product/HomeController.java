@@ -25,7 +25,7 @@ public class HomeController extends HttpServlet {
             index = Integer.parseInt(page);
         }
         ProductService productService = new ProductService();
-        int count = productService.getTotal();
+        int count = productService.getTotalProduct();
         int endPage = count/10;
         if(count % 10 != 0) {
             endPage++;
