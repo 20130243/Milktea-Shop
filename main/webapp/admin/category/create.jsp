@@ -69,7 +69,7 @@
                             <div class="card-body">
 
                                 <h4 class="header-title">Phân loại</h4>
-                                <form action="/admin/category-create" method="POST">
+                                <form action="/admin/category/create" method="POST">
                                     <input type="text" name="id" id="id"
                                            class="d-none">
                                     <div class="form-group mb-3">

@@ -70,7 +70,7 @@
                             <div class="card-body">
 
                                 <h4 class="header-title">Phân loại</h4>
-                                <form action="/admin/category-update" method="POST">
+                                <form action="/admin/category/update" method="POST">
                                     <input type="text" name="id" id="id" value="<c:out value="${object.id}"/> "
                                            class="d-none" >
                                     <div class="form-group mb-3">
