@@ -2,7 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.Size" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
-<%@ page import="vn.edu.hcmuaf.fit.services.ProducService" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.PriceSize" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.Topping" %>
 <%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %><%--
@@ -25,7 +25,7 @@
 <%
    String id = (String) request.getParameter("id");
    int id_product = Integer.parseInt(id);
-   Product p = new ProducService().getById(id_product);
+   Product p = new ProductService().getById(id_product);
     CurrencyFormat  currency = new CurrencyFormat();
     String priceP = "0";
     if(p.getPriceSize().size() > 0) {
@@ -139,7 +139,7 @@
 <script src="js/jquery-3.3.1.min.js"></script>
 <script>
     <%if(p.getPriceSize().size() > 0) {%>
-    price<%=p.getId()%> = '<%=new ProducService().getPriceSizeM(p.getId())%>';
+    price<%=p.getId()%> = '<%=new ProductService().getPriceSizeM(p.getId())%>';
     var totalPrice<%=p.getId()%> = document.getElementById('totalprice' + '<%=p.getId()%>');
     subTotal<%=p.getId()%> =Number(price<%=p.getId()%>);
     $(document).ready(function () {
@@ -236,10 +236,10 @@
             var sizeM = document.getElementById('m_size' + '<%=p.getId()%>');
             var sizeL = document.getElementById('l_size' + '<%=p.getId()%>');
             $(sizeM).click(function (e) {
-                price<%=p.getId()%> = '<%=new ProducService().getPriceSizeM(p.getId())%>';
+                price<%=p.getId()%> = '<%=new ProductService().getPriceSizeM(p.getId())%>';
                 subTotal<%=p.getId()%> =Number(price<%=p.getId()%>) ;
                 document.getElementById('modal-quantity<%=p.getId()%>').value = 1;
-                rs.innerText = '<%=priceP = currency.format((int)new ProducService().getPriceSizeM(p.getId()))%>';
+                rs.innerText = '<%=priceP = currency.format((int)new ProductService().getPriceSizeM(p.getId()))%>';
                 var checkBoxs = document.getElementsByName('<%=p.getId()%>');
                 for (i = 0; i < checkBoxs.length; i++) {
                     checkBoxs[i].checked = false;
@@ -248,10 +248,10 @@
 
             })
             $(sizeL).click(function (e) {
-                price<%=p.getId()%> = '<%=new ProducService().getPriceSizeL(p.getId())%>';
+                price<%=p.getId()%> = '<%=new ProductService().getPriceSizeL(p.getId())%>';
                 subTotal<%=p.getId()%> =Number(price<%=p.getId()%>) ;
                 document.getElementById('modal-quantity<%=p.getId()%>').value = 1;
-                rs.innerText = '<%=priceP = currency.format((int)new ProducService().getPriceSizeL(p.getId()))%>';
+                rs.innerText = '<%=priceP = currency.format((int)new ProductService().getPriceSizeL(p.getId()))%>';
                 var checkBoxs = document.getElementsByName('<%=p.getId()%>');
                 for (i = 0; i < checkBoxs.length; i++) {
                     checkBoxs[i].checked = false;

@@ -1,13 +1,11 @@
-package vn.edu.hcmuaf.fit.controller.admin.category;
+package vn.edu.hcmuaf.fit.controller.admin.product;
 
 import vn.edu.hcmuaf.fit.bean.Category;
 import vn.edu.hcmuaf.fit.services.CategoryService;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "CreateController", value = "/admin/category-create")

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ProducService {
+public class ProductService {
     private final ProductDAO dao = new ProductDAO();
 
     public List<Product> getAll() {
@@ -97,7 +97,7 @@ public class ProducService {
     }
 
     public static void main(String[] args) {
-        ProducService dao = new ProducService();
+        ProductService dao = new ProductService();
         System.out.println(dao.getPriceSizeL(1));
     }
 }

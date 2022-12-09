@@ -1,8 +1,7 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.bean.Product;
-import vn.edu.hcmuaf.fit.bean.Size;
-import vn.edu.hcmuaf.fit.services.ProducService;
+import vn.edu.hcmuaf.fit.services.ProductService;
 import vn.edu.hcmuaf.fit.services.SizeService;
 
 import javax.servlet.*;
@@ -22,15 +21,15 @@ public class listProducts extends HttpServlet {
         } else {
             index = Integer.parseInt(page);
         }
-        ProducService producService = new ProducService();
+        ProductService productService = new ProductService();
         SizeService sizeService = new SizeService();
-        int count = producService.getTotalProduct();
+        int count = productService.getTotalProduct();
         int endPage = count/12;
         if(count % 12 != 0) {
             endPage++;
         }
 
-        List<Product> listProduct = producService.getPagingProduct(index);
+        List<Product> listProduct = productService.getPagingProduct(index);
         request.setAttribute("listProduct", listProduct);
         request.setAttribute("endPage", endPage);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
