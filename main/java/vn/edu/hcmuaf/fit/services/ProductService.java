@@ -95,7 +95,9 @@ public class ProductService {
             return getPriceSizeM(id);
         }
     }
-
+    public void delete(int id) {
+        dao.delete(id);
+    }
     public static void main(String[] args) {
         ProductService dao = new ProductService();
         System.out.println(dao.getPriceSizeL(1));

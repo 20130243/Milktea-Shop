@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-right-menu float-right mb-0">
@@ -34,7 +35,7 @@
 
                 <div style="max-height: 230px;" data-simplebar>
                     <!-- item-->
-                    <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                    <a href="order/create.jsp" class="dropdown-item notify-item">
                         <div class="notify-icon bg-primary">
                             <i class="mdi mdi-comment-account-outline"></i>
                         </div>
@@ -43,7 +44,7 @@
                         </p>
                     </a>
                     <!-- item-->
-                    <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                    <a href="order/create.jsp" class="dropdown-item notify-item">
                         <div class="notify-icon bg-primary">
                             <i class="mdi mdi-comment-account-outline"></i>
                         </div>
@@ -52,7 +53,7 @@
                         </p>
                     </a>
                     <!-- item-->
-                    <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                    <a href="order/create.jsp" class="dropdown-item notify-item">
                         <div class="notify-icon bg-primary">
                             <i class="mdi mdi-comment-account-outline"></i>
                         </div>
@@ -61,7 +62,7 @@
                         </p>
                     </a>
                     <!-- item-->
-                    <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                    <a href="order/create.jsp" class="dropdown-item notify-item">
                         <div class="notify-icon bg-primary">
                             <i class="mdi mdi-comment-account-outline"></i>
                         </div>
@@ -74,7 +75,7 @@
                 </div>
 
                 <!-- All-->
-                <a href="admin-order.html"
+                <a href="order/index.jsp"
                    class="dropdown-item text-center text-primary notify-item notify-all">
                     Xem tất cả
                 </a>
@@ -93,7 +94,7 @@
             <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#"
                role="button" aria-haspopup="false" aria-expanded="false">
                                 <span class="account-user-avatar">
-                                    <img src="../img/product/products/CaPheCappuccinoDaXay.png" alt="user-image"
+                                    <img src="<c:out value="${pageContext.request.contextPath}"/>/img/product/products/CaPheCappuccinoDaXay.png" alt="user-image"
                                          class="rounded-circle">
                                 </span>
                 <span>
@@ -147,10 +148,10 @@
 
             <div class="notification-list">
                 <!-- item-->
-                <a href="admin-product.html" class="dropdown-item notify-item">
+                <a href="product/index.jsp" class="dropdown-item notify-item">
                     <div class="media">
                         <img class="d-flex mr-2 rounded-circle"
-                             src="../img/product/cappuchinovietnamo-min.png"
+                             src="<c:out value="${pageContext.request.contextPath}"/>/img/product/products/CaPheCappuccinoDaXay.png"
                              alt="Generic placeholder image" height="32">
                         <div class="media-body">
                             <h5 class="m-0 font-14">Trà sữa lài</h5>
@@ -160,10 +161,10 @@
                 </a>
 
                 <!-- item-->
-                <a href="admin-product.html" class="dropdown-item notify-item">
+                <a href="product/index.jsp" class="dropdown-item notify-item">
                     <div class="media">
                         <img class="d-flex mr-2 rounded-circle"
-                             src="../img/product/cappuchinovietnamo-min.png"
+                             src="<c:out value="${pageContext.request.contextPath}"/>/img/product/products/CaPheCappuccinoDaXay.png"
                              alt="Generic placeholder image" height="32">
                         <div class="media-body">
                             <h5 class="m-0 font-14">Cà phê đen</h5>

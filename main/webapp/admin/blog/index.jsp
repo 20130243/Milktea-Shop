@@ -3,119 +3,34 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Giảm giá</title>
+    <title>Tin tức</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico">
 
     <!-- third party css -->
-    <link href="../assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
     <!-- third party css end -->
 
     <!-- App css -->
-    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style" />
-    <link href="../assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
+    <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="../../assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
 
 </head>
 
-<body class="loading" <!--
-    data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false }'
-    -->
-    >
+
+<body class="loading"
+      data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false }'>
+
     <!-- data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}' -->
     <!-- Begin page -->
     <div class="wrapper">
-        <!-- ========== Left Sidebar Start ========== -->
-        <div class="left-side-menu">
-
-            <!-- LOGO -->
-            <a href="../index.jsp" class="logo text-center logo-light">
-                <span class="logo-lg">
-                    <img src="../assets/images/logo.png" alt="" height="16">
-                </span>
-                <span class="logo-sm">
-                    <img src="../assets/images/logo_sm.png" alt="" height="16">
-                </span>
-            </a>
-
-            <!-- LOGO -->
-            <a href="../index.jsp" class="logo text-center logo-dark">
-                <span class="logo-lg">
-                    <img src="../assets/images/logo-dark.png" alt="" height="16">
-                </span>
-                <span class="logo-sm">
-                    <img src="../assets/images/logo_sm_dark.png" alt="" height="16">
-                </span>
-            </a>
-
-            <div class="h-100" id="left-side-menu-container" data-simplebar>
-
-                <!--- Sidemenu -->
-                <ul class="metismenu side-nav">
-                    <li class="side-nav-item">
-                        <a href="index.jsp" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <!-- <span class="badge badge-success float-right">4</span> -->
-                            <span> Thống kê doanh thu</span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="admin-order.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lý đơn hàng </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="admin-sale.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lý khuyến mãi</span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="admin-coupon.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lý mã giảm giá </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="admin-blog.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lí tin tức </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="admin-product.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lí sản phẩm </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="category/index.jsp" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lí loại </span>
-                        </a>
-                    </li>
-                 <li class="side-nav-item">
-                        <a href="admin-topping.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lí topping </span>
-                        </a>
-                    </li>
-                </ul>
-
-
-                <!-- End Sidebar -->
-
-                <div class="clearfix"></div>
-
-            </div>
-            <!-- Sidebar -left -->
-
-        </div>
-        <!-- Left Sidebar End -->
+           <!-- ========== Left Sidebar Start ========== -->
+    <%@include file="../left-menu.jsp" %>
+    <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
@@ -159,7 +74,7 @@
 
                                 <div style="max-height: 230px;" data-simplebar>
                                     <!-- item-->
-                                       <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-primary">
                                             <i class="mdi mdi-comment-account-outline"></i>
                                         </div>
@@ -168,7 +83,7 @@
                                         </p>
                                     </a>
                                     <!-- item-->
-                                       <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-primary">
                                             <i class="mdi mdi-comment-account-outline"></i>
                                         </div>
@@ -177,7 +92,7 @@
                                         </p>
                                     </a>
                                     <!-- item-->
-                                       <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-primary">
                                             <i class="mdi mdi-comment-account-outline"></i>
                                         </div>
@@ -186,7 +101,7 @@
                                         </p>
                                     </a>
                                     <!-- item-->
-                                       <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-primary">
                                             <i class="mdi mdi-comment-account-outline"></i>
                                         </div>
@@ -199,7 +114,7 @@
                                 </div>
 
                                 <!-- All-->
-                               <a href="admin-order.html"
+                               <a href="../order/index.jsp"
                                     class="dropdown-item text-center text-primary notify-item notify-all">
                                     Xem tất cả
                                 </a>
@@ -271,7 +186,7 @@
 
                             <div class="notification-list">
                                 <!-- item-->
-                                <a href="admin-product.html" class="dropdown-item notify-item">
+                                <a href="../product/index.jsp" class="dropdown-item notify-item">
                                     <div class="media">
                                         <img class="d-flex mr-2 rounded-circle" src="../img/product/cappuchinovietnamo-min.png"
                                             alt="Generic placeholder image" height="32">
@@ -283,7 +198,7 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="admin-product.html" class="dropdown-item notify-item">
+                                <a href="../product/index.jsp" class="dropdown-item notify-item">
                                     <div class="media">
                                         <img class="d-flex mr-2 rounded-circle" src="../img/product/cappuchinovietnamo-min.png"
                                             alt="Generic placeholder image" height="32">
@@ -308,10 +223,10 @@
                             <div class="page-title-box">
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item active">Giảm giá </li>
+                                        <li class="breadcrumb-item active">Tin tức</li>
                                     </ol>
                                 </div>
-                                <h4 class="page-title">Giảm giá</h4>
+                                <h4 class="page-title">Tin tức</h4>
                             </div>
                         </div>
                     </div>
@@ -323,8 +238,8 @@
                                 <div class="card-body">
                                     <div class="row mb-2">
                                         <div class="col-sm-4">
-                                            <a href="admin-add-coupon.html" class="btn btn-danger mb-2"><i
-                                                    class="mdi mdi-plus-circle mr-2"></i>Thêm giảm giá</a>
+                                            <a href="create.jsp" class="btn btn-danger mb-2"><i
+                                                    class="mdi mdi-plus-circle mr-2"></i>Thêm tin tức</a>
                                         </div>
                                         <div class="col-sm-8">
                                             <!-- <div class="text-sm-right">
@@ -341,304 +256,269 @@
                                             id="products-datatable">
                                             <thead class="thead-light">
                                                 <tr>
-                                                    <th class="all">Mã giảm giá</th>
-                                                    <th  class="text-center">% giảm</th>
-                                                    <th class="text-center">Số tiền giảm tối đa</th>
-                                                    <th  class="text-center">Số lượng còn lại</th>
-                                                    <th class="text-center">Thời gian</th>
-                                                    <th  class="text-center">Tình trạng</th>
+                                                    <th class="all">Tiêu đề</th>
+                                                    <th>Nội dung</th>
+                                                    <th>Thời gian</th>
                                                     <th>Hành động</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
+                                                        <img src="../../img/blog/blog-9.jpg" alt="contact-img"
+                                                             title="contact-img" class="rounded mr-3" height="48" />
+                                                        <p class="m-0 d-inline-block align-middle font-16"  style="max-width: 200px;">
                                                             <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">GS15X2</a>
+                                                            class="text-body">GRAND OPENING: PHÚC LONG TRƯƠNG ĐỊNH &
+                                                            PHÚC LONG NGÔ GIA TỰ</a>
                                                             <br />
                                                         </p>
                                                     </td>
-                                                    <td  class="text-center">
-                                                        10%
-                                                    </td>
-                                                    <td class="text-center">
-                                                       25,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-success">Có hiệu lực</span>
+                                                    
+                                                    <td>
+                                                        <div data-simplebar data-simplebar-lg
+                                                            style="max-height: 60px;width: 400px;" class="form-group">
+                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                            Obcaecati quis quasi, veritatis temporibus eum optio, iure
+                                                            odit a sint consequuntur id cum ut. Eum non est itaque
+                                                            officia voluptatibus qui!
+                                                        </div>
+                                                    </td> 
+                                                    <td>
+                                                        28/10/2022 - 5/11/2022
                                                     </td>
 
                                                     <td class="table-action">
-                                                        <a href="admin-add-coupon.html" class="action-icon"> <i
+                                                        <a href="create.jsp" class="action-icon"> <i
                                                                 class="mdi mdi-square-edit-outline"></i></a>
                                                         <a href="javascript:void(0);" class="action-icon"> <i
                                                                 class="mdi mdi-delete"></i></a>
                                                     </td>
-                                                </tr>  
+                                                </tr>
                                                 <tr>
                                                     <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
+                                                        <img src="../../img/blog/blog-9.jpg" alt="contact-img"
+                                                             title="contact-img" class="rounded mr-3" height="48" />
+                                                        <p class="m-0 d-inline-block align-middle font-16"  style="max-width: 200px;">
                                                             <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">GS13X2</a>
+                                                            class="text-body">GRAND OPENING: PHÚC LONG TRƯƠNG ĐỊNH &
+                                                            PHÚC LONG NGÔ GIA TỰ</a>
                                                             <br />
                                                         </p>
                                                     </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
+                                                    
+                                                    <td>
+                                                        <div data-simplebar data-simplebar-lg
+                                                            style="max-height: 60px;width: 400px;" class="form-group">
+                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                            Obcaecati quis quasi, veritatis temporibus eum optio, iure
+                                                            odit a sint consequuntur id cum ut. Eum non est itaque
+                                                            officia voluptatibus qui!
+                                                        </div>
+                                                    </td> 
+                                                    <td>
+                                                        28/10/2022 - 5/11/2022
                                                     </td>
 
                                                     <td class="table-action">
-                                                        <a href="admin-add-coupon.html" class="action-icon"> <i
+                                                        <a href="create.jsp" class="action-icon"> <i
                                                                 class="mdi mdi-square-edit-outline"></i></a>
                                                         <a href="javascript:void(0);" class="action-icon"> <i
                                                                 class="mdi mdi-delete"></i></a>
                                                     </td>
-                                                </tr>  
+                                                </tr>
                                                 <tr>
                                                     <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
+                                                        <img src="../../img/blog/blog-9.jpg" alt="contact-img"
+                                                             title="contact-img" class="rounded mr-3" height="48" />
+                                                        <p class="m-0 d-inline-block align-middle font-16"  style="max-width: 200px;">
                                                             <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">GS13X2</a>
+                                                            class="text-body">GRAND OPENING: PHÚC LONG TRƯƠNG ĐỊNH &
+                                                            PHÚC LONG NGÔ GIA TỰ</a>
                                                             <br />
                                                         </p>
                                                     </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
+                                                    
+                                                    <td>
+                                                        <div data-simplebar data-simplebar-lg
+                                                            style="max-height: 60px;width: 400px;" class="form-group">
+                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                            Obcaecati quis quasi, veritatis temporibus eum optio, iure
+                                                            odit a sint consequuntur id cum ut. Eum non est itaque
+                                                            officia voluptatibus qui!
+                                                        </div>
+                                                    </td> 
+                                                    <td>
+                                                        28/10/2022 - 5/11/2022
                                                     </td>
 
                                                     <td class="table-action">
-                                                        <a href="admin-add-coupon.html" class="action-icon"> <i
+                                                        <a href="create.jsp" class="action-icon"> <i
                                                                 class="mdi mdi-square-edit-outline"></i></a>
                                                         <a href="javascript:void(0);" class="action-icon"> <i
                                                                 class="mdi mdi-delete"></i></a>
                                                     </td>
-                                                </tr>  
+                                                </tr>
                                                 <tr>
                                                     <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
+                                                        <img src="../../img/blog/blog-9.jpg" alt="contact-img"
+                                                             title="contact-img" class="rounded mr-3" height="48" />
+                                                        <p class="m-0 d-inline-block align-middle font-16"  style="max-width: 200px;">
                                                             <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">GS13X2</a>
+                                                            class="text-body">GRAND OPENING: PHÚC LONG TRƯƠNG ĐỊNH &
+                                                            PHÚC LONG NGÔ GIA TỰ</a>
                                                             <br />
                                                         </p>
                                                     </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
+                                                    
+                                                    <td>
+                                                        <div data-simplebar data-simplebar-lg
+                                                            style="max-height: 60px;width: 400px;" class="form-group">
+                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                            Obcaecati quis quasi, veritatis temporibus eum optio, iure
+                                                            odit a sint consequuntur id cum ut. Eum non est itaque
+                                                            officia voluptatibus qui!
+                                                        </div>
+                                                    </td> 
+                                                    <td>
+                                                        28/10/2022 - 5/11/2022
                                                     </td>
 
                                                     <td class="table-action">
-                                                        <a href="admin-add-coupon.html" class="action-icon"> <i
+                                                        <a href="create.jsp" class="action-icon"> <i
                                                                 class="mdi mdi-square-edit-outline"></i></a>
                                                         <a href="javascript:void(0);" class="action-icon"> <i
                                                                 class="mdi mdi-delete"></i></a>
                                                     </td>
-                                                </tr>  
+                                                </tr>
                                                 <tr>
                                                     <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
+                                                        <img src="../../img/blog/blog-9.jpg" alt="contact-img"
+                                                             title="contact-img" class="rounded mr-3" height="48" />
+                                                        <p class="m-0 d-inline-block align-middle font-16"  style="max-width: 200px;">
                                                             <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">GS13X2</a>
+                                                            class="text-body">GRAND OPENING: PHÚC LONG TRƯƠNG ĐỊNH &
+                                                            PHÚC LONG NGÔ GIA TỰ</a>
                                                             <br />
                                                         </p>
                                                     </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
+                                                    
+                                                    <td>
+                                                        <div data-simplebar data-simplebar-lg
+                                                            style="max-height: 60px;width: 400px;" class="form-group">
+                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                            Obcaecati quis quasi, veritatis temporibus eum optio, iure
+                                                            odit a sint consequuntur id cum ut. Eum non est itaque
+                                                            officia voluptatibus qui!
+                                                        </div>
+                                                    </td> 
+                                                    <td>
+                                                        28/10/2022 - 5/11/2022
                                                     </td>
 
                                                     <td class="table-action">
-                                                        <a href="admin-add-coupon.html" class="action-icon"> <i
+                                                        <a href="create.jsp" class="action-icon"> <i
                                                                 class="mdi mdi-square-edit-outline"></i></a>
                                                         <a href="javascript:void(0);" class="action-icon"> <i
                                                                 class="mdi mdi-delete"></i></a>
                                                     </td>
-                                                </tr>  
+                                                </tr>
                                                 <tr>
                                                     <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
+                                                        <img src="../../img/blog/blog-9.jpg" alt="contact-img"
+                                                             title="contact-img" class="rounded mr-3" height="48" />
+                                                        <p class="m-0 d-inline-block align-middle font-16"  style="max-width: 200px;">
                                                             <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">GS13X2</a>
+                                                            class="text-body">GRAND OPENING: PHÚC LONG TRƯƠNG ĐỊNH &
+                                                            PHÚC LONG NGÔ GIA TỰ</a>
                                                             <br />
                                                         </p>
                                                     </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
+                                                    
+                                                    <td>
+                                                        <div data-simplebar data-simplebar-lg
+                                                            style="max-height: 60px;width: 400px;" class="form-group">
+                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                            Obcaecati quis quasi, veritatis temporibus eum optio, iure
+                                                            odit a sint consequuntur id cum ut. Eum non est itaque
+                                                            officia voluptatibus qui!
+                                                        </div>
+                                                    </td> 
+                                                    <td>
+                                                        28/10/2022 - 5/11/2022
                                                     </td>
 
                                                     <td class="table-action">
-                                                        <a href="admin-add-coupon.html" class="action-icon"> <i
+                                                        <a href="create.jsp" class="action-icon"> <i
                                                                 class="mdi mdi-square-edit-outline"></i></a>
                                                         <a href="javascript:void(0);" class="action-icon"> <i
                                                                 class="mdi mdi-delete"></i></a>
                                                     </td>
-                                                </tr>  
+                                                </tr>
                                                 <tr>
                                                     <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
+                                                        <img src="../../img/blog/blog-9.jpg" alt="contact-img"
+                                                             title="contact-img" class="rounded mr-3" height="48" />
+                                                        <p class="m-0 d-inline-block align-middle font-16"  style="max-width: 200px;">
                                                             <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">GS13X2</a>
+                                                            class="text-body">GRAND OPENING: PHÚC LONG TRƯƠNG ĐỊNH &
+                                                            PHÚC LONG NGÔ GIA TỰ</a>
                                                             <br />
                                                         </p>
                                                     </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
+                                                    
+                                                    <td>
+                                                        <div data-simplebar data-simplebar-lg
+                                                            style="max-height: 60px;width: 400px;" class="form-group">
+                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                            Obcaecati quis quasi, veritatis temporibus eum optio, iure
+                                                            odit a sint consequuntur id cum ut. Eum non est itaque
+                                                            officia voluptatibus qui!
+                                                        </div>
+                                                    </td> 
+                                                    <td>
+                                                        28/10/2022 - 5/11/2022
                                                     </td>
 
                                                     <td class="table-action">
-                                                        <a href="admin-add-coupon.html" class="action-icon"> <i
+                                                        <a href="create.jsp" class="action-icon"> <i
                                                                 class="mdi mdi-square-edit-outline"></i></a>
                                                         <a href="javascript:void(0);" class="action-icon"> <i
                                                                 class="mdi mdi-delete"></i></a>
                                                     </td>
-                                                </tr>  
+                                                </tr>
                                                 <tr>
                                                     <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
+                                                        <img src="../../img/blog/blog-9.jpg" alt="contact-img"
+                                                             title="contact-img" class="rounded mr-3" height="48" />
+                                                        <p class="m-0 d-inline-block align-middle font-16"  style="max-width: 200px;">
                                                             <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">GS13X2</a>
+                                                            class="text-body">GRAND OPENING: PHÚC LONG TRƯƠNG ĐỊNH &
+                                                            PHÚC LONG NGÔ GIA TỰ</a>
                                                             <br />
                                                         </p>
                                                     </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
-                                                    </td>
-
-                                                    <td class="table-action">
-                                                        <a href="admin-add-coupon.html" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>  
-                                                <tr>
+                                                    
                                                     <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
-                                                                class="text-body">GS13X2</a>
-                                                            <br />
-                                                        </p>
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
+                                                        <div data-simplebar data-simplebar-lg
+                                                            style="max-height: 60px;width: 400px;" class="form-group">
+                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                            Obcaecati quis quasi, veritatis temporibus eum optio, iure
+                                                            odit a sint consequuntur id cum ut. Eum non est itaque
+                                                            officia voluptatibus qui!
+                                                        </div>
+                                                    </td> 
+                                                    <td>
+                                                        28/10/2022 - 5/11/2022
                                                     </td>
 
                                                     <td class="table-action">
-                                                        <a href="admin-add-coupon.html" class="action-icon"> <i
+                                                        <a href="create.jsp" class="action-icon"> <i
                                                                 class="mdi mdi-square-edit-outline"></i></a>
                                                         <a href="javascript:void(0);" class="action-icon"> <i
                                                                 class="mdi mdi-delete"></i></a>
                                                     </td>
-                                                </tr>  
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -657,15 +537,7 @@
         <!-- content -->
 
         <!-- Footer Start -->
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        2022 HAHATI
-                    </div>
-                </div>
-            </div>
-        </footer>
+    <%@include file="../footer.jsp" %>
         <!-- end Footer -->
 
     </div>
@@ -758,17 +630,17 @@
     <!-- /Right-bar -->
 
     <!-- bundle -->
-    <script src="../assets/js/vendor.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
+    <script src="../../assets/js/vendor.min.js"></script>
+    <script src="../../assets/js/app.min.js"></script>
 
     <!-- third party js -->
-    <script src="../assets/js/vendor/apexcharts.min.js"></script>
-    <script src="../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../../assets/js/vendor/apexcharts.min.js"></script>
+    <script src="../../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
     <!-- third party js ends -->
 
     <!-- demo app -->
-    <script src="../assets/js/pages/demo.dashboard.js"></script>
+    <script src="../../assets/js/pages/demo.dashboard.js"></script>
     <!-- end demo js-->
 </body>
 

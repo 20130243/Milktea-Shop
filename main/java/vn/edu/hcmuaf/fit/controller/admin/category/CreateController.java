@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "CreateController", value = "/admin/category-create")
+@WebServlet(name = "CreateController", value = "/admin/category/create")
 public class CreateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("category/create.jsp").forward(request, response);
+        request.getRequestDispatcher("create.jsp").forward(request, response);
     }
 
     @Override

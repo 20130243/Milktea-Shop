@@ -3,117 +3,34 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Chi tiết đơn hàng</title>
+    <title>Thêm khuyến mãi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico">
 
     <!-- third party css -->
-    <link href="../assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
     <!-- third party css end -->
 
     <!-- App css -->
-    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style" />
-    <link href="../assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
+    <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="../../assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
 
 </head>
 
+
 <body class="loading"
-    data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false }'>
+      data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false }'>
+
     <!-- data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}' -->
     <!-- Begin page -->
     <div class="wrapper">
-        <!-- ========== Left Sidebar Start ========== -->
-        <div class="left-side-menu">
-
-            <!-- LOGO -->
-            <a href="../index.jsp" class="logo text-center logo-light">
-                <span class="logo-lg">
-                    <img src="../assets/images/logo.png" alt="" height="16">
-                </span>
-                <span class="logo-sm">
-                    <img src="../assets/images/logo_sm.png" alt="" height="16">
-                </span>
-            </a>
-
-            <!-- LOGO -->
-            <a href="../index.jsp" class="logo text-center logo-dark">
-                <span class="logo-lg">
-                    <img src="../assets/images/logo-dark.png" alt="" height="16">
-                </span>
-                <span class="logo-sm">
-                    <img src="../assets/images/logo_sm_dark.png" alt="" height="16">
-                </span>
-            </a>
-
-            <div class="h-100" id="left-side-menu-container" data-simplebar>
-
-                <!--- Sidemenu -->
-                <ul class="metismenu side-nav">
-                    <li class="side-nav-item">
-                        <a href="index.jsp" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <!-- <span class="badge badge-success float-right">4</span> -->
-                            <span> Thống kê doanh thu</span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="admin-order.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lý đơn hàng </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="admin-sale.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lý khuyến mãi</span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="admin-coupon.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lý mã giảm giá </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="admin-blog.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lí tin tức </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="admin-product.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lí sản phẩm </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="category/index.jsp" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lí loại </span>
-                        </a>
-                    </li>
-                 <li class="side-nav-item">
-                        <a href="admin-topping.html" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Quản lí topping </span>
-                        </a>
-                    </li>
-                </ul>
-
-
-                <!-- End Sidebar -->
-
-                <div class="clearfix"></div>
-
-            </div>
-            <!-- Sidebar -left -->
-
-        </div>
-        <!-- Left Sidebar End -->
+       <!-- ========== Left Sidebar Start ========== -->
+    <%@include file="../left-menu.jsp" %>
+    <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
@@ -157,7 +74,7 @@
 
                                 <div style="max-height: 230px;" data-simplebar>
                                     <!-- item-->
-                                       <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-primary">
                                             <i class="mdi mdi-comment-account-outline"></i>
                                         </div>
@@ -166,7 +83,7 @@
                                         </p>
                                     </a>
                                     <!-- item-->
-                                       <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-primary">
                                             <i class="mdi mdi-comment-account-outline"></i>
                                         </div>
@@ -175,7 +92,7 @@
                                         </p>
                                     </a>
                                     <!-- item-->
-                                       <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-primary">
                                             <i class="mdi mdi-comment-account-outline"></i>
                                         </div>
@@ -184,7 +101,7 @@
                                         </p>
                                     </a>
                                     <!-- item-->
-                                       <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-primary">
                                             <i class="mdi mdi-comment-account-outline"></i>
                                         </div>
@@ -197,7 +114,7 @@
                                 </div>
 
                                 <!-- All-->
-                               <a href="admin-order.html"
+                               <a href="../order/index.jsp"
                                     class="dropdown-item text-center text-primary notify-item notify-all">
                                     Xem tất cả
                                 </a>
@@ -229,7 +146,7 @@
                                 <div class=" dropdown-header noti-title">
                                     <h6 class="text-overflow m-0">Xin chào !</h6>
                                 </div>
- 
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="mdi mdi-logout mr-1"></i>
@@ -269,7 +186,7 @@
 
                             <div class="notification-list">
                                 <!-- item-->
-                                <a href="admin-product.html" class="dropdown-item notify-item">
+                                <a href="../product/index.jsp" class="dropdown-item notify-item">
                                     <div class="media">
                                         <img class="d-flex mr-2 rounded-circle" src="../img/product/cappuchinovietnamo-min.png"
                                             alt="Generic placeholder image" height="32">
@@ -281,7 +198,7 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="admin-product.html" class="dropdown-item notify-item">
+                                <a href="../product/index.jsp" class="dropdown-item notify-item">
                                     <div class="media">
                                         <img class="d-flex mr-2 rounded-circle" src="../img/product/cappuchinovietnamo-min.png"
                                             alt="Generic placeholder image" height="32">
@@ -297,7 +214,6 @@
                 </div>
                 <!-- end Topbar -->
 
-
                 <!-- Start Content-->
                 <div class="container-fluid">
 
@@ -307,184 +223,103 @@
                             <div class="page-title-box">
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Đơn hàng</a></li>
-                                        <li class="breadcrumb-item active">#51522</li>
+                                        <li class="breadcrumb-item"><a href="index.jsp">Khuyến mãi</a></li>
+                                        <li class="breadcrumb-item active"> Thêm khuyến mãi</li>
                                     </ol>
                                 </div>
-                                <h4 class="page-title">Chi tiết đơn hàng</h4>
+                                <h4 class="page-title">Khuyến mãi</h4>
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
 
-                    <div class="row justify-content-center">
-                        <div class="col-lg-7 col-md-10 col-sm-11">
-                            <div class="horizontal-steps mt-4 mb-4 pb-5">
-                                <div class="horizontal-steps-content">
-                                    <div class="step-item">
-                                        <span data-toggle="tooltip" data-placement="bottom" title=""
-                                            data-original-title="20/08/2018 07:24 PM">Đã nhận</span>
-                                    </div>
-                                    <div class="step-item current">
-                                        <span data-toggle="tooltip" data-placement="bottom" title=""
-                                            data-original-title="21/08/2018 11:32 AM">Đang chuẩn bị </span>
-                                    </div>
-                                    <div class="step-item">
-                                        <span>Đang vận chuyển</span>
-                                    </div>
-                                    <div class="step-item">
-                                        <span>Thành công</span>
-                                    </div>
-                                </div>
-
-                                <div class="process-line" style="width: 33%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center mb-4">
-                            <!-- <button type="button" class="btn btn-primary">Xác nhận đơn hàng</button> -->
-                            <button type="button" class="btn btn-info">Bàn giao cho bên vận chuyển</button>
-                            <!-- <button type="button" class="btn btn-success">Hoàn tất</button> -->
-                    </div>
-                    <!-- end row -->
-
-
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="header-title mb-3">Các sản phẩm của #12537</h4>
 
-                                    <div class="table-responsive">
-                                        <table class="table mb-0">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th>Tên</th>
-                                                    <th>Size</th>
-                                                    <th>Số lượng</th>
-                                                    <th>Giá</th>
-                                                    <th>Topping</th>
-                                                    <th>Tổng</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Trà ô long dâu</td>
-                                                    <td>L</td>
-                                                    <td>1</td>
-                                                    <td>30,000đ</td>
-                                                    <td>Trân châu đen | 5,000đ <br> Trân châu trắng | 10,000đ <br> Sương
-                                                        sáo | 5,000đ</td>
-                                                    <td>50,000đ</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trà ô long sen</td>
-                                                    <td>M</td>
-                                                    <td>1</td>
-                                                    <td>25,000đ</td>
-                                                    <td>Không</td>
-                                                    <td>25,000đ</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- end table-responsive -->
+                                    <h4 class="header-title">Khuyến mãi mới</h4>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="name">Tên khuyến mãi</label>
+                                                    <input type="text" id="name" class="form-control">
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label for="percent">% giảm</label>
+                                                    <input type="text" id="percent" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Thời gian có hiệu lực</label>
+                                                    <input type="text" class="form-control date" id="singledaterange"
+                                                        data-toggle="date-picker" data-cancel-class="btn-warning">
+                                                </div>
 
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="header-title mb-3">Ghi chú</h4>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="category">Chọn loại sản phẩm áp dụng</label>
+                                                    <select id="category" multiple class="form-control">
+                                                        <option value="1">Cà phê</option>
+                                                        <option value="2">Trà sữa</option>
+                                                        <option value="3">Trà</option>
+                                                        <option value="4">Nước ép</option>
+                                                        <option value="5">Đá xay</option>
+                                                    </select>
+                                                    <span class="help-block"><small>Giữ ctrl hoặc shift để chọn nhiều
+                                                            loại.</small></span>
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label for="product">Chọn sản phẩm áp dụng</label>
+                                                    <select class="select2 form-control select2-multiple"
+                                                        data-toggle="select2" multiple="multiple"
+                                                        data-placeholder="Chọn sản phẩm áp dụng ..." id="product">
+                                                        <optgroup label="Cà phê">
+                                                            <option value="AK">Phin đen đá</option>
+                                                            <option value="HI">Phin nâu đá</option>
+                                                        </optgroup>
+                                                        <optgroup label="Trà sữa">
+                                                            <option value="CA">Trà sữa lài</option>
+                                                            <option value="NV">Trà sữa ô long</option>
+                                                            <option value="OR">Trà sữa ngon</option>
+                                                            <option value="WA">Trà sữa béo</option>
+                                                        </optgroup>
+                                                        <optgroup label="Trà">
+                                                            <option value="AZ">Trà ô long </option>
+                                                            <option value="CO">Trà vải</option>
+                                                            <option value="ID">Trà đào</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
 
-                                    <p class="text-primary">
-                                        Bỏ đá riêng, ít ngọt
-                                    </p>
-                                    <!-- end table-responsive -->
-
-                                </div>
-                            </div>
-                        </div> <!-- end col -->
-
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="header-title mb-3">Tổng đơn hàng</h4>
-                                    <div class="table-responsive">
-                                        <table class="table mb-0">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th>Mục</th>
-                                                    <th>Thành tiền</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Tổng giá sản phẩm</td>
-                                                    <td>75,000đ</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Phí vận chuyển</td>
-                                                    <td>0đ</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Tổng:</th>
-                                                    <th>75,000đ</th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- end table-responsive -->
-
-                                </div>
-                            </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Thêm khuyến mãi</button>
+                                    </form>
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
                         </div> <!-- end col -->
                     </div>
                     <!-- end row -->
-
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="header-title mb-3">Thông tin vận chuyển</h4>
-
-                                    <h5>Nguyễn Vũ Mạnh Hà</h5>
-
-                                    <address class="mb-0 font-14 address-lg">
-                                        Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, Khu phố 6, phường Linh Trung,
-                                        thành phố Thủ Đức, Thành phố Hồ Chí Minh <br>
-                                        <abbr title="Phone">Số điện thoại:</abbr> 034 4558 306
-                                    </address>
-
-                                </div>
-                            </div>
-                        </div> <!-- end col -->
-
-                    </div>
-                    <!-- end row -->
-
 
                 </div> <!-- container -->
 
+            </div> <!-- content -->
 
-            </div>
-            <!-- content -->
-
-            <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            2022 HAHATI
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
 
         </div>
+        <!-- content -->
 
-        <!-- ============================================================== -->
-        <!-- End Page content -->
-        <!-- ============================================================== -->
+        <!-- Footer Start -->
+    <%@include file="../footer.jsp" %>
+        <!-- end Footer -->
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
 
 
     </div>
@@ -570,17 +405,17 @@
     <!-- /Right-bar -->
 
     <!-- bundle -->
-    <script src="../assets/js/vendor.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
+    <script src="../../assets/js/vendor.min.js"></script>
+    <script src="../../assets/js/app.min.js"></script>
 
     <!-- third party js -->
-    <script src="../assets/js/vendor/apexcharts.min.js"></script>
-    <script src="../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../../assets/js/vendor/apexcharts.min.js"></script>
+    <script src="../../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
     <!-- third party js ends -->
 
     <!-- demo app -->
-    <script src="../assets/js/pages/demo.dashboard.js"></script>
+    <script src="../../assets/js/pages/demo.dashboard.js"></script>
     <!-- end demo js-->
 </body>
 
