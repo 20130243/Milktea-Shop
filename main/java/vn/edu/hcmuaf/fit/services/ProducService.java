@@ -95,9 +95,55 @@ public class ProducService {
             return getPriceSizeM(id);
         }
     }
+    public List<Product> searchProduct(String search) {
+        List<Product> rs = new ArrayList<Product>();
+        List<Map<String, Object>> productList = dao.searchProduct(search);
+        for (Map<String, Object> map : productList) {
+            Product product = new Product();
+            product.setId((Integer) map.get("id"));
+            product.setName((String) map.get("name"));
+            product.setIdCategory((Integer) map.get("category_id"));
+            product.setImg((String) map.get("image"));
+            product.setStatus((Integer) map.get("status"));
+
+            List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) map.get("id"));
+            List<PriceSize> priceSizeList = priceSizeList(priceSize);
+            product.setPriceSize(priceSizeList);
+
+            List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) map.get("category_id"));
+            product.setTopping(toppingList);
+
+            rs.add(product);
+        }
+        return rs;
+    }
+
+    public List<Product> getProductByCategory(int id_category) {
+        List<Product> rs = new ArrayList<Product>();
+        List<Map<String, Object>> productList = dao.getProductByCategory(id_category);
+        for (Map<String, Object> map : productList) {
+            Product product = new Product();
+            product.setId((Integer) map.get("id"));
+            product.setName((String) map.get("name"));
+            product.setIdCategory((Integer) map.get("category_id"));
+            product.setImg((String) map.get("image"));
+            product.setStatus((Integer) map.get("status"));
+
+            List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) map.get("id"));
+            List<PriceSize> priceSizeList = priceSizeList(priceSize);
+            product.setPriceSize(priceSizeList);
+
+            List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) map.get("category_id"));
+            product.setTopping(toppingList);
+
+            rs.add(product);
+        }
+        return rs;
+    }
+
 
     public static void main(String[] args) {
         ProducService dao = new ProducService();
-        System.out.println(dao.getPriceSizeL(1));
+        System.out.println(dao.getProductByCategory(1).size());
     }
 }

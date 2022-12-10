@@ -76,4 +76,24 @@ public class ProductDAO extends RD {
         );
     }
 
+    public List<Map<String, Object>> searchProduct(String search) {
+        System.out.println(search);
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from product\n" +
+                                "where name like ?").bind(0, "%" +search+"%")
+                        .mapToMap()
+                        .list()
+        );
+    }
+
+    public List<Map<String, Object>> getProductByCategory(int id_category) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from product\n" +
+                                "where product.category_id = ?;").bind(0, id_category)
+                        .mapToMap()
+                        .list()
+        );
+    }
+
+
 }

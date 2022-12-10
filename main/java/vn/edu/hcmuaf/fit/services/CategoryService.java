@@ -10,7 +10,7 @@ import java.util.Map;
 public class CategoryService {
     private final CategoryDAO dao = new CategoryDAO();
 
-    public List<Category> getAll() throws Exception {
+    public List<Category> getAll() {
         List<Category> result = new ArrayList<Category>();
         List<Map<String, Object>> categoryList = dao.getAll();
         for (Map<String, Object> map : categoryList) {

@@ -1,7 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.Size" %>
-<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.Category" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/3/2022
@@ -9,6 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <html lang="zxx">
 
 <head>
@@ -123,25 +125,32 @@
                         <h6 class="search_bar_text">Theo giá</h6>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 shop__sidebar__search">
-                        <form action="#">
-                            <input type="text" placeholder="Tìm kiếm sản phẩm" style="padding-right:42px ;">
+                        <form action="SearchController" method="get">
+                            <input name="search" type="text" placeholder="Tìm kiếm sản phẩm" style="padding-right:42px ;">
                             <button type="submit"><span class="icon_search"></span></button>
                         </form>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4" style="z-index: 99;">
                         <ul class="menu-drop">
-                            <li class="menu-item active">
-                                <a href="" class="">Chọn nhóm </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="">Cà phê </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="">Trà sữa </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="">Trà</a>
-                            </li>
+<%--                            <li class="menu-item active">--%>
+<%--                                <a href="">Tất cả</a>--%>
+<%--                            </li>--%>
+                            <%
+                              List<Category> listCategories = (List<Category>)  request.getAttribute("listCategories");
+                              for(Category category : listCategories) {
+
+                            %>
+                                <li class="menu-item <%=(int) request.getAttribute("tagCate") == category.getId()? "active":""%>">
+                                    <a href="category?cid=<%=category.getId()%>"><%=category.getName()%></a>
+                                </li>
+
+                            <%}%>
+<%--                            <li class="menu-item ">--%>
+<%--                                <a href="">Trà sữa </a>--%>
+<%--                            </li>--%>
+<%--                            <li class="menu-item ">--%>
+<%--                                <a href="">Trà</a>--%>
+<%--                            </li>--%>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4" style="z-index: 99;">
@@ -282,7 +291,7 @@
                     int count = (int) request.getAttribute("endPage");
                     for (int i = 1; i <= count; i++) {
                     %>
-                        <a class="active" href="shop?index=<%=i%>"><%=i%></a>
+                        <a class="<%=(int) request.getAttribute("pageIndex") == i? "active" : ""%>" href="shop?index=<%=i%>"><%=i%></a>
                     <%}%>
                 </div>
             </div>
