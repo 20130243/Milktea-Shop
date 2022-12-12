@@ -58,7 +58,8 @@ public class ProductService {
         }
         return list;
     }
-    private List<PriceSize> priceSizeList(List<Map<String, Object>> priceSize){
+
+    private List<PriceSize> priceSizeList(List<Map<String, Object>> priceSize) {
         List<PriceSize> priceSizeList = new ArrayList<PriceSize>();
         for (Map<String, Object> map : priceSize) {
             PriceSize priceSizeObj = new PriceSize();
@@ -68,6 +69,7 @@ public class ProductService {
         }
         return priceSizeList;
     }
+
     public Product getById(int id) {
         Map<String, Object> product = dao.getById(id);
         List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) product.get("id"));
@@ -76,7 +78,7 @@ public class ProductService {
         List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) product.get("category_id"));
 
         return new Product((Integer) product.get("id"), (String) product.get("name"), (Integer) product.get("category_id"),
-                priceSizeList, (String) product.get("image"), (Integer) product.get("status"),toppingList);
+                priceSizeList, (String) product.get("image"), (Integer) product.get("status"), toppingList);
     }
 
     public int getTotalProduct() {
@@ -84,20 +86,29 @@ public class ProductService {
     }
 
     public int getPriceSizeM(int id) {
-        return(int) getById(id).getPriceSize().get(0).getPrice();
+        return (int) getById(id).getPriceSize().get(0).getPrice();
     }
 
     public int getPriceSizeL(int id) {
         try {
-            return(int) getById(id).getPriceSize().get(1).getPrice();
+            return (int) getById(id).getPriceSize().get(1).getPrice();
 
         } catch (Exception e) {
             return getPriceSizeM(id);
         }
     }
+
     public void delete(int id) {
         dao.delete(id);
     }
+
+    public void insert(Product product) throws Exception {
+        dao.insert(product.getName(), product.getIdCategory(), product.getImg(), product.getStatus());
+        for (PriceSize priceSize : product.getPriceSize()) {
+            (new PriceSizeDAO()).insert(product.getIdCategory(), priceSize.getSize(), priceSize.getOriginalPrice());
+        }
+    }
+
     public static void main(String[] args) {
         ProductService dao = new ProductService();
         System.out.println(dao.getPriceSizeL(1));

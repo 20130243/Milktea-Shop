@@ -1,12 +1,15 @@
 package vn.edu.hcmuaf.fit.bean;
 
 public class PriceSize {
-    float price;
     String size;
+    float price;
+   float originalPrice;
 
-    public PriceSize( String size,float price) {
+
+    public PriceSize(String size, float price, float originalPrice) {
         this.price = price;
         this.size = size;
+        this.originalPrice = originalPrice;
     }
 
     public PriceSize() {
@@ -29,11 +32,20 @@ public class PriceSize {
         this.size = size;
     }
 
+    public float getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(float originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
     @Override
     public String toString() {
-        return "PriceProduct{" +
-                "price=" + price +
-                ", size='" + size + '\'' +
+        return "PriceSize{" +
+                "size='" + size + '\'' +
+                ", price=" + price +
+                ", originalPrice=" + originalPrice +
                 '}';
     }
 }
