@@ -66,7 +66,7 @@
                             <div class="card-body">
                                 <div class="row mb-2">
                                     <div class="col-sm-4">
-                                        <a href="create.jsp" class="btn btn-danger mb-2"><i
+                                        <a href="/admin/topping/create" class="btn btn-danger mb-2"><i
                                                 class="mdi mdi-plus-circle mr-2"></i>Thêm topping</a>
                                     </div>
                                     <div class="col-sm-8">
@@ -105,98 +105,6 @@
 
                                             <td class="text-center">
                                                 <span class="badge badge-success">Đang bán</span>
-                                            </td>
-
-                                            <td class="table-action text-center">
-                                                <a href="create.jsp" class="action-icon"> <i
-                                                        class="mdi mdi-square-edit-outline"></i></a>
-                                                <a href="javascript:void(0);" class="action-icon"> <i
-                                                        class="mdi mdi-delete"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p class="m-0 d-inline-block align-middle font-16">
-                                                    <a href="apps-ecommerce-products-details.html"
-                                                       class="text-body">Whipping cream</a>
-                                                    <br/>
-                                                </p>
-                                            </td>
-                                            <td class="text-center">
-                                                5,000đ
-                                            </td>
-
-                                            <td class="text-center">
-                                                <span class="badge badge-success">Đang bán</span>
-                                            </td>
-
-                                            <td class="table-action text-center">
-                                                <a href="create.jsp" class="action-icon"> <i
-                                                        class="mdi mdi-square-edit-outline"></i></a>
-                                                <a href="javascript:void(0);" class="action-icon"> <i
-                                                        class="mdi mdi-delete"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p class="m-0 d-inline-block align-middle font-16">
-                                                    <a href="apps-ecommerce-products-details.html"
-                                                       class="text-body">Thạch cà phê</a>
-                                                    <br/>
-                                                </p>
-                                            </td>
-                                            <td class="text-center">
-                                                5,000đ
-                                            </td>
-
-                                            <td class="text-center">
-                                                <span class="badge badge-success">Đang bán</span>
-                                            </td>
-
-                                            <td class="table-action text-center">
-                                                <a href="create.jsp" class="action-icon"> <i
-                                                        class="mdi mdi-square-edit-outline"></i></a>
-                                                <a href="javascript:void(0);" class="action-icon"> <i
-                                                        class="mdi mdi-delete"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p class="m-0 d-inline-block align-middle font-16">
-                                                    <a href="apps-ecommerce-products-details.html"
-                                                       class="text-body">Trân châu trắng</a>
-                                                    <br/>
-                                                </p>
-                                            </td>
-                                            <td class="text-center">
-                                                5,000đ
-                                            </td>
-
-                                            <td class="text-center">
-                                                <span class="badge badge-success">Đang bán</span>
-                                            </td>
-
-                                            <td class="table-action text-center">
-                                                <a href="create.jsp" class="action-icon"> <i
-                                                        class="mdi mdi-square-edit-outline"></i></a>
-                                                <a href="javascript:void(0);" class="action-icon"> <i
-                                                        class="mdi mdi-delete"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p class="m-0 d-inline-block align-middle font-16">
-                                                    <a href="apps-ecommerce-products-details.html"
-                                                       class="text-body">Thạch dừa</a>
-                                                    <br/>
-                                                </p>
-                                            </td>
-                                            <td class="text-center">
-                                                5,000đ
-                                            </td>
-
-                                            <td class="text-center">
-                                                <span class="badge badge-secondary">Ngưng bán</span>
                                             </td>
 
                                             <td class="table-action text-center">

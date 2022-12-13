@@ -1,7 +1,9 @@
 package vn.edu.hcmuaf.fit.controller.admin.topping;
 
 import vn.edu.hcmuaf.fit.bean.Category;
+import vn.edu.hcmuaf.fit.bean.Topping;
 import vn.edu.hcmuaf.fit.services.CategoryService;
+import vn.edu.hcmuaf.fit.services.ToppingService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -21,16 +23,16 @@ public class HomeController extends HttpServlet {
         } else {
             index = Integer.parseInt(page);
         }
-        CategoryService categoryService = new CategoryService();
-        int count = categoryService.getTotal();
+        ToppingService toppingService = new ToppingService();
+        int count = toppingService.getTotal();
         int endPage = count/10;
         if(count % 10 != 0) {
             endPage++;
         }
 
-        List<Category> categoryList = categoryService.getPaging(index);
+        List<Topping> toppingList = toppingService.getPaging(index);
 
-        request.setAttribute("categoryList", categoryList);
+        request.setAttribute("toppingList", toppingList);
         request.setAttribute("endPage", endPage);
         request.getRequestDispatcher("topping/index.jsp").forward(request, response);
     }

@@ -66,7 +66,7 @@
                             <div class="card-body">
                                 <div class="row mb-2">
                                     <div class="col-sm-4">
-                                        <a href="/admin/category-create" class="btn btn-danger mb-2"><i
+                                        <a href="<c:out value="${pageContext.request.contextPath}"/>/admin/product/create" class="btn btn-danger mb-2"><i
                                                 class="mdi mdi-plus-circle mr-2"></i>Thêm sản phẩm</a>
                                     </div>
                                     <div class="col-sm-8">
@@ -174,10 +174,10 @@
                                                 </td>
 
                                                 <td class="table-action text-center">
-                                                    <a href="/admin/product-update?id=<c:out value="${item.id}"/>"
+                                                    <a href="/admin/product/update?id=<c:out value="${item.id}"/>"
                                                        class="action-icon"> <i
                                                             class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a href="/admin/category-delete?id=<c:out value="${item.id}"/>"
+                                                    <a href="/admin/product/delete?id=<c:out value="${item.id}"/>"
                                                        class="action-icon"> <i
                                                             class="mdi mdi-delete"></i></a>
                                                 </td>

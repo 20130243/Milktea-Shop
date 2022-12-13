@@ -37,6 +37,23 @@ public class ToppingService {
         }
         return result;
     }
+    public List<Topping> getPaging(int index) {
+        List<Topping> list = new ArrayList<>();
+        List<Map<String, Object>> toppingList = dao.paging(index);
+        for (Map<String, Object> map : toppingList) {
+            Topping topping = new Topping();
+            topping.setId((Integer) map.get("id"));
+            topping.setName((String) map.get("name"));
+            topping.setPrice((Float) map.get("price"));
+            topping.setStatus((Integer) map.get("status"));
+            topping.setCategory_id((Integer) map.get("category_id"));
 
+
+            list.add(topping);
+        }
+        return list;
+    }  public int getTotal() {
+        return dao.getTotal();
+    }
 
 }

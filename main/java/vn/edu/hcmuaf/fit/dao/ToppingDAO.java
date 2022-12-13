@@ -69,4 +69,16 @@ public class ToppingDAO extends RD {
                        .execute()
         );
     }
+    public List<Map<String, Object>> paging(int index) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from topping\n" +
+                        "order by id\n" +
+                        "LIMIT ? , 10;").bind(0, (index-1)*10).mapToMap().list()
+        );
+    }  public int getTotal() {
+        int count = JDBIConnector.get().withHandle(h ->
+                h.createQuery("select count(*) from category").mapTo(Integer.class).first()
+        );
+        return count;
+    }
 }
