@@ -23,14 +23,12 @@ public class CreateController extends HttpServlet {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
         request.getRequestDispatcher("create.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-
         try {
             ToppingService toppingService = new ToppingService();
             String name = request.getParameter("name");
