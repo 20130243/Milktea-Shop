@@ -82,14 +82,14 @@
                                         <label for="status_id">Trạng thái</label>
                                         <select class="custom-select mb-3" id="status_id" name="status">
                                             <option value="0"
-                                                    <c:if test="${object.status eq 0}"><c:out value="checked"/></c:if>
+                                                    <c:if test="${object.status eq 0}"><c:out value="selected"/></c:if>
                                             >Đang bán
                                             </option>
                                             <option value="1"  <c:if test="${object.status eq 1}"><c:out
-                                                    value="checked"/></c:if>>Hết nguyên liệu
+                                                    value="selected"/></c:if>>Hết nguyên liệu
                                             </option>
                                             <option value="2"  <c:if test="${object.status eq 3}"><c:out
-                                                    value="checked"/></c:if>>Ngưng bán
+                                                    value="selected"/></c:if>>Ngưng bán
                                             </option>
                                         </select>
                                     </div>
