@@ -51,7 +51,7 @@ public class ToppingDAO extends RD {
 
     public void update(int id, String name, float price,int category_id, int status) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE topping SET name=:name,price=:price,int category_id, status=:status WHERE id=:id")
+                h.createUpdate("UPDATE topping SET name=:name,price=:price,category_id=:category_id, status=:status WHERE id=:id")
                         .bind("name", name)
                         .bind("price", price)
                         .bind("category_id", category_id)
