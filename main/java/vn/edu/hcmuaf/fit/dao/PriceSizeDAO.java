@@ -56,7 +56,7 @@ public class PriceSizeDAO extends RD {
                         .execute());
     }
 
-    public void update(int id, int product_id, String name, float price, float originalPrice) {
+    public void update(int id, String name, float price, float originalPrice) {
         JDBIConnector.get().withHandle(h ->
                 h.createUpdate("UPDATE product_size SET name=:name,price=:price,original_price:=originalPrice WHERE id=:id")
                         .bind("name", name)
