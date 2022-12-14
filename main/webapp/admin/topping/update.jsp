@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
 <c:set var="object" value="${requestScope['object']}" scope="request"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +24,10 @@
 
 </head>
 
+
 <body class="loading"
       data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false }'>
+
 <!-- data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}' -->
 <!-- Begin page -->
 <div class="wrapper">
@@ -42,7 +42,7 @@
     <div class="content-page">
         <div class="content">
             <!-- Topbar Start -->
-            <jsp:include page="../topbar.jsp"/>
+            <%@include file="../topbar.jsp" %>
             <!-- end Topbar -->
 
             <!-- Start Content-->
@@ -54,11 +54,11 @@
                         <div class="page-title-box">
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="/admin/category">Phân loại</a></li>
-                                    <li class="breadcrumb-item active">Cập nhật <c:out value="${object.name}"/></li>
+                                    <li class="breadcrumb-item"><a href="/admin/topping">Topping</a></li>
+                                    <li class="breadcrumb-item active"><c:out value="${object.name}"/></li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">Phân loại</h4>
+                            <h4 class="page-title">Topping</h4>
                         </div>
                     </div>
                 </div>
@@ -69,27 +69,37 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="header-title">Phân loại</h4>
-                                <form action="/admin/category/update" method="POST">
+                                <h4 class="header-title">Topping mới</h4>
+                                <form action="/admin/topping/update" method="post">
                                     <input type="text" name="id" id="id" value="<c:out value="${object.id}"/> "
                                            class="d-none" >
                                     <div class="form-group mb-3">
-                                        <label for="name">Tên loại</label>
-                                        <input type="text" id="name" name="name" class="form-control"
+                                        <label for="name">Tên topping</label>
+                                        <input type="text" id="name" class="form-control" name="name"
                                                value="<c:out value="${object.name}"/> ">
                                     </div>
                                     <div class="form-group mb-3">
+                                        <label for="price">Giá</label>
+                                        <input type="text" id="price" name="price" class="form-control"
+                                               value="<c:out value="${object.price}" />">
+                                    </div>
+                                    <div class="form-group mb-3 d-none">
+                                        <input type="text" name="category"
+                                               value="<c:out value="${object.category_id}"/> ">
+
+                                    </div>
+
+                                    <div class="form-group mb-3">
                                         <label for="status_id">Trạng thái</label>
                                         <select class="custom-select mb-3" id="status_id" name="status">
-                                            <option value="0"
-                                                    <c:if test="${object.status eq 0}"><c:out value="selected"/></c:if>
-                                            >Đang bán
+                                            <option value="0" <c:if test="${object.status eq 0}">
+                                                <c:out value="selected"/></c:if>>Đang bán
                                             </option>
-                                            <option value="1"  <c:if test="${object.status eq 1}"><c:out
-                                                    value="selected"/></c:if>>Hết nguyên liệu
+                                            <option value="1"  <c:if test="${object.status eq 1}">
+                                                <c:out value="selected"/></c:if>>Hết nguyên liệu
                                             </option>
-                                            <option value="2"  <c:if test="${object.status eq 3}"><c:out
-                                                    value="selected"/></c:if>>Ngưng bán
+                                            <option value="2"  <c:if test="${object.status eq 3}">
+                                                <c:out value="selected"/></c:if>>Ngưng bán
                                             </option>
                                         </select>
                                     </div>
@@ -125,7 +135,8 @@
 <!-- END wrapper -->
 
 <!-- Right Sidebar -->
-<jsp:include page="../right-sidebar.jsp"/>
+<%@include file="../right-sidebar.jsp" %>
+>
 <!-- /Right-bar -->
 
 <!-- bundle -->

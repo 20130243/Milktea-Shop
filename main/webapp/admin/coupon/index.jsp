@@ -269,7 +269,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
+                                                        <a href="" style="pointer-events: none; cursor: default;"
                                                                 class="text-body">GS15X2</a>
                                                             <br />
                                                         </p>
@@ -301,7 +301,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
+                                                        <a href="" style="pointer-events: none; cursor: default;"
                                                                 class="text-body">GS13X2</a>
                                                             <br />
                                                         </p>
@@ -333,7 +333,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
+                                                        <a href="" style="pointer-events: none; cursor: default;"
                                                                 class="text-body">GS13X2</a>
                                                             <br />
                                                         </p>
@@ -365,7 +365,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
+                                                        <a href="" style="pointer-events: none; cursor: default;"
                                                                 class="text-body">GS13X2</a>
                                                             <br />
                                                         </p>
@@ -397,7 +397,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
+                                                        <a href="" style="pointer-events: none; cursor: default;"
                                                                 class="text-body">GS13X2</a>
                                                             <br />
                                                         </p>
@@ -429,7 +429,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
+                                                        <a href="" style="pointer-events: none; cursor: default;"
                                                                 class="text-body">GS13X2</a>
                                                             <br />
                                                         </p>
@@ -461,7 +461,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
+                                                        <a href="" style="pointer-events: none; cursor: default;"
                                                                 class="text-body">GS13X2</a>
                                                             <br />
                                                         </p>
@@ -493,7 +493,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
+                                                        <a href="" style="pointer-events: none; cursor: default;"
                                                                 class="text-body">GS13X2</a>
                                                             <br />
                                                         </p>
@@ -525,7 +525,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="apps-ecommerce-products-details.html"
+                                                        <a href="" style="pointer-events: none; cursor: default;"
                                                                 class="text-body">GS13X2</a>
                                                             <br />
                                                         </p>

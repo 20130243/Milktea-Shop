@@ -63,8 +63,11 @@ public class ProductService {
         List<PriceSize> priceSizeList = new ArrayList<PriceSize>();
         for (Map<String, Object> map : priceSize) {
             PriceSize priceSizeObj = new PriceSize();
+            priceSizeObj.setId((Integer) map.get("id"));
+            priceSizeObj.setProduct_id((Integer) map.get("product_id"));
             priceSizeObj.setPrice((Float) map.get("price"));
             priceSizeObj.setSize((String) map.get("name"));
+            priceSizeObj.setOriginalPrice((Float) map.get("original_price"));
             priceSizeList.add(priceSizeObj);
         }
         return priceSizeList;

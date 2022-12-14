@@ -156,8 +156,6 @@
                                                     <span class="sr-only">Previous</span>
                                                 </a>
                                             </li>
-
-
                                             <c:forEach var="i" begin="1" end="${endPage}">
                                                 <li class="page-item  <c:if test="${currentPage eq i }"> active </c:if>">
                                                     <a class="page-link"
@@ -165,7 +163,6 @@
                                                         <c:out value="${i}"/>
                                                     </a>
                                                 </li>
-
                                             </c:forEach>
                                             <li class="page-item <c:if test="${currentPage eq endPage }"> d-none </c:if>">
                                                 <a class="page-link" href="/admin/category?page=<c:out value='${i+1}'/>"

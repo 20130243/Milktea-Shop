@@ -1,11 +1,15 @@
 package vn.edu.hcmuaf.fit.controller.admin.topping;
 
 import vn.edu.hcmuaf.fit.bean.Category;
+import vn.edu.hcmuaf.fit.bean.Topping;
 import vn.edu.hcmuaf.fit.services.CategoryService;
+import vn.edu.hcmuaf.fit.services.ToppingService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,16 +25,23 @@ public class HomeController extends HttpServlet {
         } else {
             index = Integer.parseInt(page);
         }
-        CategoryService categoryService = new CategoryService();
-        int count = categoryService.getTotal();
+        ToppingService toppingService = new ToppingService();
+        int count = toppingService.getTotal();
         int endPage = count/10;
         if(count % 10 != 0) {
             endPage++;
         }
 
-        List<Category> categoryList = categoryService.getPaging(index);
+        List<Topping> toppingList = toppingService.getPaging(index);
+        request.setAttribute("toppingList", toppingList);
 
-        request.setAttribute("categoryList", categoryList);
+        try {
+            List<Category>  categoryList = (new CategoryService()).getAll();
+            request.setAttribute("categoryList", categoryList);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         request.setAttribute("endPage", endPage);
         request.getRequestDispatcher("topping/index.jsp").forward(request, response);
     }

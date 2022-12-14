@@ -1,6 +1,6 @@
-package vn.edu.hcmuaf.fit.controller.admin.product;
+package vn.edu.hcmuaf.fit.controller.admin.topping;
 
-import vn.edu.hcmuaf.fit.services.ProductService;
+import vn.edu.hcmuaf.fit.services.ToppingService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Product delete", value = "/admin/product/delete")
+@WebServlet(name = "Topping delete", value = "/admin/topping/delete")
 public class DeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -19,12 +19,12 @@ public class DeleteController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        ProductService product = new ProductService();
+        ToppingService toppingService = new ToppingService();
         try {
-            product.delete(id);
+            toppingService.delete(id);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        response.sendRedirect("/admin/product");
+        response.sendRedirect("/admin/topping");
     }
 }

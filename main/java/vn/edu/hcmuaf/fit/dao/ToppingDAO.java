@@ -51,7 +51,7 @@ public class ToppingDAO extends RD {
 
     public void update(int id, String name, float price,int category_id, int status) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE topping SET name=:name,price=:price,int category_id, status=:status WHERE id=:id")
+                h.createUpdate("UPDATE topping SET name=:name,price=:price,category_id=:category_id, status=:status WHERE id=:id")
                         .bind("name", name)
                         .bind("price", price)
                         .bind("category_id", category_id)
@@ -68,5 +68,17 @@ public class ToppingDAO extends RD {
                        .bind("id", id)
                        .execute()
         );
+    }
+    public List<Map<String, Object>> paging(int index) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from topping\n" +
+                        "order by id\n" +
+                        "LIMIT ? , 10;").bind(0, (index-1)*10).mapToMap().list()
+        );
+    }  public int getTotal() {
+        int count = JDBIConnector.get().withHandle(h ->
+                h.createQuery("select count(*) from category").mapTo(Integer.class).first()
+        );
+        return count;
     }
 }
