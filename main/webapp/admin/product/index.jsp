@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +66,8 @@
                             <div class="card-body">
                                 <div class="row mb-2">
                                     <div class="col-sm-4">
-                                        <a href="<c:out value="${pageContext.request.contextPath}"/>/admin/product/create" class="btn btn-danger mb-2"><i
+                                        <a href="<c:out value="${pageContext.request.contextPath}"/>/admin/product/create"
+                                           class="btn btn-danger mb-2"><i
                                                 class="mdi mdi-plus-circle mr-2"></i>Thêm sản phẩm</a>
                                     </div>
                                     <div class="col-sm-8">
@@ -110,9 +111,9 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <c:forEach var="category" items="${requestScope['categoryList']}">
-                                                            <c:if test="${category.id eq item.idCategory}">
-                                                               <c:out value="${category.name}"/>
-                                                            </c:if>
+                                                        <c:if test="${category.id eq item.idCategory}">
+                                                            <c:out value="${category.name}"/>
+                                                        </c:if>
                                                     </c:forEach>
                                                 </td>
                                                 <c:choose>
@@ -122,7 +123,9 @@
 
                                                         </td>
                                                         <td class="text-center">
-                                                            <c:out value="${item.priceSize[0].price}"/>
+                                                            <fmt:formatNumber type="currency"
+                                                                              value="${item.priceSize[0].price}"
+                                                                              currencySymbol="VNĐ"/>
                                                         </td>
                                                     </c:when>
                                                     <c:otherwise>
@@ -146,11 +149,15 @@
                                                             <c:forEach var="size" items="${item.priceSize}">
                                                                 <c:choose>
                                                                     <c:when test="${count eq 0}">
-                                                                        <c:out value="${size.price}"/>
+                                                                        <fmt:formatNumber type="currency"
+                                                                                          value="${size.price}"
+                                                                                          currencySymbol="VNĐ"/>
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                         -
-                                                                        <c:out value="${size.price}"/>
+                                                                        <fmt:formatNumber type="currency"
+                                                                                          value="${size.price}"
+                                                                                          currencySymbol="VNĐ"/>
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                                 <c:set var="count" value="${count +1}"/>

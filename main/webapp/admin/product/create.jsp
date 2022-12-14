@@ -52,7 +52,7 @@
                         <div class="page-title-box">
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="index.jsp">Sản phẩm</a></li>
+                                    <li class="breadcrumb-item"><a href="<c:out value="${pageContext.request.contextPath}">/admin/product">Sản phẩm</a></li>
                                     <li class="breadcrumb-item active"> Thêm sản phẩm</li>
                                 </ol>
                             </div>
@@ -66,18 +66,17 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-
                                 <h4 class="header-title">Sản phẩm mới</h4>
-                                <form>
+                                <form action="/admin/product/create" method="post">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group mb-3">
                                                 <label for="name">Tên sản phẩm</label>
-                                                <input type="text" id="name" class="form-control">
+                                                <input type="text" id="name" class="form-control" name="name">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="image">Ảnh sản phẩm</label>
-                                                <input type="file" id="image" class="form-control-file">
+                                                <input type="file" id="image" class="form-control-file" name="image">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="category">Phân loại</label>
@@ -88,19 +87,6 @@
                                                                 value="${item.name}"/></option>
                                                     </c:forEach>
                                                 </select>
-                                            </div>
-
-                                            <div class="form-group mb-3">
-                                                <label for="topping">Chọn loại topping áp dụng</label>
-                                                <select id="topping" multiple class="form-control">
-                                                    <option value="1">Trân châu đen</option>
-                                                    <option value="2">Thạch cà phê</option>
-                                                    <option value="3">Whipping cream</option>
-                                                    <option value="4">Thạch dừa</option>
-                                                    <option value="5">Kem cheese</option>
-                                                </select>
-                                                <span class="help-block"><small>Giữ ctrl hoặc shift để chọn nhiều
-                                                            loại.</small></span>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -115,12 +101,12 @@
 
                                             <div class="form-group mb-3">
                                                 <label for="price-M">Giá size M</label>
-                                                <input type="text" id="price-M" class="form-control">
+                                                <input type="text" id="price-M" class="form-control" name="price_M">
                                             </div>
 
                                             <div class="form-group mb-3">
                                                 <label for="price-L">Giá size L</label>
-                                                <input type="text" id="price-L" disabled class="form-control">
+                                                <input type="text" id="price-L" disabled class="form-control" name="price_L">
                                             </div>
 
                                             <div class="form-group mb-3">
@@ -184,7 +170,7 @@
             if($("#checkSize").get(0).checked) {
                 $("#price-L").prop('disabled', false);
             }else{
-                $("#price-L").prop('disabled', false);
+                $("#price-L").prop('disabled', true);
             }
         })
 
