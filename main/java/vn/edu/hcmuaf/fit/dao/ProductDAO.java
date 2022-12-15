@@ -77,7 +77,6 @@ public class ProductDAO extends RD {
     }
 
     public List<Map<String, Object>> searchProduct(String search) {
-        System.out.println(search);
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from product\n" +
                                 "where name like ?").bind(0, "%" +search+"%")
@@ -93,6 +92,11 @@ public class ProductDAO extends RD {
                         .mapToMap()
                         .list()
         );
+    }
+
+    public static void main(String[] args) {
+//        ProductDAO dao = new ProductDAO();
+//        System.out.println(dao.pagingProduct(0));
     }
 
 

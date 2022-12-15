@@ -7,6 +7,7 @@ import vn.edu.hcmuaf.fit.dao.PriceSizeDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +59,57 @@ public class ProducService {
         }
         return list;
     }
+
+    public List<Product> sortASC(int index) {
+        List<Product> list = new ArrayList<Product>();
+        List<Map<String, Object>> productList = dao.pagingProduct(index);
+        for (Map<String, Object> map : productList) {
+            Product product = new Product();
+            product.setId((Integer) map.get("id"));
+            product.setName((String) map.get("name"));
+            product.setIdCategory((Integer) map.get("category_id"));
+            product.setImg((String) map.get("image"));
+            product.setStatus((Integer) map.get("status"));
+
+            List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) map.get("id"));
+            List<PriceSize> priceSizeList = priceSizeList(priceSize);
+            product.setPriceSize(priceSizeList);
+
+            List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) map.get("category_id"));
+            product.setTopping(toppingList);
+
+            list.add(product);
+            list.sort((o1, o2) -> (int) (o1.getPriceSize().get(0).getPrice() - o2.getPriceSize().get(0).getPrice()));
+        }
+        return list;
+    }
+
+    public List<Product> sortDECS(int index) {
+        List<Product> list = new ArrayList<Product>();
+        List<Map<String, Object>> productList = dao.pagingProduct(index);
+        for (Map<String, Object> map : productList) {
+            Product product = new Product();
+            product.setId((Integer) map.get("id"));
+            product.setName((String) map.get("name"));
+            product.setIdCategory((Integer) map.get("category_id"));
+            product.setImg((String) map.get("image"));
+            product.setStatus((Integer) map.get("status"));
+
+            List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) map.get("id"));
+            List<PriceSize> priceSizeList = priceSizeList(priceSize);
+            product.setPriceSize(priceSizeList);
+
+            List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) map.get("category_id"));
+            product.setTopping(toppingList);
+
+            list.add(product);
+            list.sort((o1, o2) -> (int) (o2.getPriceSize().get(0).getPrice() - o1.getPriceSize().get(0).getPrice()));
+        }
+        return list;
+    }
+
+
+
     private List<PriceSize> priceSizeList(List<Map<String, Object>> priceSize){
         List<PriceSize> priceSizeList = new ArrayList<PriceSize>();
         for (Map<String, Object> map : priceSize) {
@@ -144,6 +196,6 @@ public class ProducService {
 
     public static void main(String[] args) {
         ProducService dao = new ProducService();
-        System.out.println(dao.getProductByCategory(1).size());
+        System.out.println(dao.sortASC(1));
     }
 }

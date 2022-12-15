@@ -35,6 +35,7 @@ public class CategoryController extends HttpServlet {
         request.setAttribute("listProduct", listProductByCategory);
         request.setAttribute("endPage", 0);
         request.setAttribute("tagCate", category_id);
+        request.setAttribute("sort", 0);
         request.getRequestDispatcher("shop.jsp").forward(request,response);
     }
 
