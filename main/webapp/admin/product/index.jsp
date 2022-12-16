@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +98,7 @@
 
                                             <tr>
                                                 <td>
-                                                    <img src="<c:out value="${item.img}"/>"
+                                                    <img src="${item.img} "
                                                          alt="contact-img" title="contact-img" class="rounded mr-3"
                                                          height="48"/>
                                                     <p class="m-0 d-inline-block align-middle font-16">
@@ -180,14 +180,24 @@
                                                     </c:choose>
                                                 </td>
 
-                                                <td class="table-action text-center">
-                                                    <a href="/admin/product/update?id=<c:out value="${item.id}"/>"
-                                                       class="action-icon"> <i
-                                                            class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a href="/admin/product/delete?id=<c:out value="${item.id}"/>"
-                                                       class="action-icon"> <i
-                                                            class="mdi mdi-delete"></i></a>
-                                                </td>
+                                                <form action="/admin/product/delete" method="post" id="delete-form-<c:out value="${item.id}"/>">
+                                                    <td class="table-action text-center">
+                                                        <a href="/admin/product/update?id=<c:out value="${item.id}"/>"
+                                                           class="action-icon"> <i
+                                                                class="mdi mdi-square-edit-outline"></i></a>
+
+
+                                                        <input type="text" name="id" id="id"
+                                                               value="<c:out value="${item.id}"/>" class="d-none">
+                                                        <button type="submit" class="d-none"></button>
+                                                        <a href="javascript:{0}"
+                                                           class="action-icon"> <i class="mdi mdi-delete delete-btn"
+                                                                                   data-name="<c:out value="${item.name}"/>"
+                                                                                   data-id="<c:out value="${item.id}"/>"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </form>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -271,12 +281,14 @@
 <script src="../../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="../../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
 <!-- third party js ends -->
+
 <script>
     $(document).ready(function () {
         $(".delete-btn").click(function () {
 
-            if (window.confirm("Bạn muốn xóa " + $(".delete-btn").attr("data-name") + " ?")) {
-                return true;
+            if (window.confirm("Bạn muốn xóa " + $(this).attr("data-name") + " ?")) {
+                url = "#delete-form-"+$(this).attr("data-id");
+                $(url).submit();
             } else {
                 return false;
             }

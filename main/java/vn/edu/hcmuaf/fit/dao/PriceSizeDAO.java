@@ -39,30 +39,39 @@ public class PriceSizeDAO extends RD {
         return result;
     }
 
-    public void insert(int product_id, String name, float originalPrice) {
+    public void insert(int product_id, String name, float original_price) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("INSERT INTO product_size(product_id,name,original_price) VALUES(:product_id,:name,:originalPrice)")
+                h.createUpdate("INSERT INTO product_size(product_id,name,original_price) VALUES(:product_id,:name,:original_price)")
                         .bind("name", name)
-                        .bind("original_price", originalPrice)
+                        .bind("original_price", original_price)
                         .bind("product_id", product_id)
                         .execute()
         );
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE product_size SET price = :price WHERE product_id = :product_id AND original_price = :originalPrice AND name = :name")
-                        .bind("price", originalPrice)
+                h.createUpdate("UPDATE product_size SET price = :price WHERE product_id = :product_id AND original_price = :original_price AND name = :name")
+                        .bind("price", original_price)
                         .bind("product_id", product_id)
-                        .bind("original_price", originalPrice)
+                        .bind("original_price", original_price)
                         .bind("name", name)
                         .execute());
     }
 
-    public void update(int id, String name, float price, float originalPrice) {
+    public void update(int id, String name, float price, float original_price) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE product_size SET name=:name,price=:price,original_price:=originalPrice WHERE id=:id")
+                h.createUpdate("UPDATE product_size SET name=:name,price=:price,original_price:=original_price WHERE id=:id")
                         .bind("name", name)
                         .bind("price", price)
                         .bind("id", id)
-                        .bind("originalPrice", originalPrice)
+                        .bind("original_price", original_price)
+                        .execute());
+    }
+    public void updateByProductId(int product_id, String name, float price,float original_price){
+        JDBIConnector.get().withHandle(h ->
+                h.createUpdate("UPDATE product_size SET price=:price,original_price:=original_price WHERE product_id=:product_id AND name=:name")
+                        .bind("name", name)
+                        .bind("price", price)
+                        .bind("product_id", product_id)
+                        .bind("original_price", original_price)
                         .execute());
     }
 
@@ -75,11 +84,17 @@ public class PriceSizeDAO extends RD {
 
     }
 
-    public void updateOriginalPrice(int id, float originalPrice) {
+    public void updateoriginal_price(int id, float original_price) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE product_size SET original_price=:originalPrice WHERE id=:id")
-                        .bind("original_price", originalPrice)
+                h.createUpdate("UPDATE product_size SET original_price=:original_price WHERE id=:id")
+                        .bind("original_price", original_price)
                         .bind("id", id)
+                        .execute());
+    }
+    public void deleteByProductId(int product_id){
+        JDBIConnector.get().withHandle(h ->
+                h.createUpdate("DELETE FROM product_size WHERE product_id=:product_id")
+                        .bind("product_id", product_id)
                         .execute());
     }
 

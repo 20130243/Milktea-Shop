@@ -116,4 +116,8 @@ public class User implements Serializable {
                 ", token='" + token + '\'' +
                 '}';
     }
+
+    public static void main(String[] args) {
+
+    }
 }

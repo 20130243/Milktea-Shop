@@ -77,7 +77,6 @@ public class ProductService {
         Map<String, Object> product = dao.getById(id);
         List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) product.get("id"));
         List<PriceSize> priceSizeList = priceSizeList(priceSize);
-
         List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) product.get("category_id"));
 
         return new Product((Integer) product.get("id"), (String) product.get("name"), (Integer) product.get("category_id"),
@@ -95,20 +94,37 @@ public class ProductService {
     public int getPriceSizeL(int id) {
         try {
             return (int) getById(id).getPriceSize().get(1).getPrice();
-
         } catch (Exception e) {
             return getPriceSizeM(id);
         }
     }
 
     public void delete(int id) {
+        (new PriceSizeService()).deleteByProductId(id);
         dao.delete(id);
     }
 
     public void insert(Product product) throws Exception {
         dao.insert(product.getName(), product.getIdCategory(), product.getImg(), product.getStatus());
         for (PriceSize priceSize : product.getPriceSize()) {
-            (new PriceSizeDAO()).insert(product.getIdCategory(), priceSize.getSize(), priceSize.getOriginalPrice());
+            priceSize.setProduct_id(findFirst().getId());
+            (new PriceSizeService()).insert(priceSize);
+        }
+    }
+
+    public Product findFirst() throws Exception {
+        Map<String, Object> product = dao.findFirst();
+        List<PriceSize> priceSizeList = new PriceSizeService().getByProductId((Integer) product.get("id"));
+        List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) product.get("category_id"));
+        return new Product((Integer) product.get("id"), (String) product.get("name"), (Integer) product.get("category_id"),
+                priceSizeList, (String) product.get("image"), (Integer) product.get("status"), toppingList);
+
+    }
+    public void update(Product product) throws Exception {
+        dao.update(product.getId(),product.getName(), product.getIdCategory(), product.getImg(), product.getStatus());
+
+        for (PriceSize priceSize : product.getPriceSize()) {
+            (new PriceSizeService()).updateByProductId(priceSize);
         }
     }
 
