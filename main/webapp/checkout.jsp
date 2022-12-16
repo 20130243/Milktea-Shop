@@ -1,7 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.Cart" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.Item" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Topping" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.bean.Topping" %>
+<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/15/2022
@@ -40,6 +41,9 @@
 </head>
 
 <body>
+<%
+  Cart cart = (Cart) session.getAttribute("cart");
+%>
 <!-- Page Preloder -->
 <div id="preloder">
   <div class="loader"></div>
@@ -125,8 +129,8 @@
             </tr>
             </thead>
             <tbody>
+            <form action="/editcart" method="get" id="myForm">
             <%
-              Cart cart = (Cart) session.getAttribute("cart");
               if (cart!= null) {
                 List<Item> listItems = cart.getItems();
               for (Item item : listItems) {
@@ -138,7 +142,8 @@
                 </div>
                 <div class="product__cart__item__text">
                   <h5><%=item.getProduct().getName()%></h5>
-                  <h6><%=item.getProduct().getPriceSize().get(0).getPrice()%></h6>
+                  <input style="display: none" class="product-modal-id" type="text" name="<%=item.getId()%>" value="<%=item.getId()%>" checked="checked">
+                  <h6><%=new CurrencyFormat().format((int)item.getProduct().getPriceSize().get(0).getPrice())%></h6>
                 </div>
               </td>
               <td>
@@ -146,8 +151,6 @@
                 List<Topping> toppingList = item.getProduct().getTopping();
                 if(toppingList.size() > 0) {
                   for (Topping topping : toppingList) {
-
-
                 %>
                 <p class="w-150"><%=topping.getName()%></p>
                 <%
@@ -158,40 +161,18 @@
               <td class="quantity__item">
                 <div class="quantity">
                   <div class="pro-qty-2">
-                    <input type="text" value="<%=item.getQuantity()%>">
+                    <input name="quantityChange<%=item.getId()%>" class="quantity" type="number" value="<%=item.getQuantity()%>">
                   </div>
                 </div>
               </td>
-              <td class="cart__price"><%=item.getPrice()%></td>
-              <td class="cart__close"><i class="fa fa-close"></i></td>
+              <td class="cart__price"><%= new CurrencyFormat().format((int)item.getPrice())%></td>
+              <td class="cart__close"><a href="editcart?rpID=<%=item.getId()%>" style="border: none"><i class="fa fa-close"></i></a></td>
             </tr>
             <%
                 }
               }
             %>
-<%--            <tr>--%>
-<%--              <td class="product__cart__item">--%>
-<%--                <div class="product__cart__item__pic">--%>
-<%--                  <img src="img/product/Hồng-Trà-Sữa-min.png" alt="" width="150">--%>
-<%--                </div>--%>
-<%--                <div class="product__cart__item__text">--%>
-<%--                  <h5>Trà sữa đào</h5>--%>
-<%--                  <h6>31,000đ</h6>--%>
-<%--                </div>--%>
-<%--              </td>--%>
-<%--              <td>--%>
-<%--                <p class="w-150">Trân châu đen x1 (5000đ)</p>--%>
-<%--              </td>--%>
-<%--              <td class="quantity__item">--%>
-<%--                <div class="quantity">--%>
-<%--                  <div class="pro-qty-2">--%>
-<%--                    <input type="text" value="1">--%>
-<%--                  </div>--%>
-<%--                </div>--%>
-<%--              </td>--%>
-<%--              <td class="cart__price">36,000đ</td>--%>
-<%--              <td class="cart__close"><i class="fa fa-close"></i></td>--%>
-<%--            </tr>--%>
+              </form>
             </tbody>
           </table>
         </div>
@@ -241,9 +222,22 @@
                 <div class="col-lg-12">
                   <h6 class="mt-4  mb-3">Tổng giỏ hàng</h6>
                   <div>
-                    <p>Tổng tiền: <span>300,000đ</span></p>
-                    <p>Giảm giá: <span>0đ</span></p>
+                    <%
+                    if(cart!=null) {
 
+                    %>
+                    <p>Tổng tiền: <span><%=new CurrencyFormat().format((int) cart.getTotalMoney())%></span></p>
+                    <p>Giảm giá: <span>0đ</span></p>
+                    <%
+                      } else {
+
+
+                    %>
+                    <p>Tổng tiền: <span><%=new CurrencyFormat().format((int) 0)%></span></p>
+                    <p>Giảm giá: <span>0đ</span></p>
+                    <%
+                      }
+                    %>
                   </div>
                   <a href="#" class="primary-btn w-100 text-center">Đặt hàng</a>
                 </div>
@@ -251,9 +245,6 @@
             </div>
           </div>
         </div>
-
-
-
       </div>
     </div>
   </div>
@@ -338,6 +329,7 @@
 <script src="js/mixitup.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/cart.js"></script>
 <script src="js/account/bootstrap.min.js"></script>
 <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
 </body>

@@ -19,6 +19,7 @@ public class addToCart extends HttpServlet {
         float price = 0;
         String id = request.getParameter("product_id");
         int pro_id;
+        String url = null;
         if (id != null) {
             pro_id = Integer.parseInt(id);
             Product product = new ProducService().getById(pro_id);
@@ -51,45 +52,58 @@ public class addToCart extends HttpServlet {
                     }
                 }
             HttpSession session = request.getSession();
+                url =(String) session.getAttribute("url");
             if (session.getAttribute("cart") == null) {
                 Cart cart = new Cart();
                 List<Item> listItems = new ArrayList<Item>();
                 Item item = new Item();
+                item.setId(listItems.size());
                 item.setQuantity(quantity);
                 item.setProduct(product);
                 item.setNote(request.getParameter("note"));
                 item.setPrice(price);
                 listItems.add(item);
                 cart.setItems(listItems);
+                cart.updateTotal();
                 session.setAttribute("cart", cart);
             } else {
                 Cart cart = (Cart) session.getAttribute("cart");
                 List<Item> listItems = cart.getItems();
+
                 boolean check = false;
                 for (Item item : listItems) {
-                    if (item.getProduct() == product) {
+                    if (item.getProduct().toString().equals(product.toString())) {
                         item.setQuantity(item.getQuantity() + quantity);
+                        item.setPrice(item.getPrice() + price);
+                        cart.updateTotal();
                         check = true;
                     }
                 }
-                if (!check) {
+                if (check==false) {
                     Item item = new Item();
+                    item.setId(listItems.size());
                     item.setQuantity(quantity);
                     item.setProduct(product);
                     item.setNote(request.getParameter("note"));
                     item.setPrice(price);
                     listItems.add(item);
+                    cart.updateTotal();
                 }
+
                 session.setAttribute("cart", cart);
             }
+
         }
-        response.sendRedirect(request.getContextPath() + "/shop");
+
+            response.sendRedirect(request.getContextPath() + url);
 
     }
         else {
 
-            response.sendRedirect(request.getContextPath() + "/shop");
+            response.sendRedirect(request.getContextPath() + url);
     }
+
+
     }
 
     @Override

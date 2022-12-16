@@ -68,17 +68,19 @@ public class Cart {
 //        updateTotal();
 //    }
 //
-//    public void updateTotal() {
-//        for (Map<Product, Integer> product : productMap.keySet()) {
-//            Product tmp = (Product) product.keySet().toArray()[0];
-//            total += tmp.getPriceSize().get(0).getPrice();
-//            if (productMap.get(product) != null) {
-//                for (Topping topping : productMap.get(product)) {
-//                    total += topping.getPrice();
-//                }
-//            }
-//        }
-//    }
+    public void updateTotal() {
+        float total = 0;
+        if(items.size() == 0) {
+            this.setTotalMoney(0);
+        } else {
+            for (int i = 0; i < items.size(); i++) {
+                total += items.get(i).getPrice();
+                this.setTotalMoney(total);
+            }
+        }
+
+
+    }
 //
 //    public void add(Product product, List<Topping> topping, int quantity) {
 //        for (Map<Product,Integer>  key: productMap.keySet()) {

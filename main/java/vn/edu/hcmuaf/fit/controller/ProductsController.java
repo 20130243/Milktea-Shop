@@ -16,6 +16,10 @@ import java.util.List;
 public class ProductsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String url = ((HttpServletRequest) request).getRequestURI().toString();
+        session.setAttribute("url", url);
+
         String indexPage = request.getParameter("index");
         String sortPage = request.getParameter("sort");
         int sort = 0;

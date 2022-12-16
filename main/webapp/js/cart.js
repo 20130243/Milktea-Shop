@@ -5,102 +5,111 @@ if (document.readyState == "loading") {
 }
 
 function ready() {
-    var btn_remove = document.getElementsByClassName("remove");
-    for (var i = 0; i < btn_remove.length; i++) {
-        var btn = btn_remove[i];
-        btn.addEventListener("click", removeCartItem);
-    }
-
+//     var btn_remove = document.getElementsByClassName("remove");
+//     for (var i = 0; i < btn_remove.length; i++) {
+//         var btn = btn_remove[i];
+//         btn.addEventListener("click", removeCartItem);
+//     }
+//
     var quantityInputs = document.getElementsByClassName("quantity");
     for (var i = 0; i < quantityInputs.length; i++) {
         var input = quantityInputs[i];
         input.addEventListener("change", quantityChanged);
+
     }
-
-    var addToCartButton = document.getElementsByClassName("modal-btn")
-    for(var i = 0; i < addToCartButton.length; i++) {
-        var btn = addToCartButton[i];
-        btn.addEventListener("click", addToCartClick);
-    }
-}
-
-function removeCartItem(event) {
-    var btn_tager = event.target;
-    btn_tager.parentElement.parentElement.parentElement.remove();
-    updateCartTotal();
-}
-
+//
+//     var addToCartButton = document.getElementsByClassName("modal-btn")
+//     for(var i = 0; i < addToCartButton.length; i++) {
+//         var btn = addToCartButton[i];
+//         btn.addEventListener("click", addToCartClick);
+//     }
+// }
+//
+// function removeCartItem(event) {
+//     var btn_tager = event.target;
+//     btn_tager.parentElement.parentElement.parentElement.remove();
+//     updateCartTotal();
+// }
+//
 function quantityChanged(event) {
     var input = event.target;
     if (isNaN(input.value) || input.value <= 0) {
         input.value = 1;
     }
-    updateCartTotal();
+    submitForm();
 }
 
-function updateCartTotal() {
-    var cartItemtContainer =
-        document.getElementsByClassName("cart-product-list")[0];
-    var cartRows = cartItemtContainer.getElementsByClassName("cart-product-item");
-    var total = 0;
-    for (var i = 0; i < cartRows.length; i++) {
-        var cartRow = cartRows[i];
-        var priceElement = cartRow.getElementsByClassName(
-            "cart-product-detail-price"
-        )[0];
-        var quantityElement = cartRow.getElementsByClassName("quantity")[0];
-        var price = parseInt(priceElement.innerText.replace(/[^0-9]+/g, ''));
-        var quantity = quantityElement.value;
-        var number = priceElement.innerText;
-        total = total + price * quantity;
-        document.getElementsByClassName("cart-product-price")[i].innerText =
-            price.toLocaleString('vi-VN', {
-                style: 'currency',
-                currency: 'VND'
-            }) + " x " + quantity + " = " + (price * quantity).toLocaleString('vi-VN', {
-                style: 'currency',
-                currency: 'VND'
-            });
-    }
-    document.getElementsByClassName("price")[0].innerText = total.toLocaleString('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-    });
-}
 
-function addToCartClick(event) {
-    var btn = event.target;
-    var shopItem = btn.parentElement.parentElement.parentElement;
-    var title = shopItem.getElementsByClassName("product-modal-header")[0].innerText
-    var sizes = shopItem.getElementsByClassName("size");
-    var price = shopItem.getElementsByClassName("product-modal-price")[0].innerText
-    var toppings = shopItem.getElementsByClassName("topping-checked");
-    var quantity = shopItem.getElementsByClassName("quantity-num")[0].value;
-    var imgSrc = shopItem.getElementsByClassName("img-src")[0].src;
-    var size = null;
-    for (var i = 0; i < sizes.length; i++) {
-        var sizeCheck = sizes[i];
-        if(sizeCheck.checked) {
-            size = sizeCheck.value;
-        }
-    }
-    var toppingName = [];
-    var topppingPrice = [];
-    for (var i = 0; i < toppings.length; i++) {
-        var toppingCheck = toppings[i];
-        if(toppingCheck.checked) {
-            toppingName[i] = toppingCheck.name;
-            topppingPrice[i] = toppingCheck.value;
-        }
-    }
-    const valueToRemove = null;
-    toppingName = toppingName.filter(item => item !== valueToRemove);
-    topppingPrice = topppingPrice.filter(item => item !== valueToRemove);
+    function submitForm() {
 
-    console.log(toppingName, topppingPrice)
-    addItemToCart(title, price, size,toppingName, topppingPrice, quantity, imgSrc);
-    updateCartTotal();
+document.getElementById("myForm").submit();
+
+
+    }
+//
+// function updateCartTotal() {
+//     var cartItemtContainer =
+//         document.getElementsByClassName("cart-product-list")[0];
+//     var cartRows = cartItemtContainer.getElementsByClassName("cart-product-item");
+//     var total = 0;
+//     for (var i = 0; i < cartRows.length; i++) {
+//         var cartRow = cartRows[i];
+//         var priceElement = cartRow.getElementsByClassName(
+//             "cart-product-detail-price"
+//         )[0];
+//         var quantityElement = cartRow.getElementsByClassName("quantity")[0];
+//         var price = parseInt(priceElement.innerText.replace(/[^0-9]+/g, ''));
+//         var quantity = quantityElement.value;
+//         var number = priceElement.innerText;
+//         total = total + price * quantity;
+//         document.getElementsByClassName("cart-product-price")[i].innerText =
+//             price.toLocaleString('vi-VN', {
+//                 style: 'currency',
+//                 currency: 'VND'
+//             }) + " x " + quantity + " = " + (price * quantity).toLocaleString('vi-VN', {
+//                 style: 'currency',
+//                 currency: 'VND'
+//             });
+//     }
+//     document.getElementsByClassName("price")[0].innerText = total.toLocaleString('vi-VN', {
+//         style: 'currency',
+//         currency: 'VND'
+//     });
 }
+//
+// function addToCartClick(event) {
+//     var btn = event.target;
+//     var shopItem = btn.parentElement.parentElement.parentElement;
+//     var title = shopItem.getElementsByClassName("product-modal-header")[0].innerText
+//     var sizes = shopItem.getElementsByClassName("size");
+//     var price = shopItem.getElementsByClassName("product-modal-price")[0].innerText
+//     var toppings = shopItem.getElementsByClassName("topping-checked");
+//     var quantity = shopItem.getElementsByClassName("quantity-num")[0].value;
+//     var imgSrc = shopItem.getElementsByClassName("img-src")[0].src;
+//     var size = null;
+//     for (var i = 0; i < sizes.length; i++) {
+//         var sizeCheck = sizes[i];
+//         if(sizeCheck.checked) {
+//             size = sizeCheck.value;
+//         }
+//     }
+//     var toppingName = [];
+//     var topppingPrice = [];
+//     for (var i = 0; i < toppings.length; i++) {
+//         var toppingCheck = toppings[i];
+//         if(toppingCheck.checked) {
+//             toppingName[i] = toppingCheck.name;
+//             topppingPrice[i] = toppingCheck.value;
+//         }
+//     }
+//     const valueToRemove = null;
+//     toppingName = toppingName.filter(item => item !== valueToRemove);
+//     topppingPrice = topppingPrice.filter(item => item !== valueToRemove);
+//
+//     console.log(toppingName, topppingPrice)
+//     addItemToCart(title, price, size,toppingName, topppingPrice, quantity, imgSrc);
+//     updateCartTotal();
+// }
 //
 // function addItemToCart(title, price, size,toppingName, topppingPrice, quantity,imgSrc) {
 //     var cartRow = document.createElement('div');

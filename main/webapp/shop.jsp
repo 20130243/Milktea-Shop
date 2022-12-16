@@ -1,8 +1,6 @@
-<%@ page import="vn.edu.hcmuaf.fit.bean.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Size" %>
 <%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Category" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.bean.*" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/3/2022
@@ -206,96 +204,76 @@
                 </div>
             </div>
             <div class="col-lg-3">
-                <div id="1" class="shop__sidebar__accordion">
+                <div class="shop__sidebar__accordion">
                     <div class="">
                         <div class="cart-product">
                             <div class="cart-heading">
                                 <h4 class="cart-product-heading"><i class="fa-solid fa-cart-shopping mr-2"></i>GIỎ
                                     HÀNG</h4>
                             </div>
-                            <jsp:include page='cart.jsp'>
-                                <jsp:param name="" value=""/>
-                            </jsp:include>
+                            <%
+                                Cart cart = (Cart) session.getAttribute("cart");
+                            %>
+
+                            <div class="cart-product-list">
+                                    <%
+                                        if(cart!=null) {
+                                            List<Item> items = cart.getItems();
+                                            if(items.size()>0) {
+                                                for (Item item : items) {
+                                                    Product p = item.getProduct();
+                                    %>
+                                <form action="/editcart" method="get" id="myForm">
+                                <div class="cart-product-item">
+                                    <div class="cart-product-name">
+                                        <img src="<%=p.getImg()%>" width="32" height="32">
+                                        <h5><%=p.getName()%> (<%=p.getPriceSize().get(0).getSize()%>)</h5>
+                                        <input class="product-modal-id" type="text" name="<%=item.getId()%>" value="<%=item.getId()%>" checked="checked">
+                                    </div>
+                                    <div>
+                                        <div>Giá: <p class="cart-product-detail-price"><%= new CurrencyFormat().format((int)item.getProduct().getPriceSize().get(0).getPrice())%></p></div>
+                                    </div>
+                                    <div class="cart-product-detail justify-content-between">
+                                        <div class="detail">Topping:
+                                        <%
+                                        if(p.getTopping().size() > 0) {
+                                            for (Topping tp : p.getTopping()) {
+
+                                        %>
+                                        <p class="topping-item"><%=tp.getName()%> x <%=item.getQuantity()%></p>
+                                        <%
+                                            }
+                                        }
+                                        %>
+                                        </div>
+                                        <div class="cart-product-quantity">
+                                            <input name="quantityChange<%=item.getId()%>" class="cart-quantity-input quantity" type="number" value="<%=item.getQuantity()%>">
+                                            <a href="editcart?rpID=<%=item.getId()%>" style="border: none"> <i class="fa-solid fa-xmark remove"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="cart-product-price">
+                                        <%=new CurrencyFormat().format((int)item.getPrice())%> * <%=item.getQuantity()%> = <%=new CurrencyFormat().format((int)item.getPrice())%>
+                                    </div>
+                                </div>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </form>
+                                <div class="cart-product-total">
+                                    <div class="total">
+                                        Tổng tiền: <span class="price"> <%=new CurrencyFormat().format((int) cart.getTotalMoney())%></span>
+                                    </div>
+<%--                                    <button class=" btn-pay">Thanh toán</button>--%>
+                                    <a href="/checkout" class="btn-pay">Thanh toán</a>
+                                </div>
+                                <%
+                                    }
+                                %>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-<%--                <div class="shop__sidebar__accordion">--%>
-<%--                    <div class="">--%>
-<%--                        <div class="cart-product">--%>
-<%--                            <div class="cart-heading">--%>
-<%--                                <h4 class="cart-product-heading"><i class="fa-solid fa-cart-shopping mr-2"></i>GIỎ--%>
-<%--                                    HÀNG</h4>--%>
-<%--                            </div>--%>
-<%--                            <div class="cart-product-list">--%>
-<%--&lt;%&ndash;                                <div class="cart-product-item">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-name">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <img src="img/icon/drink.png" width="32" height="32">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <h5> Trà sữa ô long(L)</h5>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-detail justify-content-between ">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <div class="detail">Giá: <p class="cart-product-detail-price">36000đ</p></div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-detail justify-content-between">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <div class="detail">Topping:</div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <div class="cart-product-quantity">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                            <input class="cart-quantity-input quantity" type="number" value="1">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                            <i class="fa-solid fa-xmark remove"></i>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-price">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        36.000đ x 1 = 36.0000đ&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                <div class="cart-product-item">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-name">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <img src="img/icon/drink.png" width="32" height="32">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <h5> Trà sữa ô longdasdadadsad(L)</h5>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-detail justify-content-between ">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <div class="detail">Giá: <p class="cart-product-detail-price">36000đ</p></div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-detail justify-content-between">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <div class="detail">Topping:</div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <div class="cart-product-quantity">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                            <input class="cart-quantity-input quantity" type="number" value="1">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                            <i class="fa-solid fa-xmark remove"></i>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-price">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        36.000đ x 1 = 36.0000đ&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                <div class="cart-product-item">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-name">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <img src="img/icon/drink.png" width="32" height="32">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <h5> Sữa tươi trân châu đường đen(L)</h5>&ndash;%&gt;--%>
-
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-detail justify-content-between ">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <div class="detail">Giá: <p class="cart-product-detail-price">48000đ</p></div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-detail justify-content-between">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <div class="detail">Topping: Sương sáo x1; Thạch vải x1</div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <div class="cart-product-quantity">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                            <input class="cart-quantity-input quantity" type="number" value="1">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                            <i class="fa-solid fa-xmark remove"></i>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <div class="cart-product-price">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        48.000đ x 1 = 48.0000đ&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
-<%--                            </div>--%>
-<%--                            <div class="cart-product-total">--%>
-<%--                                <div class="total">--%>
-<%--                                    Tổng tiền: <span class="price"> 0 đ</span>--%>
-<%--                                </div>--%>
-<%--                                <button class=" btn-pay">Thanh toán</button>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
             </div>
         </div>
         <div class="row spad">

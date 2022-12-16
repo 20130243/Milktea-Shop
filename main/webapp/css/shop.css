@@ -218,3 +218,7 @@ element.style {
 .remove {
   margin: 0 10px !important;
 }
+
+.topping-item{
+  margin: 0 !important;
+}

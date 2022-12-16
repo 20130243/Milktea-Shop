@@ -1,7 +1,9 @@
 package vn.edu.hcmuaf.fit.bean;
 
+import java.util.List;
+
 public class Item {
-    private String id;
+    private int id;
     private Product product;
     private int quantity;
     private float price;
@@ -12,7 +14,7 @@ public class Item {
 
     }
 
-    public Item(String id, Product product, int quantity, float price, String note) {
+    public Item(int id, Product product, int quantity, float price, String note) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
@@ -20,11 +22,11 @@ public class Item {
         this.note = note;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -58,5 +60,19 @@ public class Item {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public void updatePrice(){
+        Product product = this.getProduct();
+        List<Topping> toppings = product.getTopping();
+        float price = product.getPriceSize().get(0).getPrice();
+        if(toppings.size() > 0){
+            for(Topping topping : toppings){
+                price += topping.getPrice();
+            }
+        }
+        float priceTotal = price * quantity;
+        this.setPrice(priceTotal);
+
     }
 }
