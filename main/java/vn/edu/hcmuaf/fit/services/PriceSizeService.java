@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class PriceSizeService {
     private PriceSizeDAO dao = new PriceSizeDAO();
+
     public List<PriceSize> getAll() throws Exception {
         List<PriceSize> result = new ArrayList<PriceSize>();
         List<Map<String, Object>> priceSizeList = dao.getAll();
@@ -27,7 +28,7 @@ public class PriceSizeService {
     public List<PriceSize> getByProductId(int id) throws Exception {
         List<Map<String, Object>> priceSizeList = dao.getByProductId(id);
         List<PriceSize> result = new ArrayList<PriceSize>();
-        for (Map<String,Object> map : priceSizeList) {
+        for (Map<String, Object> map : priceSizeList) {
             PriceSize priceSize = new PriceSize();
             priceSize.setId((Integer) map.get("id"));
             priceSize.setProduct_id((Integer) map.get("product_id"));
@@ -40,15 +41,24 @@ public class PriceSizeService {
     }
 
     public void insert(PriceSize priceSize) throws Exception {
-        dao.insert(priceSize.getProduct_id(),priceSize.getSize(),priceSize.getOriginalPrice());
+        dao.insert(priceSize.getProduct_id(), priceSize.getSize(), priceSize.getOriginalPrice());
     }
 
     public void update(PriceSize priceSize) throws Exception {
         dao.update(priceSize.getId(), priceSize.getSize(), priceSize.getPrice(), priceSize.getOriginalPrice());
     }
 
+    public void updateByProductId(PriceSize priceSize) throws Exception {
+        int product_id = priceSize.getProduct_id();
+        dao.updateByProductId(priceSize.getId(), priceSize.getSize(), priceSize.getPrice(), priceSize.getOriginalPrice());
+    }
+
 
     public void delete(int id) throws Exception {
         dao.delete(id);
+    }
+
+    public void deleteByProductId(int product_id) {
+        dao.deleteByProductId(product_id);
     }
 }

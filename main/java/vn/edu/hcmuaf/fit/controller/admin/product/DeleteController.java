@@ -25,6 +25,7 @@ public class DeleteController extends HttpServlet {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
         response.sendRedirect("/admin/product");
     }
 }

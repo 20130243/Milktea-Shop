@@ -1,11 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
+<c:set var="object" value="${requestScope['object']}" scope="request"/>
+
 
 <head>
     <meta charset="utf-8"/>
-    <title>Thêm sản phẩm</title>
+    <title><c:out value="${object.name}"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
     <meta content="Coderthemes" name="author"/>
@@ -54,7 +59,7 @@
                                     <li class="breadcrumb-item"><a
                                             href="<c:out value="${pageContext.request.contextPath}"/>/admin/product">Sản
                                         phẩm</a></li>
-                                    <li class="breadcrumb-item active"> Thêm sản phẩm</li>
+                                    <li class="breadcrumb-item active"><c:out value="${object.name}"/></li>
                                 </ol>
                             </div>
                             <h4 class="page-title">Sản phẩm</h4>
@@ -67,33 +72,52 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Sản phẩm mới</h4>
-                                <form action="/admin/product/create" method="post" enctype='multipart/form-data'>
+                                <h4 class="header-title">Cập nhật sản phẩm</h4>
+                                <form id="update_form" action="/admin/product/update" method="post" enctype='multipart/form-data'>
+                                    <input type="text" name="id" id="id" value="<c:out value="${object.id}"/> "
+                                           class="d-none">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group mb-3">
                                                 <label for="name">Tên sản phẩm</label>
-                                                <input type="text" id="name" class="form-control" name="name">
+                                                <input type="text" id="name" class="form-control" name="name"
+                                                       value="<c:out value="${object.name}"/> ">
                                             </div>
                                             <div class="form-group mb-3">
+                                                <img src="<c:out value="${object.img}"/>" width="40" height="40">
                                                 <label for="image">Ảnh sản phẩm</label>
                                                 <input type="file" id="image" class="form-control-file" name="image">
                                             </div>
+                                            <input type="text" name="old_image" id="old_image"
+                                                   value="<c:out value="${object.img}"/> "
+                                                   class="d-none">
+                                            <input type="text" name="check_input_file" id="check_input_file"
+                                                   value="false"
+                                                   class="d-none">
                                             <div class="form-group mb-3">
                                                 <label for="category">Phân loại</label>
                                                 <select class="custom-select " id="category" name="category">
                                                     <c:forEach var="item" items="${requestScope['categoryList']}">
-                                                        <option value="<c:out value="${item.id}"/>"><c:out
+                                                        <option value="<c:out value="${item.id}"/>"
+                                                                <c:if test="${item.id eq object.idCategory}">
+                                                                    <c:out value="selected"/>
+                                                                </c:if>
+                                                        ><c:out
                                                                 value="${item.name}"/></option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
+                                        <c:if test="${fn:length(object.priceSize) eq 2}">
+                                            <c:set var="checkSize" value="true"/>
+                                        </c:if>
                                         <div class="col-lg-6">
                                             <div class="form-group mb-3">
                                                 <div class="custom-control custom-switch">
                                                     <input type="checkbox" class="custom-control-input"
-                                                           id="checkSize">
+                                                           id="checkSize"
+                                                    ${checkSize eq true ? "checked" : ""}
+                                                    >
                                                     <label class="custom-control-label" for="checkSize">Có 2
                                                         size</label>
                                                 </div>
@@ -101,35 +125,41 @@
 
                                             <div class="form-group mb-3">
                                                 <label for="price-M">Giá size M</label>
-                                                <input type="text" id="price-M" class="form-control" name="price_M">
+                                                <input type="text" id="price-M" class="form-control" name="price_M"
+                                                       value="<fmt:formatNumber type = "number"  pattern="###" value = "${object.priceSize[0].price}" />">
                                             </div>
 
                                             <div class="form-group mb-3">
                                                 <label for="price-L">Giá size L</label>
-                                                <input type="text" id="price-L" disabled class="form-control"
-                                                       name="price_L">
+                                                <input type="text" id="price-L" ${checkSize eq true ? "" : "disabled"}
+                                                       class="form-control"
+                                                       name="price_L"
+                                                       value="<c:if test="${checkSize eq true}"><fmt:formatNumber type = "number"  pattern="###" value = "${object.priceSize[1].price}"/></c:if>">
                                             </div>
 
-                                            <div class="form-group mb-3">
+                                            <div class=" form-group mb-3">
                                                 <label for="status_id">Trạng thái</label>
                                                 <select class="custom-select mb-3" name="status" id="status_id">
-                                                    <option value="0" selected>Đang bán</option>
-                                                    <option value="1">Giảm giá</option>
-                                                    <option value="2">Hết hàng</option>
-                                                    <option value="3">Ngưng bán</option>
+                                                    <option value="0" ${object.status eq 0 ? "selected" : ""}>Đang bán
+                                                    </option>
+                                                    <option value="1"${object.status eq 1 ? "selected" : ""}>Giảm giá
+                                                    </option>
+                                                    <option value="2"${object.status eq 2 ? "selected" : ""}>Hết hàng
+                                                    </option>
+                                                    <option value="3"${object.status eq 3 ? "selected" : ""}>Ngưng bán
+                                                    </option>
                                                 </select>
                                             </div>
 
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+                                    <button  id="submit" type="submit" class="btn btn-primary">Cập nhật</button>
                                 </form>
                             </div> <!-- end card-body-->
                         </div> <!-- end card-->
                     </div> <!-- end col -->
                 </div>
                 <!-- end row -->
-
             </div> <!-- container -->
 
         </div> <!-- content -->
@@ -168,9 +198,18 @@
 
         $("#checkSize").click(function () {
             if ($("#checkSize").get(0).checked) {
+                $("#price-L").val(<c:if test="${checkSize eq true}"><fmt:formatNumber type = "number"  pattern="###" value = "${object.priceSize[1].price}"/></c:if>);
                 $("#price-L").prop('disabled', false);
             } else {
+                $("#price-L").val('');
                 $("#price-L").prop('disabled', true);
+            }
+        })
+
+
+        $("#submit").click(function() {
+            if($("#image").get(0).files.length !== 0){
+                $("#check_input_file").val("true");
             }
         })
 
