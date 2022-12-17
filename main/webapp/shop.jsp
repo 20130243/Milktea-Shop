@@ -1,7 +1,6 @@
-<%@ page import="vn.edu.hcmuaf.fit.bean.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Size" %>
-<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.*" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/3/2022
@@ -9,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <html lang="zxx">
 
 <head>
@@ -123,37 +123,38 @@
                         <h6 class="search_bar_text">Theo giá</h6>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 shop__sidebar__search">
-                        <form action="#">
-                            <input type="text" placeholder="Tìm kiếm sản phẩm" style="padding-right:42px ;">
+                        <form action="SearchController" method="get">
+                            <input name="search" type="text" placeholder="Tìm kiếm sản phẩm" style="padding-right:42px ;">
                             <button type="submit"><span class="icon_search"></span></button>
                         </form>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4" style="z-index: 99;">
                         <ul class="menu-drop">
-                            <li class="menu-item active">
-                                <a href="" class="">Chọn nhóm </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="">Cà phê </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="">Trà sữa </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="">Trà</a>
-                            </li>
+                            <%
+                              List<Category> listCategories = (List<Category>)  request.getAttribute("listCategories");
+                              for(Category category : listCategories) {
+
+                            %>
+                                <li class="menu-item <%=(int) request.getAttribute("tagCate") == category.getId()? "active":""%>">
+                                    <a href="category?cid=<%=category.getId()%>"><%=category.getName()%></a>
+                                </li>
+
+                            <%}%>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4" style="z-index: 99;">
                         <ul class="menu-drop">
-                            <li class="menu-item active">
-                                <a href="" class="">Không lựa chọn</a>
+                            <%
+                            int sort =(int) request.getAttribute("sort");
+                            %>
+                            <li class="menu-item <%=sort == 0? "active" : ""%>">
+                                <a href="shop?sort=0" class="">Không lựa chọn</a>
                             </li>
-                            <li class="menu-item ">
-                                <a href="">Giá thấp đến cao</a>
+                            <li class="menu-item <%=sort == 1? "active" : ""%>">
+                                <a href="shop?sort=1">Giá thấp đến cao</a>
                             </li>
-                            <li class="menu-item ">
-                                <a href="">Giá cao đến thấp</a>
+                            <li class="menu-item <%=sort == 2? "active" : ""%>">
+                                <a href="shop?sort=2">Giá cao đến thấp</a>
                             </li>
                         </ul>
 
@@ -184,7 +185,6 @@
                                     CurrencyFormat currency = new CurrencyFormat();
                                     if(p.getPriceSize().size()
                                     > 0) {
-
                                     price = (int) (p.getPriceSize().get(0).getPrice());
                                     } else {
                                         price = 0;
@@ -211,64 +211,65 @@
                                 <h4 class="cart-product-heading"><i class="fa-solid fa-cart-shopping mr-2"></i>GIỎ
                                     HÀNG</h4>
                             </div>
+                            <%
+                                Cart cart = (Cart) session.getAttribute("cart");
+                            %>
+
                             <div class="cart-product-list">
+                                    <%
+                                        if(cart!=null) {
+                                            List<Item> items = cart.getItems();
+                                            if(items.size()>0) {
+                                                for (Item item : items) {
+                                                    Product p = item.getProduct();
+                                    %>
+                                <form action="/editcart" method="get" id="myForm">
                                 <div class="cart-product-item">
                                     <div class="cart-product-name">
-                                        <img src="img/icon/drink.png" width="32" height="32">
-                                        <h5> Trà sữa ô long(L)</h5>
+                                        <img src="<%=p.getImg()%>" width="32" height="32">
+                                        <h5><%=p.getName()%> (<%=p.getPriceSize().get(0).getSize()%>)</h5>
+                                        <input class="product-modal-id" type="text" name="<%=item.getId()%>" value="<%=item.getId()%>" checked="checked">
+                                    </div>
+                                    <div>
+                                        <div>Giá: <p class="cart-product-detail-price"><%= new CurrencyFormat().format((int)item.getProduct().getPriceSize().get(0).getPrice())%></p></div>
                                     </div>
                                     <div class="cart-product-detail justify-content-between">
-                                        <div class="detail">Topping:</div>
+                                        <div class="detail">Topping:
+                                        <%
+                                        if(p.getTopping().size() > 0) {
+                                            for (Topping tp : p.getTopping()) {
+
+                                        %>
+                                        <p class="topping-item"><%=tp.getName()%> x <%=item.getQuantity()%></p>
+                                        <%
+                                            }
+                                        }
+                                        %>
+                                        </div>
                                         <div class="cart-product-quantity">
-                                            <i class="fa-solid fa-minus item"></i>
-                                            <div class="quantity">1</div>
-                                            <i class="fa-solid fa-plus item"></i>
+                                            <input name="quantityChange<%=item.getId()%>" class="cart-quantity-input quantity" type="number" value="<%=item.getQuantity()%>">
+                                            <a href="editcart?rpID=<%=item.getId()%>" style="border: none"> <i class="fa-solid fa-xmark remove"></i></a>
                                         </div>
                                     </div>
                                     <div class="cart-product-price">
-                                        36.000đ x 1 = 36.0000đ
+                                        <%=new CurrencyFormat().format((int)item.getPrice())%> * <%=item.getQuantity()%> = <%=new CurrencyFormat().format((int)item.getPrice())%>
                                     </div>
                                 </div>
-                                <div class="cart-product-item">
-                                    <div class="cart-product-name">
-                                        <img src="img/icon/drink.png" width="32" height="32">
-                                        <h5> Trà sữa ô long(L)</h5>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </form>
+                                <div class="cart-product-total">
+                                    <div class="total">
+                                        Tổng tiền: <span class="price"> <%=new CurrencyFormat().format((int) cart.getTotalMoney())%></span>
                                     </div>
-                                    <div class="cart-product-detail justify-content-between">
-                                        <div class="detail">Topping:</div>
-                                        <div class="cart-product-quantity">
-                                            <i class="fa-solid fa-minus item"></i>
-                                            <div class="quantity">1</div>
-                                            <i class="fa-solid fa-plus item"></i>
-                                        </div>
-                                    </div>
-                                    <div class="cart-product-price">
-                                        36.000đ x 1 = 36.0000đ
-                                    </div>
+<%--                                    <button class=" btn-pay">Thanh toán</button>--%>
+                                    <a href="/checkout" class="btn-pay">Thanh toán</a>
                                 </div>
-                                <div class="cart-product-item">
-                                    <div class="cart-product-name">
-                                        <img src="img/icon/drink.png" width="32" height="32">
-                                        <h5> Sữa tươi trân châu đường đen(L)</h5>
-                                    </div>
-                                    <div class="cart-product-detail justify-content-between">
-                                        <div class="detail">Topping: Sương sáo x1; Thạch vải x1</div>
-                                        <div class="cart-product-quantity">
-                                            <i class="fa-solid fa-minus item"></i>
-                                            <div class="quantity">1</div>
-                                            <i class="fa-solid fa-plus item"></i>
-                                        </div>
-                                    </div>
-                                    <div class="cart-product-price">
-                                        48.000đ x 1 = 48.0000đ
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cart-product-total">
-                                <div class="total">
-                                    Tổng tiền: <span> class="price"> 120.000đ</span>
-                                </div>
-                                <button class=" btn-pay">Thanh toán</button>
+                                <%
+                                    }
+                                %>
                             </div>
                         </div>
                     </div>
@@ -282,7 +283,7 @@
                     int count = (int) request.getAttribute("endPage");
                     for (int i = 1; i <= count; i++) {
                     %>
-                        <a class="active" href="shop?index=<%=i%>"><%=i%></a>
+                        <a class="<%=(int) request.getAttribute("pageIndex") == i? "active" : ""%>" href="shop?index=<%=i%><%=(String) request.getAttribute("pageSort")%>"><%=i%></a>
                     <%}%>
                 </div>
             </div>
@@ -351,11 +352,7 @@
 <!-- Footer Section End -->
 
 
-<%--<a href="shop?proId=<%=p.getId()%>" type="button" class="btn btn-primary btn-lg d-none" id="btn-modal" data-toggle="modal"--%>
-<%--   data-target="#myModal" ></a>--%>
-
 <!-- /.modal-dialog -->
-</div>
 <!-- /.modal -->
 
 <!-- Js Plugins -->
@@ -368,12 +365,9 @@
 <script src="js/jquery.slicknav.js"></script>
 <script src="js/mixitup.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
-<script src="js/modal.js"></script>
 <script src="js/main.js"></script>
-<script src="js/cart.js"></script>
-<%--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"--%>
-<%--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">--%>
-<%--</script>--%>
+<script src="js/cart.js" defer></script>
+<script src="js/modal.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 </script>
