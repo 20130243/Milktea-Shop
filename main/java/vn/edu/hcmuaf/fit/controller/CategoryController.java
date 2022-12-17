@@ -21,7 +21,12 @@ public class CategoryController extends HttpServlet {
         CategoryService categoryService = new CategoryService();
         List<Product> listProductByCategory = new ArrayList<Product>();
         String cid = request.getParameter("cid");
-        int category_id = Integer.parseInt(cid);
+        int category_id;
+        if(cid == null) {
+            category_id = 0;
+        } else {
+            category_id = Integer.parseInt(cid);
+        }
         if(category_id == 0 ) {
             request.getRequestDispatcher( "/shop").include( request, response);
         } else {
