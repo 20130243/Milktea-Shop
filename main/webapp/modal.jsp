@@ -13,7 +13,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <html lang="zxx">
 
 <head>
@@ -35,39 +34,21 @@
     String totalPrice = priceP;
     int count = p.getId();
 %>
-<form action="addToCart" method="get">
 <div id="myModal<%=p.getId()%>" class="modal fade in" tabindex="-1" role="dialog">
-
     <div class="modal-dialog product-modal" role="document">
         <div class="modal-content flex-row">
             <div class="w-50">
                 <div class="product-modal-img">
-                    <img class="img-src" src="<%=p.getImg()%>">
+                    <img src="<%=p.getImg()%>">
                 </div>
-
                 <div class="product-modal-price">
-                    <%
-                        if(p.getPriceSize().size() > 0) {
-                            List<PriceSize> sizes = p.getPriceSize();
-                            for(PriceSize size : sizes) {
-
-
-                        if(sizes.size() == 1) {
-                    %>
-                    <h6 class="<%=(p.getPriceSize().get(0).getSize().equalsIgnoreCase("M") || p.getPriceSize().get(0).getSize().equalsIgnoreCase("L"))?"active":"d-none"%> size<%=p.getId()%>"> <%= new CurrencyFormat().format((int) size.getPrice())%></h6>
-                    <%} else {
-                    %>
-                    <h6 class="<%=size.getSize().equalsIgnoreCase("M")?"active":"d-none"%> size<%=p.getId()%>"> <%= new CurrencyFormat().format((int) size.getPrice())%></h6>
-                    <%
-                            }}}%>
+                    <h6 id="price<%=p.getId()%>"> <%=priceP%></h6>
                 </div>
 
             </div>
             <div class="w-50 product-modal-detail">
                 <div class="product-modal-header">
-                    <h3><%=p.getName()%>
-                    </h3>
-                    <input class="product-modal-id" type="text" name="product_id" value="<%=p.getId()%>" checked="checked">
+                    <h3><%=p.getName()%></h3>
                 </div>
                 <div class="product-modal-middle">
                     <div class="product-modal-option ">
@@ -79,15 +60,17 @@
 
                                 if(sizes.size() == 1) {
                         %>
-                            <input class="size" type="radio" name="size<%=p.getId()%>" id="m_size<%=p.getId()%>" value="<%=sizes.get(0).getSize()%>" checked="checked">
+                            <input class="" type="radio" name="size" id="m_size<%=p.getId()%>" value="M" checked="checked">
                             <label class="size-radio active" for="m_size<%=p.getId()%>"><%=sizes.get(0).getSize()%></label>
                         <%
                             } else {
+
+
                         %>
-                            <input class="size" type="radio" name="size<%=p.getId()%>" id="m_size<%=p.getId()%>" value="<%=sizes.get(0).getSize()%>" checked="checked">
+                            <input class="" type="radio" name="size<%=p.getId()%>" id="m_size<%=p.getId()%>" value="M" checked="checked">
                             <label class="size-radio" for="m_size<%=p.getId()%>"><%=sizes.get(0).getSize()%></label>
 
-                            <input class="size" type="radio" name="size<%=p.getId()%>" id="l_size<%=p.getId()%>" value="<%=sizes.get(1).getSize()%>" >
+                            <input class="" type="radio" name="size<%=p.getId()%>" id="l_size<%=p.getId()%>" value="L" >
                             <label class="size-radio" for="l_size<%=p.getId()%>"><%=sizes.get(1).getSize()%></label>
 
                             <%
@@ -99,7 +82,9 @@
                     <div class="product-modal-option">
                         <h6 class="title">Số lượng:</h6>
                         <div class="quantity-control ">
-                            <input type="number" name="quantity<%=p.getId()%>" class="quantity-num cart-quantity-input" value="1" id="modal-quantity<%=p.getId()%>">
+                            <button class=" " id="modal-sub-btn<%=p.getId()%>"><i class="fa-solid fa-minus item"></i> </button>
+                            <input type="text" disabled class="quantity-num" value="1" id="modal-quantity<%=p.getId()%>">
+                            <button class=" " id="modal-sum-btn<%=p.getId()%>"> <i class="fa-solid fa-plus item"></i> </button>
                         </div>
                     </div>
                     <div class="product-modal-option align-items-start">
@@ -113,15 +98,13 @@
 
 
                             %>
-                            <div class="d-none topping_price <%=topping.getName()%>"><%=topping.getPrice()%></div>
-                            <input class="topping-checked" type="checkbox" name="<%=topping.getId()%>" id="<%=p.getId()%><%=topping.getId()%><%=count%>" value="<%=topping.getName()%>" data-id="<%=p.getId()%>">
+                            <input type="checkbox" name="<%=p.getId()%>" id="<%=p.getId()%><%=topping.getId()%><%=count%>" value="<%=topping.getPrice()%>" data-id="<%=p.getId()%>">
                             <label class="topping-detail" for="<%=p.getId()%><%=topping.getId()%><%=count%>">
                                 <%=topping.getName()%> + <%=currency.format((int) topping.getPrice())%> </label>
                             <%
                                     } } else {
 
                             %>
-
                             <label class="topping-detail active" for="">
                                 Sản phẩm không hỗ trợ Topping</label>
                             <%
@@ -133,7 +116,7 @@
                     <div class="product-modal-option align-items-start">
                         <h6 class="title">Ghi chú:</h6>
                         <div>
-                            <textarea name="note" id="" cols="25" rows="3"></textarea>
+                            <textarea name="" id="" cols="25" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="product-modal-option">
@@ -143,21 +126,17 @@
                 </div>
 
                 <div class="product-modal-footer">
-
-                    <button class="btn modal-btn" class="btn modal-btn" type="submit">Thêm vào giỏ hàng</button>
-
-<%--                    <a href="/addToCart?product=<%=p.getId()%>&size=size<%=p.getId()%>" class="btn modal-btn"> Thêm vào giỏ hàng</a>--%>
+                    <button class="btn modal-btn"  data-dismiss="modal">Thêm vào giỏ hàng</button>
                 </div>
             </div>
         </div>
- </div><!-- /.modal-content -->
-
+    </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
+
 <!-- /.modal -->
-</form>
+
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
-
 <script>
     <%if(p.getPriceSize().size() > 0) {%>
     price<%=p.getId()%> = '<%=new ProductService().getPriceSizeM(p.getId())%>';
