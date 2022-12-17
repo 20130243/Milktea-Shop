@@ -16,7 +16,7 @@ import java.util.List;
 
 @WebServlet(name = "CategoryController", value = "/category")
 public class CategoryController extends HttpServlet {
-    @Override
+    @Override 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ProductService productService = new ProductService();
