@@ -367,6 +367,7 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/cart.js" defer></script>
+<script src="js/modal.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 </script>
@@ -380,18 +381,6 @@
             $(s).click();
         });
     });
-
-    // $('.modal-btn').each(function(i,el) {
-    //    $(el).click(function () {
-    //        // var name = $(this).parent().find('.product-modal-detail');
-    //        //
-    //        // console.log(name);
-    //
-    //        var carousel = $('h3')[0];
-    //        console.log(carousel);
-    //        // console.log(img);
-    //    })
-    // });
 
 
 </script>

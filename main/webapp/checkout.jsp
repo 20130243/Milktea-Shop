@@ -230,8 +230,6 @@
                     <p>Giảm giá: <span>0đ</span></p>
                     <%
                       } else {
-
-
                     %>
                     <p>Tổng tiền: <span><%=new CurrencyFormat().format((int) 0)%></span></p>
                     <p>Giảm giá: <span>0đ</span></p>

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "addToCart", value = "/addToCart")
-public class addToCart extends HttpServlet {
+public class AddToCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int quantity = 1;
