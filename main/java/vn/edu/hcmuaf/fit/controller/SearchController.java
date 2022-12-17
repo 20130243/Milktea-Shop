@@ -11,34 +11,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "CategoryController", value = "/category")
-public class CategoryController extends HttpServlet {
+@WebServlet(name = "SearchController", value = "/SearchController")
+public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ProductService productService = new ProductService();
+        request.setCharacterEncoding("UTF-8");
+        String search = request.getParameter("search");
+        ProductService service = new ProductService();
         CategoryService categoryService = new CategoryService();
-        List<Product> listProductByCategory = new ArrayList<Product>();
-        String cid = request.getParameter("cid");
-        int category_id = Integer.parseInt(cid);
-        if(category_id == 0 ) {
-            request.getRequestDispatcher( "/shop").include( request, response);
-        } else {
-            listProductByCategory = productService.getProductByCategory(category_id);
-        }
-
-
+        List<Product> listProduct = service.searchProduct(search);
         List<Category> listCategories = categoryService.getAll();
         listCategories.add(0, new Category(0,"Tất cả",0));
         request.setAttribute("listCategories", listCategories);
-        request.setAttribute("listProduct", listProductByCategory);
+        request.setAttribute("listProduct", listProduct);
         request.setAttribute("endPage", 0);
-        request.setAttribute("tagCate", category_id);
+        request.setAttribute("tagCate", 0);
         request.setAttribute("sort", 0);
-        request.getRequestDispatcher("shop.jsp").forward(request,response);
+        request.getRequestDispatcher("shop.jsp").forward(request, response);
+
     }
 
     @Override
