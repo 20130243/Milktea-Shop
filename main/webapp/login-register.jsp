@@ -106,22 +106,26 @@
                                     <div class="login-register-form">
                                         <form action="/register" method="post">
                                             <div class="login-input-box">
+                                                <span class="text-danger" id="register-name-error"></span>
                                                 <input type="text" name="name" placeholder="Tên"/>
+                                                <span class="text-danger" id="register-username-error">${requestScope['error_register']}</span>
                                                 <input type="text" name="username" placeholder="Tên đăng nhập"/>
-                                                <span class="danger">Tên đăng nhập đã được sử dụng</span>
+                                                <span class="text-danger" id="register-email-error">Tên đăng nhập đã được sử dụng</span>
                                                 <input name="email" placeholder="Email" type="email"/>
+                                                <span class="text-danger" id="register-phone-error">Tên đăng nhập đã được sử dụng</span>
                                                 <input name="phone" placeholder="Số điện thoại" type="tel"
-                                                       pattern="[0]{1}[0-9]{9}"
-                                                       required/>
+                                                       pattern="[0]{1}[0-9]{9}" required/>
+                                                <span class="text-danger" id="register-password-error">Tên đăng nhập đã được sử dụng</span>
                                                 <input type="password" name="password" placeholder="Mật nhẩu "/>
-                                                <input type="password"
-                                                       placeholder="Nhập lại mật nhẩu "/>
+                                                <span class="text-danger" id="register-repassword-error">Tên đăng nhập đã được sử dụng</span>
+                                                <input type="password" placeholder="Nhập lại mật nhẩu "/>
                                             </div>
                                             <%--                                            <div class="login-toggle-btn">--%>
                                             <%--                                                <input type="checkbox"/>--%>
                                             <%--                                                <label>Đồng ý với các--%>
-                                            <%--                                                <span><a href="#" style="float: none;color: blue;text-decoration: underline;">--%>
-                                            <%--                                điều khoản</a></span>--%>
+                                            <%--                                                    <span><a href="#"--%>
+                                            <%--                                                             style="float: none;color: blue;text-decoration: underline;">--%>
+                                            <%--                                                                            điều khoản</a></span>--%>
                                             <%--                                                    của chúng tôi.</label>--%>
                                             <%--                                            </div>--%>
                                             <div class="button-box">
