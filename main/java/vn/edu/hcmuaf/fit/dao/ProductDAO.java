@@ -77,6 +77,28 @@ public class ProductDAO extends RD {
                         "LIMIT ? , 12;").bind(0, (index - 1) * 12).mapToMap().list()
         );
     }
+    public List<Map<String, Object>> searchProduct(String search) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from product\n" +
+                                "where name like ?").bind(0, "%" +search+"%")
+                        .mapToMap()
+                        .list()
+        );
+    }
+
+    public List<Map<String, Object>> getProductByCategory(int id_category) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from product\n" +
+                                "where product.category_id = ?;").bind(0, id_category)
+                        .mapToMap()
+                        .list()
+        );
+    }
+
+    public static void main(String[] args) {
+//        ProductDAO dao = new ProductDAO();
+//        System.out.println(dao.pagingProduct(0));
+    }
 
     public Map<String, Object> findFirst() {
         return JDBIConnector.get().withHandle(h ->

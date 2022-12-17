@@ -1,0 +1,103 @@
+[33m8ae335a[m[33m ([m[1;36mHEAD -> [m[1;32mha[m[33m, [m[1;31morigin/ha[m[33m)[m HEAD@{0}: checkout: moving from main to ha
+[33mf7f9f5d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{1}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33mb857791[m HEAD@{2}: reset: moving to HEAD~1
+[33mf7f9f5d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{3}: checkout: moving from main to main
+[33mf7f9f5d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{4}: checkout: moving from ha to main
+[33m8ae335a[m[33m ([m[1;36mHEAD -> [m[1;32mha[m[33m, [m[1;31morigin/ha[m[33m)[m HEAD@{5}: checkout: moving from main to ha
+[33mf7f9f5d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{6}: checkout: moving from ha to main
+[33m8ae335a[m[33m ([m[1;36mHEAD -> [m[1;32mha[m[33m, [m[1;31morigin/ha[m[33m)[m HEAD@{7}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33me56c3b0[m HEAD@{8}: reset: moving to HEAD~1
+[33m8ae335a[m[33m ([m[1;36mHEAD -> [m[1;32mha[m[33m, [m[1;31morigin/ha[m[33m)[m HEAD@{9}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m50cd77b[m HEAD@{10}: reset: moving to HEAD~1
+[33m99d63fe[m HEAD@{11}: reset: moving to HEAD~1
+[33me56c3b0[m HEAD@{12}: reset: moving to HEAD~1
+[33m8ae335a[m[33m ([m[1;36mHEAD -> [m[1;32mha[m[33m, [m[1;31morigin/ha[m[33m)[m HEAD@{13}: checkout: moving from ha-3 to ha
+[33m5a62f36[m[33m ([m[1;31morigin/ha-3[m[33m, [m[1;32mha-3[m[33m, [m[1;32mha-2[m[33m)[m HEAD@{14}: checkout: moving from ha to ha-3
+[33m8ae335a[m[33m ([m[1;36mHEAD -> [m[1;32mha[m[33m, [m[1;31morigin/ha[m[33m)[m HEAD@{15}: commit: Delete CategoryController.java
+[33me56c3b0[m HEAD@{16}: commit: Update CategoryController.java
+[33m99d63fe[m HEAD@{17}: commit (merge): Merge branch 'ha' of https://github.com/20130243/Milktea-Shop into ha
+[33m50cd77b[m HEAD@{18}: revert: Revert "Merge pull request #30 from 20130243/main"
+[33m5a62f36[m[33m ([m[1;31morigin/ha-3[m[33m, [m[1;32mha-3[m[33m, [m[1;32mha-2[m[33m)[m HEAD@{19}: reset: moving to HEAD~1
+[33m2910127[m HEAD@{20}: reset: moving to HEAD~1
+[33mc7e8129[m HEAD@{21}: reset: moving to HEAD~1
+[33mc389a5c[m HEAD@{22}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m5a62f36[m[33m ([m[1;31morigin/ha-3[m[33m, [m[1;32mha-3[m[33m, [m[1;32mha-2[m[33m)[m HEAD@{23}: reset: moving to HEAD~1
+[33m95c13f5[m HEAD@{24}: reset: moving to HEAD~1
+[33mf52c22b[m HEAD@{25}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m95c13f5[m HEAD@{26}: merge tinh: Merge made by the 'ort' strategy.
+[33m5a62f36[m[33m ([m[1;31morigin/ha-3[m[33m, [m[1;32mha-3[m[33m, [m[1;32mha-2[m[33m)[m HEAD@{27}: checkout: moving from main to ha
+[33mf7f9f5d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{28}: checkout: moving from ha to main
+[33m5a62f36[m[33m ([m[1;31morigin/ha-3[m[33m, [m[1;32mha-3[m[33m, [m[1;32mha-2[m[33m)[m HEAD@{29}: reset: moving to HEAD~1
+[33ma8bad18[m HEAD@{30}: commit: update
+[33m5a62f36[m[33m ([m[1;31morigin/ha-3[m[33m, [m[1;32mha-3[m[33m, [m[1;32mha-2[m[33m)[m HEAD@{31}: reset: moving to HEAD~1
+[33m2910127[m HEAD@{32}: reset: moving to HEAD~1
+[33mc7e8129[m HEAD@{33}: reset: moving to HEAD~1
+[33mc389a5c[m HEAD@{34}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33mc7e8129[m HEAD@{35}: reset: moving to HEAD~1
+[33mc389a5c[m HEAD@{36}: checkout: moving from main to ha
+[33mf7f9f5d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{37}: reset: moving to HEAD
+[33mf7f9f5d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{38}: commit (merge): Merge branch 'ha'
+[33mb857791[m HEAD@{39}: checkout: moving from ha to main
+[33mc7e8129[m HEAD@{40}: commit: update
+[33m2910127[m HEAD@{41}: checkout: moving from main to ha
+[33mb857791[m HEAD@{42}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m0c76cee[m HEAD@{43}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m9442efa[m HEAD@{44}: checkout: moving from tinh to main
+[33m7a2ebfc[m HEAD@{45}: commit: update
+[33m8dc1daa[m HEAD@{46}: commit (merge): Merge branch 'main' into tinh
+[33m58546cb[m HEAD@{47}: checkout: moving from main to tinh
+[33m0dec63a[m HEAD@{48}: checkout: moving from tinh to main
+[33m58546cb[m HEAD@{49}: checkout: moving from main to tinh
+[33m0dec63a[m HEAD@{50}: checkout: moving from tinh to main
+[33m58546cb[m HEAD@{51}: checkout: moving from ha to tinh
+[33mc5adf42[m HEAD@{52}: reset: moving to HEAD
+[33mc5adf42[m HEAD@{53}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m765f436[m HEAD@{54}: commit: login register without check each page
+[33mf22dfb8[m HEAD@{55}: commit: update admin
+[33m5e1877d[m HEAD@{56}: commit: updatae
+[33m8968ab6[m HEAD@{57}: commit: price size
+[33mdd2b0ec[m HEAD@{58}: commit: product
+[33mb00809f[m HEAD@{59}: commit: update topping
+[33m82d614e[m HEAD@{60}: commit: update category
+[33m58bb88b[m HEAD@{61}: commit: update topping product
+[33ma0f8605[m HEAD@{62}: commit: update admin
+[33m6d22a1f[m HEAD@{63}: commit: update product
+[33meef0942[m HEAD@{64}: commit: update directory admin
+[33mad61ae0[m HEAD@{65}: commit: Update HomeController.java
+[33mc847d18[m HEAD@{66}: commit: Update HomeController.java
+[33m9609d80[m HEAD@{67}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m01695eb[m HEAD@{68}: checkout: moving from main to ha
+[33ma91b9bd[m HEAD@{69}: commit: update product
+[33m57cbe72[m HEAD@{70}: checkout: moving from ha to main
+[33m01695eb[m HEAD@{71}: checkout: moving from main to ha
+[33m57cbe72[m HEAD@{72}: checkout: moving from ha to main
+[33m01695eb[m HEAD@{73}: checkout: moving from main to ha
+[33m76bc279[m HEAD@{74}: checkout: moving from ha to main
+[33m01695eb[m HEAD@{75}: commit: admin category
+[33m7ee6ae2[m HEAD@{76}: checkout: moving from main to ha
+[33m1ccdabe[m HEAD@{77}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33mc1459f7[m HEAD@{78}: checkout: moving from ha to main
+[33m42268c6[m HEAD@{79}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33md60ab9d[m HEAD@{80}: commit (merge): Merge branch 'ha' of https://github.com/20130243/Milktea-Shop into ha
+[33mc6a759b[m HEAD@{81}: commit: update
+[33m2811901[m HEAD@{82}: checkout: moving from main to ha
+[33m1e7ec79[m HEAD@{83}: reset: moving to HEAD
+[33m1e7ec79[m HEAD@{84}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m4357cd6[m[33m ([m[1;31morigin/hai[m[33m)[m HEAD@{85}: commit: update service
+[33mfa6322f[m HEAD@{86}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m6e334d9[m HEAD@{87}: commit: update product
+[33ma032598[m HEAD@{88}: commit: update cart dao
+[33m4f6ec7e[m HEAD@{89}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33mf184aaf[m HEAD@{90}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m31d448d[m HEAD@{91}: commit: update admin
+[33m5cd13f7[m HEAD@{92}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m2811901[m HEAD@{93}: checkout: moving from ha to main
+[33m2811901[m HEAD@{94}: checkout: moving from main to ha
+[33m2811901[m HEAD@{95}: commit: update dao
+[33md136331[m HEAD@{96}: commit: update view
+[33mecc9bae[m HEAD@{97}: commit: update file webapp
+[33m037fd7e[m HEAD@{98}: commit: update connect
+[33m42d0d4d[m HEAD@{99}: commit: update connect
+[33mfc88ab8[m HEAD@{100}: commit: update cnn
+[33m1c1a723[m HEAD@{101}: commit: Delete .gitattributes
+[33m38da8b5[m HEAD@{102}: commit (initial): Initial commit
