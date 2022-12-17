@@ -1,7 +1,7 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.bean.*;
-import vn.edu.hcmuaf.fit.services.ProducService;
+import vn.edu.hcmuaf.fit.services.ProductService;
 import vn.edu.hcmuaf.fit.services.ToppingService;
 
 import javax.servlet.*;
@@ -22,7 +22,7 @@ public class AddToCartController extends HttpServlet {
         String url = null;
         if (id != null) {
             pro_id = Integer.parseInt(id);
-            Product product = new ProducService().getById(pro_id);
+            Product product = new ProductService().getById(pro_id);
             if (product != null) {
                 List<Topping> toppingList = new ToppingService().getAll();
                 List<Topping> toppings = new ArrayList<>();
@@ -37,9 +37,9 @@ public class AddToCartController extends HttpServlet {
                 String size = request.getParameter("size" + pro_id);
                 List<PriceSize> priceSizes = new ArrayList<>();
                 if (size.equalsIgnoreCase("M")) {
-                    priceSizes.add(new PriceSize(size, new ProducService().getPriceSizeM(pro_id)));
+                    priceSizes.add(new PriceSize(0,0,size, new ProductService().getPriceSizeM(pro_id), new ProductService().getPriceSizeM(pro_id)));
                 } else if (size.equalsIgnoreCase("L")) {
-                    priceSizes.add(new PriceSize(size, new ProducService().getPriceSizeL(pro_id)));
+                    priceSizes.add(new PriceSize(0,0,size, new ProductService().getPriceSizeL(pro_id),new ProductService().getPriceSizeL(pro_id)));
                 }
 
                 product.setPriceSize(priceSizes);

@@ -3,12 +3,14 @@ package vn.edu.hcmuaf.fit.controller;
 import vn.edu.hcmuaf.fit.bean.Category;
 import vn.edu.hcmuaf.fit.bean.Product;
 import vn.edu.hcmuaf.fit.services.CategoryService;
-import vn.edu.hcmuaf.fit.services.ProducService;
-import vn.edu.hcmuaf.fit.services.SizeService;
+import vn.edu.hcmuaf.fit.services.ProductService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class ProductsController extends HttpServlet {
         } else {
             index = Integer.parseInt(indexPage);
         }
-        ProducService producService = new ProducService();
+        ProductService producService = new ProductService();
 
         String sortString = "&sort=0";
         int indexCate = 0;

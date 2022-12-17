@@ -8,7 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="zxx">
 
 <head>
@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="css/header-footer.css" type="text/css">
 </head>
 
-<body >
+<body>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -67,7 +67,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-3">
                 <div class="header__logo">
-                    <a href="index.jsp"><img class="logo-small" src="img/logo.png" alt="" /></a>
+                    <a href="index.jsp"><img class="logo-small" src="img/logo.png" alt=""/></a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
@@ -124,20 +124,21 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 shop__sidebar__search">
                         <form action="SearchController" method="get">
-                            <input name="search" type="text" placeholder="Tìm kiếm sản phẩm" style="padding-right:42px ;">
+                            <input name="search" type="text" placeholder="Tìm kiếm sản phẩm"
+                                   style="padding-right:42px ;">
                             <button type="submit"><span class="icon_search"></span></button>
                         </form>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4" style="z-index: 99;">
                         <ul class="menu-drop">
                             <%
-                              List<Category> listCategories = (List<Category>)  request.getAttribute("listCategories");
-                              for(Category category : listCategories) {
-
+                                List<Category> listCategories = (List<Category>) request.getAttribute("listCategories");
+                                for (Category category : listCategories) {
                             %>
-                                <li class="menu-item <%=(int) request.getAttribute("tagCate") == category.getId()? "active":""%>">
-                                    <a href="category?cid=<%=category.getId()%>"><%=category.getName()%></a>
-                                </li>
+                            <li class="menu-item <%=(int) request.getAttribute("tagCate") == category.getId() ? "active":""%>">
+                                <a href="category?cid=<%=category.getId()%>"><%=category.getName()%>
+                                </a>
+                            </li>
 
                             <%}%>
                         </ul>
@@ -145,7 +146,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-4" style="z-index: 99;">
                         <ul class="menu-drop">
                             <%
-                            int sort =(int) request.getAttribute("sort");
+                                int sort = (int) request.getAttribute("sort");
                             %>
                             <li class="menu-item <%=sort == 0? "active" : ""%>">
                                 <a href="shop?sort=0" class="">Không lựa chọn</a>
@@ -164,43 +165,46 @@
 
                 <div class="row">
                     <%
-                    List<Product> list = (List<Product>) request.getAttribute("listProduct");
+                        List<Product> list = (List<Product>) request.getAttribute("listProduct");
                         for (Product p : list) {
                     %>
-                    <div class="col-lg-3 col-md-4 col-sm-4" >
+                    <div class="col-lg-3 col-md-4 col-sm-4">
 
                         <div class="product__item sale" data-toggle="modal"
                              data-target="#myModal<%=p.getId()%>" data-id="<%=p.getId()%>">
                             <div class="product__item__pic set-bg" data-setbg="<%=p.getImg()%>">
                                 <%
-                                if(p.getStatus() == 1) {
+                                    if (p.getStatus() == 1) {
                                 %>
                                 <span class="label">Sale</span>
                                 <%}%>
                             </div>
                             <div class="product__item__text">
-                                <h5><%=p.getName()%></h5>
+                                <h5><%=p.getName()%>
+                                </h5>
                                 <%
                                     int price = 0;
                                     CurrencyFormat currency = new CurrencyFormat();
-                                    if(p.getPriceSize().size()
-                                    > 0) {
-                                    price = (int) (p.getPriceSize().get(0).getPrice());
+                                    if (p.getPriceSize().size()
+                                            > 0) {
+                                        price = (int) (p.getPriceSize().get(0).getPrice());
                                     } else {
                                         price = 0;
                                     }
                                 %>
-                                <h6><%=currency.format(price)%></h6>
+                                <h6><%=currency.format(price)%>
+                                </h6>
                             </div>
                         </div>
                         <jsp:include page='/modal.jsp'>
                             <jsp:param name="id" value="<%=p.getId()%>"/>
                         </jsp:include>
                     </div>
-                    <button type="button" class="btn btn-primary btn-lg d-none" id="btn-modal<%=p.getId()%>" data-toggle="modal"
+                    <button type="button" class="btn btn-primary btn-lg d-none" id="btn-modal<%=p.getId()%>"
+                            data-toggle="modal"
                             data-target="#myModal">
                     </button>
-                    <%  }%>
+                    <% }%>
                 </div>
             </div>
             <div class="col-lg-3">
@@ -216,55 +220,65 @@
                             %>
 
                             <div class="cart-product-list">
-                                    <%
-                                        if(cart!=null) {
-                                            List<Item> items = cart.getItems();
-                                            if(items.size()>0) {
-                                                for (Item item : items) {
-                                                    Product p = item.getProduct();
-                                    %>
+                                <%
+                                    if (cart != null) {
+                                        List<Item> items = cart.getItems();
+                                        if (items.size() > 0) {
+                                            for (Item item : items) {
+                                                Product p = item.getProduct();
+                                %>
                                 <form action="/editcart" method="get" id="myForm">
-                                <div class="cart-product-item">
-                                    <div class="cart-product-name">
-                                        <img src="<%=p.getImg()%>" width="32" height="32">
-                                        <h5><%=p.getName()%> (<%=p.getPriceSize().get(0).getSize()%>)</h5>
-                                        <input class="product-modal-id" type="text" name="<%=item.getId()%>" value="<%=item.getId()%>" checked="checked">
-                                    </div>
-                                    <div>
-                                        <div>Giá: <p class="cart-product-detail-price"><%= new CurrencyFormat().format((int)item.getProduct().getPriceSize().get(0).getPrice())%></p></div>
-                                    </div>
-                                    <div class="cart-product-detail justify-content-between">
-                                        <div class="detail">Topping:
-                                        <%
-                                        if(p.getTopping().size() > 0) {
-                                            for (Topping tp : p.getTopping()) {
+                                    <div class="cart-product-item">
+                                        <div class="cart-product-name">
+                                            <img src="<%=p.getImg()%>" width="32" height="32">
+                                            <h5><%=p.getName()%> (<%=p.getPriceSize().get(0).getSize()%>)</h5>
+                                            <input class="product-modal-id" type="text" name="<%=item.getId()%>"
+                                                   value="<%=item.getId()%>" checked="checked">
+                                        </div>
+                                        <div>
+                                            <div>Giá: <p
+                                                    class="cart-product-detail-price"><%= new CurrencyFormat().format((int) item.getProduct().getPriceSize().get(0).getPrice())%>
+                                            </p></div>
+                                        </div>
+                                        <div class="cart-product-detail justify-content-between">
+                                            <div class="detail">Topping:
+                                                <%
+                                                    if (p.getTopping().size() > 0) {
+                                                        for (Topping tp : p.getTopping()) {
 
-                                        %>
-                                        <p class="topping-item"><%=tp.getName()%> x <%=item.getQuantity()%></p>
-                                        <%
+                                                %>
+                                                <p class="topping-item"><%=tp.getName()%> x <%=item.getQuantity()%>
+                                                </p>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
+                                            </div>
+                                            <div class="cart-product-quantity">
+                                                <input name="quantityChange<%=item.getId()%>"
+                                                       class="cart-quantity-input quantity" type="number"
+                                                       value="<%=item.getQuantity()%>">
+                                                <a href="editcart?rpID=<%=item.getId()%>" style="border: none"> <i
+                                                        class="fa-solid fa-xmark remove"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="cart-product-price">
+                                            <%=new CurrencyFormat().format((int) item.getPrice())%>
+                                            * <%=item.getQuantity()%>
+                                            = <%=new CurrencyFormat().format((int) item.getPrice())%>
+                                        </div>
+                                    </div>
+                                    <%
                                             }
                                         }
-                                        %>
-                                        </div>
-                                        <div class="cart-product-quantity">
-                                            <input name="quantityChange<%=item.getId()%>" class="cart-quantity-input quantity" type="number" value="<%=item.getQuantity()%>">
-                                            <a href="editcart?rpID=<%=item.getId()%>" style="border: none"> <i class="fa-solid fa-xmark remove"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="cart-product-price">
-                                        <%=new CurrencyFormat().format((int)item.getPrice())%> * <%=item.getQuantity()%> = <%=new CurrencyFormat().format((int)item.getPrice())%>
-                                    </div>
-                                </div>
-                                <%
-                                        }
-                                    }
-                                %>
-                            </form>
+                                    %>
+                                </form>
                                 <div class="cart-product-total">
                                     <div class="total">
-                                        Tổng tiền: <span class="price"> <%=new CurrencyFormat().format((int) cart.getTotalMoney())%></span>
+                                        Tổng tiền: <span
+                                            class="price"> <%=new CurrencyFormat().format((int) cart.getTotalMoney())%></span>
                                     </div>
-<%--                                    <button class=" btn-pay">Thanh toán</button>--%>
+                                    <%--                                    <button class=" btn-pay">Thanh toán</button>--%>
                                     <a href="/checkout" class="btn-pay">Thanh toán</a>
                                 </div>
                                 <%
@@ -280,10 +294,12 @@
             <div class="col-lg-12">
                 <div class="product__pagination">
                     <%
-                    int count = (int) request.getAttribute("endPage");
-                    for (int i = 1; i <= count; i++) {
+                        int count = (int) request.getAttribute("endPage");
+                        for (int i = 1; i <= count; i++) {
                     %>
-                        <a class="<%=(int) request.getAttribute("pageIndex") == i? "active" : ""%>" href="shop?index=<%=i%><%=(String) request.getAttribute("pageSort")%>"><%=i%></a>
+                    <a class="<%=(int) request.getAttribute("pageIndex") == i? "active" : ""%>"
+                       href="shop?index=<%=i%><%=(String) request.getAttribute("pageSort")%>"><%=i%>
+                    </a>
                     <%}%>
                 </div>
             </div>
@@ -299,10 +315,10 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer__about">
                     <div class="footer__logo">
-                        <a href="#"><img src="img/footer-logo.png" alt="" /></a>
+                        <a href="#"><img src="img/footer-logo.png" alt=""/></a>
                     </div>
                     <p>TỪ NHỮNG MẦM TRÀ, CHÚNG TÔI TẠO RA NIỀM ĐAM MÊ</p>
-                    <a href="#"><img src="img/payment.png" alt="" /></a>
+                    <a href="#"><img src="img/payment.png" alt=""/></a>
                 </div>
             </div>
             <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
@@ -338,7 +354,7 @@
                     <div class="footer__newslatter">
                         <p>Nhập email để không bõ lỡ những khuyến mãi hấp dẫn!</p>
                         <form action="#">
-                            <input type="text" placeholder="Email của bạn" />
+                            <input type="text" placeholder="Email của bạn"/>
                             <button type="submit">
                                 <span class="icon_mail_alt"></span>
                             </button>
