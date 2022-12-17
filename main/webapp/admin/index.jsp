@@ -73,7 +73,7 @@
 
                             <div style="max-height: 230px;" data-simplebar>
                                 <!-- item-->
-                                <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                <a href="order/create.jsp" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-primary">
                                         <i class="mdi mdi-comment-account-outline"></i>
                                     </div>
@@ -82,7 +82,7 @@
                                     </p>
                                 </a>
                                 <!-- item-->
-                                <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                <a href="order/create.jsp" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-primary">
                                         <i class="mdi mdi-comment-account-outline"></i>
                                     </div>
@@ -91,7 +91,7 @@
                                     </p>
                                 </a>
                                 <!-- item-->
-                                <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                <a href="order/create.jsp" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-primary">
                                         <i class="mdi mdi-comment-account-outline"></i>
                                     </div>
@@ -100,7 +100,7 @@
                                     </p>
                                 </a>
                                 <!-- item-->
-                                <a href="admin-order-detail.html" class="dropdown-item notify-item">
+                                <a href="order/create.jsp" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-primary">
                                         <i class="mdi mdi-comment-account-outline"></i>
                                     </div>
@@ -113,7 +113,7 @@
                             </div>
 
                             <!-- All-->
-                            <a href="admin-order.html"
+                            <a href="order/index.jsp"
                                class="dropdown-item text-center text-primary notify-item notify-all">
                                 Xem tất cả
                             </a>
@@ -186,7 +186,7 @@
 
                         <div class="notification-list">
                             <!-- item-->
-                            <a href="admin-product.html" class="dropdown-item notify-item">
+                            <a href="product/index.jsp" class="dropdown-item notify-item">
                                 <div class="media">
                                     <img class="d-flex mr-2 rounded-circle"
                                          src="../img/product/cappuchinovietnamo-min.png"
@@ -199,7 +199,7 @@
                             </a>
 
                             <!-- item-->
-                            <a href="admin-product.html" class="dropdown-item notify-item">
+                            <a href="product/index.jsp" class="dropdown-item notify-item">
                                 <div class="media">
                                     <img class="d-flex mr-2 rounded-circle"
                                          src="../img/product/cappuchinovietnamo-min.png"

@@ -7,11 +7,10 @@ import vn.edu.hcmuaf.fit.dao.PriceSizeDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class ProducService {
+public class ProductService {
     private final ProductDAO dao = new ProductDAO();
 
     public List<Product> getAll() {
@@ -109,26 +108,28 @@ public class ProducService {
     }
 
 
-
-    private List<PriceSize> priceSizeList(List<Map<String, Object>> priceSize){
+    private List<PriceSize> priceSizeList(List<Map<String, Object>> priceSize) {
         List<PriceSize> priceSizeList = new ArrayList<PriceSize>();
         for (Map<String, Object> map : priceSize) {
             PriceSize priceSizeObj = new PriceSize();
+            priceSizeObj.setId((Integer) map.get("id"));
+            priceSizeObj.setProduct_id((Integer) map.get("product_id"));
             priceSizeObj.setPrice((Float) map.get("price"));
             priceSizeObj.setSize((String) map.get("name"));
+            priceSizeObj.setOriginalPrice((Float) map.get("original_price"));
             priceSizeList.add(priceSizeObj);
         }
         return priceSizeList;
     }
+
     public Product getById(int id) {
         Map<String, Object> product = dao.getById(id);
         List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) product.get("id"));
         List<PriceSize> priceSizeList = priceSizeList(priceSize);
-
         List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) product.get("category_id"));
 
         return new Product((Integer) product.get("id"), (String) product.get("name"), (Integer) product.get("category_id"),
-                priceSizeList, (String) product.get("image"), (Integer) product.get("status"),toppingList);
+                priceSizeList, (String) product.get("image"), (Integer) product.get("status"), toppingList);
     }
 
     public int getTotalProduct() {
@@ -136,17 +137,17 @@ public class ProducService {
     }
 
     public int getPriceSizeM(int id) {
-        return(int) getById(id).getPriceSize().get(0).getPrice();
+        return (int) getById(id).getPriceSize().get(0).getPrice();
     }
 
     public int getPriceSizeL(int id) {
         try {
-            return(int) getById(id).getPriceSize().get(1).getPrice();
-
+            return (int) getById(id).getPriceSize().get(1).getPrice();
         } catch (Exception e) {
             return getPriceSizeM(id);
         }
     }
+
     public List<Product> searchProduct(String search) {
         List<Product> rs = new ArrayList<Product>();
         List<Map<String, Object>> productList = dao.searchProduct(search);
@@ -194,8 +195,38 @@ public class ProducService {
     }
 
 
+    public void delete(int id) {
+        (new PriceSizeService()).deleteByProductId(id);
+        dao.delete(id);
+    }
+
+    public void insert(Product product) throws Exception {
+        dao.insert(product.getName(), product.getIdCategory(), product.getImg(), product.getStatus());
+        for (PriceSize priceSize : product.getPriceSize()) {
+            priceSize.setProduct_id(findFirst().getId());
+            (new PriceSizeService()).insert(priceSize);
+        }
+    }
+
+    public Product findFirst() throws Exception {
+        Map<String, Object> product = dao.findFirst();
+        List<PriceSize> priceSizeList = new PriceSizeService().getByProductId((Integer) product.get("id"));
+        List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) product.get("category_id"));
+        return new Product((Integer) product.get("id"), (String) product.get("name"), (Integer) product.get("category_id"),
+                priceSizeList, (String) product.get("image"), (Integer) product.get("status"), toppingList);
+
+    }
+
+    public void update(Product product) throws Exception {
+        dao.update(product.getId(), product.getName(), product.getIdCategory(), product.getImg(), product.getStatus());
+
+        for (PriceSize priceSize : product.getPriceSize()) {
+            (new PriceSizeService()).updateByProductId(priceSize);
+        }
+    }
+
     public static void main(String[] args) {
-        ProducService dao = new ProducService();
-        System.out.println(dao.sortASC(1));
+        ProductService dao = new ProductService();
+        System.out.println(dao.getPriceSizeL(1));
     }
 }

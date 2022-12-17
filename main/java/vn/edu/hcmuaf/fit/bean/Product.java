@@ -9,10 +9,7 @@ public class Product {
     List<PriceSize> priceSize;
     String img;
     int status;
-
     List<Topping> topping;
-
-
     public List<Topping> getTopping() {
         return topping;
     }
@@ -30,6 +27,7 @@ public class Product {
         this.status = status;
         this.topping = topping;
     }
+
     public Product() {
     }
 
@@ -83,14 +81,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", idCategory=" + idCategory +
-                ", priceSize=" + priceSize +
-                ", img='" + img + '\'' +
-                ", status=" + status +
-                ", topping=" + topping +
-                '}';
+        return "Product{" + "id=" + id + ", name='" + name + '\'' + ", idCategory=" + idCategory + ", priceSize=" + priceSize + ", img='" + img + '\'' + ", status=" + status + ", topping=" + topping + '}';
     }
 }

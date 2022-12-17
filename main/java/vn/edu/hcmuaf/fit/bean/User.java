@@ -11,10 +11,10 @@ public class User implements Serializable {
     private String address;
     private String phone;
     private String email;
-    private String level;
+    private int level;
     private String token;
 
-    public User(int id, String username, String password, String name, String address, String phone, String email, String level, String token) {
+    public User(int id, String username, String password, String name, String address, String phone, String email, int level, String token) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -86,11 +86,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
@@ -115,5 +115,9 @@ public class User implements Serializable {
                 ", level='" + level + '\'' +
                 ", token='" + token + '\'' +
                 '}';
+    }
+
+    public static void main(String[] args) {
+
     }
 }

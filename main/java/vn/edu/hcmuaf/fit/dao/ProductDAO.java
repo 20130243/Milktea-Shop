@@ -26,23 +26,23 @@ public class ProductDAO extends RD {
         return null;
     }
 
-    public static void insert(String name, int categoryID, String img, int status) throws Exception {
+    public static void insert(String name, int categoryID, String image, int status) throws Exception {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("INSERT INTO product(name,category_id,img,status) VALUES(:name,:category_id,:img,:status)")
+                h.createUpdate("INSERT INTO product(name,category_id,image,status) VALUES(:name,:category_id,:image,:status)")
                         .bind("name", name)
                         .bind("category_id", categoryID)
-                        .bind("img", img)
+                        .bind("image", image)
                         .bind("status", status)
                         .execute()
         );
     }
 
-    public static void update(int id, String name, int categoryID, String img, int status) {
+    public static void update(int id, String name, int categoryID, String image, int status) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE product SET name=:name,category_id=:category_id,img=:img,status=:status WHERE id=:id")
+                h.createUpdate("UPDATE product SET name=:name,category_id=:category_id,image=:image,status=:status WHERE id=:id")
                         .bind("name", name)
                         .bind("category_id", categoryID)
-                        .bind("img", img)
+                        .bind("image", image)
                         .bind("status", status)
                         .bind("id", id)
                         .execute()
@@ -58,24 +58,25 @@ public class ProductDAO extends RD {
                         .execute()
         );
     }
+
     public int getTotalProduct() {
         int count = JDBIConnector.get().withHandle(h ->
                 h.createQuery("select count(*) from product").mapTo(Integer.class).first()
-                );
+        );
         return count;
     }
+
     /*
-    * Tạo bởi: Lê Trọng Tình 20130440
-    * Cập nhật: Lê Trọng Tình 20130440
-    * */
+     * Tạo bởi: Lê Trọng Tình 20130440
+     * Cập nhật: Lê Trọng Tình 20130440
+     * */
     public List<Map<String, Object>> pagingProduct(int index) {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from product\n" +
                         "order by id\n" +
-                        "LIMIT ? , 12;").bind(0, (index-1)*12).mapToMap().list()
+                        "LIMIT ? , 12;").bind(0, (index - 1) * 12).mapToMap().list()
         );
     }
-
     public List<Map<String, Object>> searchProduct(String search) {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from product\n" +
@@ -99,5 +100,10 @@ public class ProductDAO extends RD {
 //        System.out.println(dao.pagingProduct(0));
     }
 
+    public Map<String, Object> findFirst() {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM product ORDER BY id DESC LIMIT 1")
+                        .mapToMap().first());
+    }
 
 }

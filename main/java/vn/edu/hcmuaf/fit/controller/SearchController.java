@@ -3,11 +3,13 @@ package vn.edu.hcmuaf.fit.controller;
 import vn.edu.hcmuaf.fit.bean.Category;
 import vn.edu.hcmuaf.fit.bean.Product;
 import vn.edu.hcmuaf.fit.services.CategoryService;
-import vn.edu.hcmuaf.fit.services.ProducService;
+import vn.edu.hcmuaf.fit.services.ProductService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class SearchController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String search = request.getParameter("search");
-        ProducService service = new ProducService();
+        ProductService service = new ProductService();
         CategoryService categoryService = new CategoryService();
         List<Product> listProduct = service.searchProduct(search);
         List<Category> listCategories = categoryService.getAll();
