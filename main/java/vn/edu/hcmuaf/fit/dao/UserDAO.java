@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
+import vn.edu.hcmuaf.fit.services.UserService;
 
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,14 @@ public class UserDAO extends RD {
                         .bind("level", level)
                         .bind("address", address)
                         .execute());
+    }
 
+    public boolean checkUsername(String username) {
+        int a = JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT COUNT(*) FROM user WHERE username=:username")
+                        .bind("username", username)
+                        .mapTo(Integer.class).first());
+        return a <= 1;
     }
 
     public void update(int id, String username, String password, String name, String address, String phone, String email, int level) {
@@ -62,9 +70,21 @@ public class UserDAO extends RD {
                         .execute());
 
     }
+    public Map<String,Object> login(String username, String password){
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM user WHERE username =:username and password=:password")
+                        .bind("username", username)
+                        .bind("password", password)
+                        .mapToMap()
+                        .first());
 
+    }
 
     public static void main(String[] args) {
         System.out.println(new UserDAO().getAll());
+        System.out.println((new UserDAO()).checkUsername("manhha5842"));
+        System.out.println((new UserDAO()).login("abc","a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"));
     }
+
+
 }

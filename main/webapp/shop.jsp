@@ -49,7 +49,7 @@
 <div class="offcanvas-menu-wrapper">
     <div class="offcanvas__option">
         <div class="offcanvas__links">
-            <a href="login-register.html">Đăng nhập</a>
+            <a href="login-register.jsp">Đăng nhập</a>
         </div>
     </div>
     <div class="offcanvas__nav__option">
@@ -89,7 +89,7 @@
             </div>
             <div class="col-lg-3 col-md-3">
                 <div class="header__nav__option">
-                    <a href="./login-register.html" class="primary-btn login-btn">Đăng nhập</a>
+                    <a href="login-register.jsp" class="primary-btn login-btn">Đăng nhập</a>
                 </div>
             </div>
         </div>
