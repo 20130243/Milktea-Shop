@@ -1,26 +1,9 @@
-if (document.readyState == "loading") {
-    document.addEventListener("DOMContentLoaded", ready);
-} else {
-    ready();
+
+var btnCart = document.getElementsByClassName('modal-btn');
+for (var i = 0; i < btnCart.length; i++) {
+    btnCart[i].addEventListener("click", function () {
+        var name = document.getElementById('name');
+        var testName = document.getElementById('test');
+        testName.innerHTML = name.innerHTML;
+    })
 }
-
-function ready() {
-    var quantityInputs = document.getElementsByClassName("quantity");
-    for (var i = 0; i < quantityInputs.length; i++) {
-        var input = quantityInputs[i];
-        input.addEventListener("change", quantityChanged);
-    }
-}
-    function quantityChanged(event) {
-        var input = event.target;
-        if (isNaN(input.value) || input.value <= 0) {
-            input.value = 1;
-        }
-        submitForm();
-    }
-    function submitForm() {
-        document.getElementById("myForm").submit();
-
-    }
-
-
