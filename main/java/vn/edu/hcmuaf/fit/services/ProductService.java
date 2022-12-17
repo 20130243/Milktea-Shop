@@ -59,55 +59,6 @@ public class ProductService {
         return list;
     }
 
-    public List<Product> sortASC(int index) {
-        List<Product> list = new ArrayList<Product>();
-        List<Map<String, Object>> productList = dao.pagingProduct(index);
-        for (Map<String, Object> map : productList) {
-            Product product = new Product();
-            product.setId((Integer) map.get("id"));
-            product.setName((String) map.get("name"));
-            product.setIdCategory((Integer) map.get("category_id"));
-            product.setImg((String) map.get("image"));
-            product.setStatus((Integer) map.get("status"));
-
-            List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) map.get("id"));
-            List<PriceSize> priceSizeList = priceSizeList(priceSize);
-            product.setPriceSize(priceSizeList);
-
-            List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) map.get("category_id"));
-            product.setTopping(toppingList);
-
-            list.add(product);
-            list.sort((o1, o2) -> (int) (o1.getPriceSize().get(0).getPrice() - o2.getPriceSize().get(0).getPrice()));
-        }
-        return list;
-    }
-
-    public List<Product> sortDECS(int index) {
-        List<Product> list = new ArrayList<Product>();
-        List<Map<String, Object>> productList = dao.pagingProduct(index);
-        for (Map<String, Object> map : productList) {
-            Product product = new Product();
-            product.setId((Integer) map.get("id"));
-            product.setName((String) map.get("name"));
-            product.setIdCategory((Integer) map.get("category_id"));
-            product.setImg((String) map.get("image"));
-            product.setStatus((Integer) map.get("status"));
-
-            List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) map.get("id"));
-            List<PriceSize> priceSizeList = priceSizeList(priceSize);
-            product.setPriceSize(priceSizeList);
-
-            List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) map.get("category_id"));
-            product.setTopping(toppingList);
-
-            list.add(product);
-            list.sort((o1, o2) -> (int) (o2.getPriceSize().get(0).getPrice() - o1.getPriceSize().get(0).getPrice()));
-        }
-        return list;
-    }
-
-
     private List<PriceSize> priceSizeList(List<Map<String, Object>> priceSize) {
         List<PriceSize> priceSizeList = new ArrayList<PriceSize>();
         for (Map<String, Object> map : priceSize) {
@@ -148,53 +99,6 @@ public class ProductService {
         }
     }
 
-    public List<Product> searchProduct(String search) {
-        List<Product> rs = new ArrayList<Product>();
-        List<Map<String, Object>> productList = dao.searchProduct(search);
-        for (Map<String, Object> map : productList) {
-            Product product = new Product();
-            product.setId((Integer) map.get("id"));
-            product.setName((String) map.get("name"));
-            product.setIdCategory((Integer) map.get("category_id"));
-            product.setImg((String) map.get("image"));
-            product.setStatus((Integer) map.get("status"));
-
-            List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) map.get("id"));
-            List<PriceSize> priceSizeList = priceSizeList(priceSize);
-            product.setPriceSize(priceSizeList);
-
-            List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) map.get("category_id"));
-            product.setTopping(toppingList);
-
-            rs.add(product);
-        }
-        return rs;
-    }
-
-    public List<Product> getProductByCategory(int id_category) {
-        List<Product> rs = new ArrayList<Product>();
-        List<Map<String, Object>> productList = dao.getProductByCategory(id_category);
-        for (Map<String, Object> map : productList) {
-            Product product = new Product();
-            product.setId((Integer) map.get("id"));
-            product.setName((String) map.get("name"));
-            product.setIdCategory((Integer) map.get("category_id"));
-            product.setImg((String) map.get("image"));
-            product.setStatus((Integer) map.get("status"));
-
-            List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) map.get("id"));
-            List<PriceSize> priceSizeList = priceSizeList(priceSize);
-            product.setPriceSize(priceSizeList);
-
-            List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) map.get("category_id"));
-            product.setTopping(toppingList);
-
-            rs.add(product);
-        }
-        return rs;
-    }
-
-
     public void delete(int id) {
         (new PriceSizeService()).deleteByProductId(id);
         dao.delete(id);
@@ -216,9 +120,8 @@ public class ProductService {
                 priceSizeList, (String) product.get("image"), (Integer) product.get("status"), toppingList);
 
     }
-
     public void update(Product product) throws Exception {
-        dao.update(product.getId(), product.getName(), product.getIdCategory(), product.getImg(), product.getStatus());
+        dao.update(product.getId(),product.getName(), product.getIdCategory(), product.getImg(), product.getStatus());
 
         for (PriceSize priceSize : product.getPriceSize()) {
             (new PriceSizeService()).updateByProductId(priceSize);
