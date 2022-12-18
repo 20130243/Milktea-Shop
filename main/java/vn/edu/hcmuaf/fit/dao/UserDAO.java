@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.dao;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.services.UserService;
 
@@ -70,7 +71,27 @@ public class UserDAO extends RD {
                         .execute());
 
     }
+
+    public int updatev1(int id, String username, String password, String name, String address, String phone, String email, int level) {
+
+        return  JDBIConnector.get().withHandle(h ->
+                h.createUpdate("UPDATE user SET username=:username,password=:password,name=:name,address=:address,phone=:phone,email=:email,level=:level WHERE id=:id")
+                        .bind("username", username)
+                        .bind("password", password)
+                        .bind("name", name)
+                        .bind("address", address)
+                        .bind("phone", phone)
+                        .bind("email", email)
+                        .bind("level", level)
+                        .bind("id", id)
+                        .execute());
+
+    }
+
     public Map<String,Object> login(String username, String password){
+        if(!checkValid(username,password)){
+            return null;
+        }
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("SELECT * FROM user WHERE username =:username and password=:password")
                         .bind("username", username)
@@ -79,11 +100,22 @@ public class UserDAO extends RD {
                         .first());
 
     }
-
+public boolean checkValid(String username, String password){
+        int result = JDBIConnector.get().withHandle(h->
+                h.createQuery("SELECT COUNT(*) FROM user WHERE username =:username and password =:password")
+                        .bind("username", username)
+                        .bind("password", password)
+                        .mapTo(Integer.class).first());
+        if(result==1){
+            return true;
+        }else{
+            return false;
+        }
+}
     public static void main(String[] args) {
-        System.out.println(new UserDAO().getAll());
-        System.out.println((new UserDAO()).checkUsername("manhha5842"));
-        System.out.println((new UserDAO()).login("abc","a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"));
+//        System.out.println(new UserDAO().getAll());
+//        System.out.println((new UserDAO()).checkUsername("manhha5842"));
+//        System.out.println((new UserDAO()).login("abc","a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"));
     }
 
 

@@ -89,7 +89,7 @@
                                                 <div class="login-toggle-btn">
                                                     <input type="checkbox" name="save" value="true"/>
                                                     <label>Lưu thông tin</label>
-                                                    <a href="forgotPass.html">Quên mật khẩu?</a>
+                                                    <a href="forgotPass.jsp">Quên mật khẩu?</a>
                                                 </div>
                                                 <div class="button-box">
                                                     <button class="login-btn btn" type="submit">
