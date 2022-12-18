@@ -20,6 +20,7 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         UserService userService = new UserService();
         String username = request.getParameter("username");
         String password = userService.hashPassword(request.getParameter("password"));
@@ -34,7 +35,8 @@ public class LoginController extends HttpServlet {
         }else{
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
-            response.sendRedirect("index.jsp");
+//            response.sendRedirect("index.jsp");
+            response.sendRedirect("account.jsp");
         }
     }
 }

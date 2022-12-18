@@ -47,6 +47,7 @@ public class UserService {
         if (map != null) {
             return null;
         } else {
+            user.setId((int) map.get("id"));
             user.setUsername((String) map.get("username"));
             user.setPassword((String) map.get("password"));
             user.setName((String) map.get("name"));
@@ -65,6 +66,7 @@ public class UserService {
             return null;
         } else {
             User user = new User();
+            user.setId((int) map.get("id"));
             user.setUsername((String) map.get("username"));
             user.setPassword((String) map.get("password"));
             user.setName((String) map.get("name"));
@@ -77,11 +79,20 @@ public class UserService {
         }
     }
 
+    public void update(User user){
+        dao.update(user.getId(),user.getUsername(),user.getPassword(), user.getName(), user.getAddress(), user.getPhone(), user.getEmail(), user.getLevel());
+
+    }
+
     public boolean checkUsername(User user) {
         return dao.checkUsername(user.getUsername());
     }
 
     public static void main(String[] args) {
-        System.out.println((new UserService()).login("abc","a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"));
+//        User user = new UserService().login("tinh","435006d9f697e80c9b41332131b1c751523df0f1c900eb6a660294c8f52110dd");
+//        user.setAddress("11111111");
+//        user.setId(1);
+
+
     }
 }

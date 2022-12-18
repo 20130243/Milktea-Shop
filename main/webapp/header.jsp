@@ -13,16 +13,16 @@
                 <nav class="header__menu">
                     <ul>
                         <li><a href="index.jsp">Trang chủ</a></li>
-                        <li><a href="./shop.html">Thức uống</a></li>
+                        <li><a href="./shop">Thức uống</a></li>
                         <li>
                             <a href="#">Giới thiệu</a>
                             <ul class="dropdown">
-                                <li><a href="./about.html">Về chúng tôi</a></li>
-                                <li><a href="./contact.html">Liên hệ</a></li>
+                                <li><a href="./about.jsp">Về chúng tôi</a></li>
+                                <li><a href="./contact.jsp">Liên hệ</a></li>
                             </ul>
                         </li>
 
-                        <li><a href="./blog.html">Khuyến mãi</a></li>
+                        <li><a href="./blog">Khuyến mãi</a></li>
                     </ul>
                 </nav>
             </div>
@@ -41,8 +41,8 @@
                                             </a>
 
                                             <ul class="dropdown">
-                                                <li><a href="./account.html">Tài khoản</a></li>
-                                                <li><a href="./login-register.html">Đăng xuất</a></li>
+                                                <li><a href="./account.jsp">Tài khoản</a></li>
+                                                <li><a href="./logout">Đăng xuất</a></li>
                                             </ul>
                                             <a href="#" class="user">${sessionScope.user.name}</a>
                                         </li>
