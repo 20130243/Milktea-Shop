@@ -6,7 +6,7 @@
   Time: 10:09 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="zxx">
 
 <head>
@@ -62,40 +62,7 @@
 <!-- Offcanvas Menu End -->
 
 <!-- Header Section Begin -->
-<header class="header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <div class="header__logo">
-                    <a href="index.jsp"><img class="logo-small" src="img/logo.png" alt="" /></a>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <nav class="header__menu mobile-menu">
-                    <ul>
-                        <li><a href="index.jsp">Trang chủ</a></li>
-                        <li><a href="./shop.html">Thức uống</a></li>
-                        <li>
-                            <a href="#">Giới thiệu</a>
-                            <ul class="dropdown">
-                                <li><a href="./about.html">Về chúng tôi</a></li>
-                                <li><a href="./contact.html">Liên hệ</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="active"><a href="./blog.html">Khuyến mãi</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="header__nav__option">
-                    <a href="login-register.jsp" class="primary-btn login-btn">Đăng nhập</a>
-                </div>
-            </div>
-        </div>
-        <div class="canvas__open"><i class="fa fa-bars"></i></div>
-    </div>
-</header>
+<%@include file="header.jsp" %>
 <!-- Header Section End -->
 <div class="thumbCover">
     <img src="./img/banner-matcha.jpg" alt="" />
@@ -148,62 +115,7 @@
     </div>
 </section>
 <!-- Footer Section Begin -->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="footer__about">
-                    <div class="footer__logo">
-                        <a href="#"><img src="img/footer-logo.png" alt="" /></a>
-                    </div>
-                    <p>TỪ NHỮNG MẦM TRÀ, CHÚNG TÔI TẠO RA NIỀM ĐAM MÊ</p>
-                    <a href="#"><img src="img/payment.png" alt="" /></a>
-                </div>
-            </div>
-            <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
-                <div class="footer__widget">
-                    <h6>Khuyến mãi</h6>
-                    <ul>
-                        <li><a href="./blog.html">Tin tức</a></li>
-                        <li><a href="./shop.html">Shop</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-6">
-                <div class="footer__widget">
-                    <h6>Liên hệ</h6>
-                    <ul>
-                        <li><a href="./about.html">Về chúng tôi</a></li>
-                        <li><a href="./contact.html">Địa chỉ</a></li>
-                        <li>
-                            <a href="https://manhhawebapp.web.app/" target="_blank">20130243@st.hcmuaf.edu.vn</a>
-                        </li>
-                        <li>
-                            <a href="https://ltrtinh27.web.app/" target="_blank">20130440@st.hcmuaf.edu.vn</a>
-                        </li>
-                        <li>
-                            <a href="#">20130245@st.hcmuaf.edu.vn</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-                <div class="footer__widget">
-                    <h6>Nhận khuyến mãi</h6>
-                    <div class="footer__newslatter">
-                        <p>Nhập email để không bõ lỡ những khuyến mãi hấp dẫn!</p>
-                        <form action="#">
-                            <input type="text" placeholder="Email của bạn" />
-                            <button type="submit">
-                                <span class="icon_mail_alt"></span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<%@include file="footer.jsp" %>
 <!-- Footer Section End -->
 <!-- Search Begin -->
 <div class="search-model">

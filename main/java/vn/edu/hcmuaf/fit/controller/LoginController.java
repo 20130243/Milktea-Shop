@@ -35,7 +35,8 @@ public class LoginController extends HttpServlet {
         }else{
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
-            response.sendRedirect("index.jsp");
+//            response.sendRedirect("index.jsp");
+            response.sendRedirect("account.jsp");
         }
     }
 }

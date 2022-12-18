@@ -53,6 +53,7 @@ public class AddToCartController extends HttpServlet {
                 }
             HttpSession session = request.getSession();
                 url =(String) session.getAttribute("url");
+                User user = (User) session.getAttribute("user");
             if (session.getAttribute("cart") == null) {
                 Cart cart = new Cart();
                 List<Item> listItems = new ArrayList<Item>();
@@ -65,17 +66,21 @@ public class AddToCartController extends HttpServlet {
                 listItems.add(item);
                 cart.setItems(listItems);
                 cart.updateTotal();
+
+
                 session.setAttribute("cart", cart);
             } else {
                 Cart cart = (Cart) session.getAttribute("cart");
                 List<Item> listItems = cart.getItems();
-
                 boolean check = false;
                 for (Item item : listItems) {
                     if (item.getProduct().toString().equals(product.toString())) {
                         item.setQuantity(item.getQuantity() + quantity);
                         item.setPrice(item.getPrice() + price);
                         cart.updateTotal();
+                        if(user!=null) {
+                            cart.setCustomer(user);
+                        }
                         check = true;
                     }
                 }
@@ -89,7 +94,10 @@ public class AddToCartController extends HttpServlet {
                     listItems.add(item);
                     cart.updateTotal();
                 }
-
+                if(user!=null) {
+                    cart.setCustomer(user);
+                }
+                System.out.println(cart.getCustomer().toString());
                 session.setAttribute("cart", cart);
             }
 
