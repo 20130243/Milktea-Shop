@@ -1,9 +1,13 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="coupon" class="vn.edu.hcmuaf.fit.bean.Coupon"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <title>Giảm giá</title>
+    <title>Mã giảm giá</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -39,179 +43,7 @@
         <div class="content-page">
             <div class="content">
                 <!-- Topbar Start -->
-                <div class="navbar-custom">
-                    <ul class="list-unstyled topbar-right-menu float-right mb-0">
-                        <li class="dropdown notification-list d-lg-none">
-                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="false" aria-expanded="false">
-                                <i class="dripicons-search noti-icon"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
-                                <form class="p-3">
-                                    <input type="text" class="form-control" placeholder="Tìm kiếm ..." aria-label="">
-                                </form>
-                            </div>
-                        </li>
-
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="false" aria-expanded="false">
-                                <i class="dripicons-bell noti-icon"></i>
-                                <span class="noti-icon-badge"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg">
-
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5 class="m-0">
-                                        <span class="float-right">
-                                            <a href="javascript: void(0);" class="text-dark">
-                                                <small>Đánh dấu là đã xem</small>
-                                            </a>
-                                        </span>Thông báo
-                                    </h5>
-                                </div>
-
-                                <div style="max-height: 230px;" data-simplebar>
-                                    <!-- item-->
-                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary">
-                                            <i class="mdi mdi-comment-account-outline"></i>
-                                        </div>
-                                        <p class="notify-details">Đơn hàng #1523
-                                            <small class="text-muted">1 phút trước</small>
-                                        </p>
-                                    </a>
-                                    <!-- item-->
-                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary">
-                                            <i class="mdi mdi-comment-account-outline"></i>
-                                        </div>
-                                        <p class="notify-details">Đơn hàng #1523
-                                            <small class="text-muted">1 phút trước</small>
-                                        </p>
-                                    </a>
-                                    <!-- item-->
-                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary">
-                                            <i class="mdi mdi-comment-account-outline"></i>
-                                        </div>
-                                        <p class="notify-details">Đơn hàng #1523
-                                            <small class="text-muted">1 phút trước</small>
-                                        </p>
-                                    </a>
-                                    <!-- item-->
-                                       <a href="../order/create.jsp" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary">
-                                            <i class="mdi mdi-comment-account-outline"></i>
-                                        </div>
-                                        <p class="notify-details">Đơn hàng #1523
-                                            <small class="text-muted">1 phút trước</small>
-                                        </p>
-                                    </a>
-
-
-                                </div>
-
-                                <!-- All-->
-                               <a href="../order/index.jsp"
-                                    class="dropdown-item text-center text-primary notify-item notify-all">
-                                    Xem tất cả
-                                </a>
-
-                            </div>
-                        </li>
-
-
-                        <li class="notification-list">
-                            <a class="nav-link right-bar-toggle" href="javascript: void(0);">
-                                <i class="dripicons-gear noti-icon"></i>
-                            </a>
-                        </li>
-
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="false" aria-expanded="false">
-                                <span class="account-user-avatar">
-                                    <img src="../img/product/cappuchinovietnamo-min.png" alt="user-image" class="rounded-circle">
-                                </span>
-                                <span>
-                                    <span class="account-user-name">Nguyễn Vũ Mạnh Hà</span>
-                                    <span class="account-position">Admin</span>
-                                </span>
-                            </a>
-                            <div
-                                class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-                                <!-- item-->
-                                <div class=" dropdown-header noti-title">
-                                    <h6 class="text-overflow m-0">Xin chào !</h6>
-                                </div>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-logout mr-1"></i>
-                                    <span>Đăng xuất</span>
-                                </a>
-
-                            </div>
-                        </li>
-
-                    </ul>
-                    <button class="button-menu-mobile open-left disable-btn">
-                        <i class="mdi mdi-menu"></i>
-                    </button>
-                    <div class="app-search dropdown d-none d-lg-block">
-                        <form>
-                            <div class="input-group">
-                                <input type="text" class="form-control dropdown-toggle" placeholder="Tìm kiếm..."
-                                    id="top-search">
-                                <span class="mdi mdi-magnify search-icon"></span>
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">Tìm kiếm</button>
-                                </div>
-                            </div>
-
-                        </form>
-
-                        <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h5 class="text-overflow mb-2">Tìm thấy <span class="text-danger">17</span> kết quả</h5>
-                            </div>
-
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow mb-2 text-uppercase">Sản phẩm</h6>
-                            </div>
-
-                            <div class="notification-list">
-                                <!-- item-->
-                                <a href="../product/index.jsp" class="dropdown-item notify-item">
-                                    <div class="media">
-                                        <img class="d-flex mr-2 rounded-circle" src="../img/product/cappuchinovietnamo-min.png"
-                                            alt="Generic placeholder image" height="32">
-                                        <div class="media-body">
-                                            <h5 class="m-0 font-14">Trà sữa lài</h5>
-                                            <span class="font-12 mb-0">Trà sữa</span>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <!-- item-->
-                                <a href="../product/index.jsp" class="dropdown-item notify-item">
-                                    <div class="media">
-                                        <img class="d-flex mr-2 rounded-circle" src="../img/product/cappuchinovietnamo-min.png"
-                                            alt="Generic placeholder image" height="32">
-                                        <div class="media-body">
-                                            <h5 class="m-0 font-14">Cà phê đen</h5>
-                                            <span class="font-12 mb-0">Cà phê</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <%@include file="../topbar.jsp" %>
                 <!-- end Topbar -->
 
                 <!-- Start Content-->
@@ -223,10 +55,10 @@
                             <div class="page-title-box">
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item active">Giảm giá </li>
+                                        <li class="breadcrumb-item active">Mã giảm giá </li>
                                     </ol>
                                 </div>
-                                <h4 class="page-title">Giảm giá</h4>
+                                <h4 class="page-title">Mã giảm giá</h4>
                             </div>
                         </div>
                     </div>
@@ -238,8 +70,8 @@
                                 <div class="card-body">
                                     <div class="row mb-2">
                                         <div class="col-sm-4">
-                                            <a href="create.jsp" class="btn btn-danger mb-2"><i
-                                                    class="mdi mdi-plus-circle mr-2"></i>Thêm giảm giá</a>
+                                            <a href="/admin/coupon/create" class="btn btn-danger mb-2"><i
+                                                    class="mdi mdi-plus-circle mr-2"></i>Thêm mã giảm giá</a>
                                         </div>
                                         <div class="col-sm-8">
                                             <!-- <div class="text-sm-right">
@@ -266,28 +98,32 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <c:forEach var="item" items="${requestScope['categoryList']}">
                                                 <tr>
                                                     <td>
                                                         <p class="m-0 d-inline-block align-middle font-16">
                                                         <a href="" style="pointer-events: none; cursor: default;"
-                                                                class="text-body">GS15X2</a>
+                                                                class="text-body">${item.code}</a>
                                                             <br />
                                                         </p>
                                                     </td>
                                                     <td  class="text-center">
-                                                        10%
+                                                            ${item.percent}%
                                                     </td>
                                                     <td class="text-center">
-                                                       25,000đ
+                                                        <fmt:formatNumber type="currency"
+                                                                          value="${item.max_price_sale}"
+                                                                          currencySymbol="VNĐ"/>
                                                     </td>
                                                     <td  class="text-center">
-                                                        223
+                                                        ${item.quantity}
                                                     </td>
                                                     <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
+                                                            ${item.start_date} <hr>  ${item.end_date}
                                                     </td>
 
                                                     <td  class="text-center">
+                                                            ${item.checkValid()}
                                                         <span class="badge badge-success">Có hiệu lực</span>
                                                     </td>
 
@@ -297,263 +133,8 @@
                                                         <a href="javascript:void(0);" class="action-icon"> <i
                                                                 class="mdi mdi-delete"></i></a>
                                                     </td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                        <a href="" style="pointer-events: none; cursor: default;"
-                                                                class="text-body">GS13X2</a>
-                                                            <br />
-                                                        </p>
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
-                                                    </td>
-
-                                                    <td class="table-action">
-                                                        <a href="create.jsp" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                        <a href="" style="pointer-events: none; cursor: default;"
-                                                                class="text-body">GS13X2</a>
-                                                            <br />
-                                                        </p>
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
-                                                    </td>
-
-                                                    <td class="table-action">
-                                                        <a href="create.jsp" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                        <a href="" style="pointer-events: none; cursor: default;"
-                                                                class="text-body">GS13X2</a>
-                                                            <br />
-                                                        </p>
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
-                                                    </td>
-
-                                                    <td class="table-action">
-                                                        <a href="create.jsp" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                        <a href="" style="pointer-events: none; cursor: default;"
-                                                                class="text-body">GS13X2</a>
-                                                            <br />
-                                                        </p>
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
-                                                    </td>
-
-                                                    <td class="table-action">
-                                                        <a href="create.jsp" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                        <a href="" style="pointer-events: none; cursor: default;"
-                                                                class="text-body">GS13X2</a>
-                                                            <br />
-                                                        </p>
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
-                                                    </td>
-
-                                                    <td class="table-action">
-                                                        <a href="create.jsp" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                        <a href="" style="pointer-events: none; cursor: default;"
-                                                                class="text-body">GS13X2</a>
-                                                            <br />
-                                                        </p>
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
-                                                    </td>
-
-                                                    <td class="table-action">
-                                                        <a href="create.jsp" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                        <a href="" style="pointer-events: none; cursor: default;"
-                                                                class="text-body">GS13X2</a>
-                                                            <br />
-                                                        </p>
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
-                                                    </td>
-
-                                                    <td class="table-action">
-                                                        <a href="create.jsp" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>
-                                                        <p class="m-0 d-inline-block align-middle font-16">
-                                                        <a href="" style="pointer-events: none; cursor: default;"
-                                                                class="text-body">GS13X2</a>
-                                                            <br />
-                                                        </p>
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        50%
-                                                    </td>
-                                                    <td  class="text-center">
-                                                       50,000đ
-                                                    </td>
-                                                    <td  class="text-center">
-                                                        223
-                                                    </td>
-                                                    <td class="text-center">
-                                                        28/10/2022 <hr> 28/11/2022
-                                                    </td>
-
-                                                    <td  class="text-center">
-                                                        <span class="badge badge-secondary">Hết hiệu lực</span>
-                                                    </td>
-
-                                                    <td class="table-action">
-                                                        <a href="create.jsp" class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>  
+                                                </tr>
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
