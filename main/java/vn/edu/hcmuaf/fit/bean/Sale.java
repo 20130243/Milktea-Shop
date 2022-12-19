@@ -1,4 +1,6 @@
 package vn.edu.hcmuaf.fit.bean;
 
-public class Sale {
+import java.io.Serializable;
+
+public class Sale implements Serializable {
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("login-register.jsp");
+        request.getRequestDispatcher("login-register.jsp").forward(request, response);
     }
 
     @Override
@@ -26,9 +26,9 @@ public class LoginController extends HttpServlet {
         String password = userService.hashPassword(request.getParameter("password"));
 
         User user = userService.login(username, password);
-        System.out.println(user);
-        System.out.println(username);
-        System.out.println(password);
+//        System.out.println(user);
+//        System.out.println(username);
+//        System.out.println(password);
         if(user == null){
             request.setAttribute("error_register", "Tên đăng nhập đã được sử dụng");
             request.getRequestDispatcher("login-register.jsp").forward(request, response);

@@ -45,7 +45,6 @@ public class CategoryService {
             category.setName((String) map.get("name"));
             category.setStatus((Integer) map.get("status"));
 
-
             list.add(category);
         }
         return list;
@@ -59,7 +58,5 @@ public class CategoryService {
         dao.delete(id);
     }
 
-    public static void main(String[] args) throws Exception {
-        System.out.println(new CategoryService().getPaging(2));
-    }
+
 }

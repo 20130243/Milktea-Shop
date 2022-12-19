@@ -95,4 +95,7 @@ public class UserService {
 
 
     }
+    public boolean checkAdmin(User user) {
+        return user.getLevel() ==1 ;
+    }
 }

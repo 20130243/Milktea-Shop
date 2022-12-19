@@ -1,4 +1,6 @@
 package vn.edu.hcmuaf.fit.bean;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
 }
