@@ -1,8 +1,9 @@
 package vn.edu.hcmuaf.fit.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Item {
+public class Item implements Serializable {
     private int id;
     private Product product;
     private int quantity;

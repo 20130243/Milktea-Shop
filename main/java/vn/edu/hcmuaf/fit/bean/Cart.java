@@ -1,10 +1,9 @@
 package vn.edu.hcmuaf.fit.bean;
 
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
-public class Cart {
+public class Cart implements Serializable {
     private int id;
     private User customer;
     private List<Item> items;

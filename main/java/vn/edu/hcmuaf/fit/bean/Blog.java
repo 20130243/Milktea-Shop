@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.bean;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /*
@@ -7,7 +8,7 @@ import java.sql.Date;
 * Cập nhật: Lê Trọng Tình 20130440
 *
 * */
-public class Blog {
+public class Blog implements Serializable {
     int id;
     String name;
     Date date;

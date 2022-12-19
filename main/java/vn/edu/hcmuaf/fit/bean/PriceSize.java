@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.bean;
 
-public class PriceSize {
+import java.io.Serializable;
+
+public class PriceSize implements Serializable {
     int id;
     int product_id;
     String size;
