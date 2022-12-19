@@ -16,7 +16,6 @@ public class LogoutController extends HttpServlet {
         if(user!=null) {
             session.removeAttribute("user");
         }
-        System.out.println(session.getAttribute("cart"));
         response.sendRedirect("login-register.jsp");
     }
 
