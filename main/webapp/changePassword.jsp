@@ -107,7 +107,7 @@
                                 placeholder="Nhập lại mật nhẩu "
                         />
                       </div>
-
+                      <span class="text-danger" id="register-username-error">${requestScope['erorr_changePassword']}</span>
                       <div class="button-box">
                         <button class="register-btn btn" type="submit">
                           <span>Đổi mật khẩu</span>

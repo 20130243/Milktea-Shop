@@ -90,6 +90,7 @@
                   <div class="login-register-form">
                     <form action="forgotPassword" method="get">
                       <div class="login-input-box">
+                        <span class="text-danger" id="register-username-error">${requestScope['error_forgotpassword']}</span>
                         <input
                                 type="text"
                                 name="user-name"
@@ -103,7 +104,7 @@
                       </div>
                       <div class="button-box">
                         <div class="login-toggle-btn">
-                          <a href="login-register.html" style="color: blue"
+                          <a href="login-register.jsp" style="color: blue"
                           >Đăng nhập</a
                           >
                         </div>

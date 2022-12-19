@@ -20,15 +20,8 @@ public class ChangePasswordController extends HttpServlet {
                 String oldPassword =userService.hashPassword((String) request.getParameter("password-old"));
                 String newPassword = (String) request.getParameter("password-new");
                 String comfirmPassword = (String) request.getParameter("password-new-confirm");
-
-                System.out.println(newPassword);
-                System.out.println(comfirmPassword);
-
-
                 boolean checkOldPassword =  password.equals(oldPassword);
-                System.out.println(checkOldPassword);
                 boolean checkComfirmPassword = newPassword.equals(comfirmPassword);
-                System.out.println(checkComfirmPassword);
                 if(oldPassword != null && newPassword != null && comfirmPassword != null
                         && checkOldPassword
                         && checkComfirmPassword ){
@@ -37,11 +30,9 @@ public class ChangePasswordController extends HttpServlet {
                     session.setAttribute("user", user);
                     response.sendRedirect("account.jsp");
                 } else {
-                    response.sendRedirect("changePassword.jsp");
+                    request.setAttribute("erorr_changePassword", "Mật khẩu cũ không đúng hoặc mật khẩu mới không khớp");
+                    request.getRequestDispatcher("changePassword.jsp").forward(request, response);
                 }
-
-
-
             }
     }
 
