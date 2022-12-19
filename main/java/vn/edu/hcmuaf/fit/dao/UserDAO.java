@@ -30,6 +30,16 @@ public class UserDAO extends RD {
         return null;
     }
 
+    public Map<String, Object> getByUserName(String username) {
+        List<Map<String, Object>> list = getAll();
+        for (Map<String, Object> user : list) {
+            if (((String) user.get("username")).equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void delete(int id) {
         JDBIConnector.get().withHandle(h ->
@@ -72,22 +82,6 @@ public class UserDAO extends RD {
 
     }
 
-    public int updatev1(int id, String username, String password, String name, String address, String phone, String email, int level) {
-
-        return  JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE user SET username=:username,password=:password,name=:name,address=:address,phone=:phone,email=:email,level=:level WHERE id=:id")
-                        .bind("username", username)
-                        .bind("password", password)
-                        .bind("name", name)
-                        .bind("address", address)
-                        .bind("phone", phone)
-                        .bind("email", email)
-                        .bind("level", level)
-                        .bind("id", id)
-                        .execute());
-
-    }
-
     public Map<String,Object> login(String username, String password){
         if(!checkValid(username,password)){
             return null;
@@ -114,8 +108,7 @@ public boolean checkValid(String username, String password){
 }
     public static void main(String[] args) {
 //        System.out.println(new UserDAO().getAll());
-//        System.out.println((new UserDAO()).checkUsername("manhha5842"));
-//        System.out.println((new UserDAO()).login("abc","a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"));
+        System.out.println(new UserDAO().getByUserName("tinh"));
     }
 
 

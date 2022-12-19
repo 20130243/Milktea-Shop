@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: tinh
-  Date: 12/18/2022
-  Time: 12:10 PM
+  Date: 12/19/2022
+  Time: 2:48 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -80,7 +80,7 @@
             <!-- login-register-tab-list start -->
             <div class="login-register-tab-list nav">
               <a class="active" data-bs-toggle="tab" href="#lg1">
-                <h4>Quên mật khẩu</h4>
+                <h4>Thay đổi mật khẩu</h4>
               </a>
             </div>
             <!-- login-register-tab-list end -->
@@ -88,30 +88,30 @@
               <div id="lg1" class="tab-pane active">
                 <div class="login-form-container">
                   <div class="login-register-form">
-                    <form action="forgotPassword" method="get">
+                    <form action="/changePassword" method="get">
                       <div class="login-input-box">
                         <input
-                                type="text"
-                                name="user-name"
-                                placeholder="Tài khoản"
+                                type="password"
+                                name="password-old"
+                                placeholder="Mật nhẩu cũ "
                         />
                         <input
-                                name="user-email"
-                                placeholder="Email"
-                                type="email"
+                                type="password"
+                                name="password-new"
+                                placeholder="Mật nhẩu mới"
+                        />
+
+                        <input
+                                type="password"
+                                name="password-new-confirm"
+                                placeholder="Nhập lại mật nhẩu "
                         />
                       </div>
+
                       <div class="button-box">
-                        <div class="login-toggle-btn">
-                          <a href="login-register.html" style="color: blue"
-                          >Đăng nhập</a
-                          >
-                        </div>
-                        <div class="button-box">
-                          <button class="login-btn btn" type="submit">
-                            <span>Gửi</span>
-                          </button>
-                        </div>
+                        <button class="register-btn btn" type="submit">
+                          <span>Đổi mật khẩu</span>
+                        </button>
                       </div>
                     </form>
                   </div>

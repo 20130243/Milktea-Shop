@@ -1,12 +1,23 @@
 package vn.edu.hcmuaf.fit.services;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.dao.UserDAO;
 
-import java.math.BigInteger;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.math.BigInteger;
+
+
+
+
 import java.util.Map;
+import java.util.Properties;
+import java.util.Random;
+
 
 public class UserService {
     UserDAO dao = new UserDAO();
@@ -88,11 +99,74 @@ public class UserService {
         return dao.checkUsername(user.getUsername());
     }
 
+    public User getByUsername(String username) {
+        Map<String, Object> map = dao.getByUserName(username);
+        if (map == null) {
+            return null;
+        } else {
+            User user = new User();
+            user.setId((int) map.get("id"));
+            user.setUsername((String) map.get("username"));
+            user.setPassword((String) map.get("password"));
+            user.setName((String) map.get("name"));
+            user.setEmail((String) map.get("email"));
+            user.setPhone((String) map.get("phone"));
+            user.setAddress((String) map.get("address"));
+            user.setLevel((Integer) map.get("level"));
+            user.setToken((String) map.get("token"));
+            return user;
+        }
+    }
+
+    public static boolean sendMail(String to, String subject, String text) {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("hahatishop@gmail.com", "alernqtuiilkahvz");
+            }
+        });
+        try {
+            Message message = new MimeMessage(session);
+            message.setHeader("Content-Type", "text/plain; charset=UTF-8");
+            message.setFrom(new InternetAddress("hahatishop@gmail.com"));
+            message.setReplyTo(InternetAddress.parse("hahatishop@gmail.com", false));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setText(text);
+            Transport.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean passwordRecovery(String username, String email){
+        User user = getByUsername(username);
+        if(user != null && user.getEmail().equals(email)){
+            String password = ramdomPassword();
+            user.setPassword(hashPassword(password));
+            update(user);
+            return sendMail(email, "Password recovery", password);
+
+        } else {
+
+        }
+
+        return false;
+    }
+    public String ramdomPassword() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        String pwd = RandomStringUtils.random( 8, characters );
+        return  pwd;
+    }
+
     public static void main(String[] args) {
-//        User user = new UserService().login("tinh","435006d9f697e80c9b41332131b1c751523df0f1c900eb6a660294c8f52110dd");
-//        user.setAddress("11111111");
-//        user.setId(1);
-
-
+        System.out.println(new UserService().passwordRecovery("tinh", "tinhle2772002@gmail.com"));
     }
 }
