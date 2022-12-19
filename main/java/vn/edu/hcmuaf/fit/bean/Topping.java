@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.bean;
 
-public class Topping {
+import java.io.Serializable;
+
+public class Topping implements Serializable {
     private int id;
     private String name;
     private float price;

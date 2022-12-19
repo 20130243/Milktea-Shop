@@ -43,7 +43,7 @@ public class CreateController extends HttpServlet {
 
         String name = request.getParameter("name");
 
-
+System.out.println(name);
         Part image = request.getPart("image");
         String realPath = request.getServletContext().getRealPath("/img/ProductImport");
         String fileName = Path.of(image.getSubmittedFileName()).getFileName().toString();

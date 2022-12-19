@@ -169,4 +169,7 @@ public class UserService {
     public static void main(String[] args) {
         System.out.println(new UserService().passwordRecovery("tinh", "tinhle2772002@gmail.com"));
     }
+    public boolean checkAdmin(User user) {
+        return user.getLevel() ==1 ;
+    }
 }

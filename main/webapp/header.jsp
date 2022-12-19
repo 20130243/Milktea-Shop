@@ -27,7 +27,7 @@
                 </nav>
             </div>
             <div class="col-lg-3 col-md-3">
-                <div class="header__nav__option"> 
+                <div class="header__nav__option">
                     <c:choose>
                         <c:when test="${ empty sessionScope.user}">
                             <a href="/login" class="primary-btn login-btn">Đăng nhập</a>
@@ -39,10 +39,11 @@
                                         <li style="display: flex ">
                                             <a href="#"><img src="img/icon/user.png" alt="" width="18px"/>
                                             </a>
-
                                             <ul class="dropdown">
+
                                                 <li><a href="./account.jsp">Tài khoản</a></li>
                                                 <li><a href="./logout">Đăng xuất</a></li>
+    
                                             </ul>
                                             <a href="#" class="user">${sessionScope.user.name}</a>
                                         </li>
