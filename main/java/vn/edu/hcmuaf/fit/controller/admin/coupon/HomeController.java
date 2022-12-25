@@ -9,29 +9,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "HomeController", value = "/coupon")
+@WebServlet(name = "Coupon", value = "/admin/coupon")
 public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = request.getParameter("page");
         int index;
-        if(page == null) {
+        if (page == null) {
             index = 1;
         } else {
             index = Integer.parseInt(page);
         }
         CouponService couponService = new CouponService();
         int count = couponService.getTotal();
-        int endPage = count/10;
-        if(count % 10 != 0) {
+        int endPage = count / 10;
+        if (count % 10 != 0) {
             endPage++;
         }
 
-        List<Coupon> couponList = couponService.getPaging(index);
-
-        request.setAttribute("couponList", couponList);
+        try {
+            List<Coupon> couponList = null;
+            couponList = couponService.getPaging(index);
+            request.setAttribute("couponList", couponList);
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new RuntimeException(e);
+        }
         request.setAttribute("endPage", endPage);
         request.getRequestDispatcher("coupon/index.jsp").forward(request, response);
     }
