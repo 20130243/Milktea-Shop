@@ -172,9 +172,12 @@
                                                             <span class="badge badge-success">Đang bán</span>
                                                         </c:when>
                                                         <c:when test="${item.status eq 1}">
-                                                            <span class="badge badge-warning">Hết nguyên liệu</span>
+                                                            <span class="badge badge-info">Giảm giá</span>
                                                         </c:when>
                                                         <c:when test="${item.status eq 2}">
+                                                            <span class="badge badge-warning">Hết nguyên liệu</span>
+                                                        </c:when>
+                                                        <c:when test="${item.status eq 3}">
                                                             <span class="badge badge-danger">Ngưng bán</span>
                                                         </c:when>
                                                     </c:choose>
@@ -277,19 +280,7 @@
 <script src="../../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
 <!-- third party js ends -->
 
-<script>
-    $(document).ready(function () {
-        $(".delete-btn").click(function () {
-
-            if (window.confirm("Bạn muốn xóa " + $(this).attr("data-name") + " ?")) {
-                url = "#delete-form-" + $(this).attr("data-id");
-                $(url).submit();
-            } else {
-                return false;
-            }
-        })
-    })
-</script>
+<script src="../../js/alert_delete.js"></script>
 </body>
 
 </html>

@@ -24,7 +24,7 @@ public class JDBIConnector {
 
     }
 
-    private JDBIConnector() {
+    public JDBIConnector() {
     }
 
     public static Jdbi get() {

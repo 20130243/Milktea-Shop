@@ -20,7 +20,12 @@ public class SearchController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String search = request.getParameter("search");
-        ProductService service = new ProductService();
+        ProductService service = null;
+        try {
+            service = new ProductService();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         CategoryService categoryService = new CategoryService();
         List<Product> listProduct = service.searchProduct(search);
         List<Category> listCategories = categoryService.getAll();

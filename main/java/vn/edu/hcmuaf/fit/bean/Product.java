@@ -11,6 +11,7 @@ public class Product implements Serializable {
     String img;
     int status;
     List<Topping> topping;
+
     public List<Topping> getTopping() {
         return topping;
     }
@@ -78,6 +79,20 @@ public class Product implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public void updateSale(int percent) {
+        for (PriceSize pz : priceSize) {
+            pz.setPrice((pz.getOriginalPrice() * percent) / 100);
+        }
+        setStatus(1);
+    }
+
+    public void resetPrice() {
+        for (PriceSize pz : priceSize) {
+            pz.setPrice((pz.getOriginalPrice()));
+        }
+        setStatus(0);
     }
 
     @Override

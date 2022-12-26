@@ -1,6 +1,5 @@
 package vn.edu.hcmuaf.fit.dao;
 
-import vn.edu.hcmuaf.fit.db.JDBCConnector;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.sql.Date;
@@ -11,7 +10,10 @@ import java.util.Map;
 public class CouponDao extends RD {
     @Override
     public List<Map<String, Object>> getAll() throws SQLException {
-        return JDBCConnector.query("SELECT * FROM coupon");
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM coupon  ")
+                        .mapToMap()
+                        .list());
     }
 
     @Override
@@ -78,8 +80,11 @@ public class CouponDao extends RD {
 
 
     public List<Map<String, Object>> paging(int index) throws SQLException {
-        return JDBCConnector.query("select * from coupon\n" +
-                "order by id DESC LIMIT " + ((index - 1) * 5) + ",5");
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from coupon\n" +
+                        "order by id\n" +
+                        "LIMIT ? , 5;").bind(0, (index-1)*5).mapToMap().list()
+        );
     }
 
     public static void main(String[] args) throws SQLException {

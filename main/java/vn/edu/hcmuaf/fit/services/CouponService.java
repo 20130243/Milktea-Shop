@@ -18,38 +18,15 @@ public class CouponService {
         List<Coupon> result = new ArrayList<Coupon>();
         List<Map<String, Object>> couponList = dao.getAll();
         for (Map<String, Object> map : couponList) {
-            Coupon coupon = new Coupon();
-            coupon.setId((Integer) map.get("id"));
-            coupon.setCode((String) map.get("code"));
-            coupon.setPercent((Integer) map.get("percent"));
-            coupon.setMax_price_sale((Integer) map.get("max_price_sale"));
-            coupon.setQuantity((Integer) map.get("quantity"));
-            coupon.setStart_date((Date) map.get("start_date"));
-            coupon.setEnd_date((Date) map.get("end_date"));
-            coupon.setMin_price_order((Float) map.get("min_price_order"));
-            coupon.setDate_regis_acc((Date) map.get("date_regis_acc"));
-            coupon.setMin_num_order((Integer) map.get("min_num_order"));
-            coupon.setContent((String) map.get("content"));
-            result.add(coupon);
+
+            result.add(convertMapToCoupon(map));
         }
         return result;
     }
 
     public Coupon getById(int id) throws Exception {
         Map<String, Object> map = dao.getById(id);
-        Coupon coupon = new Coupon();
-        coupon.setId((Integer) map.get("id"));
-        coupon.setCode((String) map.get("code"));
-        coupon.setPercent((Integer) map.get("percent"));
-        coupon.setMax_price_sale((Float) map.get("max_price_sale"));
-        coupon.setQuantity((Integer) map.get("quantity"));
-        coupon.setStart_date((Date) map.get("start_date"));
-        coupon.setEnd_date((Date) map.get("end_date"));
-        coupon.setMin_price_order((Float) map.get("min_price_order"));
-        coupon.setDate_regis_acc((Date) map.get("date_regis_acc"));
-        coupon.setMin_num_order((Integer) map.get("min_num_order"));
-        coupon.setContent((String) map.get("content"));
-        return coupon;
+        return  convertMapToCoupon(map);
     }
 
     public void insert(Coupon coupon) throws Exception {
@@ -82,21 +59,9 @@ public class CouponService {
     public List<Coupon> getPaging(int index) throws SQLException {
         List<Coupon> list = new ArrayList<>();
         List<Map<String, Object>> couponList = dao.paging(index);
-        if(couponList==null) return null;
+        if (couponList == null) return null;
         for (Map<String, Object> map : couponList) {
-            Coupon coupon = new Coupon();
-            coupon.setId((Integer) map.get("id"));
-            coupon.setCode((String) map.get("code"));
-            coupon.setPercent((Integer) map.get("percent"));
-            coupon.setMax_price_sale((Float) map.get("max_price_sale"));
-            coupon.setQuantity((Integer) map.get("quantity"));
-            coupon.setStart_date((Date) map.get("start_date"));
-            coupon.setEnd_date((Date) map.get("end_date"));
-            coupon.setMin_price_order((Float) map.get("min_price_order"));
-            coupon.setDate_regis_acc((Date) map.get("date_regis_acc"));
-            coupon.setMin_num_order(map.get("min_num_order") != null ?(Integer) map.get("min_num_order"):0);
-            coupon.setContent((String) map.get("content"));
-            list.add(coupon);
+            list.add(convertMapToCoupon(map));
         }
         return list;
     }
@@ -117,6 +82,7 @@ public class CouponService {
         start_date = new java.sql.Date(parsed.getTime());
         return start_date;
     }
+
     public Date convertEnd_Date(String text) throws ParseException {
         String end_date_string = text.substring(13, 23);
         java.sql.Date end_date;
@@ -126,8 +92,24 @@ public class CouponService {
         return end_date;
     }
 
+    public Coupon convertMapToCoupon(Map<String, Object> map) {
+        Coupon coupon = new Coupon();
+        coupon.setId((Integer) map.get("id"));
+        coupon.setCode((String) map.get("code"));
+        coupon.setPercent((Integer) map.get("percent"));
+        coupon.setMax_price_sale((Float) map.get("max_price_sale"));
+        coupon.setQuantity((Integer) map.get("quantity"));
+        coupon.setStart_date((Date) map.get("start_date"));
+        coupon.setEnd_date((Date) map.get("end_date"));
+        coupon.setMin_price_order((Float) map.get("min_price_order"));
+        coupon.setDate_regis_acc((Date) map.get("date_regis_acc"));
+        coupon.setMin_num_order(map.get("min_num_order") != null ? (Integer) map.get("min_num_order") : 0);
+        coupon.setContent((String) map.get("content"));
+        return coupon;
+    }
+
     public static void main(String[] args) throws SQLException {
-        System.out.println(     new CouponService().getPaging(1));
+        System.out.println(new CouponService().getPaging(1));
     }
 
 }
