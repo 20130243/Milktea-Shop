@@ -1,7 +1,7 @@
-package vn.edu.hcmuaf.fit.controller.admin.coupon;
+package vn.edu.hcmuaf.fit.controller.admin.sale;
 
-import vn.edu.hcmuaf.fit.bean.Coupon;
-import vn.edu.hcmuaf.fit.services.CouponService;
+import vn.edu.hcmuaf.fit.bean.Sale;
+import vn.edu.hcmuaf.fit.services.SaleService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,37 +9,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "Coupon", value = "/admin/coupon")
+@WebServlet(name = "Sale", value = "/admin/sale")
 public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String page = request.getParameter("page");
         int index;
-        if (page == null) {
+        if(page == null) {
             index = 1;
         } else {
             index = Integer.parseInt(page);
         }
-        CouponService couponService = new CouponService();
-        int count = couponService.getTotal();
-        int endPage = count / 5;
-        if (count % 5 != 0) {
+        SaleService saleService = new SaleService();
+        int count = saleService.getTotal();
+        int endPage = count/5;
+        if(count % 5 != 0) {
             endPage++;
         }
 
         try {
-            List<Coupon> couponList = null;
-            couponList = couponService.getPaging(index);
-            request.setAttribute("couponList", couponList);
-        } catch (SQLException e) {
-            System.out.println(e);
+            List<Sale> saleList = saleService.getPaging(index);
+            request.setAttribute("saleList", saleList);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
         request.setAttribute("endPage", endPage);
-        request.getRequestDispatcher("coupon/index.jsp").forward(request, response);
+        request.getRequestDispatcher("sale/index.jsp").forward(request, response);
     }
 
     @Override

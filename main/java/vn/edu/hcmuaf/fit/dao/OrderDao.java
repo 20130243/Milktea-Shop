@@ -5,7 +5,7 @@ import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import java.util.List;
 import java.util.Map;
 
-public class OrderDao extends RD {
+public class OrderDAO extends RD {
     @Override
     public List<Map<String, Object>> getAll() {
         return JDBIConnector.get().withHandle(h ->

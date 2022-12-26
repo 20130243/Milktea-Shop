@@ -107,6 +107,7 @@ public class PriceSizeDAO extends RD {
         );
     }
 
+
     public static void main(String[] args) {
         PriceSizeDAO dao = new PriceSizeDAO();
         List<Map<String, Object>> priceSizeList = dao.getAll();
