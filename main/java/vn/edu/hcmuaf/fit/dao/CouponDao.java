@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class CouponDao extends RD {
+public class CouponDAO extends RD {
     @Override
     public List<Map<String, Object>> getAll() throws SQLException {
         return JDBIConnector.get().withHandle(h ->
@@ -89,7 +89,7 @@ public class CouponDao extends RD {
 
     public static void main(String[] args) throws SQLException {
 
-        System.out.println(new CouponDao().paging(1));;
+        System.out.println(new CouponDAO().paging(1));;
     }
 
 

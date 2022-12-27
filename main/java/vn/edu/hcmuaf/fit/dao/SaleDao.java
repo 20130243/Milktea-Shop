@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class SaleDao extends RD {
+public class SaleDAO extends RD {
     @Override
     public List<Map<String, Object>> getAll() throws SQLException {
         return JDBIConnector.get().withHandle(h ->
@@ -85,7 +85,7 @@ public class SaleDao extends RD {
                         .mapToMap().first());
     }
     public static void main(String[] args) throws Exception {
-        System.out.println(new SaleDao().getSaleNotYet()+"");
+        System.out.println(new SaleDAO().getSaleNotYet()+"");
     }
 
 

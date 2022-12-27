@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class SaleDetailDao {
+public class SaleDetailDAO {
     public List<Map<String, Object>> getProductListBySaleId(int sale_id )throws SQLException {
 
         return JDBIConnector.get().withHandle(h ->
@@ -82,6 +82,6 @@ public class SaleDetailDao {
                         .execute());
     }
     public static void main(String[] args) throws SQLException {
-        System.out.println(new SaleDetailDao().getCategoryListBySaleId(10));
+        System.out.println(new SaleDetailDAO().getCategoryListBySaleId(10));
     }
 }
