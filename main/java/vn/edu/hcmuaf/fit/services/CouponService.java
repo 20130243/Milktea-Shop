@@ -1,7 +1,7 @@
 package vn.edu.hcmuaf.fit.services;
 
 import vn.edu.hcmuaf.fit.bean.Coupon;
-import vn.edu.hcmuaf.fit.dao.CouponDao;
+import vn.edu.hcmuaf.fit.dao.CouponDAO;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CouponService {
-    private final CouponDao dao = new CouponDao();
+    private final CouponDAO dao = new CouponDAO();
 
     public List<Coupon> getAll() throws SQLException {
         List<Coupon> result = new ArrayList<Coupon>();

@@ -14,13 +14,7 @@ public class PriceSizeService {
         List<PriceSize> result = new ArrayList<PriceSize>();
         List<Map<String, Object>> priceSizeList = dao.getAll();
         for (Map<String, Object> map : priceSizeList) {
-            PriceSize priceSize = new PriceSize();
-            priceSize.setId((Integer) map.get("id"));
-            priceSize.setProduct_id((Integer) map.get("product_id"));
-            priceSize.setSize((String) map.get("size"));
-            priceSize.setPrice((Float) map.get("price"));
-            priceSize.setOriginalPrice((Float) map.get("original_price"));
-            result.add(priceSize);
+            result.add(convertMapToPriceSize(map));
         }
         return result;
     }
@@ -29,13 +23,7 @@ public class PriceSizeService {
         List<Map<String, Object>> priceSizeList = dao.getByProductId(id);
         List<PriceSize> result = new ArrayList<PriceSize>();
         for (Map<String, Object> map : priceSizeList) {
-            PriceSize priceSize = new PriceSize();
-            priceSize.setId((Integer) map.get("id"));
-            priceSize.setProduct_id((Integer) map.get("product_id"));
-            priceSize.setSize((String) map.get("size"));
-            priceSize.setPrice((Float) map.get("price"));
-            priceSize.setOriginalPrice((Float) map.get("original_price"));
-            result.add(priceSize);
+            result.add(convertMapToPriceSize(map));
         }
         return result;
     }
@@ -61,4 +49,19 @@ public class PriceSizeService {
     public void deleteByProductId(int product_id) {
         dao.deleteByProductId(product_id);
     }
+
+    public PriceSize getById(Integer id) {
+        return convertMapToPriceSize(dao.getById(id));
+    }
+
+    public PriceSize convertMapToPriceSize(Map<String, Object> map) {
+        PriceSize priceSize = new PriceSize();
+        priceSize.setId((Integer) map.get("id"));
+        priceSize.setProduct_id((Integer) map.get("product_id"));
+        priceSize.setSize((String) map.get("size"));
+        priceSize.setPrice((Float) map.get("price"));
+        priceSize.setOriginalPrice((Float) map.get("original_price"));
+        return priceSize;
+    }
+
 }

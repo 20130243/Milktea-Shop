@@ -3,8 +3,8 @@ package vn.edu.hcmuaf.fit.services;
 import vn.edu.hcmuaf.fit.bean.Category;
 import vn.edu.hcmuaf.fit.bean.Product;
 import vn.edu.hcmuaf.fit.bean.Sale;
-import vn.edu.hcmuaf.fit.dao.SaleDao;
-import vn.edu.hcmuaf.fit.dao.SaleDetailDao;
+import vn.edu.hcmuaf.fit.dao.SaleDAO;
+import vn.edu.hcmuaf.fit.dao.SaleDetailDAO;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class SaleService {
 
-    private final SaleDao dao = new SaleDao();
-    private final SaleDetailDao detailDao = new SaleDetailDao();
+    private final SaleDAO dao = new SaleDAO();
+    private final SaleDetailDAO detailDao = new SaleDetailDAO();
 
     public List<Sale> getAll() throws Exception {
         List<Sale> result = new ArrayList<Sale>();
