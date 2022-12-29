@@ -2,14 +2,17 @@ package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class OrderDao extends RD {
+public class OrderDAO extends RD {
+    private static final String tableName = "order";
     @Override
     public List<Map<String, Object>> getAll() {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM order")
+                h.createQuery("SELECT * FROM "+tableName)
                         .mapToMap()
                         .list());
     }
@@ -28,18 +31,19 @@ public class OrderDao extends RD {
     @Override
     public void delete(int id) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("DELETE FROM order WHERE id=:id")
+                h.createUpdate("DELETE FROM "+tableName+" WHERE id=:id")
                         .bind("id", id)
                         .execute()
         );
     }
 
-    public static void insert(int user_id, String name, String phone, String address, String note, String coupon_id, String total) {
+    public static void insert(int user_id, String name, String phone, Date time, String address, String note, int coupon_id, Float total) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("INSERT INTO order(user_id,name,phone,address,note,coupon_id,total) VALUES(:user_id,:name,:phone,:address,:note,:coupon_id,:total)")
+                h.createUpdate("INSERT INTO "+tableName+"(user_id,name,phone,time,address,note,coupon_id,total) VALUES(:user_id,:name,:phone,:time,:address,:note,:coupon_id,:total)")
                         .bind("user_id", user_id)
                         .bind("name", name)
                         .bind("phone", phone)
+                        .bind("time", time)
                         .bind("address", address)
                         .bind("note", note)
                         .bind("coupon_id", coupon_id)
@@ -50,7 +54,7 @@ public class OrderDao extends RD {
 
     public void update(int id, String name, String phone, String address, String note, String coupon_id, String total) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE order SET name = :name,phone=:phone,address=:address,note=:note,coupon_id=: coupon_id,total=:total WHERE id =:id")
+                h.createUpdate("UPDATE "+tableName+" SET name = :name,phone=:phone,address=:address,note=:note,coupon_id=: coupon_id,total=:total WHERE id =:id")
                         .bind("name", name)
                         .bind("phone", phone)
                         .bind("address", address)
@@ -61,10 +65,26 @@ public class OrderDao extends RD {
 
         );
     }
+    public int getTotal() {
+        int count = JDBIConnector.get().withHandle(h ->
+                h.createQuery("select count(*) from "+tableName+"").mapTo(Integer.class).first()
+        );
+        return count;
+    }
+
+
+    public List<Map<String, Object>> paging(int index) throws SQLException {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from "+tableName+"\n" +
+                        ""+tableName+" by id\n" +
+                        "LIMIT ? , 10;").bind(0, (index-1)*10).mapToMap().list()
+        );
+    }
+
 
     public void updateStatus(int id, int status) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE order SET status = :status WHERE id = :id")
+                h.createUpdate("UPDATE "+tableName+" SET status = :status WHERE id = :id")
                         .bind("status", status)
                         .bind("id", id)
                         .execute());

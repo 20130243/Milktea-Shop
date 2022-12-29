@@ -172,21 +172,23 @@
                                                             <span class="badge badge-success">Đang bán</span>
                                                         </c:when>
                                                         <c:when test="${item.status eq 1}">
-                                                            <span class="badge badge-warning">Hết nguyên liệu</span>
+                                                            <span class="badge badge-info">Giảm giá</span>
                                                         </c:when>
                                                         <c:when test="${item.status eq 2}">
+                                                            <span class="badge badge-warning">Hết nguyên liệu</span>
+                                                        </c:when>
+                                                        <c:when test="${item.status eq 3}">
                                                             <span class="badge badge-danger">Ngưng bán</span>
                                                         </c:when>
                                                     </c:choose>
                                                 </td>
 
-                                                <form action="/admin/product/delete" method="post" id="delete-form-<c:out value="${item.id}"/>">
+                                                <form action="/admin/product/delete" method="post"
+                                                      id="delete-form-<c:out value="${item.id}"/>">
                                                     <td class="table-action text-center">
                                                         <a href="/admin/product/update?id=<c:out value="${item.id}"/>"
                                                            class="action-icon"> <i
                                                                 class="mdi mdi-square-edit-outline"></i></a>
-
-
                                                         <input type="text" name="id" id="id"
                                                                value="<c:out value="${item.id}"/>" class="d-none">
                                                         <button type="submit" class="d-none"></button>
@@ -195,7 +197,6 @@
                                                                                    data-name="<c:out value="${item.name}"/>"
                                                                                    data-id="<c:out value="${item.id}"/>"></i>
                                                         </a>
-
                                                     </td>
                                                 </form>
                                             </tr>
@@ -220,8 +221,6 @@
                                                     <span class="sr-only">Previous</span>
                                                 </a>
                                             </li>
-
-
                                             <c:forEach var="i" begin="1" end="${endPage}">
                                                 <li class="page-item  <c:if test="${currentPage eq i }"> active </c:if>">
                                                     <a class="page-link"
@@ -229,7 +228,6 @@
                                                         <c:out value="${i}"/>
                                                     </a>
                                                 </li>
-
                                             </c:forEach>
                                             <li class="page-item <c:if test="${currentPage eq endPage }"> d-none </c:if>">
                                                 <a class="page-link" href="/admin/product?page=<c:out value='${i+1}'/>"
@@ -282,19 +280,7 @@
 <script src="../../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
 <!-- third party js ends -->
 
-<script>
-    $(document).ready(function () {
-        $(".delete-btn").click(function () {
-
-            if (window.confirm("Bạn muốn xóa " + $(this).attr("data-name") + " ?")) {
-                url = "#delete-form-"+$(this).attr("data-id");
-                $(url).submit();
-            } else {
-                return false;
-            }
-        })
-    })
-</script>
+<script src="../../js/alert_delete.js"></script>
 </body>
 
 </html>

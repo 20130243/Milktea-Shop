@@ -43,7 +43,7 @@
 
                                                 <li><a href="./account.jsp">Tài khoản</a></li>
                                                 <li><a href="./logout">Đăng xuất</a></li>
-    
+
                                             </ul>
                                             <a href="#" class="user">${sessionScope.user.name}</a>
                                         </li>

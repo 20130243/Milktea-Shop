@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title><c:out value="${object.name}"/></title>
+    <title> ${object.name}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
     <meta content="Coderthemes" name="author"/>
@@ -59,7 +59,7 @@
                                     <li class="breadcrumb-item"><a
                                             href="<c:out value="${pageContext.request.contextPath}"/>/admin/product">Sản
                                         phẩm</a></li>
-                                    <li class="breadcrumb-item active"><c:out value="${object.name}"/></li>
+                                    <li class="breadcrumb-item active">${object.name}</li>
                                 </ol>
                             </div>
                             <h4 class="page-title">Sản phẩm</h4>
@@ -73,7 +73,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">Cập nhật sản phẩm</h4>
-                                <form id="update_form" action="/admin/product/update" method="post" enctype='multipart/form-data'>
+                                <form id="update_form" action="/admin/product/update" method="post"
+                                      enctype='multipart/form-data'>
                                     <input type="text" name="id" id="id" value="<c:out value="${object.id}"/> "
                                            class="d-none">
                                     <div class="row">
@@ -153,7 +154,7 @@
 
                                         </div>
                                     </div>
-                                    <button  id="submit" type="submit" class="btn btn-primary">Cập nhật</button>
+                                    <button id="submit" type="submit" class="btn btn-primary">Cập nhật</button>
                                 </form>
                             </div> <!-- end card-body-->
                         </div> <!-- end card-->
@@ -207,8 +208,8 @@
         })
 
 
-        $("#submit").click(function() {
-            if($("#image").get(0).files.length !== 0){
+        $("#submit").click(function () {
+            if ($("#image").get(0).files.length !== 0) {
                 $("#check_input_file").val("true");
             }
         })

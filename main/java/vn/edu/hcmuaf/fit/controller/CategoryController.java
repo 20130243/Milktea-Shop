@@ -19,7 +19,12 @@ public class CategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ProductService productService = new ProductService();
+        ProductService productService = null;
+        try {
+            productService = new ProductService();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         CategoryService categoryService = new CategoryService();
         List<Product> listProductByCategory = new ArrayList<Product>();
         String cid = request.getParameter("cid");

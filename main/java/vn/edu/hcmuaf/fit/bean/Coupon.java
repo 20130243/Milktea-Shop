@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.bean;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class Coupon implements Serializable {
     int id;
@@ -120,14 +121,18 @@ public class Coupon implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
-    public boolean checkValid(){
+
+    public boolean checkValid() {
         long millis = System.currentTimeMillis();
         Date crdate = new java.sql.Date(millis);
-        if(quantity<=0 || end_date.before(crdate) || start_date.after(crdate)){
-            return false;
-        }
+        return quantity > 0 && !end_date.before(crdate) && !start_date.after(crdate);
+    }
 
-        return true;
+    public String getStringStartEnd() {
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        String start = format.format(start_date);
+        String end = format.format(end_date);
+        return start + " - " + end;
     }
 
     @Override

@@ -26,6 +26,6 @@ public class CreateController extends HttpServlet {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        response.sendRedirect("/admin/category");
+        request.getRequestDispatcher("create.jsp").forward(request, response);
     }
 }

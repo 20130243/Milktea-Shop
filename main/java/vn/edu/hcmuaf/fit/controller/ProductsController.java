@@ -38,7 +38,12 @@ public class ProductsController extends HttpServlet {
         } else {
             index = Integer.parseInt(indexPage);
         }
-        ProductService producService = new ProductService();
+        ProductService producService = null;
+        try {
+            producService = new ProductService();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         String sortString = "&sort=0";
         int indexCate = 0;
