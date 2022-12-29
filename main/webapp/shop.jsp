@@ -43,7 +43,6 @@
     <div class="loader"></div>
 </div>
 
-
 <!-- Offcanvas Menu Begin -->
 <div class="offcanvas-menu-overlay"></div>
 <div class="offcanvas-menu-wrapper">
@@ -54,7 +53,6 @@
     </div>
     <div class="offcanvas__nav__option">
         <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-
         <a href="cart.html"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
     </div>
     <div id="mobile-menu-wrap"></div>
@@ -62,45 +60,7 @@
 <!-- Offcanvas Menu End -->
 
 <!-- Header Section Begin -->
-<%--<header class="header">--%>
-<%--    <div class="container">--%>
-<%--        <div class="row">--%>
-<%--            <div class="col-lg-3 col-md-3">--%>
-<%--                <div class="header__logo">--%>
-<%--                    <a href="index.jsp"><img class="logo-small" src="img/logo.png" alt=""/></a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="col-lg-6 col-md-6">--%>
-<%--                <nav class="header__menu mobile-menu">--%>
-<%--                    <ul>--%>
-<%--                        <li><a href="index.jsp">Trang chủ</a></li>--%>
-<%--                        <li class="active"><a href="./shop.html">Thức uống</a></li>--%>
-<%--                        <li>--%>
-<%--                            <a href="#">Giới thiệu</a>--%>
-<%--                            <ul class="dropdown">--%>
-<%--                                <li><a href="./about.html">Về chúng tôi</a></li>--%>
-<%--                                <li><a href="./contact.html">Liên hệ</a></li>--%>
-<%--                            </ul>--%>
-<%--                        </li>--%>
-
-<%--                        <li><a href="./blog.html">Khuyến mãi</a></li>--%>
-<%--                    </ul>--%>
-<%--                </nav>--%>
-<%--            </div>--%>
-<%--            <div class="col-lg-3 col-md-3">--%>
-<%--                <div class="header__nav__option">--%>
-<%--                    <a href="login-register.jsp" class="primary-btn login-btn">Đăng nhập</a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="canvas__open"><i class="fa fa-bars"></i></div>--%>
-<%--    </div>--%>
-<%--</header>--%>
-
 <%@include file="header.jsp" %>
-
-
-
 <!-- Header Section End -->
 
 <!-- Shop Section Begin -->
@@ -112,8 +72,6 @@
             <img src="assets/images/icon_tealeaves.png" width="500px" height="50px"
                  style="object-fit: cover;scale: 0.5;">
         </div>
-
-
         <div class="row">
             <div class=" col-lg-9">
                 <!-- Button trigger modal -->
@@ -174,7 +132,6 @@
                         for (Product p : list) {
                     %>
                     <div class="col-lg-3 col-md-4 col-sm-4">
-
                         <div class="product__item sale" data-toggle="modal"
                              data-target="#myModal<%=p.getId()%>" data-id="<%=p.getId()%>">
                             <div class="product__item__pic set-bg" data-setbg="<%=p.getImg()%>">
@@ -223,7 +180,6 @@
                             <%
                                 Cart cart = (Cart) session.getAttribute("cart");
                             %>
-
                             <div class="cart-product-list">
                                 <%
                                     if (cart != null) {
@@ -283,7 +239,6 @@
                                         Tổng tiền: <span
                                             class="price"> <%=new CurrencyFormat().format((int) cart.getTotalMoney())%></span>
                                     </div>
-                                    <%--                                    <button class=" btn-pay">Thanh toán</button>--%>
                                     <a href="/checkout" class="btn-pay">Thanh toán</a>
                                 </div>
                                 <%
@@ -347,8 +302,6 @@
             $(s).click();
         });
     });
-
-
 </script>
 </body>
 

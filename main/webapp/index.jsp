@@ -1,3 +1,7 @@
+<%@ page import="vn.edu.hcmuaf.fit.bean.Blog" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.Product" %>
+<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -24,8 +28,10 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link rel="stylesheet" href="css/blog.css" type="text/css" />
+    <link rel="stylesheet" href="css/shop.css" type="text/css">
+    <link rel="stylesheet" href="css/modal.css" type="text/css">
     <link rel="stylesheet" href="css/header-footer.css" type="text/css"/>
-    <link rel="stylesheet" href="css/shop.css">
 </head>
 
 <body>
@@ -103,7 +109,7 @@
 <!-- Hero Section End -->
 
 <!-- Banner Section Begin -->
-<section class="banner spad">
+<section class="blog spad">
     <div class="container">
         <div class="breadcumb">
             <h1>Trang chủ</h1>
@@ -114,87 +120,26 @@
             <div class="col text-center mb-3">
                 <h6 class="text_banner">Khuyến mãi mới nhất</h6>
             </div>
-            <div class="d-flex">
-                <div class="col-lg-55">
-                    <div href="#" class="banner__item">
-                        <div class="banner__item__pic" style="max-width: 100%">
-                            <img src="img/banner/pl1.png" alt="">
-                        </div>
-                        <div class="list_meta">
-                            <span>01.10 - 04.10.2022</span>
-                            <span>
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                    795
-                                </span>
-                        </div>
-                        <div class="banner__item__text text_banner text_banner">
-                            <h6>GRAND OPENING: PHÚC LONG 117 HÙNG VƯƠNG</h6>
-
-                        </div>
+        <div class="row">
+            <%
+                List<Blog> listBlog = (List<Blog>) request.getAttribute("listBlog");
+                if(listBlog!= null){
+                for (Blog b : listBlog) {
+            %>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="blog__item">
+                    <div class="blog__item__pic set-bg" data-setbg="<%=b.getImage()%>"></div>
+                    <div class="blog__item__text">
+                        <span><img src="img/icon/calendar.png" alt="" /> <%=b.getDate()%></span>
+                        <h5><%=b.getName()%></h5>
+                        <a href="blog-details?blogid=<%=b.getId()%>" target="_blank">Xem Thêm
+                            <main></main></a>
                     </div>
                 </div>
-                <div class="col-lg-55">
-                    <div href="#" class="banner__item">
-                        <div class="banner__item__pic" style="max-width: 100%">
-                            <img src="img/banner/pl2.png" alt="">
-                        </div>
-                        <div class="list_meta">
-                            <span>30.09.2022 - 02.10.2022</span>
-                            <span>
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                    990
-                                </span>
-                        </div>
-                        <div class="banner__item__text text_banner">
-                            <h6>GRAND OPENING PHÚC LONG NGUYỄN ÁI QUỐC & PHÚC LONG ĐƯỜNG 3 THÁNG 2</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-55">
-                    <div href="#" class="banner__item">
-                        <div class="banner__item__pic" style="max-width: 100%">
-                            <img src="img/banner/pl3.jpg" alt="">
-                        </div>
-                        <div class="list_meta">
-                            <span>23.09 - 25.09.2022 </span>
-                            <span>
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                    575
-                                </span>
-                        </div>
-                        <div class="banner__item__text text_banner">
-                            <h6>GRAND OPENING PHÚC LONG BICONSI</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-55">
-                    <div href="#" class="banner__item">
-                        <div class="banner__item__pic" style="max-width: 100%">
-                            <img src="img/banner/pl4.jpg" alt="">
-                        </div>
-                        <div class="list_meta">
-                            <span>17.09 - 14.10.2022</span>
-                            <span>
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                    1250
-                                </span>
-                        </div>
-                        <div class="banner__item__text text_banner">
-                            <h6>COMBO BACK TO SCHOOL - CHỈ TỪ 45,000Đ</h6>
-                            <div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+            <%}}%>
         </div>
     </div>
-</section>
-<!-- Banner Section End -->
-
-
-</div>
 </section>
 <!-- Banner Section End -->
 
@@ -203,96 +148,51 @@
     <div class="container">
         <div class="row">
             <div class="col text-center mb-3">
-                <h6 class="text_banner">Sản phẩm bán chạy</h6>
+                <h6 class="text_banner">Sản phẩm mới nhất</h6>
             </div>
         </div>
-        <div class="row product__filter d-flex">
+        <div class="row d-flex">
+            <%
+                List<Product> list = (List<Product>) request.getAttribute("listProduct");
+                if(list!=null){
+                for (Product p : list) {
+            %>
             <div class="col-lg-3 col-md-4 col-sm-4">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/CPCPCNDX-min.png">
-
-                    </div>
-                    <div class="product__item__text">
-                        <h5>Trà sữa matcha</h5>
-                        <h6>31.000đ</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-4">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/CPCRMDX-min.png">
-
-                    </div>
-                    <div class="product__item__text">
-                        <h5>Trà sữa Ôlong</h5>
-                        <h6>31.000đ</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-4">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/DE-min.png">
-
-                    </div>
-                    <div class="product__item__text">
-                        <h5>Ôlong thái cực</h5>
-                        <h6>31.000đ</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-4">
-                <div class="product__item sale">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/Dứa-Ép-min.png">
+                <div class="product__item sale" data-toggle="modal"
+                     data-target="#myModal<%=p.getId()%>" data-id="<%=p.getId()%>">
+                    <div class="product__item__pic set-bg" data-setbg="<%=p.getImg()%>">
+                        <%
+                            if (p.getStatus() == 1) {
+                        %>
                         <span class="label">Sale</span>
-
+                        <%}%>
                     </div>
                     <div class="product__item__text">
-                        <h5>Trà sữa dâu tây</h5>
-                        <h6>31.000đ</h6>
+                        <h5><%=p.getName()%>
+                        </h5>
+                        <%
+                            int price = 0;
+                            CurrencyFormat currency = new CurrencyFormat();
+                            if (p.getPriceSize().size()
+                                    > 0) {
+                                price = (int) (p.getPriceSize().get(0).getPrice());
+                            } else {
+                                price = 0;
+                            }
+                        %>
+                        <h6><%=currency.format(price)%>
+                        </h6>
                     </div>
                 </div>
+                <jsp:include page='/modal.jsp'>
+                    <jsp:param name="id" value="<%=p.getId()%>"/>
+                </jsp:include>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-4">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/Hồng-Trà-Đác-Cam-min.png">
-                    </div>
-                    <div class="product__item__text">
-                        <h5>Trà sữa bạc hà</h5>
-                        <h6>31.000đ</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-4">
-                <div class="product__item sale">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/Hồng-Trà-Sữa-min.png">
-                        <span class="label">Sale</span>
-                    </div>
-                    <div class="product__item__text">
-                        <h5>Trà sữa socola</h5>
-                        <h6>31.000đ</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-4">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/HTC-min.png">
-                    </div>
-                    <div class="product__item__text">
-                        <h5>Trà mận hạt sen</h5>
-                        <h6>31.000đ</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-4">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/KTX-min.png">
-                    </div>
-                    <div class="product__item__text">
-                        <h5>Trà đào bưởi hồng</h5>
-                        <h6>31.000đ</h6>
-                    </div>
-                </div>
-            </div>
+            <button type="button" class="btn btn-primary btn-lg d-none" id="btn-modal<%=p.getId()%>"
+                    data-toggle="modal"
+                    data-target="#myModal">
+            </button>
+            <% }}%>
         </div>
     </div>
 </section>
@@ -324,6 +224,16 @@
 <script src="js/mixitup.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/modal.js" defer></script>
+<script>
+    $(document).ready(function () {
+        $(".product__item").click(function (e) {
+            var val = this.getAttribute('data-id');
+            var s = '#btn-modal' + val;
+            $(s).click();
+        });
+    });
+</script>
 </body>
 
 </html>

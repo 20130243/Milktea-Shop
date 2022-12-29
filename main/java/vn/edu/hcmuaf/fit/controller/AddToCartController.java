@@ -112,13 +112,29 @@ public class AddToCartController extends HttpServlet {
                     }
 
                 }
-
-                response.sendRedirect(request.getContextPath() + url);
-
-            } else {
-
-                response.sendRedirect(request.getContextPath() + url);
+                if (check==false) {
+                    Item item = new Item();
+                    item.setId(listItems.size());
+                    item.setQuantity(quantity);
+                    item.setProduct(product);
+                    item.setNote(request.getParameter("note"));
+                    item.setPrice(price);
+                    listItems.add(item);
+                    cart.updateTotal();
+                }
+                if(user!=null) {
+                    cart.setCustomer(user);
+                }
+                session.setAttribute("cart", cart);
             }
+
+        }
+            response.sendRedirect(request.getContextPath() + url);
+    }
+        else {
+            response.sendRedirect(request.getContextPath() + url);
+    }
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
