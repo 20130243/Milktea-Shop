@@ -11,10 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductService {
-    public ProductService() throws Exception {
-//        new SaleService().updatePrice();
-    }
-
+    
     private final ProductDAO dao = new ProductDAO();
 
     public List<Product> getAll() {
