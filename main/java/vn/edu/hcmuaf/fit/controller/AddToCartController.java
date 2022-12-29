@@ -114,10 +114,13 @@ public class AddToCartController extends HttpServlet {
                 }
 
             }
+
+            response.sendRedirect(request.getContextPath() + url);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        }
+}
 
 
     @Override
