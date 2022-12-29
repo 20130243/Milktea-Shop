@@ -17,7 +17,12 @@ public class IndexController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BlogService blogService = new BlogService();
         List<Blog> listBlog = blogService.getBlogIndex();
-        ProductService productService = new ProductService();
+        ProductService productService = null;
+        try {
+            productService = new ProductService();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         List<Product> listProducts = productService.getProductNew();
 
 
