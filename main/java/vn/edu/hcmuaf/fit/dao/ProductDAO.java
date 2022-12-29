@@ -95,6 +95,15 @@ public class ProductDAO extends RD {
         );
     }
 
+    public List<Map<String, Object>> getProductNew() {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from product\n" +
+                                "ORDER BY product.id DESC LIMIT 8;")
+                        .mapToMap()
+                        .list()
+        );
+    }
+
     public static void main(String[] args) {
 //        ProductDAO dao = new ProductDAO();
 //        System.out.println(dao.pagingProduct(0));

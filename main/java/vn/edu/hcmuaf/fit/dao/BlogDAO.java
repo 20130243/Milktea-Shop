@@ -36,6 +36,15 @@ public class BlogDAO extends RD {
                 );
     }
 
+    public List<Map<String, Object>> getBlogIndex() {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from blog\n" +
+                                "ORDER BY blog.id DESC LIMIT 3;")
+                        .mapToMap()
+                        .list()
+        );
+    }
+
     public void insert(String name, Date start_date, Date end_date){
         JDBIConnector.get().withHandle(h ->
                 h.createUpdate("insert into blog(name,start_date,end_date) values(:name,:start_date,:end_date)")

@@ -97,17 +97,13 @@ public class AddToCartController extends HttpServlet {
                 if(user!=null) {
                     cart.setCustomer(user);
                 }
-                System.out.println(cart.getCustomer().toString());
                 session.setAttribute("cart", cart);
             }
 
         }
-
             response.sendRedirect(request.getContextPath() + url);
-
     }
         else {
-
             response.sendRedirect(request.getContextPath() + url);
     }
 
