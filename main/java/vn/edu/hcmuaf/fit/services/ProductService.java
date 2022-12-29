@@ -124,6 +124,30 @@ public class ProductService {
     }
 
 
+    public List<Product> getProductNew() {
+        List<Product> rs = new ArrayList<Product>();
+        List<Map<String, Object>> productList = dao.getProductNew();
+        for (Map<String, Object> map : productList) {
+            Product product = new Product();
+            product.setId((Integer) map.get("id"));
+            product.setName((String) map.get("name"));
+            product.setIdCategory((Integer) map.get("category_id"));
+            product.setImg((String) map.get("image"));
+            product.setStatus((Integer) map.get("status"));
+
+            List<Map<String, Object>> priceSize = new PriceSizeDAO().getByProductId((Integer) map.get("id"));
+            List<PriceSize> priceSizeList = priceSizeList(priceSize);
+            product.setPriceSize(priceSizeList);
+
+            List<Topping> toppingList = (new ToppingService()).getByCategoryId((Integer) map.get("category_id"));
+            product.setTopping(toppingList);
+
+            rs.add(product);
+        }
+        return rs;
+    }
+
+
     public void delete(int id) {
         (new PriceSizeService()).deleteByProductId(id);
         dao.delete(id);
