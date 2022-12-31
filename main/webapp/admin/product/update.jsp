@@ -127,7 +127,7 @@
                                             <div class="form-group mb-3">
                                                 <label for="price-M">Giá size M</label>
                                                 <input type="text" id="price-M" class="form-control" name="price_M"
-                                                       value="<fmt:formatNumber type = "number"  pattern="###" value = "${object.priceSize[0].price}" />">
+                                                       value="<fmt:formatNumber type = "number"  pattern="###" value = "${object.priceSize[0].originalPrice}" />">
                                             </div>
 
                                             <div class="form-group mb-3">

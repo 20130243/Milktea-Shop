@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 public class AdminDAO extends RD {
+    private static final String tableName = "admin";
+
     @Override
     public List<Map<String, Object>> getAll() {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM admin  ")
+                h.createQuery("SELECT * FROM " + tableName)
                         .mapToMap()
                         .list()
         );
@@ -17,18 +19,25 @@ public class AdminDAO extends RD {
 
     @Override
     public Map<String, Object> getById(int id) {
-        List<Map<String, Object>> adminList = getAll();
-        for (Map<String, Object> admin : adminList) {
-            if ((int) admin.get("id") == id) {
-                return admin;
-            }
-        }
-        return null;
+        return checkId(id) ? JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM " + tableName + " WHERE id=:id")
+                        .bind("id", id)
+                        .mapToMap()
+                        .first()
+        ) : null;
+    }
+
+    public boolean checkId(int id) {
+        int a = JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT COUNT(*) FROM " + tableName + " WHERE id=:id")
+                        .bind("id", id)
+                        .mapTo(Integer.class).first());
+        return a == 1;
     }
 
     public void insert(String username, String password, String name, String email, String phone, int level) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("INSERT INTO admin(username,password,name,email,phone,level ) VALUES(:username,:password,:name,email,:phone,:level )")
+                h.createUpdate("INSERT INTO " + tableName + "(username,password,name,email,phone,level ) VALUES(:username,:password,:name,email,:phone,:level )")
                         .bind("username", username)
                         .bind("password", password)
                         .bind("name", name)
@@ -39,11 +48,10 @@ public class AdminDAO extends RD {
         );
     }
 
-    public void update(int id, String username, String password, String name, String email, String phone, int level) {
+    public void update(int id, String username, String name, String email, String phone, int level) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE admin SET username=:username,password=:password,name=:name,email=:email,phone=:phone,level=:level  WHERE id=:id ")
+                h.createUpdate("UPDATE " + tableName + " SET username=:username,name=:name,email=:email,phone=:phone,level=:level  WHERE id=:id ")
                         .bind("username", username)
-                        .bind("password", password)
                         .bind("name", name)
                         .bind("email", email)
                         .bind("phone", phone)
@@ -51,14 +59,51 @@ public class AdminDAO extends RD {
                         .bind("id", id)
                         .execute()
         );
+    }
+
+    public Map<String, Object> getByUserName(String username) {
+        return checkUsername(username) ? JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM " + tableName + " WHERE username=:username")
+                        .bind("username", username)
+                        .mapToMap()
+                        .first()
+        ) : null;
     }
 
     @Override
     public void delete(int id) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("DELETE FROM admin WHERE id=:id")
+                h.createUpdate("DELETE FROM " + tableName + " WHERE id=:id")
                         .bind("id", id)
                         .execute()
         );
+    }
+
+    public boolean checkUsername(String username) {
+        int a = JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT COUNT(*) FROM " + tableName + " WHERE username=:username")
+                        .bind("username", username)
+                        .mapTo(Integer.class).first());
+        return a <= 1;
+    }
+
+    public Map<String, Object> login(String username, String password) {
+        return checkValid(username, password) ?
+                JDBIConnector.get().withHandle(h ->
+                        h.createQuery("SELECT * FROM " + tableName + " WHERE username =:username and password=:password")
+                                .bind("username", username)
+                                .bind("password", password)
+                                .mapToMap()
+                                .first()) : null;
+
+    }
+
+    public boolean checkValid(String username, String password) {
+        int result = JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT COUNT(*) FROM " + tableName + " WHERE username =:username and password =:password")
+                        .bind("username", username)
+                        .bind("password", password)
+                        .mapTo(Integer.class).first());
+        return result == 1;
     }
 }

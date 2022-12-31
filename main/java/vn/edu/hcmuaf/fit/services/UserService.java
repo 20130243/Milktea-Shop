@@ -7,34 +7,20 @@ import vn.edu.hcmuaf.fit.dao.UserDAO;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.math.BigInteger;
-
-
-
-
 import java.util.Map;
 import java.util.Properties;
-import java.util.Random;
 
 
 public class UserService {
     UserDAO dao = new UserDAO();
 
     public User getById(int id) {
-        Map<String, Object> user = dao.getById(id);
-        if (user != null) {
-            User result = new User();
-            result.setId(id);
-            result.setName((String) user.get("name"));
-            result.setEmail((String) user.get("email"));
-            result.setAddress((String) user.get("address"));
-            result.setPhone((String) user.get("phone"));
-            result.setLevel((Integer) user.get("level"));
-            return result;
-        }
-        return null;
+        Map<String, Object> map = dao.getById(id);
+
+        return map != null ? convertMapToUser(map) : null;
     }
 
     public void insert(User user) {
@@ -55,43 +41,16 @@ public class UserService {
 
     public User login(User user) {
         Map<String, Object> map = dao.login(user.getUsername(), user.getPassword());
-        if (map != null) {
-            return null;
-        } else {
-            user.setId((int) map.get("id"));
-            user.setUsername((String) map.get("username"));
-            user.setPassword((String) map.get("password"));
-            user.setName((String) map.get("name"));
-            user.setEmail((String) map.get("email"));
-            user.setPhone((String) map.get("phone"));
-            user.setAddress((String) map.get("address"));
-            user.setLevel((Integer) map.get("level"));
-            user.setToken((String) map.get("token"));
-            return user;
-        }
+        return map != null ? convertMapToUser(map) : null;
     }
 
     public User login(String username, String password) {
         Map<String, Object> map = dao.login(username, password);
-        if (map == null) {
-            return null;
-        } else {
-            User user = new User();
-            user.setId((int) map.get("id"));
-            user.setUsername((String) map.get("username"));
-            user.setPassword((String) map.get("password"));
-            user.setName((String) map.get("name"));
-            user.setEmail((String) map.get("email"));
-            user.setPhone((String) map.get("phone"));
-            user.setAddress((String) map.get("address"));
-            user.setLevel((Integer) map.get("level"));
-            user.setToken((String) map.get("token"));
-            return user;
-        }
+        return map != null ? convertMapToUser(map) : null;
     }
 
-    public void update(User user){
-        dao.update(user.getId(),user.getUsername(),user.getPassword(), user.getName(), user.getAddress(), user.getPhone(), user.getEmail(), user.getLevel());
+    public void update(User user) {
+        dao.update(user.getId(), user.getUsername(), user.getPassword(), user.getName(), user.getAddress(), user.getPhone(), user.getEmail(), user.getLevel());
 
     }
 
@@ -101,21 +60,7 @@ public class UserService {
 
     public User getByUsername(String username) {
         Map<String, Object> map = dao.getByUserName(username);
-        if (map == null) {
-            return null;
-        } else {
-            User user = new User();
-            user.setId((int) map.get("id"));
-            user.setUsername((String) map.get("username"));
-            user.setPassword((String) map.get("password"));
-            user.setName((String) map.get("name"));
-            user.setEmail((String) map.get("email"));
-            user.setPhone((String) map.get("phone"));
-            user.setAddress((String) map.get("address"));
-            user.setLevel((Integer) map.get("level"));
-            user.setToken((String) map.get("token"));
-            return user;
-        }
+        return map != null ? convertMapToUser(map) : null;
     }
 
     public static boolean sendMail(String to, String subject, String text) {
@@ -146,9 +91,9 @@ public class UserService {
         return true;
     }
 
-    public boolean passwordRecovery(String username, String email){
+    public boolean passwordRecovery(String username, String email) {
         User user = getByUsername(username);
-        if(user != null && user.getEmail().equals(email)){
+        if (user != null && user.getEmail().equals(email)) {
             String password = ramdomPassword();
             user.setPassword(hashPassword(password));
             update(user);
@@ -169,16 +114,32 @@ public class UserService {
 
         return false;
     }
+
     public String ramdomPassword() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        String pwd = RandomStringUtils.random( 8, characters );
-        return  pwd;
+        String pwd = RandomStringUtils.random(8, characters);
+        return pwd;
+    }
+
+    public boolean checkAdmin(User user) {
+        return user.getLevel() == 1;
+    }
+
+    public User convertMapToUser(Map<String, Object> map) {
+        User user = new User();
+        user.setId((int) map.get("id"));
+        user.setUsername((String) map.get("username"));
+        user.setPassword((String) map.get("password"));
+        user.setName((String) map.get("name"));
+        user.setEmail((String) map.get("email"));
+        user.setPhone((String) map.get("phone"));
+        user.setAddress((String) map.get("address"));
+        user.setLevel((Integer) map.get("level"));
+        user.setToken((String) map.get("token"));
+        return user;
     }
 
     public static void main(String[] args) {
-        System.out.println(new UserService().passwordRecovery("tinh", "tinhle2772002@gmail.com"));
-    }
-    public boolean checkAdmin(User user) {
-        return user.getLevel() ==1 ;
+        System.out.println(new UserService().getById(1));
     }
 }
