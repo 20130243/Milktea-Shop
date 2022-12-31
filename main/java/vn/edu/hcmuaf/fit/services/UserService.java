@@ -152,7 +152,16 @@ public class UserService {
             String password = ramdomPassword();
             user.setPassword(hashPassword(password));
             update(user);
-            return sendMail(email, "Password recovery", password);
+            String text = "Xin chào " +user.getName()+",\n" +
+                    "\n" +
+                    "Ai đó đã yêu cầu mật khẩu mới cho tài khoản "+ user.getUsername()+" được liên kết với "+ user.getEmail()+" .\n" +
+                    "\n" +
+                    "Mật khẩu mới của bạn: " + password+
+                    "\n" +
+                    "The HaHaTi team" +
+                      "\n" +
+                    "http://localhost:8080/login";
+            return sendMail(email, "Password recovery", text);
 
         } else {
 

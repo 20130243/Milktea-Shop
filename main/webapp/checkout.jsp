@@ -2,7 +2,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.Item" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.Topping" %>
-<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.User" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/15/2022
@@ -43,6 +44,7 @@
 <body>
 <%
   Cart cart = (Cart) session.getAttribute("cart");
+  User user = (User) session.getAttribute("user");
 %>
 <!-- Page Preloder -->
 <div id="preloder">
@@ -144,7 +146,9 @@
           </table>
         </div>
       </div>
+
       <div class="col-lg-4">
+        <form action="order" method="get" >
         <div class="cart__discount checkout__form shadow p-4">
           <div class="row">
             <div class="col-lg-12 col-md-12">
@@ -153,7 +157,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Tên người nhận<span>*</span></p>
-                    <input type="text">
+                    <input name="nameUser" type="text" value="<%=user != null ? user.getName() : ""%>">
                   </div>
                 </div>
               </div>
@@ -161,7 +165,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Số điện thoại người nhận<span>*</span></p>
-                    <input type="phone">
+                    <input name="phoneUser" type="phone" value="<%=user != null ? user.getPhone() : ""%>">
                   </div>
                 </div>
               </div>
@@ -169,7 +173,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Địa chỉ nhận hàng<span>*</span></p>
-                    <textarea name="" cols="" rows="2" style="width: 100%;"></textarea>
+                    <textarea name="addressUser" cols="" rows="2" style="width: 100%;" value="<%=user != null ? user.getAddress() : ""%>"></textarea>
                   </div>
                 </div>
               </div>
@@ -177,39 +181,41 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Ghi chú<span>*</span></p>
-                    <textarea name="" cols="" rows="2" style="width: 100%;"></textarea>
+                    <textarea name="noteUser" cols="" rows="2" style="width: 100%;"></textarea>
                   </div>
                 </div>
               </div>
-              <form action="#">
-                <input type="text" placeholder="Nhập mã giảm giá ">
-                <button type="submit">Áp dụng</button>
-              </form>
+              <div class="coupon_form">
+                <input name="coupon" type="text" placeholder="Nhập mã giảm giá ">
+                <button type="submit"  formaction="/coupon" >Áp dụng</button>
+              </div>
               <div class="row">
                 <div class="col-lg-12">
                   <h6 class="mt-4  mb-3">Tổng giỏ hàng</h6>
                   <div>
                     <%
                     if(cart!=null) {
-
                     %>
                     <p>Tổng tiền: <span><%=new CurrencyFormat().format((int) cart.getTotalMoney())%></span></p>
-                    <p>Giảm giá: <span>0đ</span></p>
+                    <p>Đã giảm: <span><%=new CurrencyFormat().format((int) cart.getPriceSale())%></span>
+                    </p>
                     <%
                       } else {
                     %>
                     <p>Tổng tiền: <span><%=new CurrencyFormat().format((int) 0)%></span></p>
-                    <p>Giảm giá: <span>0đ</span></p>
+                    <p>Đã giảm: <span>0đ</span></p>
                     <%
                       }
                     %>
                   </div>
-                  <a href="#" class="primary-btn w-100 text-center">Đặt hàng</a>
+<%--                  <a href="#" class="primary-btn w-100 text-center">Đặt hàng</a>--%>
+                  <button type="submit" class="primary-btn w-100 text-center">Đặt hàng</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        </form>
       </div>
     </div>
   </div>
@@ -242,6 +248,17 @@
 <script src="js/cart.js"></script>
 <script src="js/account/bootstrap.min.js"></script>
 <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
+<script>
+  <% String error = (String) request.getAttribute("errorCheckout");
+    if(error !=null){
+
+  %>
+    alert(<%=error%>);
+  <%
+  error = null;
+  } %>
+
+</script>
 </body>
 
 </html>

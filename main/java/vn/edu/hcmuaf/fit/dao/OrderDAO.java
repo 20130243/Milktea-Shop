@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.dao;
 
+import vn.edu.hcmuaf.fit.bean.Order;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
+import vn.edu.hcmuaf.fit.services.OrderService;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -8,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OrderDAO extends RD {
-    private static final String tableName = "order";
+    private static final String tableName = "`order`";
     @Override
     public List<Map<String, Object>> getAll() {
         return JDBIConnector.get().withHandle(h ->
@@ -37,9 +39,9 @@ public class OrderDAO extends RD {
         );
     }
 
-    public static void insert(int user_id, String name, String phone, Date time, String address, String note, int coupon_id, Float total) {
+    public static void insert(int user_id, String name, String phone, Date time, String address, String note, int coupon_id, float total) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("INSERT INTO "+tableName+"(user_id,name,phone,time,address,note,coupon_id,total) VALUES(:user_id,:name,:phone,:time,:address,:note,:coupon_id,:total)")
+                h.createUpdate("INSERT INTO `order`"+"(user_id,name,phone,time,address,note,coupon_id,total) VALUES(:user_id,:name,:phone,:time,:address,:note,:coupon_id,:total)")
                         .bind("user_id", user_id)
                         .bind("name", name)
                         .bind("phone", phone)
@@ -52,9 +54,10 @@ public class OrderDAO extends RD {
         );
     }
 
-    public void update(int id, String name, String phone, String address, String note, String coupon_id, String total) {
+    public void update(int id, String name, String phone, String address, String note, int coupon_id, float total) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE "+tableName+" SET name = :name,phone=:phone,address=:address,note=:note,coupon_id=: coupon_id,total=:total WHERE id =:id")
+                h.createUpdate("UPDATE "+tableName+" SET id = :id, name = :name,phone=:phone,address=:address,note=:note,coupon_id=: coupon_id,total=:total WHERE id =:id")
+                        .bind("id", id)
                         .bind("name", name)
                         .bind("phone", phone)
                         .bind("address", address)
@@ -89,4 +92,5 @@ public class OrderDAO extends RD {
                         .bind("id", id)
                         .execute());
     }
+
 }
