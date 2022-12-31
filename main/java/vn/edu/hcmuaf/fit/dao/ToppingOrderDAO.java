@@ -41,10 +41,11 @@ public class ToppingOrderDAO extends RD {
                         .bind("id", id).execute());
     }
 
-    public void insert(int topping_id, int order_detail_id) {
+    public void insert(int topping_id, int product_size_id, int order_detail_id) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("INSERT INTO " + tableName + "(topping_id,order_detail_id) VALUES(:topping_id,:order_detail_id)")
+                h.createUpdate("INSERT INTO " + tableName + "(topping_id, product_size_id,order_detail_id) VALUES(:topping_id,:product_size_id,:order_detail_id)")
                         .bind("topping_id", topping_id)
+                        .bind("product_size_id", product_size_id)
                         .bind("order_detail_id", order_detail_id)
                         .execute()
         );

@@ -47,9 +47,11 @@ public class AddToCartController extends HttpServlet {
                     String size = request.getParameter("size" + pro_id);
                     List<PriceSize> priceSizes = new ArrayList<>();
                     if (size.equalsIgnoreCase("M")) {
-                        priceSizes.add(new PriceSize(0, 0, size, productService.getPriceSizeM(pro_id), productService.getPriceSizeM(pro_id)));
+                        PriceSize sizeM = productService.getSizeM(pro_id);
+                        priceSizes.add(new PriceSize(sizeM.getId(), sizeM.getId(), size, sizeM.getPrice(), sizeM.getOriginalPrice()));
                     } else if (size.equalsIgnoreCase("L")) {
-                        priceSizes.add(new PriceSize(0, 0, size, productService.getPriceSizeL(pro_id), productService.getPriceSizeL(pro_id)));
+                        PriceSize sizeL = productService.getSizeL(pro_id);
+                        priceSizes.add(new PriceSize(sizeL.getId(), sizeL.getId(), size, sizeL.getPrice(), sizeL.getOriginalPrice()));
                     }
 
                     product.setPriceSize(priceSizes);
@@ -67,17 +69,10 @@ public class AddToCartController extends HttpServlet {
                     if (session.getAttribute("cart") == null) {
                         Cart cart = new Cart();
                         List<Item> listItems = new ArrayList<Item>();
-                        Item item = new Item();
-                        item.setId(listItems.size());
-                        item.setQuantity(quantity);
-                        item.setProduct(product);
-                        item.setNote(request.getParameter("note"));
-                        item.setPrice(price);
-                        listItems.add(item);
+                        Item item = new Item(listItems.size(),product,quantity,price,request.getParameter("note"));
                         cart.setItems(listItems);
+                        cart.addItem(item);
                         cart.updateTotal();
-
-
                         session.setAttribute("cart", cart);
                     } else {
                         Cart cart = (Cart) session.getAttribute("cart");
@@ -95,13 +90,8 @@ public class AddToCartController extends HttpServlet {
                             }
                         }
                         if (check == false) {
-                            Item item = new Item();
-                            item.setId(listItems.size());
-                            item.setQuantity(quantity);
-                            item.setProduct(product);
-                            item.setNote(request.getParameter("note"));
-                            item.setPrice(price);
-                            listItems.add(item);
+                            Item item = new Item(listItems.size(),product,quantity,price,request.getParameter("note"));
+                            cart.addItem(item);
                             cart.updateTotal();
                         }
                         if (user != null) {
@@ -112,16 +102,17 @@ public class AddToCartController extends HttpServlet {
                     }
 
                 }
+                response.sendRedirect(request.getContextPath() + url);
 
+            } else {
+                response.sendRedirect(request.getContextPath() + url);
             }
 
-            response.sendRedirect(request.getContextPath() + url);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

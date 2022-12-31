@@ -11,9 +11,7 @@ public class Item implements Serializable {
 
     private String note;
 
-    public Item(){
-
-    }
+    public Item(){}
 
     public Item(int id, Product product, int quantity, float price, String note) {
         this.id = id;

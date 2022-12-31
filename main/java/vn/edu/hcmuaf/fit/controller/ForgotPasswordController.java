@@ -17,6 +17,7 @@ public class ForgotPasswordController extends HttpServlet {
         if (username != null && email != null) {
             try {
                 userService.passwordRecovery(username, email);
+                response.sendRedirect("/login");
             } catch (Exception e) {
                 request.setAttribute("error_forgotpassword","Tài khoản không tồn tại");
                 request.getRequestDispatcher("/forgotPass.jsp").forward(request, response);
