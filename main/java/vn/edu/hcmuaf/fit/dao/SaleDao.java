@@ -76,7 +76,7 @@ public class SaleDAO extends RD {
     }
     public List<Map<String,Object>> getSaleNotYet(){
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("select * from sale where end_date < CURRENT_DATE").mapToMap().list()
+                h.createQuery("select * from sale where end_date > CURRENT_DATE").mapToMap().list()
         );
     }
     public Map<String, Object> findFirst() {
@@ -85,7 +85,7 @@ public class SaleDAO extends RD {
                         .mapToMap().first());
     }
     public static void main(String[] args) throws Exception {
-        System.out.println(new SaleDAO().getSaleNotYet()+"");
+        System.out.println(new SaleDAO().getSaleNotYet().size()+"");
     }
 
 

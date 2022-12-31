@@ -76,6 +76,7 @@ public class SaleService {
         for (Sale sale : saleList) {
             if (sale.checkValid()) {
                 List<Product> productList = getProducts(sale);
+
                 for (Product product : productList) {
                     product.updateSale(sale.getPercent());
                     new ProductService().update(product);
@@ -101,6 +102,7 @@ public class SaleService {
         for (Category category : sale.getCategoryList()) {
             detailDao.insert(findFirst().getId(), 0, category.getId());
         }
+        updatePrice();
     }
 
     public Sale findFirst() throws Exception {
@@ -118,7 +120,7 @@ public class SaleService {
         for (Category category : sale.getCategoryList()) {
             detailDao.insert(sale.getId(), 0, category.getId());
         }
-
+        updatePrice();
     }
 
     public void delete(int id) {
@@ -152,6 +154,7 @@ public class SaleService {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(new SaleService().getPaging(1));
+        new SaleService().updatePrice();
+//        System.out.println(new  SaleService().getSaleNotYet());
     }
 }
