@@ -170,6 +170,7 @@ ol {
   color: #ffffff;
   background: #1fa198;
   letter-spacing: 4px;
+  border: none;
 }
 
 .login-btn {
@@ -2453,7 +2454,12 @@ ol {
   position: relative;
 }
 
-.cart__discount form input {
+.cart__discount .coupon_form {
+  position: relative;
+}
+
+
+.cart__discount .coupon_form input {
   font-size: 14px;
   color: #b7b7b7;
   height: 50px;
@@ -2482,7 +2488,7 @@ ol {
   color: #b7b7b7;
 }
 
-.cart__discount form button {
+.cart__discount .coupon_form button {
   font-size: 14px;
   color: #ffffff;
   font-weight: 700;
@@ -2496,6 +2502,7 @@ ol {
   top: 0;
   height: 100%;
 }
+
 
 .cart__total {
   background: #f3f2ee;

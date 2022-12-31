@@ -56,6 +56,24 @@ public class CouponService {
                 coupon.getContent());
     }
 
+    public void useCoupon(Coupon coupon) throws Exception {
+        int getQuantity = coupon.getQuantity();
+        if(getQuantity > 0) {
+            coupon.setQuantity(coupon.getQuantity()-1);
+        }
+        dao.update(coupon.getId(),
+                coupon.getCode(),
+                coupon.getPercent(),
+                coupon.getMax_price_sale(),
+                coupon.getQuantity(),
+                coupon.getStart_date(),
+                coupon.getEnd_date(),
+                coupon.getMin_price_order(),
+                coupon.getDate_regis_acc(),
+                coupon.getMin_num_order(),
+                coupon.getContent());
+    }
+
     public List<Coupon> getPaging(int index) throws SQLException {
         List<Coupon> list = new ArrayList<>();
         List<Map<String, Object>> couponList = dao.paging(index);

@@ -93,6 +93,18 @@ public class ProductService {
         }
     }
 
+    public PriceSize getSizeM(int id) {
+        return getById(id).getPriceSize().get(0);
+    }
+
+    public PriceSize getSizeL(int id) {
+        try {
+            return getById(id).getPriceSize().get(1);
+        } catch (Exception e) {
+            return getSizeM(id);
+        }
+    }
+
     public List<Product> searchProduct(String search) {
         List<Product> rs = new ArrayList<Product>();
         List<Map<String, Object>> productList = dao.searchProduct(search);

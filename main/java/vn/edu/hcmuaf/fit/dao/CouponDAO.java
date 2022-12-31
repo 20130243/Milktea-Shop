@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.dao;
 
+
+import vn.edu.hcmuaf.fit.dao.RD;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.sql.Date;
@@ -67,7 +69,7 @@ public class CouponDAO extends RD {
                         .bind("date_regis_acc", date_regis_acc)
                         .bind("min_num_order", min_num_order)
                         .bind("content", content)
-                        .bind("id",id)
+                        .bind("id", id)
                         .execute());
     }
 
@@ -83,14 +85,16 @@ public class CouponDAO extends RD {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from coupon\n" +
                         "order by id\n" +
-                        "LIMIT ? , 5;").bind(0, (index-1)*5).mapToMap().list()
+                        "LIMIT ? , 5;").bind(0, (index - 1) * 5).mapToMap().list()
         );
     }
 
     public static void main(String[] args) throws SQLException {
 
-        System.out.println(new CouponDAO().paging(1));;
+        System.out.println(new CouponDAO().paging(1));
+        ;
     }
 
 
 }
+
