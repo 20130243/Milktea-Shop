@@ -13,7 +13,6 @@ public class Order implements Serializable {
     String address;
     Date time;
     String note;
-    int coupon_id;
     /*
     ProductList(PriceSize,(quantity,topping))
     Vi du
@@ -33,7 +32,6 @@ public class Order implements Serializable {
         this.address = address;
         this.time = time;
         this.note = note;
-        this.coupon_id = coupon_id;
         this.cart = cart;
         this.total = total;
         this.status = status;
@@ -98,16 +96,6 @@ public class Order implements Serializable {
         this.note = note;
     }
 
-    public int getCoupon_id() {
-        return coupon_id;
-    }
-
-    public void setCoupon_id(int coupon_id) {
-        this.coupon_id = coupon_id;
-    }
-
-
-
     public float getTotal() {
         return total;
     }
@@ -149,7 +137,6 @@ public class Order implements Serializable {
                 ", address='" + address + '\'' +
                 ", time=" + time +
                 ", note='" + note + '\'' +
-                ", coupon_id=" + coupon_id +
                 ", cart=" + cart +
                 ", total=" + total +
                 ", status=" + status +

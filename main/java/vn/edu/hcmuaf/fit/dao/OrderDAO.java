@@ -11,10 +11,11 @@ import java.util.Map;
 
 public class OrderDAO extends RD {
     private static final String tableName = "`order`";
+
     @Override
     public List<Map<String, Object>> getAll() {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM "+tableName)
+                h.createQuery("SELECT * FROM " + tableName)
                         .mapToMap()
                         .list());
     }
@@ -33,7 +34,7 @@ public class OrderDAO extends RD {
     @Override
     public void delete(int id) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("DELETE FROM "+tableName+" WHERE id=:id")
+                h.createUpdate("DELETE FROM " + tableName + " WHERE id=:id")
                         .bind("id", id)
                         .execute()
         );
@@ -41,14 +42,14 @@ public class OrderDAO extends RD {
 
     public static void insert(int user_id, String name, String phone, Date time, String address, String note, int coupon_id, float total) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("INSERT INTO `order`"+"(user_id,name,phone,time,address,note,coupon_id,total) VALUES(:user_id,:name,:phone,:time,:address,:note,:coupon_id,:total)")
+                h.createUpdate("INSERT INTO `order`" + "(user_id,name,phone,time,address,note,coupon_id,total) VALUES(:user_id,:name,:phone,:time,:address,:note,:coupon_id,:total)")
                         .bind("user_id", user_id)
                         .bind("name", name)
                         .bind("phone", phone)
                         .bind("time", time)
                         .bind("address", address)
                         .bind("note", note)
-                        .bind("coupon_id", coupon_id)
+                        .bind("coupon_id", coupon_id == 0 ? null : coupon_id)
                         .bind("total", total)
                         .execute()
         );
@@ -56,7 +57,7 @@ public class OrderDAO extends RD {
 
     public void update(int id, String name, String phone, String address, String note, int coupon_id, float total) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE "+tableName+" SET id = :id, name = :name,phone=:phone,address=:address,note=:note,coupon_id=: coupon_id,total=:total WHERE id =:id")
+                h.createUpdate("UPDATE " + tableName + " SET id = :id, name = :name,phone=:phone,address=:address,note=:note,coupon_id=: coupon_id,total=:total WHERE id =:id")
                         .bind("id", id)
                         .bind("name", name)
                         .bind("phone", phone)
@@ -68,9 +69,10 @@ public class OrderDAO extends RD {
 
         );
     }
+
     public int getTotal() {
         int count = JDBIConnector.get().withHandle(h ->
-                h.createQuery("select count(*) from "+tableName+"").mapTo(Integer.class).first()
+                h.createQuery("select count(*) from " + tableName + "").mapTo(Integer.class).first()
         );
         return count;
     }
@@ -78,17 +80,25 @@ public class OrderDAO extends RD {
 
     public List<Map<String, Object>> paging(int index) throws SQLException {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("select * from "+tableName+"\n" +
-                        ""+tableName+" by id\n" +
-                        "LIMIT ? , 10;").bind(0, (index-1)*10).mapToMap().list()
+                h.createQuery("select * from " + tableName + "\n" +
+                        "" + tableName + " by id\n" +
+                        "LIMIT ? , 10;").bind(0, (index - 1) * 10).mapToMap().list()
         );
     }
 
 
     public void updateStatus(int id, int status) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE "+tableName+" SET status = :status WHERE id = :id")
+                h.createUpdate("UPDATE " + tableName + " SET status = :status WHERE id = :id")
                         .bind("status", status)
+                        .bind("id", id)
+                        .execute());
+    }
+
+    public void updateCoupon(int id, int couponID) {
+        JDBIConnector.get().withHandle(h ->
+                h.createUpdate("UPDATE " + tableName + " SET coupon_id = :coupon_id WHERE id = :id")
+                        .bind("coupon_id", couponID)
                         .bind("id", id)
                         .execute());
     }
