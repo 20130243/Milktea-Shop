@@ -1,9 +1,6 @@
 package vn.edu.hcmuaf.fit.services;
 
-import vn.edu.hcmuaf.fit.bean.Item;
-import vn.edu.hcmuaf.fit.bean.Order;
-import vn.edu.hcmuaf.fit.bean.PriceSize;
-import vn.edu.hcmuaf.fit.bean.Topping;
+import vn.edu.hcmuaf.fit.bean.*;
 import vn.edu.hcmuaf.fit.dao.OrderDAO;
 import vn.edu.hcmuaf.fit.dao.OrderDetailDAO;
 import vn.edu.hcmuaf.fit.dao.ToppingOrderDAO;
@@ -47,15 +44,17 @@ public class OrderService {
 
     public void insert(Order order) {
         dao.insert(order.getUser_id(), order.getName(), order.getPhone(), order.getTime(),
-                order.getAddress(), order.getNote(), order.getCoupon_id(), order.getTotal());
+                order.getAddress(), order.getNote(), order.getCart().getCoupon() == null ? 0:order.getCart().getCoupon().getId(), order.getTotal());
     }
     public void update(Order order) {
-        dao.update(order.getId(), order.getName(), order.getPhone(), order.getAddress(), order.getNote(),order.getCoupon_id(),order.getTotal());
+        dao.update(order.getId(), order.getName(), order.getPhone(), order.getAddress(), order.getNote(),order.getCart().getCoupon().getId(),order.getTotal());
     }
+
 
     public void addOrder(Order order){
         try {
             insert(order);
+            updateCoupon(order,order.getCart().getCoupon().getId());
             List<Order> listOrder = getAll();
             System.out.println(listOrder.size());
             for (Order item : listOrder) {
@@ -66,7 +65,7 @@ public class OrderService {
             detail_dao.insert(order.getId(), item.getProduct().getPriceSize().get(0).getProduct_id(),item.getQuantity());
             List<Topping> toppings = item.getProduct().getTopping();
             for (Topping topping : toppings) {
-                topping_order_dao.insert(topping.getId(),item.getProduct().getPriceSize().get(0).getProduct_id(),order.getId());
+                topping_order_dao.insert(topping.getId(),order.getId());
             }
         }
 
@@ -84,6 +83,10 @@ public class OrderService {
         dao.updateStatus(order.getId(), status);
     }
 
+    public void updateCoupon(Order order, int coupon_id) {
+        dao.updateCoupon(order.getId(), coupon_id);
+    }
+
 
     public Order convertMaptoOrder(Map<String, Object> map) throws SQLException {
         Order order = new Order();
@@ -94,7 +97,7 @@ public class OrderService {
         order.setAddress((String) map.get("address"));
         order.setNote((String) map.get("note"));
         order.setTime((Date) map.get("time"));
-        order.setCoupon_id(map.get("coupon_id") != null ? (int) map.get("coupon_id") : 0);
+//        order.getCart().getCoupon().setId(map.get("coupon_id") != null ? (int) map.get("coupon_id") : 0);
 
 //        List<Map<PriceSize, Map<Integer, Topping>>> product_price_quantity_topping = new ArrayList<Map<PriceSize, Map<Integer, Topping>>>();
 //        List<Map<String, Object>> order_detail = detail_dao.getByOrderId(order.getId());
@@ -131,7 +134,8 @@ public class OrderService {
         order.setAddress("1234565 adssada");
         order.setNote("");
         order.setTotal(10000);
+        order.setCart(new Cart());
 
-        orderService.addOrder(order);
+        orderService.insert(order);
     }
 }
