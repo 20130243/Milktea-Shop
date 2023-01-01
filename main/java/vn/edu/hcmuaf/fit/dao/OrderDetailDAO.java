@@ -56,4 +56,6 @@ public class OrderDetailDAO extends RD {
                 h.createQuery("SELECT * FROM " + tableName + " ORDER BY id DESC LIMIT 1")
                         .mapToMap().first());
     }
+
+
 }

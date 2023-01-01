@@ -50,4 +50,10 @@ public class ToppingOrderDAO extends RD {
         );
     }
 
+    public Map<String, Object> findFirst() {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM topping_order ORDER BY id DESC LIMIT 1")
+                        .mapToMap().first());
+    }
+
 }

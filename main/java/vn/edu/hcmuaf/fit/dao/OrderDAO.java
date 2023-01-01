@@ -103,4 +103,18 @@ public class OrderDAO extends RD {
                         .execute());
     }
 
+    public Map<String, Object> findFirst() {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM `order` ORDER BY id DESC LIMIT 1")
+                        .mapToMap().first());
+    }
+
+    public List<Map<String, Object>> getOrderByUser(int userID) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM " + tableName +"WHERE user_id = :user_id")
+                        .bind("user_id", userID)
+                        .mapToMap()
+                        .list());
+    }
+
 }

@@ -168,4 +168,18 @@ public class Cart implements Serializable {
 //
 //
 //    }
+
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", items=" + items +
+                ", status=" + status +
+                ", totalMoney=" + totalMoney +
+                ", priceSale=" + priceSale +
+                ", coupon=" + coupon +
+                '}';
+    }
 }
