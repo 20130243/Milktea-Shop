@@ -26,8 +26,8 @@ public class OrderController extends HttpServlet {
             String addressUser = request.getParameter("addressUser");
             String noteUser = request.getParameter("noteUser");
             if(nameUser.equals("") || phoneUser.equals("") || addressUser.equals("")) {
-                String error = "Điền đầy đủ thông tin";
-                request.setAttribute("errorCheckout", error);
+                String error = "202";
+                session.setAttribute("errorCheckout", error);
                 request.getRequestDispatcher("checkout").forward(request, response);
             } else {
                 Order order = new Order();
@@ -40,12 +40,12 @@ public class OrderController extends HttpServlet {
                 order.setCart(cart);
                 order.setTotal(cart.getTotalMoney());
                 orderService.addOrder(order);
+                session.removeAttribute("cart");
                 response.sendRedirect("account.jsp#order");
             }
-
         } else if(user == null){
-            String error = "Đăng nhập để thanh toán";
-            request.setAttribute("errorCheckout", error);
+            String error = "204";
+            session.setAttribute("errorCheckout", error);
             request.getRequestDispatcher("checkout").forward(request, response);
         }
     }

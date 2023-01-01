@@ -40,8 +40,7 @@ public class EditCartController extends HttpServlet {
                     }
                 }
             cart.updateTotal();
-
-
+            session.setAttribute("cart", cart);
             response.sendRedirect(request.getContextPath() + url);
         }else {
             response.sendRedirect(request.getContextPath() + url);

@@ -155,6 +155,7 @@ public class SaleService {
 
     public static void main(String[] args) throws Exception {
         new SaleService().updatePrice();
+
 //        System.out.println(new  SaleService().getSaleNotYet());
     }
 }

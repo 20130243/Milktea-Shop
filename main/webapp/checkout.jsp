@@ -124,8 +124,10 @@
                 <p class="w-150"><%=topping.getName()%></p>
                 <%
                     }
-                  }
+                  } else {
                 %>
+                <p class="w-150"></p>
+                <%}%>
               </td>
               <td class="quantity__item">
                 <div class="quantity">
@@ -249,14 +251,19 @@
 <script src="js/account/bootstrap.min.js"></script>
 <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
 <script>
-  <% String error = (String) request.getAttribute("errorCheckout");
+  <% String error = (String) session.getAttribute("errorCheckout");
     if(error !=null){
-
+      if(error.equals("202")) {
   %>
-    alert(<%=error%>);
-  <%
-  error = null;
-  } %>
+  alert('Vui lòng điền đủ thông tin');
+  <%} else if(error.equals("204")) {%>
+  alert('Vui lòng đăng nhập');
+  <%} else if(error.equals("101")) {%>
+  alert('Mỗi giỏ hàng sử dụng được 1 lần');
+  <%} else if(error.equals("102")) {%>
+  alert('Mã giảm hết số lượng');
+   <%} session.setAttribute("errorCheckout",null);}%>
+
 
 </script>
 </body>
