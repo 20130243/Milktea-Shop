@@ -82,7 +82,10 @@
                                     <div class="login-register-form">
                                         <form action="/login" method="post">
                                             <div class="login-input-box">
+                                                <span class="text-danger"
+                                                      id="login-username-error">${requestScope['error_login']}</span>
                                                 <input type="text" name="username" placeholder="Tài khoản"/>
+                                                <span class="text-danger" id="login-password-error"></span>
                                                 <input type="password" name="password" placeholder="Mật khẩu"/>
                                             </div>
                                             <div class="button-box">
@@ -107,18 +110,25 @@
                                         <form action="/register" method="post">
                                             <div class="login-input-box">
                                                 <span class="text-danger" id="register-name-error"></span>
-                                                <input type="text" name="name" placeholder="Tên"/>
-                                                <span class="text-danger" id="register-username-error">${requestScope['error_register']}</span>
-                                                <input type="text" name="username" placeholder="Tên đăng nhập"/>
-                                                <span class="text-danger" id="register-email-error">${requestScope['error_register']}</span>
-                                                <input name="email" placeholder="Email" type="email"/>
-                                                <span class="text-danger" id="register-phone-error">${requestScope['error_register']}</span>
+                                                <input type="text" name="name" placeholder="Tên" required/>
+                                                <span class="text-danger"
+                                                      id="register-username-error">${requestScope['error_username_register']}</span>
+                                                <input type="text" name="username" placeholder="Tên đăng nhập"
+                                                       required/>
+                                                <span class="text-danger"
+                                                      id="register-email-error">${requestScope['error_email_register']}</span>
+                                                <input name="email" placeholder="Email" type="email" required/>
+                                                <span class="text-danger"
+                                                      id="register-phone-error">${requestScope['error_phone_register']}</span>
                                                 <input name="phone" placeholder="Số điện thoại" type="tel"
                                                        pattern="[0]{1}[0-9]{9}" required/>
-                                                <span class="text-danger" id="register-password-error">${requestScope['error_register']}</span>
-                                                <input type="password" name="password" placeholder="Mật nhẩu "/>
-                                                <span class="text-danger" id="register-repassword-error">${requestScope['error_register']}</span>
-                                                <input type="password" placeholder="Nhập lại mật nhẩu "/>
+                                                <span class="text-danger"
+                                                      id="register-password-error"></span>
+                                                <input type="password" name="password" placeholder="Mật nhẩu "
+                                                       required/>
+                                                <span class="text-danger"
+                                                      id="register-repassword-error"></span>
+                                                <input type="password" placeholder="Nhập lại mật nhẩu " required/>
                                             </div>
                                             <%--                                            <div class="login-toggle-btn">--%>
                                             <%--                                                <input type="checkbox"/>--%>
