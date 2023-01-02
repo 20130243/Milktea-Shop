@@ -16,7 +16,7 @@ public class LogoutController extends HttpServlet {
         if(user!=null) {
             session.removeAttribute("user");
         }
-        response.sendRedirect("login-register.jsp");
+        response.sendRedirect("login");
     }
 
     @Override

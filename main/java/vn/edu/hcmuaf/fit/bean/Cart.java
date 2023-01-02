@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cart implements Serializable {
@@ -86,7 +87,12 @@ public class Cart implements Serializable {
     }
 
     public void addItem(Item item) {
-        this.items.add(item);
+        if(this.items!=null){
+            this.items.add(item);
+        } else {
+            this.items = new ArrayList<>();
+            this.items.add(item);
+        }
     }
 
     public void removeItem(Item item) {
@@ -182,4 +188,5 @@ public class Cart implements Serializable {
                 ", coupon=" + coupon +
                 '}';
     }
+
 }
