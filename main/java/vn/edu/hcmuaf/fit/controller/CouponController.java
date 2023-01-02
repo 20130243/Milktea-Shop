@@ -11,6 +11,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "coupon", value = "/coupon")
@@ -22,6 +23,7 @@ public class CouponController extends HttpServlet {
         Cart cart = (Cart) session.getAttribute("cart");
         String coupon = request.getParameter("coupon");
         User user = (User) session.getAttribute("user");
+        Date currentDate = new Date(System.currentTimeMillis());
         if(user != null) {
             if (cart != null) {
                 if (coupon != null) {

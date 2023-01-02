@@ -175,6 +175,31 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                    <%List<Order> orders = (List<Order>) request.getAttribute("orders");
+                                                        if(orders!=null && orders.size()>0) {
+                                                            for (Order order : orders) {
+                                                    %>
+                                                    <tr>
+                                                        <td><%=order.getId()%></td>
+
+                                                        <td>
+                                                            <%List<Item> items = order.getCart().getItems();
+                                                                if(items!=null && items.size()>0){
+                                                                    for (Item item : items) {
+                                                            %>
+                                                            <img class="img111" src="<%=item.getProduct().getImg()%>" alt=""/>
+                                                            <%}}%>
+                                                        </td>
+                                                        <td><%=order.getTime()%></td>
+                                                        <td><%=order.getStatus()==0?"Đã nhận": order.getStatus() ==1?"Đang vận chuyển" :
+                                                                order.getStatus()==2?"Thành công" :"Đã huỷ"
+                                                        %></td>
+                                                        <td><%=format.format((int) order.getTotal())%></td>
+                                                        <td>
+                                                            <a href="orderDetail?orderid=<%=order.getId()%>" class="view" target="_blank">Xem</a>
+                                                        </td>
+                                                    </tr>
+                                                    <%}}%>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -242,7 +267,7 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <%List<Order> orders = (List<Order>) request.getAttribute("orders");
+                                                    <%
                                                     if(orders!=null && orders.size()>0) {
                                                         for (Order order : orders) {
                                                     %>
@@ -258,10 +283,12 @@
                                                             <%}}%>
                                                         </td>
                                                         <td><%=order.getTime()%></td>
-                                                        <td>Đã giao hàng</td>
+                                                        <td><%=order.getStatus()==0?"Đã nhận": order.getStatus() ==1?"Đang vận chuyển" :
+                                                                order.getStatus()==2?"Thành công" :"Đã huỷ"
+                                                        %></td>
                                                         <td><%=format.format((int) order.getTotal())%></td>
                                                         <td>
-                                                            <a href="#" class="view">Xem</a>
+                                                            <a href="orderDetail?index=<%=order.getId()%>" class="view" target="_blank">Xem</a>
                                                         </td>
                                                     </tr>
                                                     <%}}%>

@@ -3030,7 +3030,7 @@ ol {
   color: #ffffff;
   font-size: 18px;
   height: 46px;
-  display: inline-block;
+  display: inherit;
   width: 46px;
   border-radius: 50%;
   line-height: 46px;

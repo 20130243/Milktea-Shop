@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.services;
 
 import vn.edu.hcmuaf.fit.bean.*;
+import vn.edu.hcmuaf.fit.dao.CouponDAO;
 import vn.edu.hcmuaf.fit.dao.OrderDAO;
 import vn.edu.hcmuaf.fit.dao.OrderDetailDAO;
 import vn.edu.hcmuaf.fit.dao.ToppingOrderDAO;
@@ -38,11 +39,6 @@ public class CartOrderService {
         order.setAddress((String) map.get("address"));
         order.setNote((String) map.get("note"));
         order.setTotal((float) map.get("total"));
-//        String coupon_id = (String) map.get("coupon_id");
-//        if (coupon_id != null) {
-//
-//        }
-
         order.setStatus(Integer.parseInt((String) map.get("status")));
         return order;
     }
@@ -113,14 +109,11 @@ public class CartOrderService {
                     for (int j = 0; j < mapToppings.size(); j++) {
                         int toppingId = (int) mapToppings.get(j).get("topping_id");
                         Topping topping = new ToppingService().getById(toppingId);
-                        System.out.println(topping.toString());
                         product.addTopping(topping);
                     }
                 } else {
                     product.setTopping(new ArrayList<>());
                 }
-                System.out.println(product.getPriceSize().toString());
-                System.out.println(product.getTopping().toString());
                 item.setId(product.getId());
                 item.setProduct(product);
                 int quantity = (int) listMap.get(i).get("quantity");
@@ -137,17 +130,17 @@ public class CartOrderService {
 
     public List<Order> orderByUser(int userId) throws SQLException {
         List<Order> list = getOrderByUser(userId);
-        System.out.println(list.size());
         for (Order order : list) {
                 Cart cart = getCartByOrder(order.getId());
                 User user = new UserService().getById(userId);
                 cart.setCustomer(user);
                 cart.setTotalMoney(order.getTotal());
-                String idCoupon = (String) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
+                Object idCoupon = (Object) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
                 Coupon coupon = null;
                 try {
                     if(idCoupon != null) {
-                        int couponId = Integer.parseInt(idCoupon);
+                        String cId = idCoupon.toString();
+                        int couponId = Integer.parseInt(cId);
                         coupon = new CouponService().getById(couponId);
                     }
                 } catch (Exception e) {
