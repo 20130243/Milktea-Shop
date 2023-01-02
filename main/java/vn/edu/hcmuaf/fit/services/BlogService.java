@@ -11,30 +11,14 @@ import java.util.Map;
 public class BlogService {
     private final BlogDAO dao = new BlogDAO();
 
-    public Blog getById(int id){
-        Map<String, Object> blog = dao.getById(id);
-        return new Blog((Integer)blog.get("id"),
-                        (String) blog.get("name"),
-                        (Date) blog.get("date"),
-                        (String) blog.get("content"),
-                        (String) blog.get("image"),
-                        (Date) blog.get("start_date"),
-                        (Date) blog.get("end_date"));
+    public Blog getById(int id) {
+        return convertMapToBlog(dao.getById(id));
     }
 
     public List<Blog> getAll() {
         List<Blog> list = new ArrayList<>();
-        List<Map<String, Object>> listBlog = dao.getAll();
-        for (Map<String, Object> map : listBlog) {
-            Blog blog = new Blog();
-            blog.setId((Integer) map.get("id"));
-            blog.setName((String) map.get("name"));
-            blog.setDate( (Date) map.get("date"));
-            blog.setContent((String) map.get("content"));
-            blog.setImage((String) map.get("image"));
-            blog.setStart_date((Date) map.get("start_date"));
-            blog.setEnd_date( (Date) map.get("end_date"));
-            list.add(blog);
+        for (Map<String, Object> map : dao.getAll()) {
+            list.add(convertMapToBlog(map));
         }
         return list;
     }
@@ -42,17 +26,8 @@ public class BlogService {
 
     public List<Blog> getBlogIndex() {
         List<Blog> list = new ArrayList<>();
-        List<Map<String, Object>> listBlog = dao.getBlogIndex();
-        for (Map<String, Object> map : listBlog) {
-            Blog blog = new Blog();
-            blog.setId((Integer) map.get("id"));
-            blog.setName((String) map.get("name"));
-            blog.setDate( (Date) map.get("date"));
-            blog.setContent((String) map.get("content"));
-            blog.setImage((String) map.get("image"));
-            blog.setStart_date((Date) map.get("start_date"));
-            blog.setEnd_date( (Date) map.get("end_date"));
-            list.add(blog);
+        for (Map<String, Object> map : dao.getBlogIndex()) {
+            list.add(convertMapToBlog(map));
         }
         return list;
     }
@@ -61,21 +36,41 @@ public class BlogService {
         List<Blog> list = new ArrayList<>();
         List<Map<String, Object>> listBlog = dao.pageBlog(index);
         for (Map<String, Object> map : listBlog) {
-            Blog blog = new Blog();
-            blog.setId((Integer) map.get("id"));
-            blog.setName((String) map.get("name"));
-            blog.setDate( (Date) map.get("date"));
-            blog.setContent((String) map.get("content"));
-            blog.setImage((String) map.get("image"));
-            blog.setStart_date((Date) map.get("start_date"));
-            blog.setEnd_date( (Date) map.get("end_date"));
-            list.add(blog);
+            list.add(convertMapToBlog(map));
         }
         return list;
+    }
+    public void update(Blog blog) {
+        dao.update(blog.getId(), blog.getName(),blog.getContent(),blog.getStart_date(),blog.getEnd_date(),blog.getDate());
     }
 
 
     public static void main(String[] args) {
         System.out.println(new BlogService().getAll());
     }
+
+    public int getTotal() {
+        return dao.getTotal();
+    }
+
+    public List<Blog> getPaging(int index) {
+        List<Blog> list = new ArrayList<>();
+        for (Map<String, Object> map : dao.paging(index)) {
+             list.add(convertMapToBlog(map));
+        }
+        return list;
+    }
+
+    public Blog convertMapToBlog(Map<String, Object> map) {
+        Blog blog = new Blog();
+        blog.setId((Integer) map.get("id"));
+        blog.setName((String) map.get("name"));
+        blog.setDate((Date) map.get("date"));
+        blog.setContent((String) map.get("content"));
+        blog.setImage((String) map.get("image"));
+        blog.setStart_date((Date) map.get("start_date"));
+        blog.setEnd_date((Date) map.get("end_date"));
+        return blog;
+    }
+    public void delete(int id){dao.delete(id);}
 }
