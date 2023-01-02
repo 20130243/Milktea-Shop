@@ -11,7 +11,9 @@ public class Item implements Serializable {
 
     private String note;
 
-    public Item(){}
+    public Item(){
+        this.price = 0;
+    }
 
     public Item(int id, Product product, int quantity, float price, String note) {
         this.id = id;
@@ -73,5 +75,16 @@ public class Item implements Serializable {
         float priceTotal = price * quantity;
         this.setPrice(priceTotal);
 
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

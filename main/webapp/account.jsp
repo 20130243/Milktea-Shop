@@ -1,4 +1,8 @@
-<%@ page import="vn.edu.hcmuaf.fit.bean.User" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.Order" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.Item" %>
+<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/18/2022
@@ -40,6 +44,7 @@
 
 <%
     User user = (User) session.getAttribute("user");
+    CurrencyFormat format = new CurrencyFormat();
     if(user!=null) {
 
 %>
@@ -170,6 +175,31 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                    <%List<Order> orders = (List<Order>) request.getAttribute("orders");
+                                                        if(orders!=null && orders.size()>0) {
+                                                            for (Order order : orders) {
+                                                    %>
+                                                    <tr>
+                                                        <td><%=order.getId()%></td>
+
+                                                        <td>
+                                                            <%List<Item> items = order.getCart().getItems();
+                                                                if(items!=null && items.size()>0){
+                                                                    for (Item item : items) {
+                                                            %>
+                                                            <img class="img111" src="<%=item.getProduct().getImg()%>" alt=""/>
+                                                            <%}}%>
+                                                        </td>
+                                                        <td><%=order.getTime()%></td>
+                                                        <td><%=order.getStatus()==0?"Đã nhận": order.getStatus() ==1?"Đang vận chuyển" :
+                                                                order.getStatus()==2?"Thành công" :"Đã huỷ"
+                                                        %></td>
+                                                        <td><%=format.format((int) order.getTotal())%></td>
+                                                        <td>
+                                                            <a href="orderDetail?orderid=<%=order.getId()%>" class="view" target="_blank">Xem</a>
+                                                        </td>
+                                                    </tr>
+                                                    <%}}%>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -237,69 +267,31 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                    <%
+                                                    if(orders!=null && orders.size()>0) {
+                                                        for (Order order : orders) {
+                                                    %>
                                                     <tr>
-                                                        <td>15416852</td>
+                                                        <td><%=order.getId()%></td>
+
                                                         <td>
-                                                            <img class="img111" src="img/product/product/product1.png" alt="" />
-                                                            <img class="img111" src="img/product/product/product5.png" alt="" />
+                                                            <%List<Item> items = order.getCart().getItems();
+                                                                if(items!=null && items.size()>0){
+                                                                    for (Item item : items) {
+                                                            %>
+                                                            <img class="img111" src="<%=item.getProduct().getImg()%>" alt=""/>
+                                                            <%}}%>
                                                         </td>
-                                                        <td>11 thg 11 2021</td>
-                                                        <td>Đã giao hàng</td>
-                                                        <td>60.000đ</td>
+                                                        <td><%=order.getTime()%></td>
+                                                        <td><%=order.getStatus()==0?"Đã nhận": order.getStatus() ==1?"Đang vận chuyển" :
+                                                                order.getStatus()==2?"Thành công" :"Đã huỷ"
+                                                        %></td>
+                                                        <td><%=format.format((int) order.getTotal())%></td>
                                                         <td>
-                                                            <a href="#" class="view">Xem</a>
+                                                            <a href="orderDetail?index=<%=order.getId()%>" class="view" target="_blank">Xem</a>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>2543543</td>
-                                                        <td>
-                                                            <img class="img111" src="img/product/product/product3.png" alt="" />
-                                                        </td>
-                                                        <td>09 thg 01 2021</td>
-                                                        <td>Đã huỷ</td>
-                                                        <td>2.552.082đ</td>
-                                                        <td>
-                                                            <a href="#" class="view">Xem</a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2357521</td>
-                                                        <td>
-                                                            <img class="img111" src="img/product/product/product5.png" alt="" />
-                                                        </td>
-                                                        <td>01 thg 01 2021</td>
-                                                        <td>Đã giao hàng</td>
-                                                        <td>60.000đ</td>
-                                                        <td>
-                                                            <a href="#" class="view">Xem</a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1358277</td>
-                                                        <td>
-                                                            <img class="img111" src="img/product/product/product2.png" alt="" />
-                                                            <img class="img111" src="img/product/product/product3.png" alt="" />
-                                                        </td>
-                                                        <td>10 thg 12 2020</td>
-                                                        <td>Đã huỷ</td>
-                                                        <td>70.000đ</td>
-                                                        <td>
-                                                            <a href="#" class="view">Xem</a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1541682</td>
-                                                        <td>
-                                                            <img class="img111" src="img/product/product/product1.png" alt="" />
-                                                            <img class="img111" src="img/product/product/product2.png" alt="" />
-                                                        </td>
-                                                        <td>31 thg 08 2019</td>
-                                                        <td>Đã giao hàng</td>
-                                                        <td>90.000đ</td>
-                                                        <td>
-                                                            <a href="#" class="view">Xem</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%}}%>
                                                     </tbody>
                                                 </table>
                                             </div>

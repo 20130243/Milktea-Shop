@@ -16,7 +16,25 @@ public class BlogController extends HttpServlet {
         BlogService blogService = new BlogService();
         List<Blog> allBlog = blogService.getAll();
 
-        request.setAttribute("listBlog", allBlog);
+        int sumBlog = allBlog.size();
+        int endPage = sumBlog/9;
+        System.out.println(endPage);
+        if((sumBlog % 9) != 0){
+            endPage++;
+        }
+        String indexPage = request.getParameter("index");
+        int index;
+        if(indexPage == null) {
+            index = 1;
+        } else {
+            index = Integer.parseInt(indexPage);
+        }
+
+        List<Blog> pageBlogs = blogService.pageBlogs(index);
+
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("pageIndex", index);
+        request.setAttribute("listBlog", pageBlogs);
         request.getRequestDispatcher("blog.jsp").forward(request,response);
     }
 

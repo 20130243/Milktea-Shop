@@ -54,7 +54,7 @@ public class OrderService {
     public void addOrder(Order order){
         try {
             insert(order);
-            updateCoupon(order,order.getCart().getCoupon().getId());
+//            updateCoupon(order,order.getCart().getCoupon().getId());
             List<Order> listOrder = getAll();
             System.out.println(listOrder.size());
             for (Order item : listOrder) {

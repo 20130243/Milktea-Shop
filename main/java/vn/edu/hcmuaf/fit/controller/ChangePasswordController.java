@@ -28,10 +28,10 @@ public class ChangePasswordController extends HttpServlet {
                     user.setPassword(userService.hashPassword(newPassword));
                     userService.update(user);
                     session.setAttribute("user", user);
-                    response.sendRedirect("account.jsp");
+                    response.sendRedirect("account");
                 } else {
                     request.setAttribute("erorr_changePassword", "Mật khẩu cũ không đúng hoặc mật khẩu mới không khớp");
-                    request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+                    request.getRequestDispatcher("changePassword").forward(request, response);
                 }
             }
     }

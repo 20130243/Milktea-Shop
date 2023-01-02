@@ -103,4 +103,26 @@ public class OrderDAO extends RD {
                         .execute());
     }
 
+    public Map<String, Object> findFirst() {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM `order` ORDER BY id DESC LIMIT 1")
+                        .mapToMap().first());
+    }
+
+    public List<Map<String, Object>> getOrderByUser(int userID) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * from `order` \n" +
+                                "WHERE user_id = :user_id")
+                        .bind("user_id", userID)
+                        .mapToMap()
+                        .list());
+    }
+
+    public Map<String, Object> getCouponIdByOrder(int orderId){
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT coupon_id FROM `order` WHERE id = :id")
+                        .bind("id", orderId)
+                        .mapToMap().first());
+    }
+
 }

@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.controller;
 import vn.edu.hcmuaf.fit.bean.Cart;
 import vn.edu.hcmuaf.fit.bean.Order;
 import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.services.CartOrderService;
 import vn.edu.hcmuaf.fit.services.OrderService;
 
 import javax.servlet.*;
@@ -10,6 +11,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 @WebServlet(name = "OrderController", value = "/order")
@@ -19,7 +21,7 @@ public class OrderController extends HttpServlet {
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
         User user = (User) session.getAttribute("user");
-        OrderService orderService = new OrderService();
+        CartOrderService cartOrderService = new CartOrderService();
         if (cart != null && user != null) {
             String nameUser = request.getParameter("nameUser");
             String phoneUser = request.getParameter("phoneUser");
@@ -39,9 +41,13 @@ public class OrderController extends HttpServlet {
                 order.setNote(noteUser);
                 order.setCart(cart);
                 order.setTotal(cart.getTotalMoney());
-                orderService.addOrder(order);
+                try {
+                    cartOrderService.addOrder(order);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 session.removeAttribute("cart");
-                response.sendRedirect("account.jsp#order");
+                response.sendRedirect("account");
             }
         } else if(user == null){
             String error = "204";

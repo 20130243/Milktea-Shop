@@ -6,7 +6,7 @@
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="footer__about">
           <div class="footer__logo">
-            <a href="#"><img src="img/footer-logo.png" alt=""/></a>
+            <a href="/"><img src="img/footer-logo.png" alt=""/></a>
           </div>
           <p>TỪ NHỮNG MẦM TRÀ, CHÚNG TÔI TẠO RA NIỀM ĐAM MÊ</p>
           <a href="#"><img src="img/payment.png" alt=""/></a>
@@ -16,8 +16,8 @@
         <div class="footer__widget">
           <h6>Khuyến mãi</h6>
           <ul>
-            <li><a href="./blog.html">Tin tức</a></li>
-            <li><a href="./shop.html">Shop</a></li>
+            <li><a href="./blog">Tin tức</a></li>
+            <li><a href="./shop">Shop</a></li>
           </ul>
         </div>
       </div>
@@ -25,8 +25,8 @@
         <div class="footer__widget">
           <h6>Liên hệ</h6>
           <ul>
-            <li><a href="./about.html">Về chúng tôi</a></li>
-            <li><a href="./contact.html">Địa chỉ</a></li>
+            <li><a href="./about.jsp">Về chúng tôi</a></li>
+            <li><a href="./contact.jsp">Địa chỉ</a></li>
             <li>
               <a href="https://manhhawebapp.web.app/" target="_blank">20130243@st.hcmuaf.edu.vn</a>
             </li>

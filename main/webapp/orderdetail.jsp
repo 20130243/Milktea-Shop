@@ -1,9 +1,6 @@
-<%@ page import="vn.edu.hcmuaf.fit.bean.Cart" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Item" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Topping" %>
 <%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.User" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.bean.*" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/15/2022
@@ -19,7 +16,7 @@
   <meta name="keywords" content="Male_Fashion, unica, creative, html" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Thanh toán</title>
+  <title>Chi tiết đơn hàng</title>
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -43,8 +40,12 @@
 
 <body>
 <%
-  Cart cart = (Cart) session.getAttribute("cart");
+  Order order = (Order) request.getAttribute("order");
   User user = (User) session.getAttribute("user");
+  Cart cart = new Cart();
+  if(order != null){
+    cart = order.getCart();
+  }
 %>
 <!-- Page Preloder -->
 <div id="preloder">
@@ -76,7 +77,7 @@
 <!-- Breadcrumb Section Begin -->
 <div class="container">
   <div class="breadcumb">
-    <h1>Thanh toán</h1>
+    <h1>Chi tiết đơn hàng</h1>
     <img src="assets/images/icon_tealeaves.png" width="500px" height="50px" style="object-fit: cover; scale: 0.5" />
   </div>
 </div>
@@ -111,7 +112,7 @@
                 </div>
                 <div class="product__cart__item__text">
                   <h5><%=item.getProduct().getName()%></h5>
-                  <input style="display: none" class="product-modal-id" type="text" name="<%=item.getId()%>" value="<%=item.getId()%>" checked="checked">
+                  <input style="display: none" disabled class="product-modal-id" type="text" name="<%=item.getId()%>" value="<%=item.getId()%>" checked="checked">
                   <h6><%=new CurrencyFormat().format((int)item.getProduct().getPriceSize().get(0).getPrice())%></h6>
                 </div>
               </td>
@@ -132,12 +133,11 @@
               <td class="quantity__item">
                 <div class="quantity">
                   <div class="pro-qty-2">
-                    <input name="quantityChange<%=item.getId()%>" class="quantity" type="number" value="<%=item.getQuantity()%>">
+                    <input name="quantityChange<%=item.getId()%>" disabled class="quantity" type="number" value="<%=item.getQuantity()%>">
                   </div>
                 </div>
               </td>
               <td class="cart__price"><%= new CurrencyFormat().format((int)item.getPrice())%></td>
-              <td class="cart__close"><a href="editcart?rpID=<%=item.getId()%>" style="border: none"><i class="fa fa-close"></i></a></td>
             </tr>
             <%
                 }
@@ -150,16 +150,17 @@
       </div>
 
       <div class="col-lg-4">
-        <form action="order" method="get" >
+        <form action="cancel" method="get" >
         <div class="cart__discount checkout__form shadow p-4">
           <div class="row">
             <div class="col-lg-12 col-md-12">
               <h6 class="">Thông tin nhận hàng</h6>
+              <input hidden name="orderid" value="<%=order.getId()%>">
               <div class="row">
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Tên người nhận<span>*</span></p>
-                    <input name="nameUser" type="text" value="<%=user != null ? user.getName() : ""%>">
+                    <input name="nameUser" disabled type="text" value="<%=user.getName()%>">
                   </div>
                 </div>
               </div>
@@ -167,7 +168,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Số điện thoại người nhận<span>*</span></p>
-                    <input name="phoneUser" type="phone" value="<%=user != null ? user.getPhone() : ""%>">
+                    <input name="phoneUser" disabled type="phone" value="<%=user.getPhone()%>">
                   </div>
                 </div>
               </div>
@@ -175,7 +176,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Địa chỉ nhận hàng<span>*</span></p>
-                    <textarea name="addressUser" cols="" rows="2" style="width: 100%;"><%=user != null ? user.getAddress() : ""%></textarea>
+                    <textarea name="addressUser" disabled cols="" rows="2" style="width: 100%;"><%=user.getAddress()%></textarea>
                   </div>
                 </div>
               </div>
@@ -183,13 +184,13 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Ghi chú<span>*</span></p>
-                    <textarea name="noteUser" cols="" rows="2" style="width: 100%;"></textarea>
+                    <textarea name="noteUser" disabled cols="" rows="2" style="width: 100%;"><%=order.getNote()%></textarea>
                   </div>
                 </div>
               </div>
               <div class="coupon_form">
-                <input name="coupon" type="text" placeholder="Nhập mã giảm giá ">
-                <button type="submit"  formaction="/coupon" >Áp dụng</button>
+                <input name="coupon" disabled type="text" placeholder="Nhập mã giảm giá" value="<%=cart.getCoupon().getCode()%>">
+                <button type="submit" disabled >Áp dụng</button>
               </div>
               <div class="row">
                 <div class="col-lg-12">
@@ -199,19 +200,13 @@
                     if(cart!=null) {
                     %>
                     <p>Tổng tiền: <span><%=new CurrencyFormat().format((int) cart.getTotalMoney())%></span></p>
-                    <p>Đã giảm: <span><%=cart.getCoupon().getPercent()%></span>
+                    <p>Đã giảm: <span><%=cart.getCoupon().getPercent()%> %</span>
                     </p>
-                    <%
-                      } else {
-                    %>
-                    <p>Tổng tiền: <span><%=new CurrencyFormat().format((int) 0)%></span></p>
-                    <p>Đã giảm: <span>0%</span></p>
                     <%
                       }
                     %>
                   </div>
-<%--                  <a href="#" class="primary-btn w-100 text-center">Đặt hàng</a>--%>
-                  <button type="submit" class="primary-btn w-100 text-center">Đặt hàng</button>
+                  <button type="submit" class="primary-btn w-100 text-center">Huỷ đơn</button>
                 </div>
               </div>
             </div>
@@ -251,18 +246,12 @@
 <script src="js/account/bootstrap.min.js"></script>
 <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
 <script>
-  <% String error = (String) session.getAttribute("errorCheckout");
+  <% String error = (String) session.getAttribute("errorCancelOrder");
     if(error !=null){
-      if(error.equals("202")) {
+      if(error.equals("101")) {
   %>
-  alert('Vui lòng điền đủ thông tin');
-  <%} else if(error.equals("204")) {%>
-  alert('Vui lòng đăng nhập');
-  <%} else if(error.equals("101")) {%>
-  alert('Mỗi giỏ hàng sử dụng được 1 lần');
-  <%} else if(error.equals("102")) {%>
-  alert('Mã giảm hết số lượng');
-   <%} session.setAttribute("errorCheckout",null);}%>
+  alert('Đơn hàng đã đang vận chuyển, thành công, hoặc đã huỷ');
+   <%} session.setAttribute("errorCancelOrder",null);}%>
 
 
 </script>

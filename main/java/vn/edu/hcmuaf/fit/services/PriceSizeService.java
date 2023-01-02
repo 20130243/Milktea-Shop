@@ -58,7 +58,7 @@ public class PriceSizeService {
         PriceSize priceSize = new PriceSize();
         priceSize.setId((Integer) map.get("id"));
         priceSize.setProduct_id((Integer) map.get("product_id"));
-        priceSize.setSize((String) map.get("size"));
+        priceSize.setSize((String) map.get("name"));
         priceSize.setPrice((Float) map.get("price"));
         priceSize.setOriginalPrice((Float) map.get("original_price"));
         return priceSize;
