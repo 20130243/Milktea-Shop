@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Product implements Serializable {
@@ -98,5 +99,23 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "Product{" + "id=" + id + ", name='" + name + '\'' + ", idCategory=" + idCategory + ", priceSize=" + priceSize + ", img='" + img + '\'' + ", status=" + status + ", topping=" + topping + '}';
+    }
+
+    public void addPriceSize(PriceSize size) {
+        if(this.priceSize!=null) {
+            this.priceSize.add(size);
+        } else {
+            this.priceSize = new ArrayList<>();
+            this.priceSize.add(size);
+        }
+    }
+
+    public void addTopping(Topping topping) {
+        if(this.topping!=null) {
+         this.topping.add(topping);
+        } else {
+            this.topping = new ArrayList<>();
+            this.topping.add(topping);
+        }
     }
 }

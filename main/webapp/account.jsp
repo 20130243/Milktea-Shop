@@ -1,7 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.Order" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Item" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.bean.Item" %>
+<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/18/2022
@@ -43,6 +44,7 @@
 
 <%
     User user = (User) session.getAttribute("user");
+    CurrencyFormat format = new CurrencyFormat();
     if(user!=null) {
 
 %>
@@ -246,17 +248,18 @@
                                                     %>
                                                     <tr>
                                                         <td><%=order.getId()%></td>
-                                                        <%List<Item> items = order.getCart().getItems();
-                                                        if(items!=null && items.size()>0){
-                                                            for (Item item : items) {
-                                                        %>
+
                                                         <td>
+                                                            <%List<Item> items = order.getCart().getItems();
+                                                                if(items!=null && items.size()>0){
+                                                                    for (Item item : items) {
+                                                            %>
                                                             <img class="img111" src="<%=item.getProduct().getImg()%>" alt=""/>
+                                                            <%}}%>
                                                         </td>
-                                                        <%}}%>
                                                         <td><%=order.getTime()%></td>
                                                         <td>Đã giao hàng</td>
-                                                        <td><%=order.getTotal()%></td>
+                                                        <td><%=format.format((int) order.getTotal())%></td>
                                                         <td>
                                                             <a href="#" class="view">Xem</a>
                                                         </td>

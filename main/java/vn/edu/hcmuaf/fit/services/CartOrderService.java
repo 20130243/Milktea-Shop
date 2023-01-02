@@ -95,51 +95,67 @@ public class CartOrderService {
         Cart cart = new Cart();
         List<Map<String, Object>> listMap = detail_dao.getByOrderId(orderId);
         if(listMap.size() > 0) {
-            Product product = new Product();
-            Item item = new Item();
-            for(int i = 0; i < listMap.size(); i++) {
-                int productId = (int) listMap.get(i).get("product_size_id");
-                PriceSize priceSize = new PriceSizeService().getById(productId);
-                List<PriceSize> priceSizeList = new ArrayList<>();
-                priceSizeList.add(priceSize);
+            for (int i = 0; i < listMap.size(); i++) {
+                Item item = new Item();
+                Product product = new Product();
+                int priceSizeId =(int) listMap.get(i).get("product_size_id");
+                PriceSize priceSize = new PriceSizeService().getById(priceSizeId);
                 product.setId(priceSize.getProduct_id());
-                Product productInDtb = new ProductService().getById(product.getId());
-                product.setName(productInDtb.getName());
-                product.setPriceSize(priceSizeList);
-                product.setImg(productInDtb.getImg());
-                product.setStatus(productInDtb.getStatus());
-                List<Topping> listTopping = new ArrayList<>();
-                List<Map<String, Object>> listToppingMap = topping_order_dao.getByOrderDetailId(orderId);
-                int order_detail_id = (int) listMap.get(i).get("id");
-                if(listToppingMap.size() > 0) {
-                    for(int j = 0; j < listToppingMap.size(); j++){
-                        int topping_order_dt_id = (int) listToppingMap.get(i).get("order_detail_id");
-                        if(order_detail_id==topping_order_dt_id){
-                            int toppingId = (int) listToppingMap.get(i).get("topping_id");
-                            Topping topping = new ToppingService().getById(toppingId);
-                            listTopping.add(topping);
-                        }
+                Product productInDatabase = new ProductService().getById(product.getId());
+                product.setName(productInDatabase.getName());
+                product.setIdCategory(productInDatabase.getIdCategory());
+                product.setImg(productInDatabase.getImg());
+                product.setStatus(productInDatabase.getStatus());
+                product.addPriceSize(priceSize);
+                int oroderDetailsId = (int) listMap.get(i).get("id");
+                List<Map<String, Object>> mapToppings = topping_order_dao.getByOrderDetailId(oroderDetailsId);
+                if(mapToppings.size() > 0){
+                    for (int j = 0; j < mapToppings.size(); j++) {
+                        int toppingId = (int) mapToppings.get(j).get("topping_id");
+                        Topping topping = new ToppingService().getById(toppingId);
+                        System.out.println(topping.toString());
+                        product.addTopping(topping);
                     }
+                } else {
+                    product.setTopping(new ArrayList<>());
                 }
-                int quantity = (int) listMap.get(i).get("quantity");
-                product.setTopping(listTopping);
+                System.out.println(product.getPriceSize().toString());
+                System.out.println(product.getTopping().toString());
                 item.setId(product.getId());
                 item.setProduct(product);
+                int quantity = (int) listMap.get(i).get("quantity");
                 item.setQuantity(quantity);
                 item.updatePrice();
-                cart.setItems(new ArrayList<Item>());
+                item.setNote("");
+                cart.setId(i);
                 cart.addItem(item);
+
             }
         }
-
         return cart;
     }
 
     public List<Order> orderByUser(int userId) throws SQLException {
         List<Order> list = getOrderByUser(userId);
-        List<Order> rs = new ArrayList<Order>();
+        System.out.println(list.size());
         for (Order order : list) {
                 Cart cart = getCartByOrder(order.getId());
+                User user = new UserService().getById(userId);
+                cart.setCustomer(user);
+                cart.setTotalMoney(order.getTotal());
+                String idCoupon = (String) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
+                Coupon coupon = null;
+                try {
+                    if(idCoupon != null) {
+                        int couponId = Integer.parseInt(idCoupon);
+                        coupon = new CouponService().getById(couponId);
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                if(coupon != null) {
+                    cart.setCoupon(coupon);
+                }
                 order.setCart(cart);
         }
 
@@ -148,6 +164,8 @@ public class CartOrderService {
 
     public static void main(String[] args) throws SQLException {
        CartOrderService test = new CartOrderService();
-        System.out.println(test.orderByUser(3));
+        System.out.println(test.orderByUser(4));
+//        System.out.println(test.getCountOrderDetails(1));
+//        System.out.println(test.getCartByOrder(2));
     }
 }

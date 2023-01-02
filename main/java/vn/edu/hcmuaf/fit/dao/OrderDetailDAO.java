@@ -57,5 +57,14 @@ public class OrderDetailDAO extends RD {
                         .mapToMap().first());
     }
 
+    public Map<String, Object> getCountOrderDetail(int order_id) {
+         return   JDBIConnector.get().withHandle(h ->
+                h.createQuery("Select COUNT(*) AS soluong from order_detail\n" +
+                                "WHERE order_detail.order_id = ?")
+                        .bind(0, order_id)
+                        .mapToMap()
+                        .first());
+    }
+
 
 }

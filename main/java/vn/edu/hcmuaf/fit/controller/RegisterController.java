@@ -30,17 +30,15 @@ public class RegisterController extends HttpServlet {
         String email = request.getParameter("email");
 
         User user = new User(0, username, password, name, "", phone, email, 0, "");
-        System.out.println(user);
-        System.out.println(userService.checkUsername(user));
-        if (userService.checkUsername(user)) {
+        if (!userService.checkUsername(user)) {
             userService.insert(user);
             user = userService.login(user);
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
-            response.sendRedirect("login-register.jsp");
+            response.sendRedirect("login");
         }else{
             request.setAttribute("error_register", "Tên đăng nhập đã được sử dụng");
-            request.getRequestDispatcher("login-register.jsp").forward(request, response);
+            request.getRequestDispatcher("login").forward(request, response);
         }
 
     }

@@ -140,6 +140,7 @@ public class UserService {
     }
 
     public static void main(String[] args) {
-        System.out.println(new UserService().getById(1));
+
+//       new UserService().sendMail("tinhle2772002@gmail.com", "Password recovery","test");
     }
 }
