@@ -53,7 +53,6 @@ public class AddToCartController extends HttpServlet {
                         PriceSize sizeL = productService.getSizeL(pro_id);
                         priceSizes.add(new PriceSize(sizeL.getId(), sizeL.getId(), size, sizeL.getPrice(), sizeL.getOriginalPrice()));
                     }
-
                     product.setPriceSize(priceSizes);
                     product.setTopping(toppings);
                     quantity = Integer.parseInt(request.getParameter("quantity" + id));
@@ -100,7 +99,6 @@ public class AddToCartController extends HttpServlet {
                         session.setAttribute("cart", cart);
                         response.sendRedirect(request.getContextPath() + url);
                     }
-
                 }
                 response.sendRedirect(request.getContextPath() + url);
 

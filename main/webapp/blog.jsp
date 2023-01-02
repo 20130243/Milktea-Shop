@@ -104,11 +104,14 @@
         <div class="row spad">
             <div class="col-lg-12">
                 <div class="product__pagination">
-                    <a class="active" href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <span>...</span>
-                    <a href="#">21</a>
+                    <%
+                        int count = (int) request.getAttribute("endPage");
+                        for (int i = 1; i <= count; i++) {
+                    %>
+                    <a class="<%=(int) request.getAttribute("pageIndex") == i? "active" : ""%>"
+                       href="blog?index=<%=i%>"><%=i%>
+                    </a>
+                    <%}%>
                 </div>
             </div>
         </div>

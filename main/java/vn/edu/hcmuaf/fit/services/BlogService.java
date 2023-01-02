@@ -57,6 +57,24 @@ public class BlogService {
         return list;
     }
 
+    public List<Blog> pageBlogs(int index) {
+        List<Blog> list = new ArrayList<>();
+        List<Map<String, Object>> listBlog = dao.pageBlog(index);
+        for (Map<String, Object> map : listBlog) {
+            Blog blog = new Blog();
+            blog.setId((Integer) map.get("id"));
+            blog.setName((String) map.get("name"));
+            blog.setDate( (Date) map.get("date"));
+            blog.setContent((String) map.get("content"));
+            blog.setImage((String) map.get("image"));
+            blog.setStart_date((Date) map.get("start_date"));
+            blog.setEnd_date( (Date) map.get("end_date"));
+            list.add(blog);
+        }
+        return list;
+    }
+
+
     public static void main(String[] args) {
         System.out.println(new BlogService().getAll());
     }

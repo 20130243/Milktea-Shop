@@ -47,7 +47,7 @@ public class OrderController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 session.removeAttribute("cart");
-                response.sendRedirect("account.jsp#order");
+                response.sendRedirect("account");
             }
         } else if(user == null){
             String error = "204";
