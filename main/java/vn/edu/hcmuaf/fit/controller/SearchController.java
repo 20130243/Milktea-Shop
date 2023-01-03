@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String search = request.getParameter("search");
@@ -35,6 +37,8 @@ public class SearchController extends HttpServlet {
         request.setAttribute("endPage", 0);
         request.setAttribute("tagCate", 0);
         request.setAttribute("sort", 0);
+
+        session.setAttribute("url", request.getRequestURI());
         request.getRequestDispatcher("shop.jsp").forward(request, response);
 
     }

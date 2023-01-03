@@ -32,7 +32,12 @@ public class CouponController extends HttpServlet {
                         for (Coupon item : listCoupons) {
                             if (coupon.equals(item.getCode())) {
                                 Coupon newCoupon = item;
-                                if (newCoupon.getQuantity() > 0) {
+                                if (newCoupon.getQuantity() > 0
+                                        &&( checkEqualDate(currentDate,newCoupon.getStart_date())
+                                        || currentDate.after(newCoupon.getStart_date())
+                                        && (checkEqualDate(currentDate, newCoupon.getEnd_date())
+                                        || currentDate.before(newCoupon.getEnd_date()))
+                                )) {
                                     if (cart.getTotalMoney() >= newCoupon.getMin_price_order()) {
                                         if (cart.getCoupon() == null) {
                                             cart.setCoupon(newCoupon);
@@ -50,7 +55,6 @@ public class CouponController extends HttpServlet {
                                     String errorCoupon = "102";
                                     session.setAttribute("errorCheckout", errorCoupon);
                                 }
-                                cart.setCoupon(newCoupon);
                             }
                         }
                         if (cart.getItems().size() == 0) {
@@ -76,5 +80,12 @@ public class CouponController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+    private boolean checkEqualDate(Date date1, Date date2) {
+        if(date1.compareTo(date2) ==0) {
+            return true;
+        }
+        return false;
     }
 }
