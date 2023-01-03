@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,8 @@ import java.util.List;
 public class CategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
         response.setContentType("text/html;charset=UTF-8");
         ProductService productService = null;
         try {
@@ -28,6 +31,9 @@ public class CategoryController extends HttpServlet {
         CategoryService categoryService = new CategoryService();
         List<Product> listProductByCategory = new ArrayList<Product>();
         String cid = request.getParameter("cid");
+        if (cid == null) {
+            cid="0";
+        }
         int category_id = Integer.parseInt(cid);
         if(category_id == 0 ) {
             request.getRequestDispatcher( "/shop").include( request, response);
@@ -43,6 +49,7 @@ public class CategoryController extends HttpServlet {
         request.setAttribute("endPage", 0);
         request.setAttribute("tagCate", category_id);
         request.setAttribute("sort", 0);
+        session.setAttribute("url", request.getRequestURI());
         request.getRequestDispatcher("shop.jsp").forward(request,response);
     }
 

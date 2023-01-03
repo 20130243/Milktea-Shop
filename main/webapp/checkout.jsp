@@ -175,7 +175,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Địa chỉ nhận hàng<span>*</span></p>
-                    <textarea name="addressUser" cols="" rows="2" style="width: 100%;"><%=user != null ? user.getAddress() : ""%></textarea>
+                    <textarea name="addressUser" cols="" rows="2" style="width: 100%;"><%=user.getAddress()%></textarea>
                   </div>
                 </div>
               </div>
@@ -188,7 +188,7 @@
                 </div>
               </div>
               <div class="coupon_form">
-                <input name="coupon" type="text" placeholder="Nhập mã giảm giá ">
+                <input name="coupon" type="text" placeholder="Nhập mã giảm giá " value="<%=cart.getCoupon()!=null? cart.getCoupon().getCode():""%>">
                 <button type="submit"  formaction="/coupon" >Áp dụng</button>
               </div>
               <div class="row">
@@ -199,7 +199,7 @@
                     if(cart!=null) {
                     %>
                     <p>Tổng tiền: <span><%=new CurrencyFormat().format((int) cart.getTotalMoney())%></span></p>
-                    <p>Đã giảm: <span><%=cart.getCoupon().getPercent()%></span>
+                    <p>Đã giảm: <span><%=cart.getCoupon()!=null? cart.getCoupon().getPercent()+"%" : "0%"%></span>
                     </p>
                     <%
                       } else {
@@ -210,7 +210,6 @@
                       }
                     %>
                   </div>
-<%--                  <a href="#" class="primary-btn w-100 text-center">Đặt hàng</a>--%>
                   <button type="submit" class="primary-btn w-100 text-center">Đặt hàng</button>
                 </div>
               </div>
@@ -261,7 +260,7 @@
   <%} else if(error.equals("101")) {%>
   alert('Mỗi giỏ hàng sử dụng được 1 lần');
   <%} else if(error.equals("102")) {%>
-  alert('Mã giảm hết số lượng');
+  alert('Mã giảm hết số lượng hoặc hết hạn');
    <%} session.setAttribute("errorCheckout",null);}%>
 
 
