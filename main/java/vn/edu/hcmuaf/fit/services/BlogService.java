@@ -41,12 +41,10 @@ public class BlogService {
         return list;
     }
     public void update(Blog blog) {
-        dao.update(blog.getId(), blog.getName(),blog.getContent(),blog.getStart_date(),blog.getEnd_date(),blog.getDate());
+        dao.update(blog.getId(), blog.getName(),blog.getContent(),blog.getImage(),blog.getStart_date(),blog.getEnd_date());
     }
-
-
-    public static void main(String[] args) {
-        System.out.println(new BlogService().getAll());
+    public void insert(Blog blog){
+        dao.insert(blog.getName(),blog.getContent(),blog.getImage(),blog.getStart_date(),blog.getEnd_date());
     }
 
     public int getTotal() {
@@ -72,5 +70,9 @@ public class BlogService {
         blog.setEnd_date((Date) map.get("end_date"));
         return blog;
     }
+
     public void delete(int id){dao.delete(id);}
+    public static void main(String[] args) {
+        System.out.println(new BlogService().getAll());
+    }
 }

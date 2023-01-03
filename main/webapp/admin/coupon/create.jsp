@@ -65,7 +65,6 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-
                                 <h4 class="header-title">Giảm giá mới</h4>
                                 <form action="/admin/coupon/create" method="post">
                                     <div class="row">

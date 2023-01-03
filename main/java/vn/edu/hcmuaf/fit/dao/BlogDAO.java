@@ -46,21 +46,27 @@ public class BlogDAO extends RD {
         );
     }
 
-    public void insert(String name, Date start_date, Date end_date) {
+    public void insert(String name, String content, String image, Date start_date, Date end_date) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("insert into " + tableName + "(name,start_date,end_date) values(:name,:start_date,:end_date)")
+                h.createUpdate("insert into " + tableName + "(name,content,image,start_date,end_date) " +
+                                "values(:name,:content,:image,:start_date,:end_date)")
                         .bind("name", name)
+                        .bind("content", content)
+                        .bind("image", image)
                         .bind("start_date", start_date)
                         .bind("end_date", end_date).execute()
         );
     }
 
-    public void update(int id, String name, String content, Date start_date, Date end_date, Date date) {
+    public void update(int id, String name, String content, String image, Date start_date, Date end_date) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("update " + tableName + " set name =:name,start_date =:start_date,end_date =:end_date where id =:id")
+                h.createUpdate("update " + tableName + " set name =:name,content=:content,image=:image,start_date =:start_date,end_date =:end_date where id =:id")
                         .bind("name", name)
+                        .bind("content", content)
+                        .bind("image", image)
                         .bind("start_date", start_date)
                         .bind("end_date", end_date)
+                        .bind("id", id)
                         .execute()
         );
     }
