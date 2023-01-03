@@ -15,6 +15,8 @@ import java.util.List;
 public class IndexController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String url = request.getRequestURI();
         BlogService blogService = new BlogService();
         List<Blog> listBlog = blogService.getBlogIndex();
         ProductService productService = null;
@@ -29,6 +31,7 @@ public class IndexController extends HttpServlet {
         request.setAttribute("listBlog", listBlog);
 
         request.setAttribute("listProduct", listProducts);
+        session.setAttribute("url", url);
         request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 

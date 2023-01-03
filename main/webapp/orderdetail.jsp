@@ -41,7 +41,6 @@
 <body>
 <%
   Order order = (Order) request.getAttribute("order");
-  User user = (User) session.getAttribute("user");
   Cart cart = new Cart();
   if(order != null){
     cart = order.getCart();
@@ -99,7 +98,7 @@
             </tr>
             </thead>
             <tbody>
-            <form action="/editcart" method="get" id="myForm">
+            <form action="#" method="get" id="myForm">
             <%
               if (cart!= null) {
                 List<Item> listItems = cart.getItems();
@@ -160,7 +159,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Tên người nhận<span>*</span></p>
-                    <input name="nameUser" disabled type="text" value="<%=user.getName()%>">
+                    <input name="nameUser" disabled type="text" value="<%=order.getName()%>">
                   </div>
                 </div>
               </div>
@@ -168,7 +167,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Số điện thoại người nhận<span>*</span></p>
-                    <input name="phoneUser" disabled type="phone" value="<%=user.getPhone()%>">
+                    <input name="phoneUser" disabled type="phone" value="<%=order.getPhone()%>">
                   </div>
                 </div>
               </div>
@@ -176,7 +175,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Địa chỉ nhận hàng<span>*</span></p>
-                    <textarea name="addressUser" disabled cols="" rows="2" style="width: 100%;"><%=user.getAddress()%></textarea>
+                    <textarea name="addressUser" disabled cols="" rows="2" style="width: 100%;"><%=order.getAddress()%></textarea>
                   </div>
                 </div>
               </div>
@@ -189,7 +188,7 @@
                 </div>
               </div>
               <div class="coupon_form">
-                <input name="coupon" disabled type="text" placeholder="Nhập mã giảm giá" value="<%=cart.getCoupon().getCode()%>">
+                <input name="coupon" disabled type="text" placeholder="Nhập mã giảm giá" value="<%=cart.getCoupon()!=null? cart.getCoupon().getCode() : ""%>">
                 <button type="submit" disabled >Áp dụng</button>
               </div>
               <div class="row">
@@ -199,9 +198,12 @@
                     <%
                     if(cart!=null) {
                     %>
-                    <p>Tổng tiền: <span><%=new CurrencyFormat().format((int) cart.getTotalMoney())%></span></p>
-                    <p>Đã giảm: <span><%=cart.getCoupon().getPercent()%> %</span>
+                    <p>Tổng tiền: <span><%=new CurrencyFormat().format((int) order.getTotal())%></span></p>
+                    <p>Đã giảm: <span><%=cart.getCoupon()!=null? cart.getCoupon().getPercent() +"%": "0%"%></span>
                     </p>
+                    <p>Trạng thái: <span><%=order.getStatus()==0?"Đã nhận": order.getStatus() ==1?"Đang vận chuyển" :
+                            order.getStatus()==2?"Thành công" :"Đã huỷ"
+                    %></span></p>
                     <%
                       }
                     %>

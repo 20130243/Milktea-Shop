@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.bean.Cart;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -12,7 +14,6 @@ public class CheckoutController extends HttpServlet {
         HttpSession session = request.getSession();
         String url = ((HttpServletRequest) request).getRequestURI().toString();
         session.setAttribute("url", url);
-
         request.getRequestDispatcher("/checkout.jsp").forward(request, response);
     }
 

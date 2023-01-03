@@ -20,11 +20,12 @@ public class AddToCartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int quantity = 1;
         float price = 0;
+        HttpSession session = request.getSession();
         try {
             ProductService productService = new ProductService();
             String id = request.getParameter("product_id");
             int pro_id;
-            String url = null;
+            String url = (String) session.getAttribute("url");
             if (id != null) {
                 pro_id = Integer.parseInt(id);
                 Product product = null;
@@ -62,8 +63,7 @@ public class AddToCartController extends HttpServlet {
                             price = price + toppings.get(i).getPrice() * quantity;
                         }
                     }
-                    HttpSession session = request.getSession();
-                    url = (String) session.getAttribute("url");
+
                     User user = (User) session.getAttribute("user");
                     if (session.getAttribute("cart") == null) {
                         Cart cart = new Cart();
@@ -73,6 +73,7 @@ public class AddToCartController extends HttpServlet {
                         cart.addItem(item);
                         cart.updateTotal();
                         session.setAttribute("cart", cart);
+                        response.sendRedirect(request.getContextPath() + url);
                     } else {
                         Cart cart = (Cart) session.getAttribute("cart");
                         List<Item> listItems = cart.getItems();
@@ -97,16 +98,13 @@ public class AddToCartController extends HttpServlet {
                             cart.setCustomer(user);
                         }
                         session.setAttribute("cart", cart);
-                        response.sendRedirect(request.getContextPath() + url);
+                       response.sendRedirect(request.getContextPath() + url);
                     }
                 }
-                response.sendRedirect(request.getContextPath() + url);
 
-            } else {
-                response.sendRedirect(request.getContextPath() + url);
+
+
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
