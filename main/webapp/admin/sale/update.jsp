@@ -2,10 +2,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
+<c:set var="object" value="${requestScope['object']}" scope="request"/>
 
 <head>
     <meta charset="utf-8"/>
-    <title>Thêm mã giảm giá</title>
+    <title>${object.code}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- App favicon -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -51,11 +52,11 @@
                         <div class="page-title-box">
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="/admin/coupon">Giảm giá</a></li>
-                                    <li class="breadcrumb-item active"> Thêm mã giảm giá</li>
+                                    <li class="breadcrumb-item"><a href="/admin/sale">Khuyến mãi</a></li>
+                                    <li class="breadcrumb-item active"> ${object.code}</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">Giảm giá</h4>
+                            <h4 class="page-title">Khuyến mãi</h4>
                         </div>
                     </div>
                 </div>
@@ -65,63 +66,57 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Giảm giá mới</h4>
-                                <form action="/admin/coupon/create" method="post">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group mb-3">
-                                                <label for="code">Mã giảm giá</label>
-                                                <input type="text" id="code" name="code" class="form-control" required>
-                                            </div>
 
+                                <h4 class="header-title">Cập nhật khuyến mãi</h4>
+                                <form action="/admin/sale/create" method="post">
+                                    <div class="row">
+                                        <div class="col-lg-6"> <input type="text" name="id" id="id"
+                                                                      value="${object.id}"
+                                                                      class="">
                                             <div class="form-group mb-3">
-                                                <label for="quantity">Số lượng mã</label>
-                                                <input type="number" id="quantity" name="quantity" class="form-control"
-                                                       required>
+                                                <label for="name">Tên khuyến mãi</label>
+                                                <input type="text" id="name" name="name" required class="form-control"value=" ${object.name}">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="percent">% giảm</label>
-                                                <input type="number" id="percent" name="percent" class="form-control"
-                                                       required>
+                                                <input type="text" id="percent" name="percent" value=" ${object.percent}" required class="form-control">
                                             </div>
-                                            <div class="form-group mb-3">
-                                                <label for="max_price_sale">Số tiền giảm tối đa</label>
-                                                <input type="number" id="max_price_sale" name="max_price_sale"
-                                                       class="form-control" value="0" required>
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label for="min_price_order">Giá trị hóa đơn tối thiểu</label>
-                                                <input type="number" id="min_price_order" name="min_price_order"
-                                                       class="form-control" value="0" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>Thời gian có hiệu lực</label>
-                                                <input type="text" class="form-control date" id="singledaterange"
-                                                       name="date"
-                                                       data-toggle="date-picker" data-cancel-class="btn-warning"
-                                                       required>
+                                                <input type="text" class="form-control date" name="date" id="singledaterange"
+                                                       data-toggle="date-picker" data-cancel-class="btn-warning" required value="${object.getStringStartEnd()}">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <label for="category">Chọn loại sản phẩm áp dụng</label>
+                                                <select id="category" multiple class="form-control" name="category">
+                                                    <c:forEach var="item" items="${requestScope['categoryList']}">
+                                                        <option value="<c:out value="${item.id}"/>"><c:out value="${item.name}"/></option>
+                                                    </c:forEach>
+                                                </select>
+                                                <span class="help-block"><small>Giữ ctrl hoặc shift để chọn nhiều
+                                                            loại.</small></span>
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label for="content">Nội dung</label>
-                                                <textarea type="text" id="content" name="content"
-                                                          class="form-control" cols="30" rows="5"></textarea>
-                                                <h4 class="text-info">Cho tài khoản</h4>
+                                                <label for="product">Chọn sản phẩm áp dụng</label>
+                                                <select class="select2 form-control select2-multiple"
+                                                        data-toggle="select2" multiple="multiple"
+                                                        data-placeholder="Chọn sản phẩm áp dụng ..." id="product" name="product">
+                                                    <c:forEach var="item" items="${requestScope['categoryList']}">
+                                                    <optgroup label="${item.name}">
+                                                        <c:forEach var="product" items="${requestScope['productList']}">
+                                                            <option value="${product.id}" ${pro}>${product.name}</option>
+                                                        </c:forEach>
+                                                    </optgroup>
+                                                    </c:forEach>
+                                                </select>
                                             </div>
-                                            <div class="form-group mb-3">
-                                                <label for="content">Số đơn hàng đã đặt tối thiểu</label>
-                                                <input type="number" id="min_num_contentorder" name="min_num_order"
-                                                       class="form-control" value="0" required>
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label for="date_regis_acc">Ngày lập tài khoản tối thiểu</label>
-                                                <input type="date" id="date_regis_acc" name="date_regis_acc"
-                                                       class="form-control" value="2022-01-01" required>
-                                            </div>
+
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Thêm mã giảm giá</button>
+                                    <button type="submit" class="btn btn-primary">Thêm khuyến mãi</button>
                                 </form>
                             </div> <!-- end card-body-->
                         </div> <!-- end card-->

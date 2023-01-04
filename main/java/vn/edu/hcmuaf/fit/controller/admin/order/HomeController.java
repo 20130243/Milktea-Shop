@@ -1,7 +1,7 @@
 package vn.edu.hcmuaf.fit.controller.admin.order;
 
-import vn.edu.hcmuaf.fit.bean.Category;
-import vn.edu.hcmuaf.fit.services.CategoryService;
+import vn.edu.hcmuaf.fit.bean.Order;
+import vn.edu.hcmuaf.fit.services.OrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "Order", value = "/admin/order")
@@ -23,16 +24,21 @@ public class HomeController extends HttpServlet {
         } else {
             index = Integer.parseInt(page);
         }
-        CategoryService categoryService = new CategoryService();
-        int count = categoryService.getTotal();
+        OrderService orderService = new OrderService();
+        int count = orderService.getTotal();
         int endPage = count/10;
         if(count % 10 != 0) {
             endPage++;
         }
 
-        List<Category> categoryList = categoryService.getPaging(index);
+        List<Order> orderList = null;
+        try {
+            orderList = orderService.getPaging(index);
+            request.setAttribute("orderList", orderList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-        request.setAttribute("categoryList", categoryList);
         request.setAttribute("endPage", endPage);
         request.getRequestDispatcher("order/index.jsp").forward(request, response);
     }

@@ -73,7 +73,7 @@
 
                             <div style="max-height: 230px;" data-simplebar>
                                 <!-- item-->
-                                <a href="order/create.jsp" class="dropdown-item notify-item">
+                                <a href="order/update.jsp" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-primary">
                                         <i class="mdi mdi-comment-account-outline"></i>
                                     </div>
@@ -82,7 +82,7 @@
                                     </p>
                                 </a>
                                 <!-- item-->
-                                <a href="order/create.jsp" class="dropdown-item notify-item">
+                                <a href="order/update.jsp" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-primary">
                                         <i class="mdi mdi-comment-account-outline"></i>
                                     </div>
@@ -91,7 +91,7 @@
                                     </p>
                                 </a>
                                 <!-- item-->
-                                <a href="order/create.jsp" class="dropdown-item notify-item">
+                                <a href="order/update.jsp" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-primary">
                                         <i class="mdi mdi-comment-account-outline"></i>
                                     </div>
@@ -100,7 +100,7 @@
                                     </p>
                                 </a>
                                 <!-- item-->
-                                <a href="order/create.jsp" class="dropdown-item notify-item">
+                                <a href="order/update.jsp" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-primary">
                                         <i class="mdi mdi-comment-account-outline"></i>
                                     </div>

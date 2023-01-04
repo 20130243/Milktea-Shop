@@ -1,7 +1,6 @@
 package vn.edu.hcmuaf.fit.dao;
 
 
-import vn.edu.hcmuaf.fit.dao.RD;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.sql.Date;
@@ -10,28 +9,28 @@ import java.util.List;
 import java.util.Map;
 
 public class CouponDAO extends RD {
+    private static final String tableName = "coupon";
+
     @Override
     public List<Map<String, Object>> getAll() throws SQLException {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM coupon  ")
+                h.createQuery("SELECT * FROM " + tableName)
                         .mapToMap()
                         .list());
     }
 
     @Override
     public Map<String, Object> getById(int id) throws SQLException {
-        List<Map<String, Object>> couponList = getAll();
-        for (Map<String, Object> coupon : couponList) {
-            if ((int) coupon.get("id") == id) {
-                return coupon;
-            }
-        }
-        return null;
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM " + tableName + " WHERE id=:id ")
+                        .bind("id", id)
+                        .mapToMap()
+                        .first());
     }
 
     @Override
     public void delete(int id) {
-        JDBIConnector.get().withHandle(h -> h.createUpdate("delete from coupon where id =?")
+        JDBIConnector.get().withHandle(h -> h.createUpdate("delete from " + tableName + " where id =?")
                 .bind(0, id)
                 .execute()
         );
@@ -39,7 +38,7 @@ public class CouponDAO extends RD {
 
     public void insert(String code, int percent, float max_price_sale, int quantity, Date start_date, Date end_date, float min_price_order, Date date_regis_acc, int min_num_order, String content) throws Exception {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("insert into coupon (code, percent, max_price_sale, quantity, start_date, end_date,min_price_order, date_regis_acc, min_num_order, content) " +
+                h.createUpdate("insert into " + tableName + " (code, percent, max_price_sale, quantity, start_date, end_date,min_price_order, date_regis_acc, min_num_order, content) " +
                                 "values (:code,:percent,:max_price_sale,:quantity,:start_date,:end_date,:min_price_order,:date_regis_acc,:min_num_order,:content)")
                         .bind("code", code)
                         .bind("percent", percent)
@@ -58,7 +57,7 @@ public class CouponDAO extends RD {
     public void update(int id, String code, int percent, float max_price_sale, int quantity, Date start_date, Date end_date, float min_price_order, Date date_regis_acc, int min_num_order, String content) throws Exception {
 
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("UPDATE coupon SET code=:code,percent=:percent, max_price_sale=:max_price_sale, quantity=:quantity, start_date=:start_date, end_date=:end_date,  min_price_order=:min_price_order, date_regis_acc=:date_regis_acc, min_num_order=:min_num_order, content=:content WHERE id=:id")
+                h.createUpdate("UPDATE " + tableName + " SET code=:code,percent=:percent, max_price_sale=:max_price_sale, quantity=:quantity, start_date=:start_date, end_date=:end_date,  min_price_order=:min_price_order, date_regis_acc=:date_regis_acc, min_num_order=:min_num_order, content=:content WHERE id=:id")
                         .bind("code", code)
                         .bind("percent", percent)
                         .bind("max_price_sale", max_price_sale)
@@ -75,7 +74,7 @@ public class CouponDAO extends RD {
 
     public int getTotal() {
         int count = JDBIConnector.get().withHandle(h ->
-                h.createQuery("select count(*) from coupon").mapTo(Integer.class).first()
+                h.createQuery("select " + tableName + "(*) from coupon").mapTo(Integer.class).first()
         );
         return count;
     }
@@ -83,7 +82,7 @@ public class CouponDAO extends RD {
 
     public List<Map<String, Object>> paging(int index) throws SQLException {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("select * from coupon\n" +
+                h.createQuery("select * from " + tableName + "\n" +
                         "order by id\n" +
                         "LIMIT ? , 5;").bind(0, (index - 1) * 5).mapToMap().list()
         );

@@ -4,15 +4,15 @@ import vn.edu.hcmuaf.fit.bean.Cart;
 import vn.edu.hcmuaf.fit.bean.Order;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.services.CartOrderService;
-import vn.edu.hcmuaf.fit.services.OrderService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 
 @WebServlet(name = "OrderController", value = "/order")
 public class OrderController extends HttpServlet {
@@ -36,7 +36,6 @@ public class OrderController extends HttpServlet {
                 order.setUser_id(user.getId());
                 order.setName(nameUser);
                 order.setPhone(phoneUser);
-                order.setTime(new Date(System.currentTimeMillis()));
                 order.setAddress(addressUser);
                 order.setNote(noteUser);
                 order.setCart(cart);
