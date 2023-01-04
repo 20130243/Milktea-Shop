@@ -61,6 +61,16 @@ public class CouponController extends HttpServlet {
                             cart.setPriceSale(0);
                         }
 
+                        String address = request.getParameter("addressUser");
+                        if(address != null){
+                            request.setAttribute("addressUser", address);
+                        }
+
+                        String note = request.getParameter("noteUser");
+                        if(note != null){
+                            request.setAttribute("noteUser", note);
+                        }
+
                         session.setAttribute("cart", cart);
 
                     } catch (SQLException e) {

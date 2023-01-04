@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
     <link rel="stylesheet" href="css/account.css" type="text/css"/>
     <link rel="stylesheet" href="css/header-footer.css" type="text/css"/>
+
+
 </head>
 
 <body>
@@ -84,13 +86,13 @@
                                             <div class="login-input-box">
                                                 <span class="text-danger"
                                                       id="login-username-error">${requestScope['error_login']}</span>
-                                                <input type="text" name="username" placeholder="Tài khoản"/>
+                                                <input type="text" name="username" placeholder="Tài khoản" value="${requestScope['user']}"/>
                                                 <span class="text-danger" id="login-password-error"></span>
-                                                <input type="password" name="password" placeholder="Mật khẩu"/>
+                                                <input type="password" name="password" placeholder="Mật khẩu" value="${requestScope['pass']}"/>
                                             </div>
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
-                                                    <input type="checkbox" name="save" value="true"/>
+                                                    <input type="checkbox" name="save" value="checked" ${requestScope['save']}/>
                                                     <label>Lưu thông tin</label>
                                                     <a href="forgotPass.jsp">Quên mật khẩu?</a>
                                                 </div>
@@ -130,14 +132,6 @@
                                                       id="register-repassword-error"></span>
                                                 <input type="password" placeholder="Nhập lại mật nhẩu " required/>
                                             </div>
-                                            <%--                                            <div class="login-toggle-btn">--%>
-                                            <%--                                                <input type="checkbox"/>--%>
-                                            <%--                                                <label>Đồng ý với các--%>
-                                            <%--                                                    <span><a href="#"--%>
-                                            <%--                                                             style="float: none;color: blue;text-decoration: underline;">--%>
-                                            <%--                                                                            điều khoản</a></span>--%>
-                                            <%--                                                    của chúng tôi.</label>--%>
-                                            <%--                                            </div>--%>
                                             <div class="button-box">
                                                 <button class="register-btn btn" type="submit">
                                                     <span>Đăng kí</span>
@@ -168,7 +162,6 @@
     </div>
 </div>
 <!-- Search End -->
-
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jquery.nice-select.min.js"></script>
@@ -190,6 +183,7 @@
 <script src="assets/js/vendor/account/js/plugins/scrollup.min.js"></script>
 <script src="assets/js/vendor/account/js/plugins/jqueryui.min.js"></script>
 <script src="assets/js/vendor/account/js/main.js"></script>
+
 </body>
 
 </html>
