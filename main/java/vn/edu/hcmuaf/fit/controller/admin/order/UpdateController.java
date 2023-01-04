@@ -1,4 +1,4 @@
-package vn.edu.hcmuaf.fit.controller.admin.category;
+package vn.edu.hcmuaf.fit.controller.admin.order;
 
 import vn.edu.hcmuaf.fit.bean.Category;
 import vn.edu.hcmuaf.fit.services.CategoryService;
@@ -10,22 +10,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Category create", value = "/admin/category/create")
-public class CreateController extends HttpServlet {
+@WebServlet(name = "Order update", value = "/admin/order/update")
+public class UpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        try {
+            Category category = (new CategoryService()).getById(id);
+            request.setAttribute("object", category);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         request.getRequestDispatcher("update.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-
         try {
-            (new CategoryService()).insert(new Category(0, request.getParameter("name"), Integer.parseInt(request.getParameter("status").replaceAll("\\s+", ""))));
+            (new CategoryService()).update(new Category(Integer.parseInt(request.getParameter("id").replaceAll("\\s+", "")), request.getParameter("name").substring(0, 1).toUpperCase() + request.getParameter("name").substring(1).toLowerCase(), Integer.parseInt(request.getParameter("status").replaceAll("\\s+", ""))));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        request.getRequestDispatcher("update.jsp").forward(request, response);
+        response.sendRedirect("/admin/category");
     }
 }

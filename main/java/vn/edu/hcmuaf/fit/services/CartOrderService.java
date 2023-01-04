@@ -1,13 +1,13 @@
 package vn.edu.hcmuaf.fit.services;
 
 import vn.edu.hcmuaf.fit.bean.*;
-import vn.edu.hcmuaf.fit.dao.CouponDAO;
 import vn.edu.hcmuaf.fit.dao.OrderDAO;
 import vn.edu.hcmuaf.fit.dao.OrderDetailDAO;
 import vn.edu.hcmuaf.fit.dao.ToppingOrderDAO;
 
-import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,11 +22,12 @@ public class CartOrderService {
     }
 
     public void insert(Order order) {
-        dao.insert(order.getUser_id(), order.getName(), order.getPhone(), order.getTime(),
-                order.getAddress(), order.getNote(), order.getCart().getCoupon() == null ? 0:order.getCart().getCoupon().getId(), order.getTotal());
+        dao.insert(order.getUser_id(), order.getName(), order.getPhone(),
+                order.getAddress(), order.getNote(), order.getCart().getCoupon() == null ? 0 : order.getCart().getCoupon().getId(), order.getTotal());
     }
+
     public void update(Order order) {
-        dao.update(order.getId(), order.getName(), order.getPhone(), order.getAddress(), order.getNote(),order.getCart().getCoupon().getId(),order.getTotal());
+        dao.update(order.getId(), order.getName(), order.getPhone(), order.getAddress(), order.getNote(), order.getCart().getCoupon().getId(), order.getTotal());
     }
 
     public Order convertMaptoOrder(Map<String, Object> map) throws SQLException {
@@ -35,7 +36,7 @@ public class CartOrderService {
         order.setUser_id((Integer) map.get("user_id"));
         order.setName((String) map.get("name"));
         order.setPhone((String) map.get("phone"));
-        order.setTime((Date) map.get("time"));
+        order.setTime(Timestamp.valueOf((LocalDateTime) map.get("time")));
         order.setAddress((String) map.get("address"));
         order.setNote((String) map.get("note"));
         order.setTotal((float) map.get("total"));
@@ -48,14 +49,14 @@ public class CartOrderService {
         Cart cart = order.getCart();
         Order orderNew = getOrderFirst();
         List<Item> items = cart.getItems();
-        if(items.size() > 0) {
+        if (items.size() > 0) {
             for (Item item : items) {
-                detail_dao.insert(orderNew.getId(),item.getProduct().getPriceSize().get(0).getProduct_id(),item.getQuantity());
+                detail_dao.insert(orderNew.getId(), item.getProduct().getPriceSize().get(0).getProduct_id(), item.getQuantity());
                 OrderDetail orderDetailNew = getOrderDetailFirst();
                 List<Topping> toppings = item.getProduct().getTopping();
-                if(toppings.size() > 0) {
+                if (toppings.size() > 0) {
                     for (Topping topping : toppings) {
-                        topping_order_dao.insert(topping.getId(),orderDetailNew.getId());
+                        topping_order_dao.insert(topping.getId(), orderDetailNew.getId());
                     }
                 }
             }
@@ -87,14 +88,19 @@ public class CartOrderService {
         return result;
     }
 
+    public Order getOrderByUserAndOrder(int userId, int orderId) throws SQLException {
+        Map<String, Object> map = dao.getOrderByUserAndOrder(userId, orderId);
+        return map == null ? null : convertMaptoOrder(map);
+    }
+
     public Cart getCartByOrder(int orderId) throws SQLException {
         Cart cart = new Cart();
         List<Map<String, Object>> listMap = detail_dao.getByOrderId(orderId);
-        if(listMap.size() > 0) {
+        if (listMap.size() > 0) {
             for (int i = 0; i < listMap.size(); i++) {
                 Item item = new Item();
                 Product product = new Product();
-                int priceSizeId =(int) listMap.get(i).get("product_size_id");
+                int priceSizeId = (int) listMap.get(i).get("product_size_id");
                 PriceSize priceSize = new PriceSizeService().getById(priceSizeId);
                 product.setId(priceSize.getProduct_id());
                 Product productInDatabase = new ProductService().getById(product.getId());
@@ -105,7 +111,7 @@ public class CartOrderService {
                 product.addPriceSize(priceSize);
                 int oroderDetailsId = (int) listMap.get(i).get("id");
                 List<Map<String, Object>> mapToppings = topping_order_dao.getByOrderDetailId(oroderDetailsId);
-                if(mapToppings.size() > 0){
+                if (mapToppings.size() > 0) {
                     for (int j = 0; j < mapToppings.size(); j++) {
                         int toppingId = (int) mapToppings.get(j).get("topping_id");
                         Topping topping = new ToppingService().getById(toppingId);
@@ -131,32 +137,59 @@ public class CartOrderService {
     public List<Order> orderByUser(int userId) throws SQLException {
         List<Order> list = getOrderByUser(userId);
         for (Order order : list) {
-                Cart cart = getCartByOrder(order.getId());
-                User user = new UserService().getById(userId);
-                cart.setCustomer(user);
-                cart.setTotalMoney(order.getTotal());
-                Object idCoupon = (Object) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
-                Coupon coupon = null;
-                try {
-                    if(idCoupon != null) {
-                        String cId = idCoupon.toString();
-                        int couponId = Integer.parseInt(cId);
-                        coupon = new CouponService().getById(couponId);
-                    }
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+            Cart cart = getCartByOrder(order.getId());
+            User user = new UserService().getById(userId);
+            cart.setCustomer(user);
+            cart.setTotalMoney(order.getTotal());
+            Object idCoupon = (Object) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
+            Coupon coupon = null;
+            try {
+                if (idCoupon != null) {
+                    String cId = idCoupon.toString();
+                    int couponId = Integer.parseInt(cId);
+                    coupon = new CouponService().getById(couponId);
                 }
-                if(coupon != null) {
-                    cart.setCoupon(coupon);
-                }
-                order.setCart(cart);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            if (coupon != null) {
+                cart.setCoupon(coupon);
+            }
+            order.setCart(cart);
         }
 
         return list;
     }
 
+    public Order orderByUserAndOrderId(int userId, int orderId) throws SQLException {
+        Order order = getOrderByUserAndOrder(userId, orderId);
+
+        Cart cart = getCartByOrder(order.getId());
+        User user = new UserService().getById(userId);
+        cart.setCustomer(user);
+        cart.setTotalMoney(order.getTotal());
+        Object idCoupon = (Object) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
+        Coupon coupon = null;
+        try {
+            if (idCoupon != null) {
+                String cId = idCoupon.toString();
+                int couponId = Integer.parseInt(cId);
+                coupon = new CouponService().getById(couponId);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        if (coupon != null) {
+            cart.setCoupon(coupon);
+        }
+        order.setCart(cart);
+
+
+        return order;
+    }
+
     public static void main(String[] args) throws SQLException {
-       CartOrderService test = new CartOrderService();
+        CartOrderService test = new CartOrderService();
         System.out.println(test.orderByUser(4));
 //        System.out.println(test.getCountOrderDetails(1));
 //        System.out.println(test.getCartByOrder(2));

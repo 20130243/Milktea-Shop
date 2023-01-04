@@ -1,7 +1,6 @@
 package vn.edu.hcmuaf.fit.controller.admin.blog;
 
 import vn.edu.hcmuaf.fit.services.BlogService;
-import vn.edu.hcmuaf.fit.services.CategoryService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +26,6 @@ public class DeleteController extends HttpServlet {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        response.sendRedirect("/admin/category");
+        response.sendRedirect("/admin/blog");
     }
 }

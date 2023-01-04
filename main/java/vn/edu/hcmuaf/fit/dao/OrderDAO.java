@@ -1,10 +1,7 @@
 package vn.edu.hcmuaf.fit.dao;
 
-import vn.edu.hcmuaf.fit.bean.Order;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
-import vn.edu.hcmuaf.fit.services.OrderService;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -40,13 +37,12 @@ public class OrderDAO extends RD {
         );
     }
 
-    public static void insert(int user_id, String name, String phone, Date time, String address, String note, int coupon_id, float total) {
+    public static void insert(int user_id, String name, String phone, String address, String note, int coupon_id, float total) {
         JDBIConnector.get().withHandle(h ->
-                h.createUpdate("INSERT INTO `order`" + "(user_id,name,phone,time,address,note,coupon_id,total) VALUES(:user_id,:name,:phone,:time,:address,:note,:coupon_id,:total)")
+                h.createUpdate("INSERT INTO `order`" + "(user_id,name,phone,address,note,coupon_id,total) VALUES(:user_id,:name,:phone,:address,:note,:coupon_id,:total)")
                         .bind("user_id", user_id)
                         .bind("name", name)
                         .bind("phone", phone)
-                        .bind("time", time)
                         .bind("address", address)
                         .bind("note", note)
                         .bind("coupon_id", coupon_id == 0 ? null : coupon_id)
@@ -80,9 +76,10 @@ public class OrderDAO extends RD {
 
     public List<Map<String, Object>> paging(int index) throws SQLException {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("select * from " + tableName + "\n" +
-                        "" + tableName + " by id\n" +
-                        "LIMIT ? , 10;").bind(0, (index - 1) * 10).mapToMap().list()
+                h.createQuery("select * from " + tableName + "order by id LIMIT ? , 10;")
+                        .bind(0, (index - 1) * 10)
+                        .mapToMap()
+                        .list()
         );
     }
 
@@ -117,8 +114,17 @@ public class OrderDAO extends RD {
                         .mapToMap()
                         .list());
     }
+    public Map<String, Object> getOrderByUserAndOrder(int userID,int orderID) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * from `order` \n" +
+                                "WHERE user_id = :user_id AND id=:order_id")
+                        .bind("user_id", userID)
+                        .bind("order_id", orderID)
+                        .mapToMap()
+                        .first());
+    }
 
-    public Map<String, Object> getCouponIdByOrder(int orderId){
+    public Map<String, Object> getCouponIdByOrder(int orderId) {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("SELECT coupon_id FROM `order` WHERE id = :id")
                         .bind("id", orderId)
