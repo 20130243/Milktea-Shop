@@ -121,7 +121,7 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "Order{" + "id="+id+
                 ", user_id=" + user_id +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +

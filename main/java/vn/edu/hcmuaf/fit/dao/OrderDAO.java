@@ -19,13 +19,11 @@ public class OrderDAO extends RD {
 
     @Override
     public Map<String, Object> getById(int id) {
-        List<Map<String, Object>> orderList = getAll();
-        for (Map<String, Object> order : orderList) {
-            if ((int) order.get("id") == id) {
-                return order;
-            }
-        }
-        return null;
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM " + tableName + " WHERE id = ? " )
+                        .bind(0,id)
+                        .mapToMap()
+                        .first());
     }
 
     @Override
@@ -130,5 +128,6 @@ public class OrderDAO extends RD {
                         .bind("id", orderId)
                         .mapToMap().first());
     }
+
 
 }

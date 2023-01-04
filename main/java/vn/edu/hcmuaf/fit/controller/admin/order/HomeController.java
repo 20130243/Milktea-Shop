@@ -34,7 +34,7 @@ public class HomeController extends HttpServlet {
         List<Order> orderList = null;
         try {
             orderList = orderService.getPaging(index);
-            request.setAttribute("categoryList", orderList);
+            request.setAttribute("orderList", orderList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

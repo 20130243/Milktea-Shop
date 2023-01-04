@@ -8,7 +8,7 @@
 <c:set var="object" value="${requestScope['object']}" scope="request"/>
 <head>
     <meta charset="utf-8" />
-    <title>Đơn hàng #${object.id}}</title>
+    <title>Đơn hàng #${object.id}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- App favicon -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -32,7 +32,7 @@
         <!-- ========== Left Sidebar Start ========== -->
     <%@include file="../left-menu.jsp" %>
     <!-- Left Sidebar End -->
-
+        ${object}
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
         <!-- ============================================================== -->

@@ -188,10 +188,34 @@ public class CartOrderService {
         return order;
     }
 
-    public static void main(String[] args) throws SQLException {
-        CartOrderService test = new CartOrderService();
-        System.out.println(test.orderByUser(4));
-//        System.out.println(test.getCountOrderDetails(1));
-//        System.out.println(test.getCartByOrder(2));
+
+    public Order getOrderById(int id) throws SQLException {
+        Map<String, Object> map = dao.getById(id);
+        Order order = convertMaptoOrder(map);
+
+        Cart cart = getCartByOrder(order.getId());
+        User user = new UserService().getById(id);
+        cart.setCustomer(user);
+        cart.setTotalMoney(order.getTotal());
+        Object idCoupon = (Object) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
+        Coupon coupon = null;
+        try {
+            if (idCoupon != null) {
+                String cId = idCoupon.toString();
+                int couponId = Integer.parseInt(cId);
+                coupon = new CouponService().getById(couponId);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        if (coupon != null) {
+            cart.setCoupon(coupon);
+        }
+        order.setCart(cart);
+
+
+        return order;
     }
+
+
 }

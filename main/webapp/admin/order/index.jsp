@@ -102,7 +102,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach var="item" items="${requestScope['couponList']}">
+                                        <c:forEach var="item" items="${requestScope['orderList']}">
 
                                             <tr>
                                                 <td><a href="/admin/order/update?id=${item.id}"
@@ -171,7 +171,7 @@
                                     <nav>
                                         <ul class="pagination pagination-rounded mb-0">
                                             <li class="page-item  <c:if test="${currentPage eq 1 }"> d-none </c:if>">
-                                                <a class="page-link" href="/admin/coupon?page=<c:out value='${i-1}'/>"
+                                                <a class="page-link" href="/admin/order?page=<c:out value='${i-1}'/>"
                                                    aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                     <span class="sr-only">Previous</span>
@@ -182,14 +182,14 @@
                                             <c:forEach var="i" begin="1" end="${endPage}">
                                                 <li class="page-item  <c:if test="${currentPage eq i }"> active </c:if>">
                                                     <a class="page-link"
-                                                       href="/admin/coupon?page=<c:out value='${i}'/>">
+                                                       href="/admin/order?page=<c:out value='${i}'/>">
                                                         <c:out value="${i}"/>
                                                     </a>
                                                 </li>
 
                                             </c:forEach>
                                             <li class="page-item <c:if test="${currentPage eq endPage }"> d-none </c:if>">
-                                                <a class="page-link" href="/admin/coupon?page=<c:out value='${i+1}'/>"
+                                                <a class="page-link" href="/admin/order?page=<c:out value='${i+1}'/>"
                                                    aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                     <span class="sr-only">Next</span>
