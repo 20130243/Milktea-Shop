@@ -140,7 +140,5 @@ public class UserService {
     }
 
     public static void main(String[] args) {
-
-//       new UserService().sendMail("tinhle2772002@gmail.com", "Password recovery","test");
     }
 }

@@ -1,7 +1,7 @@
 package vn.edu.hcmuaf.fit.controller.admin.blog;
 
-import vn.edu.hcmuaf.fit.bean.Category;
-import vn.edu.hcmuaf.fit.services.CategoryService;
+import vn.edu.hcmuaf.fit.bean.Blog;
+import vn.edu.hcmuaf.fit.services.BlogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "Blog", value = "/admin/blog")
-public class HomeController extends HttpServlet {
+public class    HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -23,16 +23,16 @@ public class HomeController extends HttpServlet {
         } else {
             index = Integer.parseInt(page);
         }
-        CategoryService categoryService = new CategoryService();
-        int count = categoryService.getTotal();
+        BlogService blogService = new BlogService();
+        int count = blogService.getTotal();
         int endPage = count/10;
         if(count % 10 != 0) {
             endPage++;
         }
 
-        List<Category> categoryList = categoryService.getPaging(index);
+        List<Blog> blogList = blogService.getPaging(index);
 
-        request.setAttribute("categoryList", categoryList);
+        request.setAttribute("blogList", blogList);
         request.setAttribute("endPage", endPage);
         request.getRequestDispatcher("blog/index.jsp").forward(request, response);
     }

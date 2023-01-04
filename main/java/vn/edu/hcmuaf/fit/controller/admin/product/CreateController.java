@@ -40,24 +40,20 @@ public class CreateController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         Product product = new Product();
-
         String name = request.getParameter("name");
-
-System.out.println(name);
         Part image = request.getPart("image");
         String realPath = request.getServletContext().getRealPath("/img/ProductImport");
-        String fileName = Path.of(image.getSubmittedFileName()).getFileName().toString();
-        String extension = ".";
-        int i = fileName.lastIndexOf('.');
-        if (i > 0) {
-            extension = "." + fileName.substring(i + 1);
-        }
         if (!Files.exists(Path.of(realPath))) {
             Files.createDirectory(Path.of(realPath));
         }
-        String path = realPath + "/" + name.replaceAll(" ", "-") + extension;
+        String fileName = Path.of(image.getSubmittedFileName()).getFileName().toString();
+        //get extenstion
+        int i = fileName.lastIndexOf('.');
+        String extension = i > 0?"."+ fileName.substring(i + 1):"";
+
+        String path = realPath + "/" + fileName.replaceAll(" ", "-") + extension;
         image.write(path);
-        String img = "/img/ProductImport/" + name.replaceAll(" ", "-") + extension;
+        String img = "/img/ProductImport/" + fileName.replaceAll(" ", "-") + extension;
 
 
         int category = Integer.parseInt(request.getParameter("category"));

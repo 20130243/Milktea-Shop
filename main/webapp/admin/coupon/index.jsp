@@ -137,12 +137,13 @@
 
                                                 </td>
 
-                                                <form action="/admin/coupon/delete" method="post"
-                                                      id="delete-form-<c:out value="${item.id}"/>">
-                                                    <td class="table-action text-center">
-                                                        <a href="/admin/coupon/update?id=<c:out value="${item.id}"/>"
-                                                           class="action-icon"> <i
-                                                                class="mdi mdi-square-edit-outline"></i></a>
+
+                                                <td class="table-action text-center">
+                                                    <form action="/admin/coupon/delete" method="post"
+                                                          id="delete-form-<c:out value="${item.id}"/>"><a
+                                                            href="/admin/coupon/update?id=<c:out value="${item.id}"/>"
+                                                            class="action-icon"> <i
+                                                            class="mdi mdi-square-edit-outline"></i></a>
                                                         <input type="text" name="id" id="id"
                                                                value="<c:out value="${item.id}"/>" class="d-none">
                                                         <button type="submit" class="d-none"></button>
@@ -151,8 +152,9 @@
                                                                                    data-name="<c:out value="${item.code}"/>"
                                                                                    data-id="<c:out value="${item.id}"/>"></i>
                                                         </a>
-                                                    </td>
-                                                </form>
+                                                    </form>
+                                                </td>
+
                                             </tr>
                                         </c:forEach>
                                         </tbody>

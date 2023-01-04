@@ -1,17 +1,17 @@
 package vn.edu.hcmuaf.fit.controller;
 
-import vn.edu.hcmuaf.fit.bean.Cart;
 import vn.edu.hcmuaf.fit.bean.Order;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.services.CartOrderService;
-import vn.edu.hcmuaf.fit.services.UserService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 @WebServlet(name = "orderDetail", value = "/orderDetail")
 public class OrderDetailController extends HttpServlet {
@@ -20,21 +20,17 @@ public class OrderDetailController extends HttpServlet {
         String orderId = request.getParameter("orderid");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if(orderId!=null && user != null) {
+        if (orderId != null && user != null) {
             try {
-                List<Order> orders = new CartOrderService().orderByUser(user.getId());
                 int id = Integer.parseInt(orderId);
-                for (Order order : orders) {
-                    if(order.getId()==id){
-                        request.setAttribute("order",order);
-                    }
-                }
+                Order order = new CartOrderService().orderByUserAndOrderId(user.getId(), id);
+                request.setAttribute("order", order);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        request.getRequestDispatcher("orderdetail.jsp").forward(request,response);
+        request.getRequestDispatcher("orderdetail.jsp").forward(request, response);
     }
 
     @Override

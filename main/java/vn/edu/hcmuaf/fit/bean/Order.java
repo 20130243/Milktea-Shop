@@ -1,9 +1,7 @@
 package vn.edu.hcmuaf.fit.bean;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
 
 public class Order implements Serializable {
     int id;
@@ -11,20 +9,13 @@ public class Order implements Serializable {
     String name;
     String phone;
     String address;
-    Date time;
+    Timestamp time;
     String note;
-    /*
-    ProductList(PriceSize,(quantity,topping))
-    Vi du
-            tra sua("size L gia 15k",(2,"tran chau den"))
-            tra sua("size XL gia 25k",(1,""))
-            da xay("size L gia 35k",(1,""))
-    */
     Cart cart;
     float total;
     int status;
 
-    public Order(int id, int user_id, String name, String phone, String address, Date time, String note, int coupon_id, Cart cart, float total, int status) {
+    public Order(int id, int user_id, String name, String phone, String address, Timestamp time, String note, int coupon_id, Cart cart, float total, int status) {
         this.id = id;
         this.user_id = user_id;
         this.name = name;
@@ -80,11 +71,11 @@ public class Order implements Serializable {
         this.address = address;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 
@@ -130,7 +121,7 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "Order{" + "id="+id+
                 ", user_id=" + user_id +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +

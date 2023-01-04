@@ -77,7 +77,7 @@ public class ToppingDAO extends RD {
         );
     }  public int getTotal() {
         int count = JDBIConnector.get().withHandle(h ->
-                h.createQuery("select count(*) from category").mapTo(Integer.class).first()
+                h.createQuery("select count(*) from topping").mapTo(Integer.class).first()
         );
         return count;
     }
