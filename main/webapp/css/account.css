@@ -357,6 +357,7 @@
 .login-form-container .login-btn,
 .login-form-container .register-btn {
   margin-top: 20px;
+  margin-bottom: 20px;
   padding: 8px 30px;
 }
 
