@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +110,14 @@
                                                        class="text-body font-weight-bold">${item.id}</a>
                                                 </td>
                                                 <td>
-                                                        ${item.time} <small class="text-muted">10:29 AM</small>
+                                                    <fmt:formatDate type="date"
+                                                                    dateStyle="short"
+                                                                    value="${item.time}"/>
+
+
+                                                    <small class="text-muted">
+                                                        <fmt:formatDate type="time" value="${item.time}"/>
+                                                    </small>
                                                 </td>
                                                 <td>
                                                         ${item.name}
@@ -118,7 +126,9 @@
                                                         ${item.phone}
                                                 </td>
                                                 <td>
-                                                        ${item.total}
+                                                            <fmt:formatNumber type="currency"
+                                                                              value="${item.total}"
+                                                                              currencySymbol="đ"/>
                                                 </td>
                                                 <td>
                                                     <h5>
@@ -126,10 +136,10 @@
                                                             <c:when test="${item.status eq 0}">
                                                                 <span class="badge badge-info">Đã nhận</span>
                                                             </c:when>
-                                                            <c:when test="${item.status eq 0}">
-                                                                <span class="badge badge-secondary">Đang vận chuyển</span>
+                                                            <c:when test="${item.status eq 1}">
+                                                                <span class="badge badge-info-lighten">Đang vận chuyển</span>
                                                             </c:when>
-                                                            <c:when test="${item.status eq 0}">
+                                                            <c:when test="${item.status eq 2}">
                                                                 <span class="badge badge-success">Thành công</span>
                                                             </c:when>
                                                             <c:otherwise>
