@@ -219,7 +219,7 @@
                                                                 <label>Số điện thoại</label>
                                                                 <input type="text" name="user-number" value="<%=user.getPhone()%>" />
                                                             </div>
-                                                            <div class="example">(Vd: 31/05/1970)</div>
+                                                            <div class="example">(Số điện thoại 10 số, bắt đầu bằng số 0. Vd: 0987654321)</div>
                                                             <div class="button-box">
                                                                 <button class="btn default-btn" type="submit" id="submit_111">
                                                                     lưu thông tin

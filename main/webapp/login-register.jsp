@@ -29,6 +29,10 @@
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
     <link rel="stylesheet" href="css/account.css" type="text/css"/>
     <link rel="stylesheet" href="css/header-footer.css" type="text/css"/>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+
 </head>
 
 <body>
@@ -84,20 +88,31 @@
                                             <div class="login-input-box">
                                                 <span class="text-danger"
                                                       id="login-username-error">${requestScope['error_login']}</span>
-                                                <input type="text" name="username" placeholder="Tài khoản"/>
+                                                <input type="text" name="username" placeholder="Tài khoản" value="${requestScope['user']}"/>
                                                 <span class="text-danger" id="login-password-error"></span>
-                                                <input type="password" name="password" placeholder="Mật khẩu"/>
+                                                <input type="password" name="password" placeholder="Mật khẩu" value="${requestScope['pass']}"/>
                                             </div>
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
-                                                    <input type="checkbox" name="save" value="true"/>
-                                                    <label>Lưu thông tin</label>
+                                                    <input id="checkSave" type="checkbox" name="save" value="checked" ${requestScope['save']}/>
+                                                    <label for="checkSave">Lưu thông tin</label>
                                                     <a href="forgotPass.jsp">Quên mật khẩu?</a>
                                                 </div>
                                                 <div class="button-box">
                                                     <button class="login-btn btn" type="submit">
                                                         <span>Đăng nhập</span>
                                                     </button>
+                                                </div>
+                                            </div>
+                                            <hr class="mb-4 mt-1">
+
+                                            <div class="d-flex justify-content-center text-center pt-1">
+                                                <div class="col">
+                                                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                                                    </fb:login-button>
+                                                </div>
+                                                <div class="col">
+                                                    <div id="buttonDiv"></div>
                                                 </div>
                                             </div>
                                         </form>
@@ -130,14 +145,6 @@
                                                       id="register-repassword-error"></span>
                                                 <input type="password" placeholder="Nhập lại mật nhẩu " required/>
                                             </div>
-                                            <%--                                            <div class="login-toggle-btn">--%>
-                                            <%--                                                <input type="checkbox"/>--%>
-                                            <%--                                                <label>Đồng ý với các--%>
-                                            <%--                                                    <span><a href="#"--%>
-                                            <%--                                                             style="float: none;color: blue;text-decoration: underline;">--%>
-                                            <%--                                                                            điều khoản</a></span>--%>
-                                            <%--                                                    của chúng tôi.</label>--%>
-                                            <%--                                            </div>--%>
                                             <div class="button-box">
                                                 <button class="register-btn btn" type="submit">
                                                     <span>Đăng kí</span>
@@ -168,8 +175,9 @@
     </div>
 </div>
 <!-- Search End -->
-
 <!-- Js Plugins -->
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v15.0&appId=2143582525828112&autoLogAppEvents=1" nonce="jhCmVurm"></script>
+
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jquery.nice-select.min.js"></script>
 <script src="js/jquery.nicescroll.min.js"></script>
@@ -190,6 +198,64 @@
 <script src="assets/js/vendor/account/js/plugins/scrollup.min.js"></script>
 <script src="assets/js/vendor/account/js/plugins/jqueryui.min.js"></script>
 <script src="assets/js/vendor/account/js/main.js"></script>
+
+
+<script>
+
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+        FB.api('/me',{fields: ' name, email'}, function(response) {
+            console.log(response);
+            window.location.href = 'Login?action=Face&name='+response.name+'&email='+response.email+'&id='+response.id;
+        });
+    }
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '2143582525828112',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v15.0'
+        });
+
+        FB.AppEvents.logPageView();
+
+    };
+
+
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
+<script>
+    function handleCredentialResponse(response) {
+         const resp = jwt_decode(response.credential);
+
+        window.location.href = 'Login?action=Google&name='+resp.name+'&email='+resp.email+'&id='+resp.sub;
+    }
+    window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: "862913517251-8g2qrfue12q6gojci1tulp9qtfi4hmqv.apps.googleusercontent.com",
+            callback: handleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }  // customization attributes
+        );
+        google.accounts.id.prompt(); // also display the One Tap dialog
+    }
+</script>
 </body>
 
 </html>

@@ -148,7 +148,6 @@
           </table>
         </div>
       </div>
-
       <div class="col-lg-4">
         <form action="order" method="get" >
         <div class="cart__discount checkout__form shadow p-4">
@@ -167,7 +166,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Số điện thoại người nhận<span>*</span></p>
-                    <input name="phoneUser" type="phone" value="<%=user != null ? user.getPhone() : ""%>">
+                    <input name="phoneUser" type="tel" pattern="[0]{1}[0-9]{9}" required value="<%=user != null ? user.getPhone() : ""%>">
                   </div>
                 </div>
               </div>
@@ -175,7 +174,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Địa chỉ nhận hàng<span>*</span></p>
-                    <textarea name="addressUser" cols="" rows="2" style="width: 100%;"><%=user.getAddress()%></textarea>
+                    <textarea name="addressUser" cols="" rows="2" style="width: 100%;"><%= request.getAttribute("addressUser") != null? request.getAttribute("addressUser"): user!=null?user.getAddress():"" %></textarea>
                   </div>
                 </div>
               </div>
@@ -183,13 +182,13 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Ghi chú<span>*</span></p>
-                    <textarea name="noteUser" cols="" rows="2" style="width: 100%;"></textarea>
+                    <textarea name="noteUser" cols="" rows="2" style="width: 100%;"><%=request.getAttribute("noteUser")!=null?request.getAttribute("noteUser"):""%></textarea>
                   </div>
                 </div>
               </div>
               <div class="coupon_form">
-                <input name="coupon" type="text" placeholder="Nhập mã giảm giá " value="<%=cart.getCoupon()!=null? cart.getCoupon().getCode():""%>">
-                <button type="submit"  formaction="/coupon" >Áp dụng</button>
+                <input name="coupon" type="text" placeholder="Nhập mã giảm giá " value="<%=cart != null && cart.getCoupon()!=null? cart.getCoupon().getCode():""%>">
+                <button type="submit" formaction="/coupon" >Áp dụng</button>
               </div>
               <div class="row">
                 <div class="col-lg-12">
