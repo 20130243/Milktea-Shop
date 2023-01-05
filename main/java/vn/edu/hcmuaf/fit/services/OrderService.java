@@ -8,6 +8,8 @@ import vn.edu.hcmuaf.fit.dao.OrderDetailDAO;
 import vn.edu.hcmuaf.fit.dao.ToppingOrderDAO;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +58,6 @@ public class OrderService {
             insert(order);
 //            updateCoupon(order,order.getCart().getCoupon().getId());
             List<Order> listOrder = getAll();
-            System.out.println(listOrder.size());
             for (Order item : listOrder) {
                 order.setId(item.getId());
             }
@@ -82,6 +83,9 @@ public class OrderService {
     public void updateStatus(Order order, int status) {
         dao.updateStatus(order.getId(), status);
     }
+    public void updateStatus(int id, int status) {
+        dao.updateStatus(id, status);
+    }
 
     public void updateCoupon(Order order, int coupon_id) {
         dao.updateCoupon(order.getId(), coupon_id);
@@ -94,6 +98,7 @@ public class OrderService {
         order.setUser_id((Integer) map.get("user_id"));
         order.setName((String) map.get("name"));
         order.setPhone((String) map.get("phone"));
+        order.setTime(Timestamp.valueOf((LocalDateTime) map.get("time")) );
         order.setAddress((String) map.get("address"));
         order.setNote((String) map.get("note"));
 
