@@ -30,14 +30,9 @@
     <link rel="stylesheet" href="css/account.css" type="text/css"/>
     <link rel="stylesheet" href="css/header-footer.css" type="text/css"/>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="style.css" />
-    <title>jQuery Example</title>
-    <script>
-        $(document).ready(function() {
-            // Execute some code here
-        });
-    </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+
 </head>
 
 <body>
@@ -109,8 +104,17 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                                            </fb:login-button>
+                                            <hr class="mb-4 mt-1">
+
+                                            <div class="d-flex justify-content-center text-center pt-1">
+                                                <div class="col">
+                                                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                                                    </fb:login-button>
+                                                </div>
+                                                <div class="col">
+                                                    <div id="buttonDiv"></div>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -232,6 +236,25 @@
         js.src = "https://connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+</script>
+<script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
+<script>
+    function handleCredentialResponse(response) {
+         const resp = jwt_decode(response.credential);
+
+        window.location.href = 'Login?action=Google&name='+resp.name+'&email='+resp.email+'&id='+resp.sub;
+    }
+    window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: "862913517251-8g2qrfue12q6gojci1tulp9qtfi4hmqv.apps.googleusercontent.com",
+            callback: handleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }  // customization attributes
+        );
+        google.accounts.id.prompt(); // also display the One Tap dialog
+    }
 </script>
 </body>
 
