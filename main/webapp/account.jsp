@@ -209,7 +209,7 @@
                                             <h3>Thông tin cá nhân</h3>
                                             <div class="login" id="edit_111" style="display: none">
                                                 <div class="login-form-container">
-                                                    <div class="account-login-form">
+                                                    <div class="account-login-form">My Project 7505
                                                         <form action="editUser" method="post">
                                                             <div class="account-input-box">
                                                                 <label>Họ và tên</label>

@@ -166,7 +166,7 @@
                 <div class="col-lg-12">
                   <div class="checkout__input">
                     <p>Số điện thoại người nhận<span>*</span></p>
-                    <input name="phoneUser" type="phone" value="<%=user != null ? user.getPhone() : ""%>">
+                    <input name="phoneUser" type="tel" pattern="[0]{1}[0-9]{9}" required value="<%=user != null ? user.getPhone() : ""%>">
                   </div>
                 </div>
               </div>
@@ -188,7 +188,7 @@
               </div>
               <div class="coupon_form">
                 <input name="coupon" type="text" placeholder="Nhập mã giảm giá " value="<%=cart != null && cart.getCoupon()!=null? cart.getCoupon().getCode():""%>">
-                <button type="submit" formaction="/coupon" formmethod="post" >Áp dụng</button>
+                <button type="submit" formaction="/coupon" >Áp dụng</button>
               </div>
               <div class="row">
                 <div class="col-lg-12">

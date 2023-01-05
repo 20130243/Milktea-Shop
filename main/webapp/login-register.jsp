@@ -30,7 +30,14 @@
     <link rel="stylesheet" href="css/account.css" type="text/css"/>
     <link rel="stylesheet" href="css/header-footer.css" type="text/css"/>
 
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>jQuery Example</title>
+    <script>
+        $(document).ready(function() {
+            // Execute some code here
+        });
+    </script>
 </head>
 
 <body>
@@ -92,8 +99,8 @@
                                             </div>
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
-                                                    <input type="checkbox" name="save" value="checked" ${requestScope['save']}/>
-                                                    <label>Lưu thông tin</label>
+                                                    <input id="checkSave" type="checkbox" name="save" value="checked" ${requestScope['save']}/>
+                                                    <label for="checkSave">Lưu thông tin</label>
                                                     <a href="forgotPass.jsp">Quên mật khẩu?</a>
                                                 </div>
                                                 <div class="button-box">
@@ -102,6 +109,8 @@
                                                     </button>
                                                 </div>
                                             </div>
+                                            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                                            </fb:login-button>
                                         </form>
                                     </div>
                                 </div>
@@ -163,6 +172,8 @@
 </div>
 <!-- Search End -->
 <!-- Js Plugins -->
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v15.0&appId=2143582525828112&autoLogAppEvents=1" nonce="jhCmVurm"></script>
+
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jquery.nice-select.min.js"></script>
 <script src="js/jquery.nicescroll.min.js"></script>
@@ -184,6 +195,44 @@
 <script src="assets/js/vendor/account/js/plugins/jqueryui.min.js"></script>
 <script src="assets/js/vendor/account/js/main.js"></script>
 
+
+<script>
+
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+        FB.api('/me',{fields: ' name, email'}, function(response) {
+            console.log(response);
+            window.location.href = 'Login?action=Face&name='+response.name+'&email='+response.email+'&id='+response.id;
+        });
+    }
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '2143582525828112',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v15.0'
+        });
+
+        FB.AppEvents.logPageView();
+
+    };
+
+
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 </body>
 
 </html>
