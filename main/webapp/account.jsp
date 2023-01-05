@@ -209,7 +209,7 @@
                                             <h3>Thông tin cá nhân</h3>
                                             <div class="login" id="edit_111" style="display: none">
                                                 <div class="login-form-container">
-                                                    <div class="account-login-form">My Project 7505
+                                                    <div class="account-login-form">
                                                         <form action="editUser" method="post">
                                                             <div class="account-input-box">
                                                                 <label>Họ và tên</label>
@@ -219,7 +219,7 @@
                                                                 <label>Số điện thoại</label>
                                                                 <input type="text" name="user-number" value="<%=user.getPhone()%>" />
                                                             </div>
-                                                            <div class="example">(Vd: 31/05/1970)</div>
+                                                            <div class="example">(Số điện thoại 10 số, bắt đầu bằng số 0. Vd: 0987654321)</div>
                                                             <div class="button-box">
                                                                 <button class="btn default-btn" type="submit" id="submit_111">
                                                                     lưu thông tin

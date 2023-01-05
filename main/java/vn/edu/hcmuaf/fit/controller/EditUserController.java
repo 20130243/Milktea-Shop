@@ -43,6 +43,6 @@ public class EditUserController extends HttpServlet {
 
         session.setAttribute("user", user);
 
-        response.sendRedirect("account.jsp");
+        response.sendRedirect("account");
     }
 }
