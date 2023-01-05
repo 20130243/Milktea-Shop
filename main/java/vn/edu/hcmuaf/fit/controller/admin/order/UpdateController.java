@@ -20,8 +20,6 @@ public class UpdateController extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             Order order = new CartOrderService().getOrderById(id);
-            System.out.println("123");
-            System.out.println(order);
             request.setAttribute("object", order);
         } catch (SQLException e) {
             throw new RuntimeException(e);
