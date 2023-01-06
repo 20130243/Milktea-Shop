@@ -40,17 +40,19 @@ String url = request.getRequestURI();
                             <div class="">
                                 <nav class="header__menu" style="padding: 0">
                                     <ul>
-                                        <li style="display: flex "  class="<%=url.equals("/account.jsp") || url.equals("/changePassword.jsp")?"active" : ""%>">
-                                            <a href="./account"><img src="img/icon/user.png" alt="" width="18px"/>
+                                        <li class="<%=url.equals("/account.jsp") || url.equals("/changePassword.jsp")?"active" : ""%> mr-0">
+                                            <a href="./account" class="user">${sessionScope.user.name}
+                                                <img src="img/icon/user.png" alt="" width="18px"/>
                                             </a>
                                             <ul class="dropdown">
-
                                                 <li><a href="./account">Tài khoản</a></li>
+                                                <li><a href="./checkout">Giỏ hàng</a></li>
                                                 <li><a href="./logout">Đăng xuất</a></li>
 
                                             </ul>
-                                            <a href="./account" class="user">${sessionScope.user.name}</a>
                                         </li>
+                                        <li class="<%=url.equals("/checkout.jsp")?"active" : ""%> mr-2"><a href="./checkout"><img src="img/icon/cart.png" alt="" width="18px"/><span>${sessionScope.cart==null?0:sessionScope.cart.items.size()}</span></a></li>
+                                        <li><a href="#"><img src="img/icon/notification.png" alt="" width="24px"/></a></li>
                                     </ul>
                                 </nav>
                             </div>
