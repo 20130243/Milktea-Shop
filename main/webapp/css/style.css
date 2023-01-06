@@ -531,10 +531,10 @@ ol {
 
 .header__nav__option a span {
   color: #0d0d0d;
-  font-size: 11px;
+  font-size: 15px;
   position: absolute;
   left: 5px;
-  top: 8px;
+  top: 5px;
 }
 
 .header__nav__option a:last-child {
