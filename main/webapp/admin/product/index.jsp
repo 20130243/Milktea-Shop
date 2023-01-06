@@ -8,8 +8,6 @@
     <meta charset="utf-8"/>
     <title>Sản phẩm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
-    <meta content="Coderthemes" name="author"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
 
@@ -125,7 +123,7 @@
                                                         <td class="text-center">
                                                             <fmt:formatNumber type="currency"
                                                                               value="${item.priceSize[0].price}"
-                                                                              currencySymbol="VNĐ"/>
+                                                                              currencySymbol="đ"/>
                                                         </td>
                                                     </c:when>
                                                     <c:otherwise>
@@ -151,13 +149,13 @@
                                                                     <c:when test="${count eq 0}">
                                                                         <fmt:formatNumber type="currency"
                                                                                           value="${size.price}"
-                                                                                          currencySymbol="VNĐ"/>
+                                                                                          currencySymbol="đ"/>
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                         -
                                                                         <fmt:formatNumber type="currency"
                                                                                           value="${size.price}"
-                                                                                          currencySymbol="VNĐ"/>
+                                                                                          currencySymbol="đ"/>
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                                 <c:set var="count" value="${count +1}"/>

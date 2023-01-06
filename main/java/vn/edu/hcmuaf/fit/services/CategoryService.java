@@ -23,7 +23,7 @@ public class CategoryService {
         return result;
     }
 
-    public Category getById(int id) throws Exception {
+    public Category getById(int id)  {
         Map<String, Object> category = dao.getById(id);
         return new Category((Integer) category.get("id"), (String) category.get("name"), (Integer) category.get("status"));
     }

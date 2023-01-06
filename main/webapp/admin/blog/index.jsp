@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+create.jsp<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -109,7 +109,7 @@
                                             <td>
                                                 <div data-simplebar data-simplebar-lg
                                                      style="max-height: 60px;width: 400px;" class="form-group">
-                                                        ${fn:substring(item.content, 0, 100)}
+                                                        ${fn:substring(item.content, 0, 300)}
                                                 </div>
                                             </td>
                                             <td>

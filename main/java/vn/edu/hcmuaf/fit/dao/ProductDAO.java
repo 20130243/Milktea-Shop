@@ -9,7 +9,7 @@ public class ProductDAO extends RD {
     @Override
     public List<Map<String, Object>> getAll() {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM product  ")
+                h.createQuery("SELECT * FROM product   ORDER BY id DESC")
                         .mapToMap()
                         .list()
         );
@@ -17,13 +17,11 @@ public class ProductDAO extends RD {
 
     @Override
     public Map<String, Object> getById(int id) {
-        List<Map<String, Object>> productList = getAll();
-        for (Map<String, Object> product : productList) {
-            if ((int) product.get("id") == id) {
-                return product;
-            }
-        }
-        return null;
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM product WHERE id=? ORDER BY id")
+                        .bind(0, id)
+                        .mapToMap()
+                        .first());
     }
 
     public static void insert(String name, int categoryID, String image, int status) throws Exception {
@@ -60,10 +58,9 @@ public class ProductDAO extends RD {
     }
 
     public int getTotalProduct() {
-        int count = JDBIConnector.get().withHandle(h ->
+        return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select count(*) from product").mapTo(Integer.class).first()
         );
-        return count;
     }
 
     /*
@@ -73,7 +70,7 @@ public class ProductDAO extends RD {
     public List<Map<String, Object>> pagingProduct(int index) {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from product\n" +
-                        "order by id\n" +
+                        "order by id DESC \n" +
                         "LIMIT ? , 12;").bind(0, (index - 1) * 12).mapToMap().list()
         );
     }
