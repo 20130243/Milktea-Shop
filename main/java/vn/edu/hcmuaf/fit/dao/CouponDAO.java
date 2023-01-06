@@ -73,10 +73,9 @@ public class CouponDAO extends RD {
     }
 
     public int getTotal() {
-        int count = JDBIConnector.get().withHandle(h ->
-                h.createQuery("select " + tableName + "(*) from coupon").mapTo(Integer.class).first()
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select count(*) from " + tableName ).mapTo(Integer.class).first()
         );
-        return count;
     }
 
 
@@ -90,7 +89,7 @@ public class CouponDAO extends RD {
 
     public static void main(String[] args) throws SQLException {
 
-        System.out.println(new CouponDAO().paging(1));
+        System.out.println(new CouponDAO().getTotal());
         ;
     }
 

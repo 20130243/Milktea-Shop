@@ -12,7 +12,7 @@ public class OrderDetailDAO extends RD {
     @Override
     public List<Map<String, Object>> getAll() throws SQLException {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM " + tableName)
+                h.createQuery("SELECT * FROM " + tableName +" ORDER BY id DESC")
                         .mapToMap()
                         .list());
     }
@@ -45,7 +45,7 @@ public class OrderDetailDAO extends RD {
 
     public List<Map<String, Object>> getByOrderId(int order_id) {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM " + tableName + " WHERE order_id = ?")
+                h.createQuery("SELECT * FROM " + tableName + " WHERE order_id = ?  ORDER BY id DESC")
                         .bind(0, order_id)
                         .mapToMap()
                         .list());

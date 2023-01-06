@@ -236,7 +236,7 @@
 <!-- third party js ends -->
 
 <!-- demo app -->
-<script src="../../assets/js/pages/demo.dashboard.js"></script>
+<script src="../../assets/js/pages/revenue.jsp"></script>
 <!-- end demo js-->
 </body>
 
