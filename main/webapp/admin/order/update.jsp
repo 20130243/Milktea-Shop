@@ -271,8 +271,7 @@
 <script type="text/javascript">
 
     $("#update_status").submit(function (e) {
-        e.preventDefault();
-        console.log($(this).serialize());
+        e.preventDefault(); ;
         $.ajax({
             type: $(this).attr('method'),
             url: $(this).attr('action'),
@@ -282,18 +281,15 @@
                 if (1 == data) {
                     $("#process-line").css("width", "50%");
                     $("#step-1").addClass("current");
-                    $("#status-1").addClass("d-none");
+                    $("#status-1").remove();
                     $("#status-2").removeClass("d-none");
                     $("#status").val("2");
-                    console.log(123);
                 } else if (2 == data) {
                     $("#process-line").css("width", "100%");
                     $("#step-2").addClass("current");
-                    $("#status-2").addClass("d-none");
-                    console.log(456);
+
+                    $("#status-2").remove();
                 }
-                console.log('Submission was successful.');
-                console.log(data);
             },
             error: function (data) {
                 console.log('An error occurred.');

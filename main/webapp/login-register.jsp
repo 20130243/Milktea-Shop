@@ -84,17 +84,23 @@
                             <div id="lg1" class="tab-pane active">
                                 <div class="login-form-container">
                                     <div class="login-register-form">
-                                        <form action="/login" method="post">
+                                        <form action="${pageContext.request.contextPath}/login" method="post"
+                                              id="login">
                                             <div class="login-input-box">
                                                 <span class="text-danger"
-                                                      id="login-username-error">${requestScope['error_login']}</span>
-                                                <input type="text" name="username" placeholder="Tài khoản" value="${requestScope['user']}"/>
+                                                      id="login-username-error"></span>
+                                                <input type="text" id="login_username" name="username"
+                                                       placeholder="Tài khoản"
+                                                       value="" required/>
                                                 <span class="text-danger" id="login-password-error"></span>
-                                                <input type="password" name="password" placeholder="Mật khẩu" value="${requestScope['pass']}"/>
+                                                <input type="password" id="login_password" name="password"
+                                                       placeholder="Mật khẩu"
+                                                       value="" required/>
                                             </div>
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
-                                                    <input id="checkSave" type="checkbox" name="save" value="checked" ${requestScope['save']}/>
+                                                    <input id="checkSave" type="checkbox" name="save"
+                                                           value="checked"/>
                                                     <label for="checkSave">Lưu thông tin</label>
                                                     <a href="forgotPass.jsp">Quên mật khẩu?</a>
                                                 </div>
@@ -107,7 +113,8 @@
                                             <hr class="mb-4 mt-1">
                                             <div class="d-flex justify-content-center text-center pt-1">
                                                 <div class="col">
-                                                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                                                    <fb:login-button scope="public_profile,email"
+                                                                     onlogin="checkLoginState();">
                                                     </fb:login-button>
                                                 </div>
                                                 <div class="col">
@@ -121,49 +128,58 @@
                             <div id="lg2" class="tab-pane">
                                 <div class="login-form-container">
                                     <div class="login-register-form">
-                                        <form action="/register" method="post">
+                                        <form action="/register" method="post" id="register">
                                             <div class="login-input-box">
                                                 <span class="text-danger" id="register-name-error"></span>
                                                 <small id="nameHelpInline" class="text-muted mb-3">
                                                     Tên người dùng. Vd: Nguyễn Văn A.
                                                 </small>
-                                                <input type="text" name="name" placeholder="Tên" aria-describedby="nameHelpInline" required/>
-                                                <span class="text-danger"
-                                                      id="register-username-error">${requestScope['error_username_register']}</span>
+                                                <input type="text" id="name" name="name" placeholder="Tên"
+                                                       aria-describedby="nameHelpInline" required/>
+                                                <span class="text-danger" id="register-username-error"></span>
                                                 <small id="usernameHelpInline" class="text-muted mb-3">
                                                     Tên đang nhập. Vd: adeptrai.
                                                 </small>
-                                                <input type="text" name="username" placeholder="Tên đăng nhập" aria-describedby="usernameHelpInline"
+                                                <input type="text" id="username" name="username"
+                                                       placeholder="Tên đăng nhập" aria-describedby="usernameHelpInline"
                                                        required/>
+
                                                 <span class="text-danger"
-                                                      id="register-email-error">${requestScope['error_email_register']}</span>
+                                                      id="register-email-error"></span>
                                                 <small id="emailHelpInline" class="text-muted mb-3">
                                                     Email. Vd: nguyenvana@gmail.com.
                                                 </small>
-                                                <input name="email" placeholder="Email" type="email" aria-describedby="emailHelpInline" required/>
+
+                                                <input name="email" id="email" placeholder="Email" type="email"
+                                                       aria-describedby="emailHelpInline" required/>
                                                 <span class="text-danger"
-                                                      id="register-phone-error">${requestScope['error_phone_register']}</span>
+                                                      id="register-phone-error"></span>
                                                 <small id="phoneHelpInline" class="text-muted mb-3">
                                                     Số điện thoại. Vd: 0987654321.
                                                 </small>
-                                                <input name="phone" placeholder="Số điện thoại" type="tel"
-                                                       pattern="[0]{1}[0-9]{9}" aria-describedby="phoneHelpInline" required/>
+                                                <input name="phone" id="phone" placeholder="Số điện thoại" type="tel"
+                                                       pattern="[0]{1}[0-9]{9}" aria-describedby="phoneHelpInline"
+                                                       required/>
                                                 <span class="text-danger"
                                                       id="register-password-error"></span>
                                                 <small id="passwordHelpInline" class="text-muted mb-3">
                                                     Mật khẩu ít nhất 8 ký tự.
                                                 </small>
-                                                <input type="password" name="password" placeholder="Mật nhẩu" aria-describedby="passwordHelpInline" minlength="8"
+                                                <input type="password" id="password" name="password"
+                                                       placeholder="Mật nhẩu" aria-describedby="passwordHelpInline"
+                                                       minlength="6"
                                                        required/>
                                                 <span class="text-danger"
                                                       id="register-repassword-error"></span>
                                                 <small id="passcomfirmHelpInline" class="text-muted mb-3">
                                                     Mật khẩu phải trùng với mật khẩu ở trên
                                                 </small>
-                                                <input type="password" placeholder="Nhập lại mật nhẩu " minlength="8" aria-describedby="passcomfirmHelpInline" required/>
+                                                <input type="password" id="repassword" placeholder="Nhập lại mật nhẩu "
+                                                       minlength="6" aria-describedby="passcomfirmHelpInline" required/>
                                             </div>
                                             <div class="button-box">
-                                                <button class="register-btn btn" type="submit">
+                                                <button class="register-btn btn" type="submit"
+                                                        onclick="return check_register()">
                                                     <span>Đăng kí</span>
                                                 </button>
                                             </div>
@@ -193,7 +209,9 @@
 </div>
 <!-- Search End -->
 <!-- Js Plugins -->
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v15.0&appId=2143582525828112&autoLogAppEvents=1" nonce="jhCmVurm"></script>
+<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v15.0&appId=2143582525828112&autoLogAppEvents=1"
+        nonce="jhCmVurm"></script>
 
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jquery.nice-select.min.js"></script>
@@ -206,7 +224,6 @@
 <script src="js/main.js"></script>
 <script src="js/account/bootstrap.min.js"></script>
 <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
-
 <script src="assets/js/vendor/account/js/plugins/slick.min.js"></script>
 <script src="assets/js/vendor/account/js/plugins/jquery.nice-select.min.js"></script>
 
@@ -216,25 +233,24 @@
 <script src="assets/js/vendor/account/js/plugins/jqueryui.min.js"></script>
 <script src="assets/js/vendor/account/js/main.js"></script>
 
-
 <script>
 
     function checkLoginState() {
-        FB.getLoginStatus(function(response) {
+        FB.getLoginStatus(function (response) {
             statusChangeCallback(response);
         });
-        FB.api('/me',{fields: ' name, email'}, function(response) {
+        FB.api('/me', {fields: ' name, email'}, function (response) {
             console.log(response);
-            window.location.href = 'Login?action=Face&name='+response.name+'&email='+response.email+'&id='+response.id;
+            window.location.href = 'Login?action=Face&name=' + response.name + '&email=' + response.email + '&id=' + response.id;
         });
     }
 
-    window.fbAsyncInit = function() {
+    window.fbAsyncInit = function () {
         FB.init({
-            appId      : '2143582525828112',
-            cookie     : true,
-            xfbml      : true,
-            version    : 'v15.0'
+            appId: '2143582525828112',
+            cookie: true,
+            xfbml: true,
+            version: 'v15.0'
         });
 
         FB.AppEvents.logPageView();
@@ -242,14 +258,17 @@
     };
 
 
-    FB.getLoginStatus(function(response) {
+    FB.getLoginStatus(function (response) {
         statusChangeCallback(response);
     });
 
-    (function(d, s, id){
+    (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
         js.src = "https://connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
@@ -257,10 +276,11 @@
 <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
 <script>
     function handleCredentialResponse(response) {
-         const resp = jwt_decode(response.credential);
+        const resp = jwt_decode(response.credential);
 
-        window.location.href = 'Login?action=Google&name='+resp.name+'&email='+resp.email+'&id='+resp.sub;
+        window.location.href = 'Login?action=Google&name=' + resp.name + '&email=' + resp.email + '&id=' + resp.sub;
     }
+
     window.onload = function () {
         google.accounts.id.initialize({
             client_id: "862913517251-8g2qrfue12q6gojci1tulp9qtfi4hmqv.apps.googleusercontent.com",
@@ -268,10 +288,61 @@
         });
         google.accounts.id.renderButton(
             document.getElementById("buttonDiv"),
-            { theme: "outline", size: "large" }  // customization attributes
+            {theme: "outline", size: "large"}  // customization attributes
         );
         google.accounts.id.prompt(); // also display the One Tap dialog
     }
+</script>
+
+<script src="js/validate.js"></script>
+<script type="text/javascript">
+
+    $("#login").submit(function (e) {
+        e.preventDefault();
+        console.log($(this).serialize());
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function (data) {
+                if (1 == data) {
+                    $("#login-username-error").text("Tài khoản hoặc mật khẩu không đúng");
+                    console.log(123);
+                } else if (2 == data) {
+                    window.location.href = "/";
+                }
+                console.log('Submission was successful.');
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+    });
+    $("#register").submit(function (e) {
+        e.preventDefault();
+        console.log($(this).serialize());
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function (data) {
+                if (1 == data) {
+                    $("#register-username-error").text("Tên đăng nhập đã được sử dụng");
+                    console.log(123);
+                } else if (2 == data) {
+                    window.location.href = "/";
+                }
+                console.log('Submission was successful.');
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+    });
 </script>
 </body>
 

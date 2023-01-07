@@ -60,11 +60,13 @@ public class LoginController extends HttpServlet {
         User user = userService.login(username, password);
         if(user == null){
             request.setAttribute("error_register", "Tên đăng nhập hoặc mật khẩu không đúng.");
-            request.getRequestDispatcher("login-register.jsp").forward(request, response);
+            response.getWriter().write("1");
+//            request.getRequestDispatcher("login-register.jsp").forward(request, response);
         }else{
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
-            response.sendRedirect("account");
+            response.getWriter().write("2");
+//            response.sendRedirect("account");
         }
     }
 }
