@@ -24,7 +24,7 @@ public class UserService {
     }
 
     public void insert(User user) {
-        dao.insert(user.getUsername(), user.getPassword(), user.getName(), user.getAddress(), user.getPhone(), user.getEmail(), user.getLevel());
+        dao.insert(user.getUsername(), hashPassword(user.getPassword()), user.getName(), user.getAddress(), user.getPhone(), user.getEmail(), user.getLevel());
     }
 
     public String hashPassword(String password) {
@@ -46,6 +46,10 @@ public class UserService {
 
     public User login(String username, String password) {
         Map<String, Object> map = dao.login(username, password);
+        return map != null ? convertMapToUser(map) : null;
+    }
+    public User login(String token) {
+        Map<String, Object> map = dao.login(token);
         return map != null ? convertMapToUser(map) : null;
     }
 
@@ -101,14 +105,14 @@ public class UserService {
             String password = ramdomPassword();
             user.setPassword(hashPassword(password));
             update(user);
-            String text = "Xin chào " +user.getName()+",\n" +
+            String text = "Xin chào " + user.getName() + ",\n" +
                     "\n" +
                     "Ai đó đã yêu cầu mật khẩu mới cho tài khoản Username: "+ user.getUsername()+" được liên kết với Email: "+ user.getEmail()+" .\n" +
                     "\n" +
-                    "Mật khẩu mới của bạn: " + password+
+                    "Mật khẩu mới của bạn: " + password +
                     "\n" +
                     "The HaHaTi team" +
-                      "\n" +
+                    "\n" +
                     "http://localhost:8080/login";
             return sendMail(email, "Password recovery", text);
 
@@ -126,7 +130,7 @@ public class UserService {
     }
 
     public boolean checkAdmin(User user) {
-        return user.getLevel() == 1;
+        return user.getLevel() >= 1;
     }
 
     public User convertMapToUser(Map<String, Object> map) {
@@ -143,6 +147,13 @@ public class UserService {
         return user;
     }
 
+    public void updateToken(User user) {
+        String token = new TokenService().generateNewToken();
+        user.setToken(token);
+        dao.updateToken(user.getId(), token);
+    }
+
     public static void main(String[] args) {
+        new UserService().insert(new User(0,"admin","123","admin","","","",2,"") );
     }
 }

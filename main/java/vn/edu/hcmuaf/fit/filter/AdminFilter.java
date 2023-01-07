@@ -1,5 +1,9 @@
 package vn.edu.hcmuaf.fit.filter;
 
+import vn.edu.hcmuaf.fit.bean.Admin;
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.services.UserService;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -23,20 +27,29 @@ public class AdminFilter implements Filter {
         HttpServletResponse httpRespond = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(true);
 
-//        User user =  (User) session.getAttribute("user");
-//        if(user == null){
-//            RequestDispatcher dd = request.getRequestDispatcher("/404.html");
-//
-//            dd.forward(request, response);
-////            httpRespond.sendRedirect("404.html");
-//        }else{
-//            if(!(new UserService()).checkAdmin(user)){
-//                RequestDispatcher dd = request.getRequestDispatcher("/404.html");
-//
-//                dd.forward(request, response);
-//            }
-//        }
 
-        chain.doFilter(request, response);
+            User user = (User) session.getAttribute("user");
+            if (user == null) {
+                System.out.println("user not found");
+                httpRespond.sendError(HttpServletResponse.SC_NOT_FOUND, "");
+            } else {
+
+                if (!(new UserService()).checkAdmin(user)) {
+                    System.out.println("user not admin");
+                    httpRespond.sendError(HttpServletResponse.SC_NOT_FOUND, "");
+                } else {
+                    Admin admin = (Admin) session.getAttribute("admin");
+                    if (admin == null) {
+                        System.out.println("admin not found");
+                        System.out.println(user.getLevel());
+                        System.out.println(new UserService().checkAdmin(user));
+                        request.getRequestDispatcher("/admin-login").forward(request, response);
+                    } else {
+                        chain.doFilter(request, response);
+                    }
+
+            }
+        }
+
     }
 }

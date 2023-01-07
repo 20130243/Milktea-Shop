@@ -3,7 +3,9 @@ package vn.edu.hcmuaf.fit.dao;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +15,7 @@ public class OrderDAO extends RD {
     @Override
     public List<Map<String, Object>> getAll() {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM " + tableName +"ORDER BY id DESC ")
+                h.createQuery("SELECT * FROM " + tableName + "ORDER BY id DESC ")
                         .mapToMap()
                         .list());
     }
@@ -155,7 +157,7 @@ public class OrderDAO extends RD {
 
     public int countOrder() {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT  COUNT(DISTINCT id) from "+tableName+" WHERE  status = 2")
+                h.createQuery("SELECT  COUNT(DISTINCT id) from " + tableName + " WHERE  status = 2")
                         .mapTo(Integer.class).first());
     }
 
@@ -196,18 +198,20 @@ public class OrderDAO extends RD {
     }
 
     public float sumTotalThisWeek() {
-        String result = JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT  SUM(total) from " + tableName + " WHERE YEARWEEK(time) = YEARWEEK(NOW())  AND status = 2")
-                        .mapTo(String.class).first());
-        return result != null ? Float.parseFloat(result) : 0;
+        float result = 0;
+        for (float f : perDayThisWeek()) {
+            result += f;
+        }
+        return result;
     }
 
 
     public float sumTotalPreWeek() {
-        String result = JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT  SUM(total) from " + tableName + " WHERE YEARWEEK(time) = YEARWEEK(NOW() - INTERVAL 1 WEEK)  AND status = 2")
-                        .mapTo(String.class).first());
-        return result != null ? Float.parseFloat(result) : 0;
+        float result = 0;
+        for (float f : perDayPreWeek()) {
+            result += f;
+        }
+        return result;
     }
 
     public float sumTotalToday() {
@@ -225,7 +229,7 @@ public class OrderDAO extends RD {
                                 "JOIN product on product.id=product_size.product_id \n" +
                                 "WHERE  `order`.time BETWEEN NOW() - INTERVAL 30 DAY AND NOW()  AND `order`.status = 2 \n" +
                                 "GROUP BY product.id,product.name\n" +
-                                "ORDER BY SUM(order_detail.quantity)\n" +
+                                "ORDER BY SUM(order_detail.quantity) DESC\n" +
                                 "LIMIT 5")
                         .mapToMap()
                         .list());
@@ -253,24 +257,55 @@ public class OrderDAO extends RD {
 
     public List<Float> perDayThisWeek() {
         List<Float> result = new ArrayList<Float>();
-        String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        for (String day : dayName) {
+        String str = new SimpleDateFormat("u").format(new Date());
+        if (str.equals("7")) {
+            String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+            for (String day : dayName) {
+                String number = JDBIConnector.get().withHandle(h ->
+                        h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW()- INTERVAL 1 WEEK) AND DAYNAME(time) like '" + day + "' AND status = 2")
+                                .mapTo(String.class).first());
+                result.add(number != null ? Float.parseFloat(number) : 0);
+            }
             String number = JDBIConnector.get().withHandle(h ->
-                    h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW()) AND DAYNAME(time) like '" + day + "' AND status = 2")
+                    h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW()) AND DAYNAME(time) like '" + "Sunday" + "' AND status = 2")
                             .mapTo(String.class).first());
             result.add(number != null ? Float.parseFloat(number) : 0);
+        } else {
+            String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            for (String day : dayName) {
+                String number = JDBIConnector.get().withHandle(h ->
+                        h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW()) AND DAYNAME(time) like '" + day + "' AND status = 2")
+                                .mapTo(String.class).first());
+                result.add(number != null ? Float.parseFloat(number) : 0);
+            }
         }
         return result;
     }
 
     public List<Float> perDayPreWeek() {
         List<Float> result = new ArrayList<Float>();
-        String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        for (String day : dayName) {
+
+        String str = new SimpleDateFormat("u").format(new Date());
+        if (str.equals("7")) {
+            String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+            for (String day : dayName) {
+                String number = JDBIConnector.get().withHandle(h ->
+                        h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW()- INTERVAL 2 WEEK) AND DAYNAME(time) like '" + day + "' AND status = 2")
+                                .mapTo(String.class).first());
+                result.add(number != null ? Float.parseFloat(number) : 0);
+            }
             String number = JDBIConnector.get().withHandle(h ->
-                    h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW()- INTERVAL 1 WEEK) AND DAYNAME(time) like '" + day + "' AND status = 2")
+                    h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW()- INTERVAL 1 WEEK) AND DAYNAME(time) like '" + "Sunday" + "' AND status = 2")
                             .mapTo(String.class).first());
             result.add(number != null ? Float.parseFloat(number) : 0);
+        } else {
+            String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            for (String day : dayName) {
+                String number = JDBIConnector.get().withHandle(h ->
+                        h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW() - INTERVAL 1 WEEK) AND DAYNAME(time) like '" + day + "' AND status = 2")
+                                .mapTo(String.class).first());
+                result.add(number != null ? Float.parseFloat(number) : 0);
+            }
         }
         return result;
     }

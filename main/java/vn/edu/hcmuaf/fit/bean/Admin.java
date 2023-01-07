@@ -9,14 +9,15 @@ public class Admin implements Serializable {
     String email;
     String phone;
     int level;
-
-    public Admin(int id, String username, String name, String email, String phone, int level) {
+    String token;
+    public Admin(int id, String username, String name, String email, String phone, int level,String token) {
         this.id = id;
         this.username = username;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.level = level;
+        this.token = token;
     }
 
     public Admin() {
@@ -55,6 +56,7 @@ public class Admin implements Serializable {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", level=" + level +
+                ", token='" + token + '\'' +
                 '}';
     }
 
@@ -82,4 +84,11 @@ public class Admin implements Serializable {
         this.level = level;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

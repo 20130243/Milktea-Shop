@@ -25,7 +25,7 @@ public class RegisterController extends HttpServlet {
         UserService userService = new UserService();
         String username = request.getParameter("username");
         String name = request.getParameter("name");
-        String password = userService.hashPassword(request.getParameter("password"));
+        String password = request.getParameter("password");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
 
