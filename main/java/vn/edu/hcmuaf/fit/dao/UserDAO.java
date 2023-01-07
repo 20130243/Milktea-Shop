@@ -37,6 +37,15 @@ public class UserDAO extends RD {
         ) : null;
     }
 
+    public boolean checkUsernameAndMail(String username, String email) {
+        int a = JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT COUNT(*) FROM " + tableName + " WHERE username=:username and email=:email")
+                        .bind("username", username)
+                        .bind("email", email)
+                        .mapTo(Integer.class).first());
+        return a == 1;
+    }
+
     @Override
     public void delete(int id) {
         JDBIConnector.get().withHandle(h ->
