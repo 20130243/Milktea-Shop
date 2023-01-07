@@ -26,7 +26,7 @@ String url = request.getRequestURI();
                                 <li class="<%=url.equals("/contact.jsp")?"active" : ""%>"><a href="./contact.jsp">Liên hệ</a></li>
                             </ul>
                         </li>
-                        <li class="<%=url.equals("/blog.jsp")?"active" : ""%>"><a href="./blog">Khuyến mãi</a></li>
+                        <li class="<%=url.equals("/blog.jsp")?"active" : ""%>"><a href="./blog">Tin tức</a></li>
                     </ul>
                 </nav>
             </div>
@@ -52,7 +52,6 @@ String url = request.getRequestURI();
                                             </ul>
                                         </li>
                                         <li class="<%=url.equals("/checkout.jsp")?"active" : ""%> mr-2"><a href="./checkout"><img src="img/icon/cart.png" alt="" width="18px"/><span>${sessionScope.cart==null?0:sessionScope.cart.items.size()}</span></a></li>
-                                        <li><a href="#"><img src="img/icon/notification.png" alt="" width="24px"/></a></li>
                                     </ul>
                                 </nav>
                             </div>

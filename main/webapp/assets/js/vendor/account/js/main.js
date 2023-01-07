@@ -447,5 +447,25 @@
   });
 })(jQuery);
 
-//  
- 
+//
+let btn_edit_111 = document.getElementById("btn_edit_111");
+btn_edit_111.onclick = function () {
+  document.getElementById("edit_111").style.display = "block";
+  document.getElementById("save_111").style.display = "none";
+};
+let btn_submit_111 = document.getElementById("submit_111");
+btn_submit_111.onclick = function () {
+  document.getElementById("edit_111").style.display = "none";
+  document.getElementById("save_111").style.display = "block";
+};
+
+let edit__address = document.getElementById("save-address");
+edit__address.onclick = function () {
+  document.getElementById("edit_address__form").style.display = "block";
+  document.getElementById("address-save").style.display = "none";
+};
+let save__address = document.getElementById("submit_save__adress");
+save__address.onclick = function () {
+  document.getElementById("edit_address__form").style.display = "none";
+  document.getElementById("address-save").style.display = "block";
+};

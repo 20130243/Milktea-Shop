@@ -58,6 +58,10 @@ public class UserService {
         return dao.checkUsername(user.getUsername());
     }
 
+    public boolean checkUsernameAndMail(String username, String email){
+        return dao.checkUsernameAndMail(username, email);
+    }
+
     public User getByUsername(String username) {
         Map<String, Object> map = dao.getByUserName(username);
         return map != null ? convertMapToUser(map) : null;
@@ -72,14 +76,14 @@ public class UserService {
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("hahatishop@gmail.com", "alernqtuiilkahvz");
+                return new PasswordAuthentication("thaha8788@gmail.com", "dkkkmsvxwgmoguwg");
             }
         });
         try {
             Message message = new MimeMessage(session);
             message.setHeader("Content-Type", "text/plain; charset=UTF-8");
-            message.setFrom(new InternetAddress("hahatishop@gmail.com"));
-            message.setReplyTo(InternetAddress.parse("hahatishop@gmail.com", false));
+            message.setFrom(new InternetAddress("thaha8788@gmail.com"));
+            message.setReplyTo(InternetAddress.parse("thaha8788@gmail.com", false));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
             message.setText(text);
@@ -99,7 +103,7 @@ public class UserService {
             update(user);
             String text = "Xin chào " +user.getName()+",\n" +
                     "\n" +
-                    "Ai đó đã yêu cầu mật khẩu mới cho tài khoản "+ user.getUsername()+" được liên kết với "+ user.getEmail()+" .\n" +
+                    "Ai đó đã yêu cầu mật khẩu mới cho tài khoản Username: "+ user.getUsername()+" được liên kết với Email: "+ user.getEmail()+" .\n" +
                     "\n" +
                     "Mật khẩu mới của bạn: " + password+
                     "\n" +

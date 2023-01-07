@@ -72,8 +72,8 @@
 <section class="breadcrumb-option">
     <div class="container">
         <div class="breadcumb">
-            <h1>Khuyến mãi</h1>
-            <h6>Tất cả khuyến mãi</h6>
+            <h1>Tin tức</h1>
+            <h6>Tất cả tin tức</h6>
             <img src="assets/images/icon_tealeaves.png" width="500px" height="50px" style="object-fit: cover; scale: 0.5" />
         </div>
     </div>

@@ -118,7 +118,7 @@
         </div>
         <div class="row ">
             <div class="col text-center mb-3">
-                <h6 class="text_banner">Khuyến mãi mới nhất</h6>
+                <h6 class="text_banner">Tin tức mới nhất</h6>
             </div>
         <div class="row">
             <%
