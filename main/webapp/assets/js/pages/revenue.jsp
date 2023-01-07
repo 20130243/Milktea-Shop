@@ -57,12 +57,12 @@
                 }, {
                     name: "Tuần trước",
                     data: ["${requestScope['totalPerDayPreviousWeek'][0]}",
-                        "${requestScope['totalPerDayPreviousWeek'][0]}",
-                        "${requestScope['totalPerDayPreviousWeek'][0]}",
-                        "${requestScope['totalPerDayPreviousWeek'][0]}",
-                        "${requestScope['totalPerDayPreviousWeek'][0]}",
-                        "${requestScope['totalPerDayPreviousWeek'][0]}",
-                        "${requestScope['totalPerDayPreviousWeek'][0]}"]
+                        "${requestScope['totalPerDayPreviousWeek'][1]}",
+                        "${requestScope['totalPerDayPreviousWeek'][2]}",
+                        "${requestScope['totalPerDayPreviousWeek'][3]}",
+                        "${requestScope['totalPerDayPreviousWeek'][4]}",
+                        "${requestScope['totalPerDayPreviousWeek'][5]}",
+                        "${requestScope['totalPerDayPreviousWeek'][6]}"]
                 }],
                 colors: e,
                 zoom: {

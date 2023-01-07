@@ -37,8 +37,8 @@
 
                         </div>
 
-                        <form action="/admin/login" method="post">
-                            <span class="text-danger">${messages['error_login']}</span>
+                        <form action="/admin-login" method="post" id="login">
+                            <span class="text-danger" id="login-username-error">${messages['error_login']}</span>
                             <div class="form-group">
                                 <label for="username">Tài khoản</label>
                                 <input class="form-control" type="text" id="username" name="username" required
@@ -60,8 +60,7 @@
 
                             <div class="form-group mb-3">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="checkbox-signin" name="save"
-                                           checked>
+                                    <input type="checkbox" class="custom-control-input" id="checkbox-signin" name="save">
                                     <label class="custom-control-label" for="checkbox-signin">Lưu đăng nhập</label>
                                 </div>
                             </div>
@@ -86,11 +85,34 @@
 <!-- end page -->
 
 <%@include file="footer.jsp" %>
->
 
 <!-- bundle -->
 <script src="../assets/js/vendor.min.js"></script>
 <script src="../assets/js/app.min.js"></script>
-
+<script>
+    $("#login").submit(function (e) {
+        e.preventDefault();
+        console.log($(this).serialize());
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function (data) {
+                if (1 == data) {
+                    $("#login-username-error").text("Tài khoản hoặc mật khẩu không đúng");
+                    console.log(123);
+                } else if (2 == data) {
+                    window.location.href = "/admin";
+                }
+                console.log('Submission was successful.');
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+    });
+</script>
 </body>
 </html>

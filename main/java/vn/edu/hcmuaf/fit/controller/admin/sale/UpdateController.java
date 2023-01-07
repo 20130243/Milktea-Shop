@@ -1,7 +1,7 @@
 package vn.edu.hcmuaf.fit.controller.admin.sale;
 
-import vn.edu.hcmuaf.fit.bean.Category;
-import vn.edu.hcmuaf.fit.services.CategoryService;
+import vn.edu.hcmuaf.fit.bean.Sale;
+import vn.edu.hcmuaf.fit.services.SaleService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +17,8 @@ public class UpdateController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
 
         try {
-            Category category = (new CategoryService()).getById(id);
-            request.setAttribute("object", category);
+            Sale sale = (new SaleService()).getById(id);
+            request.setAttribute("object", sale);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -28,11 +28,7 @@ public class UpdateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        try {
-            (new CategoryService()).update(new Category(Integer.parseInt(request.getParameter("id").replaceAll("\\s+", "")), request.getParameter("name").substring(0, 1).toUpperCase() + request.getParameter("name").substring(1).toLowerCase(), Integer.parseInt(request.getParameter("status").replaceAll("\\s+", ""))));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
         response.sendRedirect("/admin/category");
     }
 }

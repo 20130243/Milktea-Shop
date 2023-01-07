@@ -12,21 +12,6 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Cookie cookies[] = request.getCookies();
-        if(cookies != null){
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals("userC")){
-                    request.setAttribute("user", cookie.getValue());
-                }
-                if(cookie.getName().equals("passC")){
-                    request.setAttribute("pass", cookie.getValue());
-                }
-                if(cookie.getName().equals("saveC")){
-                    request.setAttribute("save", cookie.getValue());
-                }
-            }
-        }
-
 
         request.getRequestDispatcher("login-register.jsp").forward(request, response);
     }
@@ -38,35 +23,22 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String password = userService.hashPassword(request.getParameter("password"));
 
-        String save = request.getParameter("save");
-
-        Cookie cUser = new Cookie("userC", username);
-        Cookie cPass = new Cookie("passC", request.getParameter("password"));
-        Cookie cSave = new Cookie("saveC", save);
-
-        if(save!=null) {
-            cUser.setMaxAge(60*60*24*7); // 7 days
-            cPass.setMaxAge(60*60*24*7);
-            cSave.setMaxAge(60*60*24*7);
-        } else {
-            cUser.setMaxAge(0);
-            cPass.setMaxAge(0);
-            cSave.setMaxAge(0);
-        }
-
-        response.addCookie(cUser);
-        response.addCookie(cPass);
-        response.addCookie(cSave);
         User user = userService.login(username, password);
-        if(user == null){
+        if (user == null) {
             request.setAttribute("error_register", "Tên đăng nhập hoặc mật khẩu không đúng.");
             response.getWriter().write("1");
-//            request.getRequestDispatcher("login-register.jsp").forward(request, response);
-        }else{
+        } else {
+            userService.updateToken(user);
+            String save = request.getParameter("save");
+            Cookie cToken = new Cookie("tokenID", user.getToken());
+            if (save != null) {
+                cToken.setMaxAge(60 * 60 * 24 * 7); // 7 days
+                response.addCookie(cToken);
+            }
+
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
             response.getWriter().write("2");
-//            response.sendRedirect("account");
         }
     }
 }
