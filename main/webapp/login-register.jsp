@@ -105,7 +105,6 @@
                                                 </div>
                                             </div>
                                             <hr class="mb-4 mt-1">
-
                                             <div class="d-flex justify-content-center text-center pt-1">
                                                 <div class="col">
                                                     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
@@ -125,25 +124,43 @@
                                         <form action="/register" method="post">
                                             <div class="login-input-box">
                                                 <span class="text-danger" id="register-name-error"></span>
-                                                <input type="text" name="name" placeholder="Tên" required/>
+                                                <small id="nameHelpInline" class="text-muted mb-3">
+                                                    Tên người dùng. Vd: Nguyễn Văn A.
+                                                </small>
+                                                <input type="text" name="name" placeholder="Tên" aria-describedby="nameHelpInline" required/>
                                                 <span class="text-danger"
                                                       id="register-username-error">${requestScope['error_username_register']}</span>
-                                                <input type="text" name="username" placeholder="Tên đăng nhập"
+                                                <small id="usernameHelpInline" class="text-muted mb-3">
+                                                    Tên đang nhập. Vd: adeptrai.
+                                                </small>
+                                                <input type="text" name="username" placeholder="Tên đăng nhập" aria-describedby="usernameHelpInline"
                                                        required/>
                                                 <span class="text-danger"
                                                       id="register-email-error">${requestScope['error_email_register']}</span>
-                                                <input name="email" placeholder="Email" type="email" required/>
+                                                <small id="emailHelpInline" class="text-muted mb-3">
+                                                    Email. Vd: nguyenvana@gmail.com.
+                                                </small>
+                                                <input name="email" placeholder="Email" type="email" aria-describedby="emailHelpInline" required/>
                                                 <span class="text-danger"
                                                       id="register-phone-error">${requestScope['error_phone_register']}</span>
+                                                <small id="phoneHelpInline" class="text-muted mb-3">
+                                                    Số điện thoại. Vd: 0987654321.
+                                                </small>
                                                 <input name="phone" placeholder="Số điện thoại" type="tel"
-                                                       pattern="[0]{1}[0-9]{9}" required/>
+                                                       pattern="[0]{1}[0-9]{9}" aria-describedby="phoneHelpInline" required/>
                                                 <span class="text-danger"
                                                       id="register-password-error"></span>
-                                                <input type="password" name="password" placeholder="Mật nhẩu "
+                                                <small id="passwordHelpInline" class="text-muted mb-3">
+                                                    Mật khẩu ít nhất 8 ký tự.
+                                                </small>
+                                                <input type="password" name="password" placeholder="Mật nhẩu" aria-describedby="passwordHelpInline" minlength="8"
                                                        required/>
                                                 <span class="text-danger"
                                                       id="register-repassword-error"></span>
-                                                <input type="password" placeholder="Nhập lại mật nhẩu " required/>
+                                                <small id="passcomfirmHelpInline" class="text-muted mb-3">
+                                                    Mật khẩu phải trùng với mật khẩu ở trên
+                                                </small>
+                                                <input type="password" placeholder="Nhập lại mật nhẩu " minlength="8" aria-describedby="passcomfirmHelpInline" required/>
                                             </div>
                                             <div class="button-box">
                                                 <button class="register-btn btn" type="submit">
