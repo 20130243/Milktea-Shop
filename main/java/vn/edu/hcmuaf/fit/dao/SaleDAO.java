@@ -11,20 +11,18 @@ public class SaleDAO extends RD {
     @Override
     public List<Map<String, Object>> getAll() throws SQLException {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM sale  ")
+                h.createQuery("SELECT * FROM sale  ORDER BY id DESC ")
                         .mapToMap()
                         .list());
     }
 
     @Override
     public Map<String, Object> getById(int id) throws SQLException {
-        List<Map<String, Object>> saleList = getAll();
-        for (Map<String, Object> sale : saleList) {
-            if ((int) sale.get("id") == id) {
-                return sale;
-            }
-        }
-        return null;
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM sale WHERE id =?  ORDER BY id DESC")
+                        .bind(0, id)
+                        .mapToMap()
+                        .first());
     }
 
     @Override
@@ -60,10 +58,10 @@ public class SaleDAO extends RD {
     }
 
     public int getTotal() {
-        int count = JDBIConnector.get().withHandle(h ->
+        return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select count(*) from sale").mapTo(Integer.class).first()
         );
-        return count;
+
     }
 
 
@@ -71,21 +69,24 @@ public class SaleDAO extends RD {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from sale\n" +
                         "order by id\n" +
-                        "LIMIT ? , 5;").bind(0, (index-1)*5).mapToMap().list()
+                        "LIMIT ? , 5;").bind(0, (index - 1) * 5).mapToMap().list()
         );
     }
-    public List<Map<String,Object>> getSaleNotYet(){
+
+    public List<Map<String, Object>> getSaleNotYet() {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from sale where end_date > CURRENT_DATE").mapToMap().list()
         );
     }
+
     public Map<String, Object> findFirst() {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("SELECT * FROM sale ORDER BY id DESC LIMIT 1")
                         .mapToMap().first());
     }
+
     public static void main(String[] args) throws Exception {
-        System.out.println(new SaleDAO().getSaleNotYet().size()+"");
+        System.out.println(new SaleDAO().getSaleNotYet().size() + "");
     }
 
 

@@ -35,9 +35,11 @@ public class RegisterController extends HttpServlet {
             user = userService.login(user);
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
+            response.getWriter().write("2");
             response.sendRedirect("account");
-        }else{
+        } else {
             request.setAttribute("error_register", "Tên đăng nhập đã được sử dụng");
+            response.getWriter().write("1");
             request.getRequestDispatcher("login").forward(request, response);
         }
 

@@ -41,6 +41,25 @@ public class CartOrderService {
         order.setNote((String) map.get("note"));
         order.setTotal((float) map.get("total"));
         order.setStatus(Integer.parseInt((String) map.get("status")));
+        Cart cart = getCartByOrder(order.getId());
+        User user = new UserService().getById(order.getUser_id());
+        cart.setCustomer(user);
+        cart.setTotalMoney(order.getTotal());
+        Object idCoupon = (Object) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
+        Coupon coupon = null;
+        try {
+            if (idCoupon != null) {
+                String cId = idCoupon.toString();
+                int couponId = Integer.parseInt(cId);
+                coupon = new CouponService().getById(couponId);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        if (coupon != null) {
+            cart.setCoupon(coupon);
+        }
+        order.setCart(cart);
         return order;
     }
 
@@ -78,20 +97,8 @@ public class CartOrderService {
         return orderDetail;
     }
 
-    public List<Order> getOrderByUser(int userId) throws SQLException {
-        List<Order> result = new ArrayList<Order>();
-        List<Map<String, Object>> list = dao.getOrderByUser(userId);
-        if (list == null) return null;
-        for (Map<String, Object> map : list) {
-            result.add(convertMaptoOrder(map));
-        }
-        return result;
-    }
 
-    public Order getOrderByUserAndOrder(int userId, int orderId) throws SQLException {
-        Map<String, Object> map = dao.getOrderByUserAndOrder(userId, orderId);
-        return map == null ? null : convertMaptoOrder(map);
-    }
+
 
     public Cart getCartByOrder(int orderId) throws SQLException {
         Cart cart = new Cart();
@@ -135,88 +142,38 @@ public class CartOrderService {
     }
 
     public List<Order> orderByUser(int userId) throws SQLException {
-        List<Order> list = getOrderByUser(userId);
-        for (Order order : list) {
-            Cart cart = getCartByOrder(order.getId());
-            User user = new UserService().getById(userId);
-            cart.setCustomer(user);
-            cart.setTotalMoney(order.getTotal());
-            Object idCoupon = (Object) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
-            Coupon coupon = null;
-            try {
-                if (idCoupon != null) {
-                    String cId = idCoupon.toString();
-                    int couponId = Integer.parseInt(cId);
-                    coupon = new CouponService().getById(couponId);
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            if (coupon != null) {
-                cart.setCoupon(coupon);
-            }
-            order.setCart(cart);
+        List<Order> result = new ArrayList<Order>();
+        List<Map<String, Object>> list = dao.getOrderByUser(userId);
+        if (list == null) return null;
+        for (Map<String, Object> map : list) {
+            result.add(convertMaptoOrder(map));
         }
-
-        return list;
+        return result;
+    }
+    public List<Order> newOrderList() throws SQLException {
+        List<Order> result = new ArrayList<Order>();
+        List<Map<String, Object>> list = dao.listNewOrder();
+        if (list == null) return null;
+        for (Map<String, Object> map : list) {
+            result.add(convertMaptoOrder(map));
+        }
+        return result;
     }
 
     public Order orderByUserAndOrderId(int userId, int orderId) throws SQLException {
-        Order order = getOrderByUserAndOrder(userId, orderId);
-
-        Cart cart = getCartByOrder(order.getId());
-        User user = new UserService().getById(userId);
-        cart.setCustomer(user);
-        cart.setTotalMoney(order.getTotal());
-        Object idCoupon = (Object) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
-        Coupon coupon = null;
-        try {
-            if (idCoupon != null) {
-                String cId = idCoupon.toString();
-                int couponId = Integer.parseInt(cId);
-                coupon = new CouponService().getById(couponId);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        if (coupon != null) {
-            cart.setCoupon(coupon);
-        }
-        order.setCart(cart);
-
-
-        return order;
+        Map<String, Object> map = dao.getOrderByUserAndOrder(userId, orderId);
+        return map == null ? null : convertMaptoOrder(map);
     }
 
 
     public Order getOrderById(int id) throws SQLException {
         Map<String, Object> map = dao.getById(id);
         Order order = convertMaptoOrder(map);
-
-        Cart cart = getCartByOrder(order.getId());
-        User user = new UserService().getById(id);
-        cart.setCustomer(user);
-        cart.setTotalMoney(order.getTotal());
-        Object idCoupon = (Object) dao.getCouponIdByOrder(order.getId()).get("coupon_id");
-        Coupon coupon = null;
-        try {
-            if (idCoupon != null) {
-                String cId = idCoupon.toString();
-                int couponId = Integer.parseInt(cId);
-                coupon = new CouponService().getById(couponId);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        if (coupon != null) {
-            cart.setCoupon(coupon);
-        }
-        order.setCart(cart);
-
-
         return order;
     }
 
-
+    public static void main(String[] args) throws SQLException {
+        System.out.println(new CartOrderService().newOrderList());
+    }
 
 }
