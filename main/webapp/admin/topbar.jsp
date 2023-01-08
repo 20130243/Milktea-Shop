@@ -20,67 +20,7 @@
                 <i class="dripicons-bell noti-icon"></i>
                 <span class="noti-icon-badge"></span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg">
 
-                <!-- item-->
-                <div class="dropdown-item noti-title">
-                    <h5 class="m-0">
-                                        <span class="float-right">
-                                            <a href="javascript: void(0);" class="text-dark">
-                                                <small>Đánh dấu là đã xem</small>
-                                            </a>
-                                        </span>Thông báo
-                    </h5>
-                </div>
-
-                <div style="max-height: 230px;" data-simplebar>
-                    <!-- item-->
-                    <a href="order/create.jsp" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-primary">
-                            <i class="mdi mdi-comment-account-outline"></i>
-                        </div>
-                        <p class="notify-details">Đơn hàng #1523
-                            <small class="text-muted">1 phút trước</small>
-                        </p>
-                    </a>
-                    <!-- item-->
-                    <a href="order/create.jsp" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-primary">
-                            <i class="mdi mdi-comment-account-outline"></i>
-                        </div>
-                        <p class="notify-details">Đơn hàng #1523
-                            <small class="text-muted">1 phút trước</small>
-                        </p>
-                    </a>
-                    <!-- item-->
-                    <a href="order/create.jsp" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-primary">
-                            <i class="mdi mdi-comment-account-outline"></i>
-                        </div>
-                        <p class="notify-details">Đơn hàng #1523
-                            <small class="text-muted">1 phút trước</small>
-                        </p>
-                    </a>
-                    <!-- item-->
-                    <a href="order/create.jsp" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-primary">
-                            <i class="mdi mdi-comment-account-outline"></i>
-                        </div>
-                        <p class="notify-details">Đơn hàng #1523
-                            <small class="text-muted">1 phút trước</small>
-                        </p>
-                    </a>
-
-
-                </div>
-
-                <!-- All-->
-                <a href="order/index.jsp"
-                   class="dropdown-item text-center text-primary notify-item notify-all">
-                    Xem tất cả
-                </a>
-
-            </div>
         </li>
 
 
@@ -93,28 +33,25 @@
         <li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#"
                role="button" aria-haspopup="false" aria-expanded="false">
-                                <span class="account-user-avatar">
-                                    <img src="<c:out value="${pageContext.request.contextPath}"/>/img/product/products/CaPheCappuccinoDaXay.png" alt="user-image"
-                                         class="rounded-circle">
-                                </span>
+
                 <span>
-                                    <span class="account-user-name">Nguyễn Vũ Mạnh Hà</span>
-                                    <span class="account-position">Admin</span>
-                                </span>
+                <span class="account-user-name">${sessionScope.admin.name}</span>
+                <span class="account-position">Admin</span>
+                </span>
             </a>
-            <div
-                    class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
                 <!-- item-->
                 <div class=" dropdown-header noti-title">
                     <h6 class="text-overflow m-0">Xin chào !</h6>
                 </div>
 
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="mdi mdi-logout mr-1"></i>
-                    <span>Đăng xuất</span>
-                </a>
-
+                <form action="/logout" method="post">
+                    <!-- item-->
+                    <a href="/admin/logout" class="dropdown-item notify-item">
+                        <i class="mdi mdi-logout mr-1"></i>
+                        <span>Đăng xuất</span>
+                    </a>
+                </form>
             </div>
         </li>
 

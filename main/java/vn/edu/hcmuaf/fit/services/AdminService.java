@@ -45,6 +45,10 @@ public class AdminService {
         Map<String, Object> map = dao.login(username, password);
         return map != null ? convertMaptoAdmin(map) : null;
     }
+    public Admin login(String token) {
+        Map<String, Object> map = dao.login(token);
+        return map != null ? convertMaptoAdmin(map) : null;
+    }
 
     public void update(Admin admin) {
         dao.update(admin.getId(), admin.getUsername(), admin.getName(), admin.getPhone(), admin.getEmail(), admin.getLevel());
@@ -79,11 +83,18 @@ public class AdminService {
         admin.setEmail((String) map.get("email"));
         admin.setPhone((String) map.get("phone"));
         admin.setLevel((Integer) map.get("level"));
+        admin.setToken((String) map.get("token"));
         return admin;
     }
 
+    public void updateToken(Admin admin) {
+        String token = new TokenService().generateNewToken();
+        admin.setToken(token);
+        dao.updateToken(admin.getId(), token);
+    }
+
     public static void main(String[] args) {
-        System.out.println(new AdminService().checkUsername(new Admin(0, "admin", "ha", null, null, 0)));
-        new AdminService().insert(new Admin(0, "admin", "ha", null, null, 0), "123");
+        System.out.println(new AdminService().checkUsername(new Admin(0, "admin", "ha", null, null, 0, "")));
+        new AdminService().insert(new Admin(0, "admin", "ha", null, null, 0, ""), "123");
     }
 }

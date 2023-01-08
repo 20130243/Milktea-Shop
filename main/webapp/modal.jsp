@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/modal.css" type="text/css">
 </head>
 
+<link rel="stylesheet" href="css/modal.css" type="text/css">
 <body>
 <!-- Page Preloder -->
 <%

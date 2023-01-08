@@ -28,9 +28,12 @@ public class OrderDetailController extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            request.getRequestDispatcher("orderdetail.jsp").forward(request, response);
+        }else{
+            request.getRequestDispatcher("/").forward(request, response);
         }
 
-        request.getRequestDispatcher("orderdetail.jsp").forward(request, response);
+
     }
 
     @Override

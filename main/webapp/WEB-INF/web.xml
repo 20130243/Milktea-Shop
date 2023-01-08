@@ -13,6 +13,16 @@
 
     <filter>
         <description></description>
+        <display-name>CookieFilter</display-name>
+        <filter-name>CookieFilter</filter-name>
+        <filter-class>vn.edu.hcmuaf.fit.filter.CookieFilter</filter-class>
+        <init-param>
+            <param-name>test-param</param-name>
+            <param-value>Initialization Paramter</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <description></description>
         <display-name>UserFilter</display-name>
         <filter-name>UserFilter</filter-name>
         <filter-class>vn.edu.hcmuaf.fit.filter.UserFilter</filter-class>
@@ -20,7 +30,8 @@
             <param-name>test-param</param-name>
             <param-value>Initialization Paramter</param-value>
         </init-param>
-    </filter> <filter>
+    </filter>
+    <filter>
         <description></description>
         <display-name>AdminFilter</display-name>
         <filter-name>AdminFilter</filter-name>
@@ -31,13 +42,24 @@
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>UserFilter</filter-name>
+        <filter-name>CookieFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/account/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
-
+    <servlet-mapping>
+        <servlet-name>Error404</servlet-name>
+        <url-pattern>/404</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404</location>
+    </error-page>
 </web-app>
 

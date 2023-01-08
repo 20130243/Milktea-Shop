@@ -73,6 +73,14 @@ public class UserDAO extends RD {
         return a == 1;
     }
 
+    public void updateToken(int id, String token) {
+        JDBIConnector.get().withHandle(h ->
+                h.createUpdate("UPDATE  " + tableName + " SET token =:token WHERE id =:id")
+                        .bind("token", token)
+                        .bind("id", id)
+                        .execute());
+    }
+
     public boolean checkId(int id) {
         int a = JDBIConnector.get().withHandle(h ->
                 h.createQuery("SELECT COUNT(*) FROM " + tableName + " WHERE id=:id")
@@ -109,6 +117,18 @@ public class UserDAO extends RD {
 
     }
 
+    public Map<String, Object> login(String token) {
+        if (!checkValid(token)) {
+            return null;
+        }
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT * FROM " + tableName + " WHERE token =:token")
+                        .bind("token", token)
+                        .mapToMap()
+                        .first());
+
+    }
+
     public boolean checkValid(String username, String password) {
         int result = JDBIConnector.get().withHandle(h ->
                 h.createQuery("SELECT COUNT(*) FROM " + tableName + " WHERE username =:username and password =:password")
@@ -118,6 +138,13 @@ public class UserDAO extends RD {
         return result == 1;
     }
 
+    public boolean checkValid(String token) {
+        int result = JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT COUNT(*) FROM " + tableName + " WHERE token =:token")
+                        .bind("token", token)
+                        .mapTo(Integer.class).first());
+        return result == 1;
+    }
 
     public static void main(String[] args) {
 //        System.out.println(new UserDAO().getAll());
