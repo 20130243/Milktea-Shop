@@ -28,7 +28,7 @@ public class LogoutController extends HttpServlet {
                 }
             }
         }
-        response.sendRedirect("/");
+        response.sendRedirect("/login");
     }
 
     @Override
