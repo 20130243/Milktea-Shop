@@ -51,8 +51,6 @@
                         if(p.getPriceSize().size() > 0) {
                             List<PriceSize> sizes = p.getPriceSize();
                             for(PriceSize size : sizes) {
-
-
                         if(sizes.size() == 1) {
                     %>
                     <h6 class="<%=(p.getPriceSize().get(0).getSize().equalsIgnoreCase("M") || p.getPriceSize().get(0).getSize().equalsIgnoreCase("L"))?"active":"d-none"%> size<%=p.getId()%>"> <%= new CurrencyFormat().format((int) size.getPrice())%></h6>
@@ -62,7 +60,6 @@
                     <%
                             }}}%>
                 </div>
-
             </div>
             <div class="w-50 product-modal-detail">
                 <div class="product-modal-header">
@@ -90,12 +87,10 @@
 
                             <input class="size" type="radio" name="size<%=p.getId()%>" id="l_size<%=p.getId()%>" value="<%=sizes.get(1).getSize()%>" >
                             <label class="size-radio" for="l_size<%=p.getId()%>"><%=sizes.get(1).getSize()%></label>
-
                             <%
                                 } }
                             %>
                         </div>
-
                     </div>
                     <div class="product-modal-option">
                         <h6 class="title">Số lượng:</h6>
@@ -115,14 +110,13 @@
 
                             %>
                             <div class="d-none topping_price <%=topping.getName()%>"><%=topping.getPrice()%></div>
-                            <input class="topping-checked" type="checkbox" name="<%=topping.getId()%>" id="<%=p.getId()%><%=topping.getId()%><%=count%>" value="<%=topping.getName()%>" data-id="<%=p.getId()%>">
+                            <input class="topping-checked" type="checkbox" name="<%=topping.getId()%>" id="<%=p.getId()%><%=topping.getId()%><%=count%>" value="<%=topping.getName()%>" data-id="<%=p.getId()%>"
+                            <%=topping.getStatus()==1?"disabled":""%>>
                             <label class="topping-detail" for="<%=p.getId()%><%=topping.getId()%><%=count%>">
-                                <%=topping.getName()%> + <%=currency.format((int) topping.getPrice())%> </label>
+                                <%=topping.getName()%> + <%=topping.getStatus()==1?"Hết nguyên liệu":currency.format((int) topping.getPrice())%></label>
                             <%
                                     } } else {
-
                             %>
-
                             <label class="topping-detail active" for="">
                                 Sản phẩm không hỗ trợ Topping</label>
                             <%
@@ -222,8 +216,6 @@
             var checkBox = document.getElementById('<%=p.getId()%><%=topping.getId()%><%=count%>');
             var sum = parseInt($(rs).val());
             if($(checked).is(':checked') ){
-                <%--const checkValue = document.querySelector('<%=p.getId()%><%=topping.getId()%><%=count%>').checked;--%>
-                <%--console.log(checkValue);--%>
                 var value = Number(checkBox.value);
                 value = sum * value;
                 subTotal<%=p.getId()%> = subTotal<%=p.getId()%> + value;
@@ -251,9 +243,7 @@
 
     $(document).ready(function () {
         var rs = document.getElementById('price' + '<%=p.getId()%>');
-        <%--var totalPrice = document.getElementById('totalprice' + '<%=p.getId()%>');--%>
         rs.innerText = '<%=priceP%>';
-        <%--totalPrice.innerText = '<%=priceP%>';--%>
 
             var sizeM = document.getElementById('m_size' + '<%=p.getId()%>');
             var sizeL = document.getElementById('l_size' + '<%=p.getId()%>');
