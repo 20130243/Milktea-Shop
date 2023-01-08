@@ -1,11 +1,9 @@
-<%@ page import="vn.edu.hcmuaf.fit.bean.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Size" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.PriceSize" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Topping" %>
-<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.CategoryService" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/3/2022
@@ -28,8 +26,9 @@
    String id = (String) request.getParameter("id");
    int id_product = Integer.parseInt(id);
    Product p = new ProductService().getById(id_product);
-    CurrencyFormat  currency = new CurrencyFormat();
-    String priceP = "0";
+   Category c = new CategoryService().getById(p.getIdCategory());
+   CurrencyFormat  currency = new CurrencyFormat();
+   String priceP = "0";
     if(p.getPriceSize().size() > 0) {
         priceP  = currency.format((int) p.getPriceSize().get(0).getPrice());
     }
@@ -106,8 +105,6 @@
                                 if(p.getTopping().size() > 0) {
                                     List<Topping> toppingList = p.getTopping();
                                     for(Topping topping : toppingList) {
-
-
                             %>
                             <div class="d-none topping_price <%=topping.getName()%>"><%=topping.getPrice()%></div>
                             <input class="topping-checked" type="checkbox" name="<%=topping.getId()%>" id="<%=p.getId()%><%=topping.getId()%><%=count%>" value="<%=topping.getName()%>" data-id="<%=p.getId()%>"
@@ -138,10 +135,14 @@
                 </div>
 
                 <div class="product-modal-footer">
-
-                    <button class="btn modal-btn" class="btn modal-btn" type="submit">Thêm vào giỏ hàng</button>
-
-<%--                    <a href="/addToCart?product=<%=p.getId()%>&size=size<%=p.getId()%>" class="btn modal-btn"> Thêm vào giỏ hàng</a>--%>
+                    <%if(c.getStatus() == 0) {
+                    %>
+                    <button class="btn modal-btn" class="btn modal-btn" type="submit" >Thêm vào giỏ hàng</button>
+                    <%} else if(c.getStatus() == 1) {%>
+                    <button class="btn modal-btn" class="btn modal-btn" type="submit" disabled>Hết nguyên liệu</button>
+                    <%} else if(c.getStatus() == 2) {%>
+                    <button class="btn modal-btn" class="btn modal-btn" type="submit" disabled>Ngừng kinh doanh</button>
+                    <%}%>
                 </div>
             </div>
         </div>
