@@ -5,15 +5,10 @@ import vn.edu.hcmuaf.fit.services.AdminService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-@WebServlet(name = "Admin login", value = "/admin/login")
+@WebServlet(name = "Admin login", value = "/admin-login")
 public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,17 +23,23 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String password = adminService.hashPassword(request.getParameter("password"));
 
+
+
+
         Admin admin = adminService.login(username, password);
         if (admin == null) {
-            Map<String, String> messages = new HashMap<String, String>();
-            messages.put("error_login", "Tên đăng nhập hoặc mật khẩu không đúng");
-            messages.put("username", username);
-            request.setAttribute("messages", messages);
-            request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
+            response.getWriter().write("1");
         } else {
+            adminService.updateToken(admin);
+            String save = request.getParameter("save");
+            Cookie cAdminToken = new Cookie("tokenAdminID", admin.getToken());
+            if (save != null) {
+                cAdminToken.setMaxAge(60 * 60 * 24 * 7); // 7 days
+                response.addCookie(cAdminToken);
+            }
             HttpSession session = request.getSession(true);
             session.setAttribute("admin", admin);
-            response.sendRedirect("/admin");
+            response.getWriter().write("2");
         }
     }
 }

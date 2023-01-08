@@ -139,6 +139,8 @@ public class RevenueService {
 
 
     public static void main(String[] args) {
-        System.out.println(new RevenueService().percentTotal());
+
+        System.out.println(new RevenueService().totalPerDayThisWeek());
+        System.out.println(new RevenueService().totalPerDayPreviousWeek());
     }
 }

@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.filter;
 
+import vn.edu.hcmuaf.fit.bean.User;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +24,15 @@ public class UserFilter implements Filter {
         HttpServletResponse httpRespond = (HttpServletResponse) response;
         HttpSession session = ((HttpServletRequest) request).getSession(true);
         String url = httpRequest.getServletPath();
-//        if (session.getAttribute("user") == null) {
-//            httpRespond.sendRedirect("login-register.jsp");
-//        }
+
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            System.out.println("user not found");
+            httpRespond.sendError(HttpServletResponse.SC_NOT_FOUND, "");
+        } else {
+            chain.doFilter(request, response);
+        }
 
 
-        chain.doFilter(request, response);
     }
 }

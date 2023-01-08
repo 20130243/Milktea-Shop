@@ -13,31 +13,18 @@
 <html lang="zxx">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Male_Fashion Template" />
-    <meta name="keywords" content="Male_Fashion, unica, creative, html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title> Tài khoản</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-          rel="stylesheet" />
+          rel="stylesheet"/>
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <link rel="stylesheet" href="css/account.css" type="text/css" />
-    <link rel="stylesheet" href="css/header-footer.css" type="text/css" />
+    <%@include file="css.jsp"%>
+    <link rel="stylesheet" href="css/account.css" type="text/css"/>
 </head>
 
 <body>
@@ -45,7 +32,7 @@
 <%
     User user = (User) session.getAttribute("user");
     CurrencyFormat format = new CurrencyFormat();
-    if(user!=null) {
+    if (user != null) {
 
 %>
 
@@ -64,8 +51,8 @@
         </div>
     </div>
     <div class="offcanvas__nav__option">
-        <a href="#" class="search-switch"><img src="img/icon/search.png" alt="" /></a>
-        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+        <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""/></a>
+        <a href="#"><img src="img/icon/heart.png" alt=""/></a>
         <a href="cart.html"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
         <div class="price">0 vnđ</div>
     </div>
@@ -85,7 +72,8 @@
         <div class="breadcumb">
             <h1>Tài khoản</h1>
             <h6>Quản lý tài khoản</h6>
-            <img src="assets/images/icon_tealeaves.png" width="500px" height="50px" style="object-fit: cover;scale: 0.5;">
+            <img src="assets/images/icon_tealeaves.png" width="500px" height="50px"
+                 style="object-fit: cover;scale: 0.5;">
         </div>
     </div>
 </section>
@@ -114,10 +102,12 @@
                                 <div class="col-md-12 col-lg-2">
                                     <ul role="tablist" class="nav flex-column dashboard-list">
                                         <li>
-                                            <a href="#dashboard" data-bs-toggle="tab" class="nav-link active">Quản lý tài khoản</a>
+                                            <a href="#dashboard" data-bs-toggle="tab" class="nav-link active">Quản lý
+                                                tài khoản</a>
                                         </li>
                                         <li>
-                                            <a href="#account-details" data-bs-toggle="tab" class="nav-link">Thông tin cá nhân</a>
+                                            <a href="#account-details" data-bs-toggle="tab" class="nav-link">Thông tin
+                                                cá nhân</a>
                                         </li>
                                         <li>
                                             <a href="#orders" data-bs-toggle="tab" class="nav-link">Đơn hàng</a>
@@ -145,17 +135,23 @@
                                                         Thông tin cá nhân
                                                         <span class="sp111"><a class="btn__edit" href="#">Chỉnh sửa</a></span>
                                                     </h6>
-                                                    <p><%=user.getName()%></p>
-                                                    <p><%=user.getEmail()%></p>
-                                                    <p>(+84) <%=user.getPhone()%></p>
+                                                    <p><%=user.getName()%>
+                                                    </p>
+                                                    <p><%=user.getEmail()%>
+                                                    </p>
+                                                    <p>(+84) <%=user.getPhone()%>
+                                                    </p>
                                                 </div>
-                                                <div class="d111 col-md-8" style="border-left: rgb(255, 255, 255) 10px solid">
+                                                <div class="d111 col-md-8"
+                                                     style="border-left: rgb(255, 255, 255) 10px solid">
                                                     <h6>
                                                         Sổ địa chỉ
                                                         <span class="sp111"><a class="btn__edit" href="#">Chỉnh sửa</a></span>
                                                     </h6>
-                                                    <p><%=user.getName()%></p>
-                                                    <p><%=user.getEmail()%></p>
+                                                    <p><%=user.getName()%>
+                                                    </p>
+                                                    <p><%=user.getEmail()%>
+                                                    </p>
                                                     <p>
                                                         <%=user.getAddress()%>
                                                     </p>
@@ -175,31 +171,45 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <%List<Order> orders = (List<Order>) request.getAttribute("orders");
-                                                        if(orders!=null && orders.size()>0) {
+                                                    <%
+                                                        List<Order> orders = (List<Order>) request.getAttribute("orders");
+                                                        if (orders != null && orders.size() > 0) {
                                                             for (Order order : orders) {
                                                     %>
                                                     <tr>
-                                                        <td><%=order.getId()%></td>
+                                                        <td><%=order.getId()%>
+                                                        </td>
 
                                                         <td>
-                                                            <%List<Item> items = order.getCart().getItems();
-                                                                if(items!=null && items.size()>0){
+                                                            <%
+                                                                List<Item> items = order.getCart().getItems();
+                                                                if (items != null && items.size() > 0) {
                                                                     for (Item item : items) {
                                                             %>
-                                                            <img class="img111" src="<%=item.getProduct().getImg()%>" alt=""/>
-                                                            <%}}%>
+                                                            <img class="img111" src="<%=item.getProduct().getImg()%>"
+                                                                 alt=""/>
+                                                            <%
+                                                                    }
+                                                                }
+                                                            %>
                                                         </td>
-                                                        <td><%=order.getTime()%></td>
-                                                        <td><%=order.getStatus()==0?"Đã nhận": order.getStatus() ==1?"Đang vận chuyển" :
-                                                                order.getStatus()==2?"Thành công" :"Đã huỷ"
-                                                        %></td>
-                                                        <td><%=format.format((int) order.getTotal())%></td>
+                                                        <td><%=order.getTime()%>
+                                                        </td>
+                                                        <td><%=order.getStatus() == 0 ? "Đã nhận" : order.getStatus() == 1 ? "Đang vận chuyển" :
+                                                                order.getStatus() == 2 ? "Thành công" : "Đã huỷ"
+                                                        %>
+                                                        </td>
+                                                        <td><%=format.format((int) order.getTotal())%>
+                                                        </td>
                                                         <td>
-                                                            <a href="orderDetail?orderid=<%=order.getId()%>" class="view" target="_blank">Xem</a>
+                                                            <a href="orderDetail?orderid=<%=order.getId()%>"
+                                                               class="view" target="_blank">Xem</a>
                                                         </td>
                                                     </tr>
-                                                    <%}}%>
+                                                    <%
+                                                            }
+                                                        }
+                                                    %>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -213,15 +223,21 @@
                                                         <form action="editUser" method="post">
                                                             <div class="account-input-box">
                                                                 <label>Họ và tên</label>
-                                                                <input type="text" name="first-name" value="<%=user.getName()%>" />
+                                                                <input type="text" name="first-name"
+                                                                       value="<%=user.getName()%>"/>
                                                                 <label>Email</label>
-                                                                <input type="text" name="email-name" value="<%=user.getEmail()%>" />
+                                                                <input type="text" name="email-name"
+                                                                       value="<%=user.getEmail()%>"/>
                                                                 <label>Số điện thoại</label>
-                                                                <input type="text" name="user-number" value="<%=user.getPhone()%>" />
+                                                                <input type="text" name="user-number"
+                                                                       value="<%=user.getPhone()%>"/>
                                                             </div>
-                                                            <div class="example">(Số điện thoại 10 số, bắt đầu bằng số 0. Vd: 0987654321)</div>
+                                                            <div class="example">(Số điện thoại 10 số, bắt đầu bằng số
+                                                                0. Vd: 0987654321)
+                                                            </div>
                                                             <div class="button-box">
-                                                                <button class="btn default-btn" type="submit" id="submit_111">
+                                                                <button class="btn default-btn" type="submit"
+                                                                        id="submit_111">
                                                                     lưu thông tin
                                                                 </button>
                                                             </div>
@@ -233,15 +249,18 @@
                                                 <div class="row">
                                                     <div class="col-3">
                                                         <p class="p441">Họ và tên</p>
-                                                        <p><%=user.getName()%></p>
+                                                        <p><%=user.getName()%>
+                                                        </p>
                                                     </div>
                                                     <div class="col-3">
                                                         <p class="p441">Email</p>
-                                                        <p><%=user.getEmail()%></p>
+                                                        <p><%=user.getEmail()%>
+                                                        </p>
                                                     </div>
                                                     <div class="col">
                                                         <p class="p441">Số điện thoại</p>
-                                                        <p>(+84) <%=user.getPhone()%></p>
+                                                        <p>(+84) <%=user.getPhone()%>
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="button-box" style="padding-top: 20px">
@@ -268,30 +287,43 @@
                                                     </thead>
                                                     <tbody>
                                                     <%
-                                                    if(orders!=null && orders.size()>0) {
-                                                        for (Order order : orders) {
+                                                        if (orders != null && orders.size() > 0) {
+                                                            for (Order order : orders) {
                                                     %>
                                                     <tr>
-                                                        <td><%=order.getId()%></td>
+                                                        <td><%=order.getId()%>
+                                                        </td>
 
                                                         <td>
-                                                            <%List<Item> items = order.getCart().getItems();
-                                                                if(items!=null && items.size()>0){
+                                                            <%
+                                                                List<Item> items = order.getCart().getItems();
+                                                                if (items != null && items.size() > 0) {
                                                                     for (Item item : items) {
                                                             %>
-                                                            <img class="img111" src="<%=item.getProduct().getImg()%>" alt=""/>
-                                                            <%}}%>
+                                                            <img class="img111" src="<%=item.getProduct().getImg()%>"
+                                                                 alt=""/>
+                                                            <%
+                                                                    }
+                                                                }
+                                                            %>
                                                         </td>
-                                                        <td><%=order.getTime()%></td>
-                                                        <td><%=order.getStatus()==0?"Đã nhận": order.getStatus() ==1?"Đang vận chuyển" :
-                                                                order.getStatus()==2?"Thành công" :"Đã huỷ"
-                                                        %></td>
-                                                        <td><%=format.format((int) order.getTotal())%></td>
+                                                        <td><%=order.getTime()%>
+                                                        </td>
+                                                        <td><%=order.getStatus() == 0 ? "Đã nhận" : order.getStatus() == 1 ? "Đang vận chuyển" :
+                                                                order.getStatus() == 2 ? "Thành công" : "Đã huỷ"
+                                                        %>
+                                                        </td>
+                                                        <td><%=format.format((int) order.getTotal())%>
+                                                        </td>
                                                         <td>
-                                                            <a href="orderDetail?index=<%=order.getId()%>" class="view" target="_blank">Xem</a>
+                                                            <a href="orderDetail?index=<%=order.getId()%>" class="view"
+                                                               target="_blank">Xem</a>
                                                         </td>
                                                     </tr>
-                                                    <%}}%>
+                                                    <%
+                                                            }
+                                                        }
+                                                    %>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -300,19 +332,23 @@
                                         <div class="tab-pane" id="address">
                                             <h3>Sổ địa chỉ</h3>
                                             <div class="login" id="edit_address" style="display: block">
-                                                <div class="login-form-container" id="edit_address__form" style="display: none">
+                                                <div class="login-form-container" id="edit_address__form"
+                                                     style="display: none">
                                                     <div class="account-login-form">
                                                         <form action="editUser" method="post">
                                                             <div class="account-input-box">
                                                                 <label>Họ và tên</label>
-                                                                <input type="text" name="first-name" value="<%=user.getName()%>" />
+                                                                <input type="text" name="first-name"
+                                                                       value="<%=user.getName()%>"/>
                                                                 <label>Số điện thoại</label>
-                                                                <input type="text" name="user-number" value="<%=user.getPhone()%>" />
+                                                                <input type="text" name="user-number"
+                                                                       value="<%=user.getPhone()%>"/>
                                                                 <label>Địa chỉ</label>
                                                                 <input type="text" name="address"
-                                                                       value="<%=user.getAddress()%>" />
+                                                                       value="<%=user.getAddress()%>"/>
                                                                 <div class="button-box">
-                                                                    <button class="btn default-btn" type="submit" id="submit_save__adress">
+                                                                    <button class="btn default-btn" type="submit"
+                                                                            id="submit_save__adress">
                                                                         lưu địa chỉ
                                                                     </button>
                                                                 </div>
@@ -342,7 +378,8 @@
                                                                 </p>
                                                             </div>
                                                             <div class="row d333">
-                                                                <p>(+84) <%=user.getPhone()%></p>
+                                                                <p>(+84) <%=user.getPhone()%>
+                                                                </p>
                                                             </div>
                                                             <div class="row d333">
                                                                 <p>
@@ -353,7 +390,8 @@
                                                         <div class="col-2">
                                                             <div class="row">
                                                                 <div class="container address">
-                                                                    <button class="view b333" style="border: none" id="save-address">
+                                                                    <button class="view b333" style="border: none"
+                                                                            id="save-address">
                                                                         Chỉnh sửa
                                                                     </button>
                                                                     <a href="#" class="view b333">Xoá</a>
@@ -385,7 +423,7 @@
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch">+</div>
         <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Search here....." />
+            <input type="text" id="search-input" placeholder="Search here....."/>
         </form>
     </div>
 </div>

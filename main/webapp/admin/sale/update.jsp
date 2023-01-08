@@ -2,11 +2,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
-<c:set var="object" value="${requestScope['object']}" scope="request"/>
 
 <head>
     <meta charset="utf-8"/>
-    <title>${object.code}</title>
+    <title>Thêm khuyến mãi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- App favicon -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -53,7 +52,7 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="/admin/sale">Khuyến mãi</a></li>
-                                    <li class="breadcrumb-item active"> ${object.code}</li>
+                                    <li class="breadcrumb-item active"> Thêm khuyến mãi</li>
                                 </ol>
                             </div>
                             <h4 class="page-title">Khuyến mãi</h4>
@@ -67,24 +66,22 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="header-title">Cập nhật khuyến mãi</h4>
+                                <h4 class="header-title">Khuyến mãi mới</h4>
                                 <form action="/admin/sale/create" method="post">
                                     <div class="row">
-                                        <div class="col-lg-6"> <input type="text" name="id" id="id"
-                                                                      value="${object.id}"
-                                                                      class="">
+                                        <div class="col-lg-6">
                                             <div class="form-group mb-3">
                                                 <label for="name">Tên khuyến mãi</label>
-                                                <input type="text" id="name" name="name" required class="form-control"value=" ${object.name}">
+                                                <input type="text" id="name" name="name" required class="form-control">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="percent">% giảm</label>
-                                                <input type="text" id="percent" name="percent" value=" ${object.percent}" required class="form-control">
+                                                <input type="text" id="percent" name="percent" required class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Thời gian có hiệu lực</label>
                                                 <input type="text" class="form-control date" name="date" id="singledaterange"
-                                                       data-toggle="date-picker" data-cancel-class="btn-warning" required value="${object.getStringStartEnd()}">
+                                                       data-toggle="date-picker" data-cancel-class="btn-warning" required>
                                             </div>
 
                                         </div>
@@ -105,11 +102,11 @@
                                                         data-toggle="select2" multiple="multiple"
                                                         data-placeholder="Chọn sản phẩm áp dụng ..." id="product" name="product">
                                                     <c:forEach var="item" items="${requestScope['categoryList']}">
-                                                    <optgroup label="${item.name}">
-                                                        <c:forEach var="product" items="${requestScope['productList']}">
-                                                            <option value="${product.id}" ${pro}>${product.name}</option>
-                                                        </c:forEach>
-                                                    </optgroup>
+                                                        <optgroup label="${item.name}">
+                                                            <c:forEach var="product" items="${requestScope['productList']}">
+                                                                <option value="${product.id}">${product.name}</option>
+                                                            </c:forEach>
+                                                        </optgroup>
                                                     </c:forEach>
                                                 </select>
                                             </div>

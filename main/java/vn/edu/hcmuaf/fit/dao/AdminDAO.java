@@ -97,7 +97,15 @@ public class AdminDAO extends RD {
                                 .first()) : null;
 
     }
+    public Map<String, Object> login(String token) {
+        return checkValid(token) ?
+                JDBIConnector.get().withHandle(h ->
+                        h.createQuery("SELECT * FROM " + tableName + " WHERE token =:token")
+                                .bind("token", token)
+                                .mapToMap()
+                                .first()) : null;
 
+    }
     public boolean checkValid(String username, String password) {
         int result = JDBIConnector.get().withHandle(h ->
                 h.createQuery("SELECT COUNT(*) FROM " + tableName + " WHERE username =:username and password =:password")
@@ -106,4 +114,19 @@ public class AdminDAO extends RD {
                         .mapTo(Integer.class).first());
         return result == 1;
     }
+    public boolean checkValid(String token) {
+        int result = JDBIConnector.get().withHandle(h ->
+                h.createQuery("SELECT COUNT(*) FROM " + tableName + " WHERE token =:token")
+                        .bind("token", token)
+                        .mapTo(Integer.class).first());
+        return result == 1;
+    }
+    public void updateToken(int id,String token){
+        JDBIConnector.get().withHandle(h->
+                h.createUpdate("UPDATE  " + tableName + " SET token =:token WHERE id =:id")
+                        .bind("token", token)
+                        .bind("id", id)
+                        .execute());
+    }
+
 }
