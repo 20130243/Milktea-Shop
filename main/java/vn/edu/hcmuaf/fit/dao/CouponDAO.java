@@ -35,6 +35,12 @@ public class CouponDAO extends RD {
                 .execute()
         );
     }
+    public void updateEndDate(int id,Date date){
+        JDBIConnector.get().withHandle(h -> h.createUpdate("update " + tableName +" SET end_date =:date where id=:id" )
+                .bind("date",date)
+                .bind("id",id)
+                .execute());
+    }
 
     public void insert(String code, int percent, float max_price_sale, int quantity, Date start_date, Date end_date, float min_price_order, Date date_regis_acc, int min_num_order, String content) throws Exception {
         JDBIConnector.get().withHandle(h ->

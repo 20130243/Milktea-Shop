@@ -56,7 +56,14 @@ public class ProductDAO extends RD {
                         .execute()
         );
     }
-
+    public void updateStatus(int id,int status){
+        JDBIConnector.get().withHandle(h ->
+                h.createUpdate("UPDATE product SET status=:status WHERE id=:id")
+                        .bind("id", id)
+                        .bind("status", status)
+                        .execute()
+        );
+    }
     public int getTotalProduct() {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select count(*) from product").mapTo(Integer.class).first()
@@ -69,12 +76,18 @@ public class ProductDAO extends RD {
      * */
     public List<Map<String, Object>> pagingProduct(int index) {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("select * from product\n" +
+                h.createQuery("select * from product where status != 3\n" +
                         "order by id DESC \n" +
                         "LIMIT ? , 12;").bind(0, (index - 1) * 12).mapToMap().list()
         );
     }
-
+    public List<Map<String, Object>> pagingProductAdmin(int index) {
+        return JDBIConnector.get().withHandle(h ->
+                h.createQuery("select * from product \n" +
+                        "order by id DESC \n" +
+                        "LIMIT ? , 12;").bind(0, (index - 1) * 12).mapToMap().list()
+        );
+    }
     public List<Map<String, Object>> searchProduct(String search) {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from product\n" +

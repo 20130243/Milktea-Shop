@@ -55,7 +55,7 @@ public class CategoryService {
     }
 
     public void delete(int id) throws Exception {
-        dao.delete(id);
+        dao.deleteStatus(id);
     }
 
 

@@ -62,7 +62,7 @@ public class ToppingService {
     }
 
     public void delete(int id) {
-        dao.delete(id);
+        dao.updateStatus(id,2);
     }
 
     public void insert(Topping topping) {
