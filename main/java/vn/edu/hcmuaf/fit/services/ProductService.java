@@ -30,6 +30,13 @@ public class ProductService {
             list.add(convertMapToProduct(map));
         }
         return list;
+    }public List<Product> getPagingProductAdmin(int index) {
+        List<Product> list = new ArrayList<Product>();
+        List<Map<String, Object>> productList = dao.pagingProductAdmin(index);
+        for (Map<String, Object> map : productList) {
+            list.add(convertMapToProduct(map));
+        }
+        return list;
     }
 
     public List<Product> sortASC(int index) {
@@ -158,8 +165,8 @@ public class ProductService {
 
 
     public void delete(int id) {
-        (new PriceSizeService()).deleteByProductId(id);
-        dao.delete(id);
+//        (new PriceSizeService()).deleteByProductId(id);
+        dao.updateStatus(id,3);
     }
 
     public void insert(Product product) throws Exception {

@@ -89,7 +89,7 @@ public class CouponService {
     }
 
     public void delete(int id) throws Exception {
-        dao.delete(id);
+        dao.updateEndDate(id,new Date(System.currentTimeMillis()-24*60*60*1000));
     }
 
     public Date convertStart_Date(String text) throws ParseException {

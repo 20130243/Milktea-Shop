@@ -32,7 +32,11 @@ public class SaleDAO extends RD {
                 .execute()
         );
     }
-
+    public void updateEndDate(int id,Date date){
+        JDBIConnector.get().withHandle(h -> h.createUpdate("update sale SET end_date = ?" )
+                .bind(0,date)
+                .execute());
+    }
     public void insert(String name, int percent, Date start_date, Date end_date) throws Exception {
         JDBIConnector.get().withHandle(h ->
                 h.createUpdate("insert into sale (name, percent,start_date, end_date) " +
