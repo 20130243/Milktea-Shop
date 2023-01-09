@@ -1,11 +1,9 @@
-<%@ page import="vn.edu.hcmuaf.fit.bean.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Size" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.PriceSize" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Topping" %>
-<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.Format.CurrencyFormat" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.CategoryService" %><%--
   Created by IntelliJ IDEA.
   User: tinh
   Date: 12/3/2022
@@ -28,8 +26,9 @@
    String id = (String) request.getParameter("id");
    int id_product = Integer.parseInt(id);
    Product p = new ProductService().getById(id_product);
-    CurrencyFormat  currency = new CurrencyFormat();
-    String priceP = "0";
+   Category c = new CategoryService().getById(p.getIdCategory());
+   CurrencyFormat  currency = new CurrencyFormat();
+   String priceP = "0";
     if(p.getPriceSize().size() > 0) {
         priceP  = currency.format((int) p.getPriceSize().get(0).getPrice());
     }
@@ -51,8 +50,6 @@
                         if(p.getPriceSize().size() > 0) {
                             List<PriceSize> sizes = p.getPriceSize();
                             for(PriceSize size : sizes) {
-
-
                         if(sizes.size() == 1) {
                     %>
                     <h6 class="<%=(p.getPriceSize().get(0).getSize().equalsIgnoreCase("M") || p.getPriceSize().get(0).getSize().equalsIgnoreCase("L"))?"active":"d-none"%> size<%=p.getId()%>"> <%= new CurrencyFormat().format((int) size.getPrice())%></h6>
@@ -62,7 +59,6 @@
                     <%
                             }}}%>
                 </div>
-
             </div>
             <div class="w-50 product-modal-detail">
                 <div class="product-modal-header">
@@ -90,12 +86,10 @@
 
                             <input class="size" type="radio" name="size<%=p.getId()%>" id="l_size<%=p.getId()%>" value="<%=sizes.get(1).getSize()%>" >
                             <label class="size-radio" for="l_size<%=p.getId()%>"><%=sizes.get(1).getSize()%></label>
-
                             <%
                                 } }
                             %>
                         </div>
-
                     </div>
                     <div class="product-modal-option">
                         <h6 class="title">Số lượng:</h6>
@@ -111,18 +105,15 @@
                                 if(p.getTopping().size() > 0) {
                                     List<Topping> toppingList = p.getTopping();
                                     for(Topping topping : toppingList) {
-
-
                             %>
                             <div class="d-none topping_price <%=topping.getName()%>"><%=topping.getPrice()%></div>
-                            <input class="topping-checked" type="checkbox" name="<%=topping.getId()%>" id="<%=p.getId()%><%=topping.getId()%><%=count%>" value="<%=topping.getName()%>" data-id="<%=p.getId()%>">
+                            <input class="topping-checked" type="checkbox" name="<%=topping.getId()%>" id="<%=p.getId()%><%=topping.getId()%><%=count%>" value="<%=topping.getName()%>" data-id="<%=p.getId()%>"
+                            <%=topping.getStatus()==1?"disabled":""%>>
                             <label class="topping-detail" for="<%=p.getId()%><%=topping.getId()%><%=count%>">
-                                <%=topping.getName()%> + <%=currency.format((int) topping.getPrice())%> </label>
+                                <%=topping.getName()%> + <%=topping.getStatus()==1?"Hết nguyên liệu":currency.format((int) topping.getPrice())%></label>
                             <%
                                     } } else {
-
                             %>
-
                             <label class="topping-detail active" for="">
                                 Sản phẩm không hỗ trợ Topping</label>
                             <%
@@ -144,10 +135,14 @@
                 </div>
 
                 <div class="product-modal-footer">
-
-                    <button class="btn modal-btn" class="btn modal-btn" type="submit">Thêm vào giỏ hàng</button>
-
-<%--                    <a href="/addToCart?product=<%=p.getId()%>&size=size<%=p.getId()%>" class="btn modal-btn"> Thêm vào giỏ hàng</a>--%>
+                    <%if(c.getStatus() == 0) {
+                    %>
+                    <button class="btn modal-btn" class="btn modal-btn" type="submit" >Thêm vào giỏ hàng</button>
+                    <%} else if(c.getStatus() == 1) {%>
+                    <button class="btn modal-btn" class="btn modal-btn" type="submit" disabled>Hết nguyên liệu</button>
+                    <%} else if(c.getStatus() == 2) {%>
+                    <button class="btn modal-btn" class="btn modal-btn" type="submit" disabled>Ngừng kinh doanh</button>
+                    <%}%>
                 </div>
             </div>
         </div>
@@ -222,8 +217,6 @@
             var checkBox = document.getElementById('<%=p.getId()%><%=topping.getId()%><%=count%>');
             var sum = parseInt($(rs).val());
             if($(checked).is(':checked') ){
-                <%--const checkValue = document.querySelector('<%=p.getId()%><%=topping.getId()%><%=count%>').checked;--%>
-                <%--console.log(checkValue);--%>
                 var value = Number(checkBox.value);
                 value = sum * value;
                 subTotal<%=p.getId()%> = subTotal<%=p.getId()%> + value;
@@ -251,9 +244,7 @@
 
     $(document).ready(function () {
         var rs = document.getElementById('price' + '<%=p.getId()%>');
-        <%--var totalPrice = document.getElementById('totalprice' + '<%=p.getId()%>');--%>
         rs.innerText = '<%=priceP%>';
-        <%--totalPrice.innerText = '<%=priceP%>';--%>
 
             var sizeM = document.getElementById('m_size' + '<%=p.getId()%>');
             var sizeL = document.getElementById('l_size' + '<%=p.getId()%>');

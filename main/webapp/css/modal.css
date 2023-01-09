@@ -175,11 +175,11 @@ input[type="checkbox"]:checked+label {
 }
 
 .product-modal-id {
-  /*margin: 0 10px;*/
-  /*width: 30px;*/
-  /*height: 30px;*/
-  /*background-color: #ffffff;*/
-  /*border: none;*/
-  /*text-align: center;*/
   display: none;
 }
+
+input:disabled {
+  background:#dddddd;
+}
+
+input:disabled+label{color:#ccc;}

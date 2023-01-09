@@ -97,7 +97,7 @@
                                 for (Category category : listCategories) {
                             %>
                             <li class="menu-item <%=(int) request.getAttribute("tagCate") == category.getId() ? "active":""%>">
-                                <a href="category?cid=<%=category.getId()%>"><%=category.getName()%>
+                                <a href="category?cid=<%=category.getId()%>"><%=category.getName()%> <%=category.getStatus()==1?" (Hết nguyên liệu)" : category.getStatus()==2?" (Ngừng kinh doanh)" : ""%>
                                 </a>
                             </li>
 
