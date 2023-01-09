@@ -62,7 +62,7 @@ public class CategoryDAO extends RD {
     public List<Map<String, Object>> paging(int index) {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from "+tableName+
-                        " order by id\n" +
+                        " order by id DESC \n" +
                         "LIMIT ? , 10;").bind(0, (index-1)*10).mapToMap().list()
         );
     }

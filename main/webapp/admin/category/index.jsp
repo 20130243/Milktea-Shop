@@ -8,8 +8,6 @@
     <meta charset="utf-8"/>
     <title>Phân loại</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
-    <meta content="Coderthemes" name="author"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
 
@@ -116,7 +114,8 @@
                                                         </c:when>
                                                     </c:choose>
                                                 </td>
-                                                <form action="/admin/category/delete" method="post" id="delete-form-<c:out value="${item.id}"/>">
+                                                <form action="/admin/category/delete" method="post"
+                                                      id="delete-form-<c:out value="${item.id}"/>">
                                                     <td class="table-action text-center">
                                                         <a href="/admin/category/update?id=<c:out value="${item.id}"/>"
                                                            class="action-icon"> <i
@@ -217,7 +216,7 @@
         $(".delete-btn").click(function () {
 
             if (window.confirm("Bạn muốn xóa " + $(this).attr("data-name") + " ?")) {
-                url = "#delete-form-"+$(this).attr("data-id");
+                url = "#delete-form-" + $(this).attr("data-id");
                 // console.log(url)
                 $(url).submit();
                 // return false;

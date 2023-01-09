@@ -68,7 +68,7 @@ public class SaleDAO extends RD {
     public List<Map<String, Object>> paging(int index) throws SQLException {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from sale\n" +
-                        "order by id\n" +
+                        "order by id DESC \n" +
                         "LIMIT ? , 5;").bind(0, (index - 1) * 5).mapToMap().list()
         );
     }

@@ -109,6 +109,8 @@
                                                     </optgroup>
                                                     </c:forEach>
                                                 </select>
+                                                <span class="help-block"><small>Giữ ctrl hoặc shift để chọn nhiều
+                                                            sản phẩm.</small></span>
                                             </div>
 
                                         </div>

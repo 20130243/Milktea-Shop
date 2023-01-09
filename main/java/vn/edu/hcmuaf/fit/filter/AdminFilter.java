@@ -28,27 +28,24 @@ public class AdminFilter implements Filter {
         HttpSession session = httpRequest.getSession(true);
 
 
-            User user = (User) session.getAttribute("user");
-            if (user == null) {
-                System.out.println("user not found");
+        User user = (User) session.getAttribute("user");
+        Admin admin = (Admin) session.getAttribute("admin");
+        if (admin != null && user == null) {
+            System.out.println("admin cookie");
+            chain.doFilter(request, response);
+        } else if (admin == null && user == null) {
+            System.out.println("user not found");
+            httpRespond.sendError(HttpServletResponse.SC_NOT_FOUND, "");
+        } else if (admin == null && user != null) {
+            if (!(new UserService()).checkAdmin(user)) {
+                System.out.println("user not admin");
                 httpRespond.sendError(HttpServletResponse.SC_NOT_FOUND, "");
             } else {
-
-                if (!(new UserService()).checkAdmin(user)) {
-                    System.out.println("user not admin");
-                    httpRespond.sendError(HttpServletResponse.SC_NOT_FOUND, "");
-                } else {
-                    Admin admin = (Admin) session.getAttribute("admin");
-                    if (admin == null) {
-                        System.out.println("admin not found");
-                        System.out.println(user.getLevel());
-                        System.out.println(new UserService().checkAdmin(user));
-                        request.getRequestDispatcher("/admin-login").forward(request, response);
-                    } else {
-                        chain.doFilter(request, response);
-                    }
-
+                System.out.println("admin not found");
+                request.getRequestDispatcher("/admin-login").forward(request, response);
             }
+        } else {
+            chain.doFilter(request, response);
         }
 
     }

@@ -14,7 +14,7 @@ import java.io.IOException;
 public class CreateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("update.jsp").forward(request, response);
+        request.getRequestDispatcher("create.jsp").forward(request, response);
     }
 
     @Override

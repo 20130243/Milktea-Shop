@@ -26,39 +26,39 @@ public class SocialLoginController extends HttpServlet {
             String email = request.getParameter("email");
             String id = request.getParameter("id");
 
-            String password = userService.hashPassword(email);
+            String password = email;
 
             User userNew = new User(0,id, password, name, "", "", email,0,"");
 
             if(userService.checkUsername(userNew)) {
                 userNew = userService.login(userNew);
                 session.setAttribute("user", userNew);
-                response.sendRedirect("account");
+                response.sendRedirect("/");
             } else {
                 userService.insert(userNew);
                 userNew = userService.login(userNew);
                 session.setAttribute("user", userNew);
-                response.sendRedirect("account");
+                response.sendRedirect("/");
             }
         }
         if(action.equals("Google")){
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String id = request.getParameter("id");
-
-            String password = userService.hashPassword(email);
+            String password = email;
+            System.out.println(password);
 
             User user = new User(0,id,password,name,"","",email,0,"");
 
             if(userService.checkUsername(user)){
                 user = userService.login(user);
                 session.setAttribute("user", user);
-                response.sendRedirect("account");
+                response.sendRedirect("/");
             } else {
                 userService.insert(user);
                 user = userService.login(user);
                 session.setAttribute("user", user);
-                response.sendRedirect("account");
+                response.sendRedirect("/");
             }
         }
     }

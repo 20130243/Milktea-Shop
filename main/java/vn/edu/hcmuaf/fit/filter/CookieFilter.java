@@ -30,19 +30,26 @@ public class CookieFilter implements Filter {
         javax.servlet.http.Cookie cookies[] = httpRequest.getCookies();
         if (cookies != null) {
             for (javax.servlet.http.Cookie cookie : cookies) {
-                if (cookie.getName().equals("tokenAdminID")) {
+                if (cookie.getName().equals("tokenAdminID") && session.getAttribute("admin") == null ){
                     String token = cookie.getValue();
                     AdminService adminService = new AdminService();
                     Admin admin = adminService.login(token);
                     if (admin != null) {
+                        System.out.println("admin cookie checked");
                         session.setAttribute("admin", admin);
+                    } else {
+                        System.out.println("admin null");
                     }
-                } else if (cookie.getName().equals("tokenID")) {
+                }
+                if (cookie.getName().equals("tokenID") && session.getAttribute("user") == null ) {
                     String token = cookie.getValue();
                     UserService userService = new UserService();
                     User user = userService.login(token);
+                    System.out.println(user + " 1");
                     if (user != null) {
                         session.setAttribute("user", user);
+                    } else {
+                        System.out.println("user null");
                     }
                 }
             }
