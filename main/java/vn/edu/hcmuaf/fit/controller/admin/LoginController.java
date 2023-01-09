@@ -12,6 +12,7 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("admin login");
         request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
 
     }
@@ -23,9 +24,6 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String password = adminService.hashPassword(request.getParameter("password"));
 
-
-
-
         Admin admin = adminService.login(username, password);
         if (admin == null) {
             response.getWriter().write("1");
@@ -36,9 +34,15 @@ public class LoginController extends HttpServlet {
             if (save != null) {
                 cAdminToken.setMaxAge(60 * 60 * 24 * 7); // 7 days
                 response.addCookie(cAdminToken);
+            }else{
+                cAdminToken.setMaxAge(0);
+                cAdminToken.setValue("");
+                cAdminToken.setPath("/");
+                response.addCookie(cAdminToken);
             }
             HttpSession session = request.getSession(true);
             session.setAttribute("admin", admin);
+            System.out.println(admin);
             response.getWriter().write("2");
         }
     }

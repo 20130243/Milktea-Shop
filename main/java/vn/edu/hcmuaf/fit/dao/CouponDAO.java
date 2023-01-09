@@ -14,7 +14,7 @@ public class CouponDAO extends RD {
     @Override
     public List<Map<String, Object>> getAll() throws SQLException {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM " + tableName)
+                h.createQuery("SELECT * FROM " + tableName+"ORDER BY id DESC ")
                         .mapToMap()
                         .list());
     }
@@ -82,7 +82,7 @@ public class CouponDAO extends RD {
     public List<Map<String, Object>> paging(int index) throws SQLException {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from " + tableName + "\n" +
-                        "order by id\n" +
+                        "order by id DESC \n" +
                         "LIMIT ? , 5;").bind(0, (index - 1) * 5).mapToMap().list()
         );
     }

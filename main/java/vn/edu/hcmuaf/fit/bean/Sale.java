@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.bean;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Sale implements Serializable {
@@ -85,6 +86,12 @@ public class Sale implements Serializable {
         long millis = System.currentTimeMillis();
         Date crdate = new java.sql.Date(millis);
         return start_date.before(crdate) && end_date.after(crdate);
+    }
+    public String getStringStartEnd() {
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        String start = format.format(start_date);
+        String end = format.format(end_date);
+        return start + " - " + end;
     }
     @Override
     public String toString() {

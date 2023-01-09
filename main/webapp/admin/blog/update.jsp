@@ -2,13 +2,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
+<c:set var="object" value="${requestScope['object']}" scope="request"/>
 
 <head>
     <meta charset="utf-8" />
-    <title>Thêm tin tức</title>
+    <title>${object.name}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
 
@@ -54,7 +53,7 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="/admin/blog">Tin tức</a></li>
-                                        <li class="breadcrumb-item active"> Thêm tin tức</li>
+                                        <li class="breadcrumb-item active"> ${object.name}</li>
                                     </ol>
                                 </div>
                                 <h4 class="page-title">Tin tức</h4>
@@ -67,29 +66,38 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="header-title">Tin tức mới</h4>
-                                    <form action="/admin/blog/create" method="post" enctype='multipart/form-data'>
+                                    <h4 class="header-title">Cập nhật tin tức</h4>
+                                    <form action="/admin/blog/update" method="post" enctype='multipart/form-data'>
                                         <div class="form-group mb-3">
+                                            <input type="text" name="id" id="id" value="${object.id}"
+                                                   class="d-none" >
                                             <label for="name">Tiêu đề</label>
-                                            <input type="text" id="name" name="name" required class="form-control">
+                                            <input type="text" value="${object.name}" id="name" name="name" required class="form-control">
                                         </div>
                                         <div class="form-group mb-3">
+                                            <img src="${object.image}" width="40" height="40">
                                             <label for="image">Ảnh banner</label>
                                             <input type="file" id="image" class="form-control-file" name="image">
+                                            <input type="text" name="old_image" id="old_image"
+                                                   value="<c:out value="${object.image}"/> "
+                                                   class="d-none">
+                                            <input type="text" name="check_input_file" id="check_input_file"
+                                                   value="false"
+                                                   class="d-none">
                                         </div>
                                         <div class="form-group">
                                             <label>Thời gian có hiệu lực</label>
                                             <input type="text" class="form-control date" id="singledaterange"
                                                    name="date"
                                                    data-toggle="date-picker" data-cancel-class="btn-warning"
-                                                   required>
+                                                   required value="${object.getStringStartEnd()}">
                                         </div>
 
 
                                         <div class="form-group mb-3">
                                             <label for="content">Nội dung</label>
                                             <textarea type="text" id="content" name="content"
-                                                      class="form-control" cols="30" rows="20"></textarea>
+                                                      class="form-control" cols="30" rows="20">${object.content}</textarea>
 
                                         </div>
 
