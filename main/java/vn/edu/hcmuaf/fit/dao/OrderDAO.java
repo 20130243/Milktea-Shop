@@ -271,13 +271,14 @@ public class OrderDAO extends RD {
                             .mapTo(String.class).first());
             result.add(number != null ? Float.parseFloat(number) : 0);
         } else {
-            String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
             for (String day : dayName) {
                 String number = JDBIConnector.get().withHandle(h ->
                         h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW()) AND DAYNAME(time) like '" + day + "' AND status = 2")
                                 .mapTo(String.class).first());
                 result.add(number != null ? Float.parseFloat(number) : 0);
             }
+            result.add((float) 0);
         }
         return result;
     }
@@ -299,13 +300,17 @@ public class OrderDAO extends RD {
                             .mapTo(String.class).first());
             result.add(number != null ? Float.parseFloat(number) : 0);
         } else {
-            String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
             for (String day : dayName) {
                 String number = JDBIConnector.get().withHandle(h ->
                         h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW() - INTERVAL 1 WEEK) AND DAYNAME(time) like '" + day + "' AND status = 2")
                                 .mapTo(String.class).first());
                 result.add(number != null ? Float.parseFloat(number) : 0);
             }
+            String number = JDBIConnector.get().withHandle(h ->
+                    h.createQuery("SELECT SUM(total) FROM `order` WHERE  YEARWEEK(time) = YEARWEEK(NOW()) AND DAYNAME(time) like '" + "Sunday" + "' AND status = 2")
+                            .mapTo(String.class).first());
+            result.add(number != null ? Float.parseFloat(number) : 0);
         }
         return result;
     }

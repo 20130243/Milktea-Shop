@@ -40,12 +40,12 @@ public class UserService {
     }
 
     public User login(User user) {
-        Map<String, Object> map = dao.login(user.getUsername(), user.getPassword());
+        Map<String, Object> map = dao.login(user.getUsername(), hashPassword(user.getPassword()));
         return map != null ? convertMapToUser(map) : null;
     }
 
     public User login(String username, String password) {
-        Map<String, Object> map = dao.login(username, password);
+        Map<String, Object> map = dao.login(username, hashPassword(password));
         return map != null ? convertMapToUser(map) : null;
     }
     public User login(String token) {

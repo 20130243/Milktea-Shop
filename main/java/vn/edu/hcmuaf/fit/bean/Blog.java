@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.bean;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /*
 * Người tạo: Lê Trọng Tình 20130440
@@ -85,7 +86,12 @@ public class Blog implements Serializable {
     public void setEnd_date(Date end_date) {
         this.end_date = end_date;
     }
-
+    public String getStringStartEnd() {
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        String start = format.format(start_date);
+        String end = format.format(end_date);
+        return start + " - " + end;
+    }
     @Override
     public String toString() {
         return "Blog{" +

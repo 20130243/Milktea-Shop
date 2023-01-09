@@ -1,5 +1,5 @@
-create.jsp<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,16 +70,7 @@ create.jsp<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                                         <a href="/admin/blog/create" class="btn btn-danger mb-2"><i
                                                 class="mdi mdi-plus-circle mr-2"></i>Thêm tin tức</a>
                                     </div>
-                                    <div class="col-sm-8">
-                                        <!-- <div class="text-sm-right">
-                                            <button type="button" class="btn btn-success mb-2 mr-1"><i
-                                                    class="mdi mdi-settings"></i></button>
-                                            <button type="button" class="btn btn-light mb-2 mr-1">Nhập file</button>
-                                            <button type="button" class="btn btn-light mb-2">Xuất file</button>
-                                        </div> -->
-                                    </div><!-- end col-->
                                 </div>
-
                                 <div class="table-responsive">
                                     <table class="table table-centered w-100 dt-responsive nowrap"
                                            id="products-datatable">
@@ -94,51 +85,53 @@ create.jsp<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                                         <tbody>
                                         <c:forEach var="item" items="${requestScope['blogList']}">
 
-                                        <tr>
-                                            <td>
-                                                <img src="${item.image}" alt="contact-img"
-                                                     title="contact-img" class="rounded mr-3" height="48"/>
-                                                <p class="m-0 d-inline-block align-middle font-16"
-                                                   style="max-width: 200px;">
-                                                    <a href="" style="pointer-events: none; cursor: default;"
-                                                       class="text-body">${item.name}</a>
-                                                    <br/>
-                                                </p>
-                                            </td>
-
-                                            <td>
-                                                <div data-simplebar data-simplebar-lg
-                                                     style="max-height: 60px;width: 400px;" class="form-group">
-                                                        ${fn:substring(item.content, 0, 300)}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                    ${item.start_date}
-                                                <hr>
-                                                    ${item.end_date}
-                                            </td>
-
-
-                                            <form action="/admin/blog/delete" method="post"
-                                                  id="delete-form-<c:out value="${item.id}"/>">
-                                                <td class="table-action text-center">
-                                                    <a href="/admin/blog/update?id=<c:out value="${item.id}"/>"
-                                                       class="action-icon"> <i
-                                                            class="mdi mdi-square-edit-outline"></i></a>
-                                                    <input type="text" name="id" id="id"
-                                                           value="<c:out value="${item.id}"/>" class="d-none">
-                                                    <button type="submit" class="d-none"></button>
-                                                    <a href="javascript:{0}"
-                                                       class="action-icon"> <i class="mdi mdi-delete delete-btn"
-                                                                               data-name="<c:out value="${item.name}"/>"
-                                                                               data-id="<c:out value="${item.id}"/>"></i>
-                                                    </a>
-
+                                            <tr>
+                                                <td>
+                                                    <img src="${item.image}" alt="contact-img"
+                                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                                    <p class="m-0 d-inline-block align-middle font-16"
+                                                       style="max-width: 200px;">
+                                                        <a href="" style="pointer-events: none; cursor: default;"
+                                                           class="text-body">${item.name}</a>
+                                                        <br/>
+                                                    </p>
                                                 </td>
-                                            </form>
-                                        </tr> </c:forEach>
+
+                                                <td>
+                                                    <div data-simplebar data-simplebar-lg
+                                                         style="max-height: 60px;width: 400px;" class="form-group">
+                                                            ${fn:substring(item.content, 0, 300)}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                        ${item.start_date}
+                                                    <hr>
+                                                        ${item.end_date}
+                                                </td>
+
+
+                                                <form action="/admin/blog/delete" method="post"
+                                                      id="delete-form-<c:out value="${item.id}"/>">
+                                                    <td class="table-action text-center">
+                                                        <a href="/admin/blog/update?id=<c:out value="${item.id}"/>"
+                                                           class="action-icon"> <i
+                                                                class="mdi mdi-square-edit-outline"></i></a>
+                                                        <input type="text" name="id" id="id"
+                                                               value="<c:out value="${item.id}"/>" class="d-none">
+                                                        <button type="submit" class="d-none"></button>
+                                                        <a href="javascript:{0}"
+                                                           class="action-icon"> <i class="mdi mdi-delete delete-btn"
+                                                                                   data-name="<c:out value="${item.name}"/>"
+                                                                                   data-id="<c:out value="${item.id}"/>"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </form>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
-                                    </table><c:set var="endPage" value='${requestScope["endPage"]}'/>
+                                    </table>
+                                    <c:set var="endPage" value='${requestScope["endPage"]}'/>
                                     <c:choose>
                                         <c:when test="${empty param['page']}">
                                             <c:set var="currentPage" value="1"/>
@@ -150,8 +143,7 @@ create.jsp<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                                     <nav>
                                         <ul class="pagination pagination-rounded mb-0">
                                             <li class="page-item  <c:if test="${currentPage eq 1 }"> d-none </c:if>">
-                                                <a class="page-link"
-                                                   href="/admin/blog?page=<c:out value='${i-1}'/>"
+                                                <a class="page-link" href="/admin/blog?page=<c:out value='${i-1}'/>"
                                                    aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                     <span class="sr-only">Previous</span>
@@ -166,8 +158,7 @@ create.jsp<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                                                 </li>
                                             </c:forEach>
                                             <li class="page-item <c:if test="${currentPage eq endPage }"> d-none </c:if>">
-                                                <a class="page-link"
-                                                   href="/admin/blog?page=<c:out value='${i+1}'/>"
+                                                <a class="page-link" href="/admin/blog?page=<c:out value='${i+1}'/>"
                                                    aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                     <span class="sr-only">Next</span>
@@ -179,14 +170,9 @@ create.jsp<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                             </div> <!-- end card-body-->
                         </div> <!-- end card-->
                     </div> <!-- end col -->
-                </div>
-                <!-- end row -->
-
+                </div>       <!-- end row -->
             </div> <!-- container -->
-
-        </div> <!-- content -->
-
-
+         </div> <!-- content -->
     </div>
     <!-- content -->
 
@@ -205,7 +191,7 @@ create.jsp<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- END wrapper -->
 
 <!-- Right Sidebar -->
-<%@include file="../right-sidebar.jsp"%>
+<%@include file="../right-sidebar.jsp" %>
 <!-- /Right-bar -->
 
 <!-- bundle -->

@@ -21,7 +21,7 @@ public class LoginController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         UserService userService = new UserService();
         String username = request.getParameter("username");
-        String password = userService.hashPassword(request.getParameter("password"));
+        String password = request.getParameter("password");
 
         User user = userService.login(username, password);
         if (user == null) {
