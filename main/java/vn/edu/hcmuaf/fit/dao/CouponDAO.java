@@ -14,7 +14,7 @@ public class CouponDAO extends RD {
     @Override
     public List<Map<String, Object>> getAll() throws SQLException {
         return JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT * FROM " + tableName+"ORDER BY id DESC ")
+                h.createQuery("SELECT * FROM " + tableName+"  ORDER BY id DESC ")
                         .mapToMap()
                         .list());
     }
