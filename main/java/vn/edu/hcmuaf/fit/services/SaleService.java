@@ -124,8 +124,8 @@ public class SaleService {
     }
 
     public void delete(int id) {
-        dao.delete(id);
-        detailDao.deleteBySaleId(id);
+        dao.updateEndDate(id,new Date(System.currentTimeMillis()-24*60*60*1000));
+//        detailDao.deleteBySaleId(id);
     }
 
     public int getTotal() {

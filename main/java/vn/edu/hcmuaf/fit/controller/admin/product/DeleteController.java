@@ -19,13 +19,9 @@ public class DeleteController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        ProductService product = null;
+
         try {
-            product = new ProductService();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        try {
+            ProductService product = new ProductService();
             product.delete(id);
         } catch (Exception e) {
             throw new RuntimeException(e);

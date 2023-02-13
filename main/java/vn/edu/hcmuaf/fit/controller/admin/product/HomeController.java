@@ -34,7 +34,7 @@ public class HomeController extends HttpServlet {
                 endPage++;
             }
 
-            List<Product> productList = productService.getPagingProduct(index);
+            List<Product> productList = productService.getPagingProductAdmin(index);
             List<Category> categoryList = categoryService.getAll();
 
             request.setAttribute("productList", productList);

@@ -27,7 +27,8 @@ public class ToppingDAO extends RD {
         }
         return null;
     }
-    public List<Map<String,Object>> getByCategoryId(int id){
+
+    public List<Map<String, Object>> getByCategoryId(int id) {
         List<Map<String, Object>> toppingList = getAll();
         List<Map<String, Object>> result = new ArrayList<>();
         for (Map<String, Object> topping : toppingList) {
@@ -38,7 +39,7 @@ public class ToppingDAO extends RD {
         return result;
     }
 
-    public void insert(String name, float price,int category_id, int status) {
+    public void insert(String name, float price, int category_id, int status) {
         JDBIConnector.get().withHandle(h ->
                 h.createUpdate("INSERT INTO topping(name,price,category_id, status) VALUES(:name,:price,:category_id, :status)")
                         .bind("name", name)
@@ -49,7 +50,7 @@ public class ToppingDAO extends RD {
         );
     }
 
-    public void update(int id, String name, float price,int category_id, int status) {
+    public void update(int id, String name, float price, int category_id, int status) {
         JDBIConnector.get().withHandle(h ->
                 h.createUpdate("UPDATE topping SET name=:name,price=:price,category_id=:category_id, status=:status WHERE id=:id")
                         .bind("name", name)
@@ -65,17 +66,28 @@ public class ToppingDAO extends RD {
     public void delete(int id) {
         JDBIConnector.get().withHandle(h ->
                 h.createUpdate("DELETE FROM topping WHERE id=:id")
-                       .bind("id", id)
-                       .execute()
+                        .bind("id", id)
+                        .execute()
         );
     }
+
+    public void updateStatus(int id, int status) {
+        JDBIConnector.get().withHandle(h ->
+                h.createUpdate("UPDATE topping SET status=:status WHERE id=:id")
+                        .bind("status", status)
+                        .bind("id", id)
+                        .execute());
+    }
+
     public List<Map<String, Object>> paging(int index) {
         return JDBIConnector.get().withHandle(h ->
                 h.createQuery("select * from topping\n" +
                         "order by id\n" +
-                        "LIMIT ? , 10;").bind(0, (index-1)*10).mapToMap().list()
+                        "LIMIT ? , 10;").bind(0, (index - 1) * 10).mapToMap().list()
         );
-    }  public int getTotal() {
+    }
+
+    public int getTotal() {
         int count = JDBIConnector.get().withHandle(h ->
                 h.createQuery("select count(*) from topping").mapTo(Integer.class).first()
         );
