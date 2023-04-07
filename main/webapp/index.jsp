@@ -17,9 +17,9 @@
           rel="stylesheet">
 
     <!-- Css Styles -->
-    <%@include file="css.jsp"%>
+    <%@include file="css.jsp" %>
     <link rel="stylesheet" href="css/index.css" type="text/css">
-    <link rel="stylesheet" href="css/blog.css" type="text/css" />
+    <link rel="stylesheet" href="css/blog.css" type="text/css"/>
     <link rel="stylesheet" href="css/shop.css" type="text/css">
 </head>
 
@@ -76,7 +76,7 @@
                     <div class="col-xl-5 col-lg-7 col-md-8">
                         <div class="hero__text">
 
-                            <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                            <a href="#" class="primary-btn" id="banner-arrow">Shop now <span class="arrow_right"></span></a>
 
                         </div>
                     </div>
@@ -109,26 +109,31 @@
             <div class="col text-center mb-3">
                 <h6 class="text_banner">Tin tức mới nhất</h6>
             </div>
-        <div class="row">
-            <%
-                List<Blog> listBlog = (List<Blog>) request.getAttribute("listBlog");
-                if(listBlog!= null){
-                for (Blog b : listBlog) {
-            %>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="blog__item">
-                    <div class="blog__item__pic set-bg" data-setbg="<%=b.getImage()%>"></div>
-                    <div class="blog__item__text">
-                        <span><img src="img/icon/calendar.png" alt="" /> <%=b.getDate()%></span>
-                        <h5><%=b.getName()%></h5>
-                        <a href="blog-details?blogid=<%=b.getId()%>" target="_blank">Xem Thêm
-                            <main></main></a>
+            <div class="row">
+                <%
+                    List<Blog> listBlog = (List<Blog>) request.getAttribute("listBlog");
+                    if (listBlog != null) {
+                        for (Blog b : listBlog) {
+                %>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic set-bg" data-setbg="<%=b.getImage()%>"></div>
+                        <div class="blog__item__text">
+                            <span><img src="img/icon/calendar.png" alt=""/> <%=b.getDate()%></span>
+                            <h5><%=b.getName()%>
+                            </h5>
+                            <a href="blog-details?blogid=<%=b.getId()%>" target="_blank">Xem Thêm
+                                <main></main>
+                            </a>
+                        </div>
                     </div>
                 </div>
+                <%
+                        }
+                    }
+                %>
             </div>
-            <%}}%>
         </div>
-    </div>
 </section>
 <!-- Banner Section End -->
 
@@ -143,8 +148,8 @@
         <div class="row d-flex">
             <%
                 List<Product> list = (List<Product>) request.getAttribute("listProduct");
-                if(list!=null){
-                for (Product p : list) {
+                if (list != null) {
+                    for (Product p : list) {
             %>
             <div class="col-lg-3 col-md-4 col-sm-4">
                 <div class="product__item sale" data-toggle="modal"
@@ -181,7 +186,8 @@
                     data-toggle="modal"
                     data-target="#myModal">
             </button>
-            <% }}%>
+            <% }
+            }%>
         </div>
     </div>
 </section>
@@ -222,6 +228,10 @@
             $(s).click();
         });
     });
+
+    setInterval(function () {
+        $(".owl-next").click
+    }, 5000);
 </script>
 </body>
 
